@@ -1,0 +1,25 @@
+{
+  "name": "tee-time",
+  "version": "1.0.0",
+  "description": "A golf app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/E-Bossler/tee-time.git"
+  },
+  "keywords": [
+    "golf"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/E-Bossler/tee-time/issues"
+  },
+  "homepage": "https://github.com/E-Bossler/tee-time#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
