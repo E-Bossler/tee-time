@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const routerApi = require('./routes/routes-api');
 
 const app = express();
 
@@ -11,7 +12,7 @@ app.use(express.json({ type: ['application/json'] }));
 app.use(express.static("public"));
 
 mongoose.connect(
-    process.env.MONGODB_URI || "mongodb://localhost/7777",
+    process.env.MONGODB_URI || "mongodb://localhost/tee-time",
     {
         useNewUrlParser: true,
         useFindAndModify: false
@@ -27,6 +28,8 @@ app.get(
         )
         }
 );
+
+app.use('/api',routerApi)
 
 app.listen(
     PORT,

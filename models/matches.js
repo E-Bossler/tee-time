@@ -23,6 +23,10 @@ const matchSchema = new Schema (
         parValues: {
             type: Array,
             length: 18
+        },
+        day: {
+            type: Date,
+            default: Date.now
         }
     }
 );
