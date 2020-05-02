@@ -1,5 +1,4 @@
 import React from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
@@ -23,29 +22,25 @@ function App() {
   return (
     <Router>
       <Switch>
+
         <Route
           exact path="/"
         component={Login}
-        // landing page: signup and login components
         >
-    
         </Route>
+
         <Route
           exact path="/dashboard"
         component={Dashboard}
-        // dashboard: 
         >
         </Route>
+
         <Route
           exact path="/signup"
         component={Signup}
         >
         </Route>
-        <Route
-          exact path="/saved"
-        // component={PAGE TBD}
-        >
-        </Route>
+
       </Switch>
     </Router>
   );
