@@ -1,27 +1,23 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const app = express();
-const mongoose = require('mongoose');
-const routerApi = require('./routes/routes-api');
-
-
-const server = require("http").Server(app);
-const io = require("socket.io")(server);
-
+const mongoose = require("mongoose");
+const routerApi = require("./routes/routes-api");
 const PORT = process.env.PORT || 7777;
+var server = app.listen(PORT, () =>
+  console.log(`Welcome to port ${PORT}! You are going to rock your day!`)
+);
+const io = require("socket.io")(server);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ type: ["application/json"] }));
 
 app.use(express.static("public"));
 
-mongoose.connect(
-    process.env.MONGODB_URI || "mongodb://localhost/tee-time",
-    {
-        useNewUrlParser: true,
-        useFindAndModify: false
-    }
-);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/tee-time", {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useFindAndModify: false,
+});
 
 app.get("/api/test", (req, res) => {
   // console.log(req);
@@ -33,13 +29,16 @@ app.get("/api/test", (req, res) => {
   ]);
 });
 
-app.use('/api',routerApi)
+app.get("/", (req, res) => {
+  res.send("You are now connected to your dev server.");
+});
 
-app.listen(
-    PORT,
-    () => console.log(`Welcome to port ${PORT}! You are going to rock your day!`)
-);
+app.use("/api", routerApi);
 
 io.on("connection", socket => {
-  console.log("A user has entered Chat");
+  console.log("a user connected :D");
+  socket.on("chat message", msg => {
+    console.log(msg);
+    io.emit("chat message", msg);
+  });
 });
