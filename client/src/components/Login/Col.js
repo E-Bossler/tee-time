@@ -1,11 +1,12 @@
 import React from "react";
 import EmailInput from "../Login/EmailInput";
 import PasswordInput from "../Login/PasswordInput";
+import "./stylesheet.css";
 
 function Col() {
     return(
         <div className="col text-center">
-            <h1>Welcome to Tee-Time!</h1>
+            <h1>Welcome to Tee Time</h1>
                 <form>
                     <EmailInput/>
                     <PasswordInput />

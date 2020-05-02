@@ -1,5 +1,6 @@
 import React from "react";
 import Col from "../Login/Col";
+import "./stylesheet.css";
 
 function Row() {
     return(
