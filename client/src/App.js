@@ -2,7 +2,9 @@ import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Dashboard from "./pages/Dashboard";
 
 // THE FOLLOWING 8 LINES OF CODE ARE A TEST TO SEE IF THE FRONT END IS GETTING INFORTATION FROM THE SERVER
 
@@ -23,21 +25,20 @@ function App() {
       <Switch>
         <Route
           exact path="/"
-        // component={PAGE TBD}
-        component={Signup}
+        component={Login}
         // landing page: signup and login components
         >
     
         </Route>
         <Route
-          exact path="/saved"
-        // component={PAGE TBD}
+          exact path="/dashboard"
+        component={Dashboard}
         // dashboard: 
         >
         </Route>
         <Route
-          exact path="/saved"
-        // component={PAGE TBD}
+          exact path="/signup"
+        component={Signup}
         >
         </Route>
         <Route

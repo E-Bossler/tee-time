@@ -1,6 +1,6 @@
 import React from "react";
-import EmailInput from "../Signup/EmailInput";
-import PasswordInput from "../Signup/PasswordInput";
+import EmailInput from "../Login/EmailInput";
+import PasswordInput from "../Login/PasswordInput";
 
 function Col() {
     return(
@@ -9,10 +9,10 @@ function Col() {
                 <form>
                     <EmailInput/>
                     <PasswordInput />
-                    <button type="submit" id='login-btn' className="btn btn-default">Sign Up</button>
+                    <button type="submit" id='login-btn' className="btn btn-default">Login</button>
                 </form>
                 <div>
-                <p>Already have an account? Log in <a href="/">here</a></p>
+                <p>Don't have an account? Sign up <a href="/signup">here</a></p>
             </div>
         </div>
     )
