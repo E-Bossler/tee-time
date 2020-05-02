@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-  }
+}
   
   #greens-container {
     margin: 10px auto;
@@ -47,11 +47,11 @@
           background: rgb(10, 10, 10);
           border-radius: 50%;
           content: "";
-          height: 12px;
-          left: 6px;
+          height: 11px;
+          left: 5px;
           position: absolute;
           top: 4px;
-          width: 30px;
+          width: 28px;
         }
       }
     }
@@ -59,6 +59,7 @@
     #hill {
       background: green;
       border-radius: 50%;
+      box-shadow: -4px 4px 5px rgba(0, 0, 0, 0.5);
       height: 50px;
       margin: 0px auto;
       width: 300px;
