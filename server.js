@@ -1,8 +1,9 @@
-
 const express = require("express");
+const mongoose = require("mongoose");
 const app = express();
 const mongoose = require('mongoose');
 const routerApi = require('./routes/routes-api');
+
 
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
@@ -22,15 +23,15 @@ mongoose.connect(
     }
 );
 
-app.get(
-    '/api/test',
-    (req, res) => {
-        // console.log(req);
-        res.json(
-            [{"This is test data":"if you see this, the front end and back end are communicating."}]
-        )
-        }
-);
+app.get("/api/test", (req, res) => {
+  // console.log(req);
+  res.json([
+    {
+      "This is test data":
+        "if you see this, the front end and back end are communicating.",
+    },
+  ]);
+});
 
 app.use('/api',routerApi)
 
