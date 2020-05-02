@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 const mongoose = require('mongoose');
 const routerApi = require('./routes/routes-api');
+const app = express();
+
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
 
