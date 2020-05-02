@@ -21,9 +21,9 @@ mongoose.connect(
 app.get(
     '/api/test',
     (req, res) => {
-        console.log(req);
+        // console.log(req);
         res.json(
-            [{"hi":"hello"}]
+            [{"This is test data":"if you see this, the front end and back end are communicating."}]
         )
         }
 );

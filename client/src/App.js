@@ -1,41 +1,49 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+// THE FOLLOWING 8 LINES OF CODE ARE A TEST TO SEE IF THE FRONT END IS GETTING INFORTATION FROM THE SERVER
+
+import test from './test.js'
 
 function testFun() {
   test.getAll().then(
     result => {
-      console.log(result)
+      console.log(result.data[0])
     }
   )
+}
 
 function App() {
+  testFun();
   return (
     <Router>
-    <Switch>
-      <Route
-        exact path="/"
+      <Switch>
+        <Route
+          exact path="/"
         // component={PAGE TBD}
-      >
-      </Route>
-      <Route
-        exact path="/saved"
+        
+        >
+    
+        </Route>
+        <Route
+          exact path="/saved"
         // component={PAGE TBD}
-      >
-      </Route>
-      <Route
-        exact path="/saved"
+        >
+        </Route>
+        <Route
+          exact path="/saved"
         // component={PAGE TBD}
-      >
-      </Route>
-      <Route
-        exact path="/saved"
+        >
+        </Route>
+        <Route
+          exact path="/saved"
         // component={PAGE TBD}
-      >
-      </Route>
-    </Switch>
-  </Router>
+        >
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
