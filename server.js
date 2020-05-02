@@ -1,13 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const routerApi = require('./routes/routes-api');
-
+const server = require("http").Server(app);
+const io = require("socket.io")(server);
 const app = express();
 
 const PORT = process.env.PORT || 7777;
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json({ type: ['application/json'] }));
+app.use(express.json({ type: ["application/json"] }));
 
 app.use(express.static("public"));
 
@@ -35,3 +36,7 @@ app.listen(
     PORT,
     () => console.log(`Welcome to port ${PORT}! You are going to rock your day!`)
 );
+
+io.on("connection", socket => {
+  console.log("A user has entered Chat");
+});
