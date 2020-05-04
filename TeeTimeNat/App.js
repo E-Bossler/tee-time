@@ -1,7 +1,6 @@
 import React from 'react';
-import Todo from './src/Components/Todo';
-import Chatroom from './src/Pages/Chatroom';
+import Dashboard from './src/pages/Dashboard';
 
-const App = () => <Chatroom />;
+const App = () => <Dashboard />;
 
 export default App;
