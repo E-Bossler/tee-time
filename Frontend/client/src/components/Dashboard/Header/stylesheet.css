@@ -1,1 +1,87 @@
-/* No CSS *//*# sourceMappingURL=stylesheet.css.map */
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap");
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+nav {
+  border: 1px solid black;
+  font-family: 'Rubik', sans-serif;
+  position: relative;
+  z-index: 1;
+}
+
+nav #banner h2 {
+  padding: 10px;
+  text-align: center;
+}
+
+nav #banner #burger {
+  cursor: pointer;
+  padding: 10px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  z-index: 2;
+}
+
+nav #banner #burger .line {
+  background-color: black;
+  border-radius: 5px;
+  height: 2px;
+  margin: 7px;
+  width: 34px;
+}
+
+nav #banner #burger .toggle #line1 {
+  -webkit-transform: rotate(-45deg) translate(-5px, 10px);
+          transform: rotate(-45deg) translate(-5px, 10px);
+}
+
+nav #banner #burger .toggle #line2 {
+  opacity: 0;
+}
+
+nav #banner #burger .toggle #line3 {
+  -webkit-transform: rotate(45deg) translate(-5px, -10px);
+          transform: rotate(45deg) translate(-5px, -10px);
+}
+
+nav #slider #nav-links {
+  border: 1px solid black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  position: fixed;
+  -webkit-transition: right 1000ms ease-in-out;
+  transition: right 1000ms ease-in-out;
+  width: 50vw;
+  z-index: 2;
+}
+
+nav #slider #nav-links li {
+  list-style: none;
+}
+
+nav #slider #nav-links li .nav-link {
+  color: black;
+  text-decoration: none;
+}
+
+nav #slider .slide-left {
+  right: 0vw;
+}
+
+nav #slider .slide-right {
+  right: -50vw;
+}
+/*# sourceMappingURL=stylesheet.css.map */

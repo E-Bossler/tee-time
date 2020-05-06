@@ -1,6 +1,7 @@
 import React from "react";
 import EmailInput from "../Signup/EmailInput";
 import PasswordInput from "../Signup/PasswordInput";
+import "./stylesheet.css";
 
 function Col() {
     return(
