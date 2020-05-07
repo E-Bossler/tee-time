@@ -27,24 +27,20 @@ nav {
             .line {
                 background-color: black;
                 border-radius: 5px;
-                height: 2px;
+                height: 3px;
                 margin: 7px;
                 width: 34px;
             }
-            .toggle #line1 {
-                transform: rotate(-45deg) translate(-5px, 10px);
-    
+            .toggle1 {
+                transform: rotate(-45deg) translate(-5px, 9px);
             }
-            .toggle #line2 {
+            .toggle2 {
                 opacity: 0;
-                
             }
-            .toggle #line3 {
-                transform: rotate(45deg) translate(-5px, -10px);
-                
+            .toggle3 {
+                transform: rotate(45deg) translate(-5px, -9px);
             }
         }
-        
     }
     #slider {
         #nav-links {

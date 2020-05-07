@@ -31,23 +31,23 @@ nav #banner #burger {
 nav #banner #burger .line {
   background-color: black;
   border-radius: 5px;
-  height: 2px;
+  height: 3px;
   margin: 7px;
   width: 34px;
 }
 
-nav #banner #burger .toggle #line1 {
-  -webkit-transform: rotate(-45deg) translate(-5px, 10px);
-          transform: rotate(-45deg) translate(-5px, 10px);
+nav #banner #burger .toggle1 {
+  -webkit-transform: rotate(-45deg) translate(-5px, 9px);
+          transform: rotate(-45deg) translate(-5px, 9px);
 }
 
-nav #banner #burger .toggle #line2 {
+nav #banner #burger .toggle2 {
   opacity: 0;
 }
 
-nav #banner #burger .toggle #line3 {
-  -webkit-transform: rotate(45deg) translate(-5px, -10px);
-          transform: rotate(45deg) translate(-5px, -10px);
+nav #banner #burger .toggle3 {
+  -webkit-transform: rotate(45deg) translate(-5px, -9px);
+          transform: rotate(45deg) translate(-5px, -9px);
 }
 
 nav #slider #nav-links {

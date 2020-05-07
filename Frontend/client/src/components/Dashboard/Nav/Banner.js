@@ -1,5 +1,6 @@
 import React from "react";
 import Burger from "./Burger";
+import "./stylesheet.css";
 
 function Banner() {
     return(
