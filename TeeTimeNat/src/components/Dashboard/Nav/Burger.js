@@ -1,11 +1,5 @@
-import React, {Component} from 'react';
-import {
-  View,
-  // Text,
-  // StyleSheet,
-  // TextInput,
-  // TouchableHighlight,
-} from 'react-native';
+import React from 'react';
+import {View} from 'react-native';
 
 function Burger() {
   return (

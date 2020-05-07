@@ -1,19 +1,14 @@
 import React from 'react';
-import {
-  View,
-  Button,
-  // Text,
-  // StyleSheet,
-  // TextInput,
-  // TouchableHighlight,
-} from 'react-native';
+import {View, Text, Button} from 'react-native';
 import Form from './Form';
 
 function FormContainer() {
   return (
     <View id="form-container">
       <Form />
-      <Button title="Start Game" />
+      <Button>
+        <Text>Start Game</Text>
+      </Button>
     </View>
   );
 }

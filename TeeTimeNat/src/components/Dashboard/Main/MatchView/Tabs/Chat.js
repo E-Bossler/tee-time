@@ -1,13 +1,7 @@
 import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  // TouchableHighlight,
-} from 'react-native';
+import {View, Text, StyleSheet, TextInput} from 'react-native';
 import io from 'socket.io-client';
-export default class Chatroom extends Component {
+export default class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {

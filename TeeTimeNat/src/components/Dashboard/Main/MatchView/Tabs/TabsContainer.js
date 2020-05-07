@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  View,
-  // Text,
-  // StyleSheet,
-  // TextInput,
-  // TouchableHighlight,
-} from 'react-native';
+import {View} from 'react-native';
 import Tracker from './Tracker';
 import Chat from './Chat';
 import ScoreBoard from './ScoreBoard';

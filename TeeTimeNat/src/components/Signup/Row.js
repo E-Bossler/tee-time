@@ -1,12 +1,6 @@
 import React from 'react';
-import {
-  View,
-  // Text,
-  // StyleSheet,
-  // TextInput,
-  // TouchableHighlight,
-} from 'react-native';
-import Col from '../Signup/Col';
+import {View} from 'react-native';
+import Col from './Col';
 
 function Row() {
   return (

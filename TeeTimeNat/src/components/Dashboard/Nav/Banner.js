@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  // StyleSheet,
-  // TextInput,
-  // TouchableHighlight,
-} from 'react-native';
+import {View, Text} from 'react-native';
 import Burger from './Burger';
 
 function Banner() {

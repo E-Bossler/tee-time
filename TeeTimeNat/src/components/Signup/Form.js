@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  View,
-  // Text,
-  // StyleSheet,
-  // TextInput,
-  // TouchableHighlight,
-} from 'react-native';
-import Container from '../Signup/Container';
+import Container from './Container';
 
 function Form() {
   return <Container />;

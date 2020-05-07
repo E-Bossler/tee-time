@@ -1,12 +1,6 @@
 import React from 'react';
-import {
-  View,
-  // Text,
-  // StyleSheet,
-  // TextInput,
-  // TouchableHighlight,
-} from 'react-native';
-import Row from '../Signup/Row';
+import {View} from 'react-native';
+import Row from './Row';
 
 function Container() {
   return (

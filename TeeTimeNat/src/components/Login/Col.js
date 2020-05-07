@@ -1,15 +1,8 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Button,
-  Linking,
-  // StyleSheet,
-  // TextInput,
-  //   TouchableHighlight,
-} from 'react-native';
-import EmailInput from '../Login/EmailInput';
-import PasswordInput from '../Login/PasswordInput';
+import {View, Text, Button} from 'react-native';
+import {Link} from 'react-router-native';
+import EmailInput from './EmailInput';
+import PasswordInput from './PasswordInput';
 
 function Col() {
   return (
@@ -18,22 +11,12 @@ function Col() {
       <View>
         <EmailInput />
         <PasswordInput />
-        <Button
-          title="Login"
-          type="submit"
-          id="login-btn"
-          className="btn btn-default"
-        />
       </View>
       <View>
-        <Text>
-          Don't have an account? Sign up{' '}
-          <Text
-            style={{color: 'blue'}}
-            onPress={() => Linking.openURL('/signup')}>
-            Here
-          </Text>
-        </Text>
+        <Text>Not a member? Sign Up!</Text>
+        <Link to="/signup">
+          <Button title="Sign Up" />
+        </Link>
       </View>
     </View>
   );
