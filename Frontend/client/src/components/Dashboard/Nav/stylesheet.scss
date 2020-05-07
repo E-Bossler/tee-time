@@ -13,6 +13,7 @@ nav {
     position: relative;
     z-index: 1;
     #banner {
+        height: 10vh;
         h2 {
             padding: 10px;
             text-align: center;
@@ -44,16 +45,19 @@ nav {
     }
     #slider {
         #nav-links {
-            border: 1px solid black;
+            background: grey;
+            // border: 1px solid black;
             display: flex;
             flex-direction: column;
+            height: calc(100vh - 10vh);
             justify-content: space-around;
             position: fixed;
             transition: right 1000ms ease-in-out;
-            width: 50vw;
+            width: 100vw;
             z-index: 2;
             li {
                 list-style: none;
+                text-align: center;
                 .nav-link {
                     color: black;
                     text-decoration: none;
@@ -64,7 +68,7 @@ nav {
             right: 0vw;
         }
         .slide-right {
-            right: -50vw;
+            right: -100vw;
         }
     }
 }
