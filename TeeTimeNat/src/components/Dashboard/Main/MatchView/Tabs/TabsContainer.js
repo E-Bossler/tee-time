@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {Route} from 'react-router-native';
 import Tracker from './Tracker';
 import Chat from './Chat';
-import Stats from './TabsContainer';
+import Stats from './Stats';
 
 function TabsContainer() {
   return (

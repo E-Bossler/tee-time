@@ -8,3 +8,5 @@ function Tracker() {
     </View>
   );
 }
+
+export default Tracker;

@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, TextInput} from 'react-native';
+import {View, Text, StyleSheet, TextInput, YellowBox} from 'react-native';
 import io from 'socket.io-client';
+
+console.ignoredYellowBox = ['Remote debugger'];
+YellowBox.ignoreWarnings([
+  'Unrecognized WebSocket connection option(s) `agent`, `perMessageDeflate`, `pfx`, `key`, `passphrase`, `cert`, `ca`, `ciphers`, `rejectUnauthorized`. Did you mean to put these under `headers`?',
+]);
 export default class Chat extends Component {
   constructor(props) {
     super(props);
