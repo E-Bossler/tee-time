@@ -1,9 +1,10 @@
 import React from "react";
 import Links from "./Links";
+import "./stylesheet.css";
 
 function Slider() {
     return(
-        <div id='links-container'>
+        <div id='slider'>
             <Links />
         </div>
     );
