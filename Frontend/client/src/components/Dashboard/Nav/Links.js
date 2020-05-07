@@ -38,6 +38,11 @@ class Links extends Component {
           </Link>
         </li>
         <li>
+          <Link className="nav-link" to="/dashboard/game/new">
+            New Match
+          </Link>
+        </li>
+        <li>
           <Link className="nav-link" to="/dashboard">
             Logout
           </Link>
