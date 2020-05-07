@@ -34,16 +34,9 @@ export default class Chat extends Component {
     ));
 
     return (
-      <View style={styles.container}>
-        {chatMessages}
+      <View>
         <TextInput
-          style={{
-            height: 40,
-            // borderWidth: 2,
-            // bottom: 600,
-            backgroundColor: 'lightblue',
-            // color: 'white',
-          }}
+          style={{height: 40, backgroundColor: 'lightblue', borderWidth: 2}}
           autoCorrect={false}
           value={this.state.chatMessage}
           onSubmitEditing={() => this.submitChatMessage()}
@@ -51,15 +44,16 @@ export default class Chat extends Component {
             this.setState({chatMessage});
           }}
         />
+        {chatMessages}
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    height: 400,
-    flex: 1,
-    backgroundColor: '#F5FCFF',
-  },
-});
+/// FOR SOME REASON, THIS BREAKS THE CHAT???
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#F5FCFF',
+//   },
+// });
