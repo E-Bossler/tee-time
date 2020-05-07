@@ -1,14 +1,17 @@
-import React from 'react';
-import Nav from '../../../client/src/components/Dashboard/Nav/Nav';
-import Page from '../../../client/src/components/Dashboard/Main/Page';
-import Chat from '../../../client/src/components/Dashboard/Main/MatchView/Tabs/Chat';
+import React from "react";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
+import Nav from "../../../client/src/components/Dashboard/Nav/Nav";
+import Page from "../../../client/src/components/Dashboard/Main/Page";
 
 function Dashboard() {
   return (
     <div>
-      <Nav />
-      <Page />
-      <Chat />
+      <Router>
+        <Nav />
+        <Switch>
+          <Page />
+        </Switch>
+      </Router>
     </div>
   );
 }

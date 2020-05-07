@@ -1,14 +1,19 @@
 import React from "react";
+import { Route } from "react-router-dom";
 import FormContainer from "./MatchForm/FormContainer";
-import StartBtn from "./StartBtn/StartBtn";
+import TabsContainer from "./MatchView/Tabs/TabsContainer";
 
 function Page() {
-    return(
-        <div>
-            <StartBtn />
-            <FormContainer />
-        </div>
-    );
-};
+  return (
+    <div>
+      <Route exact path="/dashboard/game/new">
+        <FormContainer />
+      </Route>
+      <Route path="/dashboard/game">
+        <TabsContainer />
+      </Route>
+    </div>
+  );
+}
 
 export default Page;
