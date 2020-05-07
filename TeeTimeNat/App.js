@@ -9,9 +9,15 @@ const App = () => (
   <NativeRouter>
     <View>
       <Switch>
-        <Route exact path="/" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/">
+          <Login />
+        </Route>
+        <Route exact path="/signup">
+          <Signup />
+        </Route>
+        <Route exact path="/dashboard">
+          <Dashboard />
+        </Route>
       </Switch>
     </View>
   </NativeRouter>

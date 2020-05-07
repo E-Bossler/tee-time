@@ -11,11 +11,14 @@ function Col() {
       <View>
         <EmailInput />
         <PasswordInput />
+        <Link to="/dashboard">
+          <Text>Sign Up</Text>
+        </Link>
       </View>
       <View>
-        <Text>If you're a member, log in!</Text>
+        <Text>Click below to log in.</Text>
         <Link to="/">
-          <Button title="Log In" />
+          <Text>Log In</Text>
         </Link>
       </View>
     </View>

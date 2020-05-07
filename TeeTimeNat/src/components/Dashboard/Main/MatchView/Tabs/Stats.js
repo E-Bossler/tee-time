@@ -1,12 +1,12 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-function ScoreBoard() {
+function Stats() {
   return (
     <View>
-      <Text>Score Board</Text>
+      <Text>Stats</Text>
     </View>
   );
 }
 
-export default ScoreBoard;
+export default Stats;
