@@ -1,11 +1,10 @@
 import React from "react";
 
-function Tracker() {
+function DashboardContainer() {
     return(
         <div>
-            <h4>Tracker</h4>
         </div>
     );
 };
 
-export default Tracker;
+export default DashboardContainer;
