@@ -1,14 +1,10 @@
 import React from "react";
-import Tracker from "./Tracker";
-import Chat from "./Chat";
-import ScoreBoard from "./ScoreBoard";
+import NavTabs from "./NavTabs";
 
 function TabsContainer() {
     return(
         <div>
-            <Tracker />
-            <Chat />
-            <ScoreBoard />
+            <NavTabs />
         </div>
     );
 };
