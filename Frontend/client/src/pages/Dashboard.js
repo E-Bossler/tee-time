@@ -1,14 +1,12 @@
 import React from 'react';
 import Nav from '../../../client/src/components/Dashboard/Nav/Nav';
-import Page from '../../../client/src/components/Dashboard/Main/Page';
-import Chat from '../../../client/src/components/Dashboard/Main/MatchView/Tabs/Chat';
+import Main from '../components/Dashboard/Main/Main';
 
 function Dashboard() {
   return (
     <div>
       <Nav />
-      <Page />
-      <Chat />
+      <Main />
     </div>
   );
 }

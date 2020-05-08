@@ -8,10 +8,13 @@
 }
 
 nav {
-  border: 1px solid black;
   font-family: 'Rubik', sans-serif;
   position: relative;
   z-index: 1;
+}
+
+nav #banner {
+  height: 10vh;
 }
 
 nav #banner h2 {
@@ -51,7 +54,7 @@ nav #banner #burger .toggle3 {
 }
 
 nav #slider #nav-links {
-  border: 1px solid black;
+  background: grey;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -59,17 +62,19 @@ nav #slider #nav-links {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  height: calc(100vh - 10vh);
   -ms-flex-pack: distribute;
       justify-content: space-around;
   position: fixed;
   -webkit-transition: right 1000ms ease-in-out;
   transition: right 1000ms ease-in-out;
-  width: 50vw;
+  width: 100vw;
   z-index: 2;
 }
 
 nav #slider #nav-links li {
   list-style: none;
+  text-align: center;
 }
 
 nav #slider #nav-links li .nav-link {
@@ -82,6 +87,6 @@ nav #slider .slide-left {
 }
 
 nav #slider .slide-right {
-  right: -50vw;
+  right: -100vw;
 }
 /*# sourceMappingURL=stylesheet.css.map */
