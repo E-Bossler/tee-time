@@ -1,12 +1,12 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-function Tracker() {
+function Stats() {
   return (
     <View>
-      <Text>Tracker</Text>
+      <Text>Stats</Text>
     </View>
   );
 }
 
-export default Tracker;
+export default Stats;

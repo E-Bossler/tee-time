@@ -1,12 +1,6 @@
 import React from 'react';
-import {
-  View,
-  // Text,
-  // StyleSheet,
-  // TextInput,
-  // TouchableHighlight,
-} from 'react-native';
-import './stylesheet.css';
+import {View} from 'react-native';
+// import './stylesheet.css';
 
 function Greens() {
   return (

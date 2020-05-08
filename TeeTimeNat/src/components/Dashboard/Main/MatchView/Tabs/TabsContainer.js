@@ -1,21 +1,24 @@
 import React from 'react';
-import {
-  View,
-  // Text,
-  // StyleSheet,
-  // TextInput,
-  // TouchableHighlight,
-} from 'react-native';
+import {View} from 'react-native';
+import {Route} from 'react-router-native';
 import Tracker from './Tracker';
 import Chat from './Chat';
-import ScoreBoard from './ScoreBoard';
+import Stats from './Stats';
 
 function TabsContainer() {
   return (
     <View>
-      <Tracker />
-      <Chat />
-      <ScoreBoard />
+      <Route path="/dashboard/game/tracker">
+        <Tracker />
+      </Route>
+
+      <Route path="/dashboard/game/chat">
+        <Chat />
+      </Route>
+
+      <Route path="/dashboard/game/stats">
+        <Stats />
+      </Route>
     </View>
   );
 }

@@ -1,10 +1,8 @@
-import React from "react";
-import Container from "../Login/Container";
+import React from 'react';
+import Container from './Container';
 
 function Form() {
-    return(
-        <Container />
-    );
-};
+  return <Container />;
+}
 
 export default Form;

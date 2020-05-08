@@ -1,19 +1,18 @@
 import React from 'react';
-import {
-  View,
-  // Text,
-  // StyleSheet,
-  // TextInput,
-  // TouchableHighlight,
-} from 'react-native';
+import {View} from 'react-native';
+import {Route} from 'react-router-native';
 import FormContainer from './MatchForm/FormContainer';
-import StartBtn from './StartBtn/StartBtn';
+import TabsContainer from './MatchView/Tabs/TabsContainer';
 
 function Page() {
   return (
     <View>
-      <StartBtn />
-      <FormContainer />
+      <Route exact path="/dashboard/game/new">
+        <FormContainer />
+      </Route>
+      <Route path="/dashboard/game">
+        <TabsContainer />
+      </Route>
     </View>
   );
 }
