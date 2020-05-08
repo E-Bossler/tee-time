@@ -40,9 +40,10 @@ export default class Chatroom extends Component {
         <TextInput
           style={{
             height: 40,
-            borderWidth: 2,
-            bottom: 600,
-            backgroundColor: 'blue',
+            // borderWidth: 2,
+            // bottom: 600,
+            backgroundColor: 'lightblue',
+            // color: 'white',
           }}
           autoCorrect={false}
           value={this.state.chatMessage}
