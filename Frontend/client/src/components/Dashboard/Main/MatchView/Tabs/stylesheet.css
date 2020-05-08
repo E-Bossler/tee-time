@@ -1,0 +1,17 @@
+#tabs-container #tabs-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+#tabs-container #tabs-list .nav-tab {
+  list-style: none;
+  padding: 10px;
+}
+/*# sourceMappingURL=stylesheet.css.map */

@@ -1,16 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import "./stylesheet.css";
 
 function NavTabs() {
     return(
-        <ul>
-            <li>
-                <h4>Tracker</h4>
+        <ul id="tabs-list">
+            <li className="nav-tab">
+                <Link id="tracker-tab" to="/dashboard/matchView/tracker">Tracker</Link>
             </li>
-            <li>
-                <h4>Score Board</h4>
+            <li className="nav-tab">
+                <Link id="scoreboard-tab" to="/dashboard/matchView/scoreboard">Score Board</Link>
             </li>
-            <li>
-                <h4>Chat</h4>
+            <li className="nav-tab">
+                <Link id="chat-tab" to="/dashboard/matchView/chat">Chat</Link>
             </li>
         </ul>
     );

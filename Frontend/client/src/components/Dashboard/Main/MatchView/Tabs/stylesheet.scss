@@ -1,0 +1,11 @@
+#tabs-container {
+    #tabs-list {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        .nav-tab {
+            list-style: none;
+            padding: 10px;
+        }
+    }
+}
