@@ -42,6 +42,7 @@ router.post('/account/signup', (req, res, next) => {
   let {
     email,
     password,
+    username,
     matchHistory
   } = body;
 
@@ -73,7 +74,8 @@ router.post('/account/signup', (req, res, next) => {
       if (err) {
         return res.send({
           success: false,
-          message: "WARNING WARNING! Server Error! WARNING WARNING!"
+          message: `Please see error message: ${err}
+          location base`
         })
       } else if (previousUsers.length > 0) {
         return res.send({
@@ -88,14 +90,15 @@ router.post('/account/signup', (req, res, next) => {
 
   const newUser = new db.User();
 
-  newUser.email = email
-
+  newUser.email = email;
+  newUser.username = username;
   newUser.password = newUser.generateHash(password);
   newUser.save((err, user) => {
     if (err) {
       return res.send({
         success: false,
-        message: "WARNING WARNING! Server Error! WARNING WARNING!"
+        message: `Please see error message: ${err}
+        location 0`
       })
     }
     return res.send({
@@ -136,7 +139,8 @@ router.post('/account/signin', (req, res, next) => {
     if (err) {
       return res.send({
         success: false,
-        message: "ANOTHER SERVER ERROR! OH NOOOOO!!!"
+        message: `Please see error message: ${err}
+        location 1`
       })
     }
     if (users.length != 1) {
@@ -163,7 +167,8 @@ router.post('/account/signin', (req, res, next) => {
         console.log(err)
         return res.send({
           success: false,
-          message: "ANOTHER SERVER ERROR!"
+          message: `Please see error message: ${err}
+          location 2`
         })
       }
       return res.send({
@@ -179,7 +184,7 @@ router.post('/account/signin', (req, res, next) => {
   })
 });
 
-router.post('/account/verify', (req, res, next) => {
+router.get('/account/verify', (req, res, next) => {
   //get the token 
   const { query } = req;
   const { token } = query;
@@ -193,9 +198,10 @@ router.post('/account/verify', (req, res, next) => {
     if (err) {
       return res.send({
         success: false,
-        message: "Server error! Face palm!"
+        message: `Please see error message: ${err}
+        location 3`
       })
-    } 
+    }
 
     if (sessions.length != 1) {
       return res.send({
@@ -208,8 +214,43 @@ router.post('/account/verify', (req, res, next) => {
         message: 'Good session.'
       })
     }
+
+
   })
 
 });
+
+router.get('/account/logout', (req, res, next) => {
+  //get the token 
+  const query = req;
+  console.log(req.body);
+  const token = req.body._id;
+  const updateLogOut = {
+    isDeleted: true 
+  }
+  console.log(`Token: ${token}`)
+  //verify the token is one of a kind and is not deleted
+
+  db.UserSession.findOneAndUpdate(
+    {
+      _id: token,
+      isDeleted: false
+    }, 
+    updateLogOut,
+    null,
+    (err, sessions) => {
+      if (err) {
+        return res.send({
+          success: false,
+          message: `Please see error message: ${err}
+      location 3`
+        })
+      }
+      return res.send({
+        success: true,
+        message: 'We have logged you out'
+      })
+    })
+})
 
 module.exports = router;
