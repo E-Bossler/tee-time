@@ -1,24 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require("bcrypt");
 
-const usersSchema = new Schema (
+const UserSchema = new Schema (
     {
-        userName: {
-            type: String,
-            trim: true,
-            required: "Please enter a Username"
-        },
-        firstName: {
-            type: String,
-            trim: true,
-            required: "Please enter a first name"
-        },
         email: {
             type: String,
             trim: true,
             required: "Please enter an email address"
         },
-        // Maybe we don't need this
         password: {
             type: String,
             trim: true,
@@ -27,10 +17,22 @@ const usersSchema = new Schema (
         matchHistory: {
             type: Array,
             trim: true
+        },
+        isDeleted: {
+            type: Boolean,
+            default: 'false'
         }
     }
 );
 
-const User = mongoose.model("User", usersSchema);
+UserSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+UserSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+}
+
+const User = mongoose.model("User", UserSchema);
 
 module.exports  = User;
