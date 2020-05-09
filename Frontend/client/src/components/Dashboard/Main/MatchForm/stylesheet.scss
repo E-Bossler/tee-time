@@ -42,9 +42,26 @@ button {
                 background: rgb(26, 228, 26);
                 color: white;
                 font-family: 'Rubik', sans-serif;
-                margin: 5px 2px;
+                margin: 10px 2px;
                 text-decoration: none;
                 text-transform: uppercase;
+            }
+        }
+        #friends-list-container {
+            margin: 5px auto;
+            width: 85%;
+            h3 {
+                font-weight: 300;
+                margin: 5px 0;
+            }
+            #friends-list {
+                li {
+                    list-style: none;
+                    margin: 5px 0;
+                }
+            }
+            .hide {
+                display: none;
             }
         }
         #start-match-btn {
