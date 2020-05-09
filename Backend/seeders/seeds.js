@@ -11,37 +11,34 @@ mongoose.connect(
 
 const userSeed = [
   {
-    userName: 'Eric-test-user',
-    firstName: 'Eric',
     email: 'eric@test.gmail.com',
     password: 'password',
+    username: 'erictest',
     matchHistory: [
       1, 2, 3, 4,
     ]
   },
   {
-    userName: 'Austen-test-user',
-    firstName: 'Austen',
     email: 'Austen@test.gmail.com',
     password: 'password',
+    username: 'austentest',
     matchHistory: [
       1, 2, 3, 4,
     ]
   },
   {
-    userName: 'Dustin-test-user',
-    firstName: 'Dustin',
+
     email: 'Dustin@test.gmail.com',
     password: 'password',
+    username: 'dustintest',
     matchHistory: [
       1, 2, 3, 4,
     ]
   },
   {
-    userName: 'Jon-test-user',
-    firstName: 'Jon',
     email: 'Jon@test.gmail.com',
     password: 'password',
+    username: 'jontest',
     matchHistory: [
       1, 2, 3, 4,
     ]
@@ -62,52 +59,52 @@ db.User.deleteMany({})
 const matchSeed = [
   {
     participants: [
-      'Eric-test-user', 'Austen-test-user', 'Dustin-test-user', 'Jon-test-user'
+      'eric@test.gmail.com', 'Austen@test.gmail.com', 'Dustin@test.gmail.com', 'Jon@test.gmail.com'
     ],
     course: "Interbay Golf Course",
     holes: 18,
     parValues: [
       //fake data for the purpose of getting it to work... for now
-      3,4,3,4,5,3,4,5,4,3,4,3,4,5,3,4,5,4
+      3, 4, 3, 4, 5, 3, 4, 5, 4, 3, 4, 3, 4, 5, 3, 4, 5, 4
     ]
   },
   {
     participants: [
-      'Eric-test-user', 'Austen-test-user', 'Dustin-test-user'
+      'eric@test.gmail.com', 'Austen@test.gmail.com', 'Dustin@test.gmail.com'
     ],
     course: "Jackson Park Golf Course",
     holes: 18,
     parValues: [
       //fake data for the purpose of getting it to work... for now
-      3,4,3,4,5,3,4,5,4,3,4,3,4,5,3,4,5,4
+      3, 4, 3, 4, 5, 3, 4, 5, 4, 3, 4, 3, 4, 5, 3, 4, 5, 4
     ]
   },
   {
     participants: [
-      'Eric-test-user', 'Jon-test-user'
+      'eric@test.gmail.com', 'Jon@test.gmail.com'
     ],
     course: "Jefferson Park Golf Course",
     holes: 18,
     parValues: [
       //fake data for the purpose of getting it to work... for now
-      3,4,3,4,5,3,4,5,4,3,4,3,4,5,3,4,5,4
+      3, 4, 3, 4, 5, 3, 4, 5, 4, 3, 4, 3, 4, 5, 3, 4, 5, 4
     ]
   },
   {
     participants: [
-      'Austen-test-user'
+      'Austen@test.gmail.com'
     ],
     course: "West Seattle Golf Course",
     holes: 18,
     parValues: [
       //fake data for the purpose of getting it to work... for now
-      3,4,3,4,5,3,4,5,4,3,4,3,4,5,3,4,5,4
+      3, 4, 3, 4, 5, 3, 4, 5, 4, 3, 4, 3, 4, 5, 3, 4, 5, 4
     ]
   }
 ]
 
 db.Match.deleteMany({})
-  .then(() => db.Match.collection.insertMany(roundSeed))
+  .then(() => db.Match.collection.insertMany(matchSeed))
   .then(data => {
     console.log(data.result.n + " Match records inserted!");
     process.exit(0);
@@ -117,79 +114,75 @@ db.Match.deleteMany({})
     process.exit(1);
   });
 
-   
-  
 
-  'Eric-test-user'
-  'Jon-test-user'
-  'Austen-test-user'
+
 
 const roundSeed = [
   {
-    golfer: 'Eric-test-user',
+    golfer: 'eric@test.gmail.com',
     matchId: 1,
     score: [
-      3,4,3,4,5,3,4,5,4,3,4,3,4,5,3,4,5,4
+      3, 4, 3, 4, 5, 3, 4, 5, 4, 3, 4, 3, 4, 5, 3, 4, 5, 4
     ]
   },
   {
-    golfer:  'Austen-test-user',
+    golfer: 'Austen@test.gmail.com',
     matchId: 1,
     score: [
-      3,4,3,4,5,3,4,5,4,3,4,3,4,5,3,4,5,4
+      3, 4, 3, 4, 5, 3, 4, 5, 4, 3, 4, 3, 4, 5, 3, 4, 5, 4
     ]
   },
   {
-    golfer:  'Dustin-test-user',
+    golfer: 'Dustin@test.gmail.com',
     matchId: 1,
     score: [
-      3,4,3,4,5,3,4,5,4,3,4,3,4,5,3,4,5,4
+      3, 4, 3, 4, 5, 3, 4, 5, 4, 3, 4, 3, 4, 5, 3, 4, 5, 4
     ]
   },
   {
-    golfer:  'Jon-test-user',
+    golfer: 'Jon@test.gmail.com',
     matchId: 1,
     score: [
-      3,4,3,4,5,3,4,5,4,3,4,3,4,5,3,4,5,4
+      3, 4, 3, 4, 5, 3, 4, 5, 4, 3, 4, 3, 4, 5, 3, 4, 5, 4
     ]
-  },  {
-    golfer: 'Eric-test-user',
+  }, {
+    golfer: 'eric@test.gmail.com',
     matchId: 2,
     score: [
-      3,4,3,4,5,3,4,5,4,3,4,3,4,5,3,4,5,4
+      3, 4, 3, 4, 5, 3, 4, 5, 4, 3, 4, 3, 4, 5, 3, 4, 5, 4
     ]
   },
   {
-    golfer:  'Austen-test-user',
+    golfer: 'Austen@test.gmail.com',
     matchId: 2,
     score: [
-      3,4,3,4,5,3,4,5,4,3,4,3,4,5,3,4,5,4
+      3, 4, 3, 4, 5, 3, 4, 5, 4, 3, 4, 3, 4, 5, 3, 4, 5, 4
     ]
   },
   {
-    golfer:  'Dustin-test-user',
+    golfer: 'Dustin@test.gmail.com',
     matchId: 2,
     score: [
-      3,4,3,4,5,3,4,5,4,3,4,3,4,5,3,4,5,4
+      3, 4, 3, 4, 5, 3, 4, 5, 4, 3, 4, 3, 4, 5, 3, 4, 5, 4
     ]
-  },,  {
-    golfer: 'Eric-test-user',
+  }, , {
+    golfer: 'eric@test.gmail.com',
     matchId: 3,
     score: [
-      3,4,3,4,5,3,4,5,4,3,4,3,4,5,3,4,5,4
+      3, 4, 3, 4, 5, 3, 4, 5, 4, 3, 4, 3, 4, 5, 3, 4, 5, 4
     ]
-  },{
-    golfer:  'Jon-test-user',
+  }, {
+    golfer: 'Jon@test.gmail.com',
     matchId: 3,
     score: [
-      3,4,3,4,5,3,4,5,4,3,4,3,4,5,3,4,5,4
+      3, 4, 3, 4, 5, 3, 4, 5, 4, 3, 4, 3, 4, 5, 3, 4, 5, 4
     ]
   },
   {
-    golfer:  'Austen-test-user',
+    golfer: 'Austen@test.gmail.com',
     matchId: 4,
     score: [
-      3,4,3,4,5,3,4,5,4,3,4,3,4,5,3,4,5,4
+      3, 4, 3, 4, 5, 3, 4, 5, 4, 3, 4, 3, 4, 5, 3, 4, 5, 4
     ]
   }
 ]

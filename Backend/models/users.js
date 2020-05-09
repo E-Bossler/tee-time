@@ -14,6 +14,11 @@ const UserSchema = new Schema (
             trim: true,
             required: "Please enter a valid Password"
         },
+        username: {
+            type: String,
+            trim: true,
+            required: "Please enter a valid Username"
+        },
         matchHistory: {
             type: Array,
             trim: true
