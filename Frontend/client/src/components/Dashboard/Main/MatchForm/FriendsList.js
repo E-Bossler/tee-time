@@ -4,12 +4,20 @@ import "./stylesheet.css";
 class FriendsList extends Component {
     render() {
         const friends = this.props.friends;
+        let otherPlayers = false;
+        if (friends.length > 0) {
+            otherPlayers = true;
+        }
         return(
-            <ul id="friends-list">
-                {friends.map((value, index) => {
-                    return <li key={index}>{value}</li>
-                })}
-            </ul>
+            <div id="friends-list-container">
+                <h3>Players:</h3>
+                <p className={ otherPlayers ? "hide" : "show"}>No friends added yet</p>
+                <ul id="friends-list">
+                    {friends.map((value, index) => {
+                        return <li key={index}>{value}</li>
+                    })}
+                </ul>
+            </div>
         );
     }
 };

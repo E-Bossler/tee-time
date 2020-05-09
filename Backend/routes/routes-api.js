@@ -15,6 +15,20 @@ router.get("/users", (req, res) => {
     });
 });
 
+router.post("/users", (req, res) => {
+    db.User.findOne({
+      where: {
+        username: req.body.name
+      }
+    })
+    .then(data => {
+      res.json(data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+});
+
 router.get("/matches", (req, res) => {
   db.Match.find({})
     .then(data => {
