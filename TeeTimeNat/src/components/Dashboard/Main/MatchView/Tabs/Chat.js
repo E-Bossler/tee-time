@@ -18,7 +18,7 @@ export default class Chat extends Component {
   componentDidMount() {
     this.socket = io('http://192.168.138.2:7777');
     this.socket.on('connect', () => console.log('connected'));
-    this.socket.on('chat message', msg => {
+    this.socket.on('chat message', (msg) => {
       this.setState({chatMessages: [...this.state.chatMessages, msg]});
     });
   }
@@ -29,7 +29,7 @@ export default class Chat extends Component {
   }
 
   render() {
-    const chatMessages = this.state.chatMessages.map(chatMessage => (
+    const chatMessages = this.state.chatMessages.map((chatMessage) => (
       <Text key={chatMessage}>{chatMessage}</Text>
     ));
 
@@ -40,7 +40,7 @@ export default class Chat extends Component {
           autoCorrect={false}
           value={this.state.chatMessage}
           onSubmitEditing={() => this.submitChatMessage()}
-          onChangeText={chatMessage => {
+          onChangeText={(chatMessage) => {
             this.setState({chatMessage});
           }}
         />
@@ -50,7 +50,7 @@ export default class Chat extends Component {
   }
 }
 
-/// FOR SOME REASON, THIS BREAKS THE CHAT???
+//  FOR SOME REASON, THIS BREAKS THE CHAT???
 // const styles = StyleSheet.create({
 //   container: {
 //     flex: 1,

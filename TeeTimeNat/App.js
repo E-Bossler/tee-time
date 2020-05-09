@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import {NativeRouter, Route, Switch} from 'react-router-native';
 import Login from './src/pages/Login';
 import Signup from './src/pages/Signup';
@@ -7,7 +7,7 @@ import Dashboard from './src/pages/Dashboard';
 
 const App = () => (
   <NativeRouter>
-    <View>
+    <SafeAreaView>
       <Switch>
         <Route exact path="/">
           <Login />
@@ -19,7 +19,7 @@ const App = () => (
           <Dashboard />
         </Route>
       </Switch>
-    </View>
+    </SafeAreaView>
   </NativeRouter>
 );
 
