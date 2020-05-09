@@ -104,7 +104,8 @@ router.post('/account/signup', (req, res, next) => {
     })
   })
 })
-// SING IN SET UP
+
+// SIGN IN SET UP
 
 router.post('/account/signin', (req, res, next) => {
   const { body } = req;
@@ -178,6 +179,37 @@ router.post('/account/signin', (req, res, next) => {
   })
 });
 
+router.post('/account/verify', (req, res, next) => {
+  //get the token 
+  const { query } = req;
+  const { token } = query;
 
+  //verify the token is one of a kind and is not deleted
+
+  db.UserSession.find({
+    _id: token,
+    isDeleted: false
+  }, (err, sessions) => {
+    if (err) {
+      return res.send({
+        success: false,
+        message: "Server error! Face palm!"
+      })
+    } 
+
+    if (sessions.length != 1) {
+      return res.send({
+        success: false,
+        message: "Something went wrong... "
+      })
+    } else {
+      return res.send({
+        success: false,
+        message: 'Good session.'
+      })
+    }
+  })
+
+});
 
 module.exports = router;
