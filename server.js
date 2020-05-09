@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const bodyParser = require('body-parser');
 const http = require("http");
 const mongoose = require("mongoose");
 const router = require("./Backend/routes/routes-api");
@@ -11,6 +12,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ type: ["application/json"] }));
 
 app.use(express.static("public"));
+
+app.use(bodyParser());
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/tee-time", {
   useUnifiedTopology: true,
