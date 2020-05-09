@@ -52,6 +52,15 @@ button {
   width: 90%;
 }
 
+#form-container #form .form-group #add-friend-btn {
+  background: #1ae41a;
+  color: white;
+  font-family: 'Rubik', sans-serif;
+  margin: 5px 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
 #form-container #form #start-match-btn #match-link {
   color: white;
   font-family: 'Rubik', sans-serif;

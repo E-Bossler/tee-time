@@ -38,14 +38,16 @@ button {
         .form-group {
             margin: 5px auto;
             width: 90%;
+            #add-friend-btn {
+                background: rgb(26, 228, 26);
+                color: white;
+                font-family: 'Rubik', sans-serif;
+                margin: 5px 2px;
+                text-decoration: none;
+                text-transform: uppercase;
+            }
         }
         #start-match-btn {
-            // background: linear-gradient(rgb(100, 142, 255), rgb(51, 104, 250));
-            // margin: 10px auto;
-            // border: none;
-            // box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.8);
-            // padding: 8px 10px;
-            // width: 100px;
             #match-link {
                 color: white;
                 font-family: 'Rubik', sans-serif;
