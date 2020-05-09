@@ -184,10 +184,13 @@ router.post('/account/signin', (req, res, next) => {
   })
 });
 
+// VERIFY SET UP
+
 router.get('/account/verify', (req, res, next) => {
   //get the token 
-  const { query } = req;
-  const { token } = query;
+  const query = req;
+  console.log(req.body);
+  const token = req.body._id;
 
   //verify the token is one of a kind and is not deleted
 
@@ -219,6 +222,8 @@ router.get('/account/verify', (req, res, next) => {
   })
 
 });
+
+// LOG OUT SET UP
 
 router.get('/account/logout', (req, res, next) => {
   //get the token 

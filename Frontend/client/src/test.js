@@ -1,7 +1,7 @@
-import axios from 'axios';
+// import axios from 'axios';
 
-export default {
-    getAll: function () {
-        return axios.get('/api/test')
-    } 
-}
+// export default {
+//     getAll: function () {
+//         return axios.get('/api/test')
+//     } 
+// }

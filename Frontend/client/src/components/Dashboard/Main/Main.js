@@ -7,8 +7,83 @@ import UserMenuContainer from "./UserData/UserMenuContainer";
 import MatchView from "./MatchView/MatchView";
 import "./stylesheet.css";
 
+// import {
+//   getFromStorage,
+//   setInStorage
+// } from "../../utils/storage"
+
 class Main extends Component {
+
+  // constructor(props) {
+  //   super(props);
+
+  //   this.state = {
+  //     isLoading: true,
+  //     token: '',
+  //     signUpError: '',
+  //     signInError: ''
+  //   };
+  // }
+
+  // componentDidMount() {
+  //   const token = getFromStorage('tee-time-seattle')
+
+  //   if (token) {
+  //     //verify if the user is logged in 
+
+  //     fetch(`/api/account/verify?token=${token}`)
+  //       .then(res => res.json())
+  //       .then(json => {
+  //         if (json.success) {
+  //           this.setState({
+  //             token: token,
+  //             isLoading: false
+  //           })
+  //         } else {
+  //           this.setState({
+  //             isLoading: false
+  //           })
+  //         }
+  //       })
+
+  //   } else {
+  //     this.setState({
+  //       isLoading: false
+  //     }
+  //     )
+  //   }
+  // }
+
   render() {
+
+    // const {
+    //   isLoading,
+    //   token
+    // } = this.state;
+
+    // if (isLoading) {
+    //   return (
+    //     <div>
+    //       <p>
+    //         Loading...
+    //       </p>
+    //     </div>
+    //   )
+    // }
+
+    // if (!token) {
+    //   return (
+    //     <div>
+    //       <p>
+    //         Sign In
+    //       </p>
+    //       <p>
+    //         Sign Up
+    //       </p>
+    //     </div>
+    //   )
+    // }
+
     return (
       <div>
         <Route exact path="/dashboard">

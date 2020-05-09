@@ -17,6 +17,8 @@ function testFun() {
 
 function App() {
   testFun();
+
+  
   return (
     <Router>
       <Switch>
