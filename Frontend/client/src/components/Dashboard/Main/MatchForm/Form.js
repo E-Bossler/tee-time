@@ -8,12 +8,12 @@ import "./stylesheet.css";
 class Form extends Component {
     render() {
         return(
-            <div >
+            <div id="form">
                 <CourseInput />
                 <ParInput />
                 <FriendsInput />
-                <button>
-                    <Link to="/dashboard/matchView">
+                <button id="start-match-btn">
+                    <Link id="match-link" to="/dashboard/matchView">
                         Start Game
                     </Link>
                 </button>

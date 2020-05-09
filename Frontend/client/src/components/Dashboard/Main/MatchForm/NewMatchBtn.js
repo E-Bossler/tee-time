@@ -5,9 +5,9 @@ import "./stylesheet.css";
 class NewMatchBtn extends Component {
     render() {
         return(
-            <div>
-                <button>
-                    <Link to="/dashboard/matchForm">
+            <div id="match-btn-container">
+                <button id="new-match-btn">
+                    <Link id="new-match-link" to="/dashboard/matchForm">
                         New Match
                     </Link>
                 </button>

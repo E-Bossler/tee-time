@@ -20,12 +20,10 @@ class Nav extends Component {
     };
 
     render() {
-        
-
         return(
             <nav>
                 <Banner action={this.animate.bind(this)} clicked={this.state.clicked}/>
-                <Slider clicked={this.state.clicked}/>
+                <Slider action={this.animate.bind(this)} clicked={this.state.clicked}/>
             </nav>
         );
     }

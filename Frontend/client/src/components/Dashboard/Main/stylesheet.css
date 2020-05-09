@@ -1,0 +1,11 @@
+div #landing-container {
+  margin: 40px auto 20px;
+}
+
+div #landing-container h2,
+div #landing-container h4 {
+  font-weight: 300;
+  margin: 5px auto;
+  text-align: center;
+}
+/*# sourceMappingURL=stylesheet.css.map */

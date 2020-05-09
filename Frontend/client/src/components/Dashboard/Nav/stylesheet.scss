@@ -8,11 +8,12 @@
 }
 
 nav {
-    // border: 1px solid black;
+    background: rgb(168, 248, 168);
     font-family: 'Rubik', sans-serif;
     position: relative;
-    z-index: 1;
+    z-index: 90;
     #banner {
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
         height: 10vh;
         h2 {
             padding: 10px;
@@ -24,7 +25,7 @@ nav {
             position: absolute;
             right: 0px;
             top: 0px;
-            z-index: 2;
+            z-index: 4;
             .line {
                 background-color: black;
                 border-radius: 5px;
@@ -45,8 +46,7 @@ nav {
     }
     #slider {
         #nav-links {
-            background: grey;
-            // border: 1px solid black;
+            background: white;
             display: flex;
             flex-direction: column;
             height: calc(100vh - 10vh);
@@ -54,9 +54,11 @@ nav {
             position: fixed;
             transition: right 1000ms ease-in-out;
             width: 100vw;
-            z-index: 2;
             li {
+                border: 1px solid black;
+                height: calc((100vh - 56.8px)/7);
                 list-style: none;
+                padding-top: 25px;
                 text-align: center;
                 .nav-link {
                     color: black;

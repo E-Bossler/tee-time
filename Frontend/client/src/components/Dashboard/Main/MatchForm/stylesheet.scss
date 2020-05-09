@@ -1,7 +1,57 @@
-// .hideForm {
-//     display: none;
-// }
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap');
 
-// .hideNewMatchBtn {
-//     display: none;
-// }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+button {
+    background: linear-gradient(rgb(100, 142, 255), rgb(51, 104, 250));
+    margin: 10px auto;
+    border: none;
+    box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.8);
+    padding: 8px 10px;
+    width: 100px;
+}
+
+#match-btn-container {
+    margin: 40px auto;
+    width: 100px;
+    #new-match-btn {
+        #new-match-link {
+            color: white;
+            font-family: 'Rubik', sans-serif;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+    }
+}
+
+#form-container {
+    padding: 10px;
+    #form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .form-group {
+            margin: 5px auto;
+            width: 90%;
+        }
+        #start-match-btn {
+            // background: linear-gradient(rgb(100, 142, 255), rgb(51, 104, 250));
+            // margin: 10px auto;
+            // border: none;
+            // box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.8);
+            // padding: 8px 10px;
+            // width: 100px;
+            #match-link {
+                color: white;
+                font-family: 'Rubik', sans-serif;
+                text-decoration: none;
+                text-transform: uppercase;
+            }
+        }
+    }
+}
