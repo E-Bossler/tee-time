@@ -1,9 +1,10 @@
 import React from "react";
 import NavTabs from "./NavTabs";
+import "./stylesheet.css";
 
 function TabsContainer() {
     return(
-        <div>
+        <div id="tabs-container">
             <NavTabs />
         </div>
     );

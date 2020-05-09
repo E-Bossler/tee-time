@@ -1,1 +1,61 @@
-/* No CSS *//*# sourceMappingURL=stylesheet.css.map */
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap");
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+button {
+  background: -webkit-gradient(linear, left top, left bottom, from(#648eff), to(#3368fa));
+  background: linear-gradient(#648eff, #3368fa);
+  margin: 10px auto;
+  border: none;
+  -webkit-box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.8);
+          box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.8);
+  padding: 8px 10px;
+  width: 100px;
+}
+
+#match-btn-container {
+  margin: 40px auto;
+  width: 100px;
+}
+
+#match-btn-container #new-match-btn #new-match-link {
+  color: white;
+  font-family: 'Rubik', sans-serif;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+#form-container {
+  padding: 10px;
+}
+
+#form-container #form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#form-container #form .form-group {
+  margin: 5px auto;
+  width: 90%;
+}
+
+#form-container #form #start-match-btn #match-link {
+  color: white;
+  font-family: 'Rubik', sans-serif;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+/*# sourceMappingURL=stylesheet.css.map */

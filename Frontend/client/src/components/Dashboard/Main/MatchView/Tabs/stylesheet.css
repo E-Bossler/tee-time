@@ -1,0 +1,51 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+#tabs-container {
+  background: #a8f8a8;
+  z-index: 1;
+}
+
+#tabs-container #tabs-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+#tabs-container #tabs-list .nav-tab {
+  background: #969696;
+  border: 1px solid white;
+  border-radius: 5px 5px 0 0;
+  -webkit-box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
+          box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
+  font-size: 0.8em;
+  list-style: none;
+  padding: 5px;
+  text-align: center;
+  width: 33.3%;
+  z-index: 2;
+}
+
+#tabs-container #tabs-list .nav-tab #tracker-tab,
+#tabs-container #tabs-list .nav-tab #scoreboard-tab,
+#tabs-container #tabs-list .nav-tab #chat-tab {
+  color: black;
+  text-decoration: none;
+}
+
+#tabs-container #tabs-list .selected {
+  background: #c5c5c5;
+  border: 2px solid white;
+}
+/*# sourceMappingURL=stylesheet.css.map */
