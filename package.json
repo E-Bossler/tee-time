@@ -4,7 +4,8 @@
   "description": "A golf app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "node backend/seeders/matchseeds && node backend/seeders/roundseeds && node backend/seeders/userseeds"
   },
   "repository": {
     "type": "git",
