@@ -1,21 +1,22 @@
 import React, {Component} from "react";
 import { Link } from "react-router-dom";
 import CourseInput from "./CourseInput";
-// import ParInput from "./ParInput";
 import FriendsInput from "./FriendsInput";
 import FriendsList from "./FriendsList";
 import "./stylesheet.css";
 
 const findUser = name => {
-    fetch("/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(name)
+    fetch("/api/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(name)
     }).then(res => {
-      res.json();
-    });
+        res.json();
+    }).then(data => {
+        console.log(data);
+    })
 };
 
 class Form extends Component {
@@ -37,9 +38,6 @@ class Form extends Component {
         const friends = this.state.friends;
         friends.push(this.state.friend);
         this.setState({ friends: friends });
-
-        console.log(this.state.friend);
-        console.log(this.state.friends);
 
         findUser(this.state.friend);
 
