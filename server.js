@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const http = require("http");
 const mongoose = require("mongoose");
-const routerApi = require("./Backend/routes/routes-api");
+const router = require("./Backend/routes/routes-api");
 const PORT = process.env.PORT || 7777;
 var server = http.createServer(app);
 const io = require("socket.io")(server);
@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
   res.send("You are now connected to your dev server.");
 });
 
-app.use("/api", routerApi);
+app.use("/api", router);
 
 server.listen(PORT, () =>
   console.log(`Welcome to port ${PORT}! You are going to rock your day!`)
