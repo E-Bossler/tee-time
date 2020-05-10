@@ -49,16 +49,16 @@ nav {
             background: white;
             display: flex;
             flex-direction: column;
-            height: calc(100vh - 10vh);
+            height: calc(100vh - 10vh - 38px);
             justify-content: space-around;
             position: fixed;
             transition: right 1000ms ease-in-out;
             width: 100vw;
             li {
                 border: 1px solid black;
-                height: calc((100vh - 56.8px)/7);
+                height: calc((100vh - 56.8px)/4);
                 list-style: none;
-                padding-top: 25px;
+                padding-top: 45px;
                 text-align: center;
                 .nav-link {
                     color: black;
