@@ -6,10 +6,11 @@ export function getFromStorage(key) {
     try {
         const valueStr = localStorage.getItem(key);
         if (valueStr) {
-            return JSON.parse(valueStr)
+            // console.log(valueStr)
+            return valueStr
         }
         return null;
-    } catch {
+    } catch (err) {
         return null;
     }
 }
@@ -20,7 +21,7 @@ export function setInStorage(key, obj) {
     }
 
     try {
-        localStorage.setItem(key, JSON.stringify(obj))
+        localStorage.setItem('SessionToken', key)
     } catch (err) {
         console.log(`Error: ${err}`)
     }

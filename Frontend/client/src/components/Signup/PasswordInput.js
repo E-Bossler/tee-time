@@ -2,10 +2,18 @@ import React from "react";
 import "./stylesheet.css";
 
 function PasswordInput() {
-    return(
+    return (
         <div className="form-group">
-            <label htmlFor="password-input">Password</label>
-            <input type="password" className="form-control" id="password-input" name="password" placeholder="Password"></input>
+            <label
+                htmlFor="password-input"
+            >Password</label>
+            <input
+                type="password"
+                className="form-control"
+                id="password-input"
+                name="password"
+                placeholder="Password"
+            ></input>
         </div>
     );
 };

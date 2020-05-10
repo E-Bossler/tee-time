@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
@@ -15,21 +15,29 @@ function testFun() {
   });
 }
 
-function App() {
-  testFun();
-
+class App extends Component {
   
-  return (
-    <Router>
-      <Switch>
-        <Route exact path="/" component={Login}></Route>
 
-        <Route exact path="/dashboard" component={Dashboard}></Route>
+  constructor(props) {
+    super(props);
 
-        <Route exact path="/signup" component={Signup}></Route>
-      </Switch>
-    </Router>
-  );
+   
+  }
+
+  render() {
+    // testFun();
+    return (
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Login}></Route>
+
+          <Route exact path="/dashboard" component={Dashboard}></Route>
+
+          <Route exact path="/signup" component={Signup}></Route>
+        </Switch>
+      </Router>
+    );
+  }
 }
 
 export default App;

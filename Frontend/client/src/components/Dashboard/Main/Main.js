@@ -6,84 +6,42 @@ import FormContainer from "./MatchForm/FormContainer";
 import UserMenuContainer from "./UserData/UserMenuContainer";
 import MatchView from "./MatchView/MatchView";
 import "./stylesheet.css";
+import api from '../../utils/api';
+import {
+  getFromStorage,
+  setInStorage
+} from "../../utils/storage"
 
-// import {
-//   getFromStorage,
-//   setInStorage
-// } from "../../utils/storage"
+
 
 class Main extends Component {
 
-  // constructor(props) {
-  //   super(props);
+  constructor(props) {
+    super(props);
+  };
 
-  //   this.state = {
-  //     isLoading: true,
-  //     token: '',
-  //     signUpError: '',
-  //     signInError: ''
-  //   };
-  // }
+  findUserName () {
+    // get token from storage
+    let key = 'SessionToken'
+    const sessionToken = getFromStorage(key)
+    // console.log(sessionToken);
+    
+    // search user session db
 
-  // componentDidMount() {
-  //   const token = getFromStorage('tee-time-seattle')
+    api.verify(sessionToken)
+      // .then(
+      //   result => {
+      //     console.log('here are the results:', result.data)
+      //   }
+      // )
 
-  //   if (token) {
-  //     //verify if the user is logged in 
-
-  //     fetch(`/api/account/verify?token=${token}`)
-  //       .then(res => res.json())
-  //       .then(json => {
-  //         if (json.success) {
-  //           this.setState({
-  //             token: token,
-  //             isLoading: false
-  //           })
-  //         } else {
-  //           this.setState({
-  //             isLoading: false
-  //           })
-  //         }
-  //       })
-
-  //   } else {
-  //     this.setState({
-  //       isLoading: false
-  //     }
-  //     )
-  //   }
-  // }
+    // get user id from session db
+    // search users db for id 
+    // return username from the user 
+  }
 
   render() {
-
-    // const {
-    //   isLoading,
-    //   token
-    // } = this.state;
-
-    // if (isLoading) {
-    //   return (
-    //     <div>
-    //       <p>
-    //         Loading...
-    //       </p>
-    //     </div>
-    //   )
-    // }
-
-    // if (!token) {
-    //   return (
-    //     <div>
-    //       <p>
-    //         Sign In
-    //       </p>
-    //       <p>
-    //         Sign Up
-    //       </p>
-    //     </div>
-    //   )
-    // }
-
+    this.findUserName();
     return (
       <div>
         <Route exact path="/dashboard">
