@@ -65,7 +65,7 @@ nav #slider #nav-links {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  height: calc(100vh - 10vh);
+  height: calc(100vh - 10vh - 38px);
   -ms-flex-pack: distribute;
       justify-content: space-around;
   position: fixed;
@@ -76,9 +76,9 @@ nav #slider #nav-links {
 
 nav #slider #nav-links li {
   border: 1px solid black;
-  height: calc((100vh - 56.8px)/7);
+  height: calc((100vh - 56.8px)/4);
   list-style: none;
-  padding-top: 25px;
+  padding-top: 45px;
   text-align: center;
 }
 

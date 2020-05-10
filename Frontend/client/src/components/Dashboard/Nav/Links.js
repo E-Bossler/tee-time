@@ -35,33 +35,6 @@ class Links extends Component {
         </li>
         <li>
           <Link 
-            id="stats-link" 
-            className="nav-link" 
-            onClick={this.props.animate}
-            to="/dashboard/userMenu/stats">
-            Stats
-          </Link>
-        </li>
-        <li>
-          <Link 
-            id="courses-link" 
-            className="nav-link" 
-            onClick={this.props.animate}
-            to="/dashboard/userMenu/courses">
-            Courses
-          </Link>
-        </li>
-        <li>
-          <Link 
-            id="friends-link" 
-            className="nav-link"
-            onClick={this.props.animate} 
-            to="/dashboard/userMenu/friends">
-            Friends
-          </Link>
-        </li>
-        <li>
-          <Link 
             id="logout-link" 
             className="nav-link"
             onClick={this.props.animate} 
