@@ -56,6 +56,7 @@ router.post('/account/signup', (req, res, next) => {
   let {
     email,
     password,
+    username,
     matchHistory
   } = body;
 
@@ -69,7 +70,7 @@ router.post('/account/signup', (req, res, next) => {
   if (!password) {
     return res.send({
       success: false,
-      message: "Input a passwords"
+      message: "Input a password"
     })
   }
 
@@ -87,7 +88,8 @@ router.post('/account/signup', (req, res, next) => {
       if (err) {
         return res.send({
           success: false,
-          message: "WARNING WARNING! Server Error! WARNING WARNING!"
+          message: `Please see error message: ${err}
+          location base`
         })
       } else if (previousUsers.length > 0) {
         return res.send({
@@ -102,14 +104,15 @@ router.post('/account/signup', (req, res, next) => {
 
   const newUser = new db.User();
 
-  newUser.email = email
-
+  newUser.email = email;
+  newUser.username = username;
   newUser.password = newUser.generateHash(password);
   newUser.save((err, user) => {
     if (err) {
       return res.send({
         success: false,
-        message: "WARNING WARNING! Server Error! WARNING WARNING!"
+        message: `Please see error message: ${err}
+        location 0`
       })
     }
     return res.send({
@@ -150,7 +153,8 @@ router.post('/account/signin', (req, res, next) => {
     if (err) {
       return res.send({
         success: false,
-        message: "ANOTHER SERVER ERROR! OH NOOOOO!!!"
+        message: `Please see error message: ${err}
+        location 1`
       })
     }
     if (users.length != 1) {
@@ -172,14 +176,17 @@ router.post('/account/signin', (req, res, next) => {
     const userSession = new db.UserSession();
 
     userSession.userId = user._id;
+
     userSession.save((err, doc) => {
       if (err) {
         console.log(err)
         return res.send({
           success: false,
-          message: "ANOTHER SERVER ERROR!"
+          message: `Please see error message: ${err}
+          location 2`
         })
       }
+      console.log('location 10')
       return res.send({
         success: true,
         message: "SUCCESS! YOU HAVE SIGNED IN! IT IS TEE TIME!!! FOOOOURRRRR",
@@ -193,37 +200,94 @@ router.post('/account/signin', (req, res, next) => {
   })
 });
 
-router.post('/account/verify', (req, res, next) => {
-  //get the token 
-  const { query } = req;
-  const { token } = query;
+// VERIFY SET UP
 
+router.get('/account/verify', (req, res) => {
+  //get the token 
+  // const query = req;
+  console.log("Testing verify method...", res);
+  const token = req.params.id;
+  // console.log(req)
+  // console.log('Here is the token we are locating:', token)
   //verify the token is one of a kind and is not deleted
 
-  db.UserSession.find({
+  db.UserSession.findById({
     _id: token,
-    isDeleted: false
-  }, (err, sessions) => {
+    // isDeleted: false
+  }, (err, results) => {
     if (err) {
       return res.send({
         success: false,
-        message: "Server error! Face palm!"
+        message: `Please see error message: ${err}
+        location 3`
       })
-    } 
-
-    if (sessions.length != 1) {
+    }
+    console.log('The session:', 
+    results, 
+    '----------------------------------------------------')
+    // return res.send({
+    //   success: true,
+    //   message: 'Session Exists.'
+    // })
+    if (results.length != 1) {
       return res.send({
         success: false,
         message: "Something went wrong... "
       })
     } else {
       return res.send({
-        success: false,
+        success: true,
         message: 'Good session.'
       })
     }
+
+
   })
 
 });
+
+// LOG OUT SET UP
+
+router.get('/account/logout', (req, res, next) => {
+  //get the token 
+  const query = req;
+  console.log(req.body);
+  const token = req.body._id;
+  const updateLogOut = {
+    isDeleted: true 
+  }
+  console.log(`Token: ${token}`)
+  //verify the token is one of a kind and is not deleted
+
+  db.UserSession.findOneAndUpdate(
+    {
+      _id: token,
+      isDeleted: false
+    }, 
+    updateLogOut,
+    null,
+    (err, sessions) => {
+      if (err) {
+        return res.send({
+          success: false,
+          message: `Please see error message: ${err}
+      location 3`
+        })
+      }
+      return res.send({
+        success: true,
+        message: 'We have logged you out'
+      })
+    })
+})
+
+// NEED TO SET UP A  NEW MATCH 
+
+// NEED TO SET UP A NEW ROUND (MULTIPLE ROUNDS PER MATCH)
+// WITHIN A MATCH, THERE WILL BE AS MANY ROUNDS AS THERE ARE USERS IN THE MATCH 
+// EACH USER GETS TO PLAY A ROUND 
+
+// UPON COMPLETION OF A MATCH, WE NEED TO LOG THE MATCH TO MATCH HISTORY 
+
 
 module.exports = router;

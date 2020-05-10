@@ -6,9 +6,42 @@ import FormContainer from "./MatchForm/FormContainer";
 import UserMenuContainer from "./UserData/UserMenuContainer";
 import MatchView from "./MatchView/MatchView";
 import "./stylesheet.css";
+import api from '../../utils/api';
+import {
+  getFromStorage,
+  setInStorage
+} from "../../utils/storage"
+
+
 
 class Main extends Component {
+
+  constructor(props) {
+    super(props);
+  };
+
+  findUserName () {
+    // get token from storage
+    let key = 'SessionToken'
+    const sessionToken = getFromStorage(key)
+    // console.log(sessionToken);
+    
+    // search user session db
+
+    api.verify(sessionToken)
+      // .then(
+      //   result => {
+      //     console.log('here are the results:', result.data)
+      //   }
+      // )
+
+    // get user id from session db
+    // search users db for id 
+    // return username from the user 
+  }
+
   render() {
+    this.findUserName();
     return (
       <div>
         <Route exact path="/dashboard">

@@ -1,14 +1,29 @@
-import React from "react";
+import React, { Component } from "react";
 import Form from "../components/Signup/Form"
 import Greens from "../components/GreensCSS/Greens"
+import SignUpForm from "../components/Signup/SignUpForm";
 
-function Signup() {
-  return (
+// import {
+//   getFromStorage,
+//   setInStorage
+// } from "../../src/components/utils/storage"
+
+
+class Signup extends Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
     <div>
-      <Form />
+      {/* <Form /> */}
+      <SignUpForm />
       <Greens />
     </div>
   );
+  }
 }
 
 export default Signup;
