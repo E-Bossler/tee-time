@@ -1,13 +1,18 @@
 import React, { Component } from "react";
 import { Link, Router, Route, Switch } from "react-router-dom";
 import "./stylesheet.css";
-import Login from "../../../pages/Login";
+// import Login from "../../../pages/Login";
+// import App from '../../../App'
+
 
 class Links extends Component {
   
-  
+
   
   render() {
+
+  
+
     return (
       <ul id="nav-links" className={this.props.burgerClicked ? "slide-left" : "slide-right"}>
         <li>

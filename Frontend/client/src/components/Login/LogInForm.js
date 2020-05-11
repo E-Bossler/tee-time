@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import api from '../utils/api';
+import API from '../utils/api';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Dashboard from '../../pages/Dashboard'
 
 // import Form from "../components/Login/Form"
 // // import Greens from "../components/GreensCSS/Greens"
@@ -14,29 +16,30 @@ class LogInForm extends Component {
 
     constructor(props) {
         super(props);
-
     }
 
     handleSubmit(e) {
         e.preventDefault();
-
         const email = document.getElementById('email-input').value;
-        const password = document.getElementById('password-input').value;
-
-        console.log(email,password)
-
-        api.login(email,password)
-            .then(
-                result => {
-                    console.log(result.data.token)
-                    setInStorage(result.data.token, result)
-                }
-            )
+        const password = document.getElementById('password-input').value
+        API.login(
+            email,
+            password
+        ).then(
+            result => {
+                setInStorage(result.data.token, result);
+                // return (
+                //     <Route
+                //         exact path="/dashboard"
+                //         component={Dashboard}>
+                //     </Route>
+                // )
+            }
+        )
     }
 
     render() {
         return (
-
             <div
                 className="container">
                 <div
@@ -48,24 +51,32 @@ class LogInForm extends Component {
                             <div
                                 className="form-group">
                                 <label
-                                    htmlFor="email-input">Email address</label>
+                                    htmlFor="email-input">
+                                    Email address
+                                        </label>
                                 <input
                                     type="email"
                                     className="form-control"
                                     id="email-input"
                                     name='email'
-                                    placeholder="Email"></input>
+                                    placeholder="Email">
+
+                                </input>
                             </div>
                             <div
                                 className="form-group">
                                 <label
-                                    htmlFor="password-input">Password</label>
+                                    htmlFor="password-input">
+                                    Password
+                                        </label>
                                 <input
                                     type="password"
                                     className="form-control"
                                     id="password-input"
                                     name="password"
-                                    placeholder="Password"></input>
+                                    placeholder="Password">
+
+                                </input>
                             </div>
                             <button
                                 type="submit"
@@ -74,7 +85,7 @@ class LogInForm extends Component {
                                 onClick={
                                     this.handleSubmit
                                 }
-                                >Login
+                            >Login
                                 </button>
                         </form>
                         <div>

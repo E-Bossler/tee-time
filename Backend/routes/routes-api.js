@@ -264,7 +264,7 @@ router.get('/account/verify', (req, res) => {
 
 router.get('/account/logout', (req, res, next) => {
   //get the token 
-  const query = req;
+  // const query = req;
   console.log(req.body);
   const token = req.body._id;
   const updateLogOut = {
@@ -293,15 +293,30 @@ router.get('/account/logout', (req, res, next) => {
         message: 'We have logged you out'
       })
     })
+});
+
+// SET UP A  NEW MATCH 
+
+router.post('/match/new', (req, res, next) => {
+  //STILL NEED TO SET UP THIS ROUTE
+});
+
+// CREATE A NEW NEW ROUND
+
+router.post('/round/new', (req, res, next) => {
+  //STILL NEED TO SET UP THIS ROUTE
+});
+
+// ADD MATCH TO HISTORY 
+
+router.post('/match/history', (req, res, next) => {
+  //STILL NEED TO SET UP THIS ROUTE
+});
+
+// GET MATCH HISTORY
+
+router.get('/match/history', (req, res, next) => {
+  //STILL NEED TO SET UP THIS ROUTE
 })
-
-// NEED TO SET UP A  NEW MATCH 
-
-// NEED TO SET UP A NEW ROUND (MULTIPLE ROUNDS PER MATCH)
-// WITHIN A MATCH, THERE WILL BE AS MANY ROUNDS AS THERE ARE USERS IN THE MATCH 
-// EACH USER GETS TO PLAY A ROUND 
-
-// UPON COMPLETION OF A MATCH, WE NEED TO LOG THE MATCH TO MATCH HISTORY 
-
 
 module.exports = router;
