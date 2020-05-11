@@ -7,13 +7,13 @@ import Dashboard from "./pages/Dashboard";
 
 // THE FOLLOWING 8 LINES OF CODE ARE A TEST TO SEE IF THE FRONT END IS GETTING INFORTATION FROM THE SERVER
 
-import test from "./test.js";
+// import test from "./test.js";
 
-function testFun() {
-  test.getAll().then(result => {
-    console.log(result.data[0]);
-  });
-}
+// function testFun() {
+//   test.getAll().then(result => {
+//     console.log(result.data[0]);
+//   });
+// }
 
 class App extends Component {
   
@@ -25,7 +25,7 @@ class App extends Component {
   }
 
   render() {
-    testFun();
+    // testFun();
     return (
       <Router>
         <Switch>

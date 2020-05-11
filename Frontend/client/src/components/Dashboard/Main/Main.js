@@ -6,7 +6,7 @@ import FormContainer from "./MatchForm/FormContainer";
 import UserMenuContainer from "./UserData/UserMenuContainer";
 import MatchView from "./MatchView/MatchView";
 import "./stylesheet.css";
-import api from '../../utils/api';
+import API from '../../utils/api';
 import {
   getFromStorage,
   // setInStorage
@@ -16,51 +16,69 @@ import {
 
 class Main extends Component {
 
-  // constructor(props) {
-  //   super(props);
-  // };
+  constructor() {
+    super();
+    this.state = {
+      username: "test name"
+    }
+  }
+
+  componentDidMount() {
+    this.findUserName();
+  }
 
   findUserName() {
     // get token from storage
     let key = 'SessionToken'
     const sessionToken = getFromStorage(key)
-    // console.log(sessionToken);
-
     // search user session db
+    // console.log("testing...", sessionToken)
 
-    return (
-      api.verify(sessionToken)
-        
+    API.verify(
+      sessionToken
+    ).then(
+      response => {
+        for (let i = 0; i < response.data.length; i++) {
+          let checkAgainstId = response.data[i]._id;
+          if (sessionToken === checkAgainstId
+            && response.data[i].isDeleted === false) {
+            const userId = response.data[i].userId
+            // console.log("User Id:", userId)
+            API.getUserWithId(
+              userId
+            ).then(
+              response => {
+                // console.log("Here is the userID results:", 
+                // response.data)
+                for (let i = 0; i < response.data.length; i++) {
+                  let checkAgainstId = response.data[i]._id;
+                  if (userId === checkAgainstId
+                    && response.data[i].isDeleted === false) {
+                    const username = response.data[i].username
+                    // console.log("Current user:", username)
+                    return( this.setState(
+                      {
+                        username: username
+                      }
+                    ))
+                  }
+                }
+              }
+            )
+          }
+        }
+      }
     )
-    // console.log("User Info:", userInfo)
-    // api.verify(
-    //   sessionToken
-    //   ).then(
-    //     result => {
-    //       console.log('here are the results:', result.data.message)
-    //       // console.log(result.config)
-    //       // console.log(result.config.params._id)
-
-
-
-
-    //       // get user id from session db
-    //       // search users db for id 
-    //       // return username from the user 
-    //       // redirect the user to login
-
-
-    //     }
-    //   )
   }
 
   render() {
-    ;
+    // this.findUserName()
+    
     return (
       <div>
         <Route exact path="/dashboard">
           <div id="landing-container">
-            <h2>Welcome, {this.findUserName()}</h2>
+            <h2>Welcome, {this.state.username}</h2>
             <h4>Start a new match?</h4>
             <NewMatchBtn />
             <Greens />
