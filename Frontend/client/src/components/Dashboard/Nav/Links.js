@@ -1,8 +1,12 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Router, Route, Switch } from "react-router-dom";
 import "./stylesheet.css";
+import Login from "../../../pages/Login";
 
 class Links extends Component {
+  
+  
+  
   render() {
     return (
       <ul id="nav-links" className={this.props.burgerClicked ? "slide-left" : "slide-right"}>
@@ -38,7 +42,8 @@ class Links extends Component {
             id="logout-link" 
             className="nav-link"
             onClick={this.props.animate} 
-            to="#">
+            to="#"
+            >
             Logout
           </Link>
         </li>

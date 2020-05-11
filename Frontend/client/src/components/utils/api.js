@@ -42,5 +42,16 @@ export default {
                 }
             )
         )
+    },
+
+    logout: function (userId) {
+        return (
+            axios.get(
+                '/api/account/logout',
+                {
+                    _id: userId
+                }
+            )
+        )
     }
 }

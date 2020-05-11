@@ -19,7 +19,7 @@ class Main extends Component {
   constructor() {
     super();
     this.state = {
-      username: "test name"
+      username: ""
     }
   }
 
