@@ -25,7 +25,7 @@ class App extends Component {
   }
 
   render() {
-    // testFun();
+    testFun();
     return (
       <Router>
         <Switch>

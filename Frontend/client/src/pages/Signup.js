@@ -21,6 +21,9 @@ class Signup extends Component {
       {/* <Form /> */}
       <SignUpForm />
       <Greens />
+      <div id="landing-container">
+            <h4>© 2020 Ballard Study Group</h4>
+          </div>
     </div>
   );
   }

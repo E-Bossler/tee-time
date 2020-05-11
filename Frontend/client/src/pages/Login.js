@@ -40,6 +40,9 @@ class Login extends Component {
         {/* <Form /> */}
         <LogInForm />
         <Greens />
+        <div id="landing-container">
+            <h4>© 2020 Ballard Study Group</h4>
+          </div>
       </div>
     );
   }

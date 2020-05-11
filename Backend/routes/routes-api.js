@@ -1,6 +1,9 @@
 const db = require("../models");
 const bcrypt = require("bcrypt");
 const router = require("express").Router();
+const mongoose = require ('mongoose');
+
+// mongoose.connect('mongodb://localhost:27017/tee-time', {useNewUrlParser: true});
 
 // remember that we add '/api' within the server so we can leave it off here
 
@@ -204,45 +207,56 @@ router.post('/account/signin', (req, res, next) => {
 
 router.get('/account/verify', (req, res) => {
   //get the token 
-  // const query = req;
-  console.log("Testing verify method...", res);
-  const token = req.params.id;
-  // console.log(req)
+  // console.log("This should be the params", req);
+  let token;
+  // console.log('This should be the token', token)
+  // console.log("here is your token", token)
   // console.log('Here is the token we are locating:', token)
   //verify the token is one of a kind and is not deleted
 
-  db.UserSession.findById({
-    _id: token,
-    // isDeleted: false
-  }, (err, results) => {
-    if (err) {
-      return res.send({
-        success: false,
-        message: `Please see error message: ${err}
-        location 3`
-      })
-    }
-    console.log('The session:', 
-    results, 
-    '----------------------------------------------------')
-    // return res.send({
-    //   success: true,
-    //   message: 'Session Exists.'
-    // })
-    if (results.length != 1) {
-      return res.send({
-        success: false,
-        message: "Something went wrong... "
-      })
-    } else {
-      return res.send({
-        success: true,
-        message: 'Good session.'
-      })
-    }
 
-
+  db.UserSession.find({
+    // _id: token
   })
+  .then(data => {
+    console.log('We are getting here')
+    res.json(data);
+  })
+  .catch(({ message }) => {
+    console.log("Message:", message);
+  });
+
+  // db.UserSession.findById({
+  //   _id: token
+  // }, (err, results) => {
+  //   if (err) {
+  //     return res.send({
+  //       success: false,
+  //       message: `Please see error message: ${err}
+  //       location 3`
+  //     })
+  //   }
+  //   console.log('The session:', 
+  //   results, 
+  //   '----------------------------------------------------')
+  //   return res.send({
+  //     success: true,
+  //     message: 'Session Exists.'
+  //   })
+  //   if (results.length != 1) {
+  //     return res.send({
+  //       success: false,
+  //       message: "Something went wrong... "
+  //     })
+  //   } else {
+  //     return res.send({
+  //       success: true,
+  //       message: 'Good session.'
+  //     })
+  //   }
+
+
+  // })
 
 });
 
