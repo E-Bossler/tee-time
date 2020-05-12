@@ -1,34 +1,42 @@
 import React, { Component } from "react";
 import api from '../utils/api';
-import { Redirect } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 import {
     getFromStorage,
     setInStorage
 } from "../utils/storage"
 
+// let globalProps;
+
 class SignUpForm extends Component {
 
     constructor(props) {
         super(props)
+        // globalProps = this.props
+        // console.log(this.props)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    handleSubmit(e) {
+    navigateToSignIn() {
+        this.props.history.push('/signin')
+    }
+
+    handleSubmit(e, props) {
         e.preventDefault();
 
         const email = document.getElementById('email-input').value;
         const password = document.getElementById('password-input').value;
         const username = document.getElementById('username-input').value;
 
+        // const history = useHistory();
+
         api.signUp(email, password, username)
             .then(
                 result => {
                     console.log(result.data.success, result.data.message)
                     let successful = result.data.success;
-
                     if(successful) {
-                        return (
-                        <Redirect to='/signin' />
-                        )
+                        window.location.href = '/'
                     } else {
                         alert('Error: this account already exists.')
                     }
@@ -86,7 +94,9 @@ class SignUpForm extends Component {
                                 id='login-btn'
                                 className="btn btn-default"
                                 onClick={
-                                    this.handleSubmit
+                                    (e) => {
+                                        this.handleSubmit(e, this.props)
+                                    }
                                 }
                             >
                                 Sign Up
