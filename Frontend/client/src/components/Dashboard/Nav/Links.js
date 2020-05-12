@@ -47,7 +47,7 @@ class Links extends Component {
             id="logout-link" 
             className="nav-link"
             onClick={this.props.animate} 
-            to="#"
+            to="/"
             >
             Logout
           </Link>

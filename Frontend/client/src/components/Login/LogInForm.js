@@ -27,13 +27,18 @@ class LogInForm extends Component {
             password
         ).then(
             result => {
-                setInStorage(result.data.token, result);
-                // return (
-                //     <Route
-                //         exact path="/dashboard"
-                //         component={Dashboard}>
-                //     </Route>
-                // )
+                let successful = result.data.success;
+
+                if(successful) {
+                    // console.log("Dan look here", result)
+                    setInStorage(result.data.token, result);
+
+                    window.location.href = '/dashboard'
+                    
+
+                } else {
+                    alert('Error: your login data is wrong.')
+                }
             }
         )
     }
