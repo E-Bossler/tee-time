@@ -1,13 +1,17 @@
-import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import React, { Component } from "react";
 import UserMenu from "./UserMenu";
 
-function UserMenuContainer() {
-  return (
-    <div>
-      <UserMenu />
-    </div>
-  );
+class UserMenuContainer extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <UserMenu username={this.props.username} />
+      </div>
+    );
+  }
 }
 
 export default UserMenuContainer;
