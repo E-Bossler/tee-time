@@ -29,6 +29,27 @@ class Friends extends Component {
         this.setState({ friends });
       }
     });
+
+    axios.put("/api/dashboard/userMenu/friendRequests", { user }).then(res => {
+      const friendRequests = res.data[0].friendRequests;
+      if (friendRequests === undefined) {
+        alert("No friend requests yet - golf more!");
+      } else {
+        this.setState({ friendRequests });
+      }
+    });
+  }
+
+  acceptFriend(e) {
+    const request = e.target.value;
+    const user = this.username;
+    console.log(request, user);
+
+    axios
+      .post("/api/dashboard/userMenu/friendRequests", { request })
+      .then(res => {
+        console.log(res.data);
+      });
   }
 
   handleChange(e) {
@@ -73,7 +94,18 @@ class Friends extends Component {
         </ul>
 
         <h2>Friend Requests</h2>
-        <ul></ul>
+        <ul>
+          {this.state.friendRequests.map(friendRequest => {
+            return (
+              <>
+                <li>{friendRequest}</li>
+                <button onClick={this.acceptFriend} value={friendRequest}>
+                  Add Friend
+                </button>
+              </>
+            );
+          })}
+        </ul>
       </div>
     );
   }

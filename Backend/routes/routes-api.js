@@ -57,6 +57,19 @@ router.put("/dashboard/userMenu/friends", (req, res) => {
     });
 });
 
+router.put("/dashboard/userMenu/friendRequests", (req, res) => {
+  console.log(req.body);
+  db.User.find({
+    username: req.body.user,
+  })
+    .then(data => {
+      res.json(data);
+    })
+    .catch(({ message }) => {
+      console.log(message);
+    });
+});
+
 router.post("/dashboard/userMenu/friends", (req, res) => {
   console.log(req.body);
   db.User.find({
@@ -75,6 +88,19 @@ router.post("/dashboard/userMenu/friends", (req, res) => {
           res.json(data);
         });
       }
+    })
+    .catch(({ message }) => {
+      console.log(message);
+    });
+});
+
+router.post("/dashboard/userMenu/friendRequests", (req, res) => {
+  console.log(req.body.request);
+  db.User.find({
+    username: req.body.friend,
+  })
+    .then(data => {
+      console.log(data);
     })
     .catch(({ message }) => {
       console.log(message);
