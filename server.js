@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require('body-parser');
 const http = require("http");
+const path = require('path');
 const mongoose = require("mongoose");
 const router = require("./Backend/routes/routes-api");
 const PORT = process.env.PORT || 7777;
@@ -40,7 +41,7 @@ app.use('/',
     (req, res) => {
         res.sendFile(
             path.join(
-                __dirname, './Frontend/client/public/index.html'
+                __dirname, '/Frontend/client/public/index.html'
             )
         )
     }    
