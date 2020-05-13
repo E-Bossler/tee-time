@@ -8,6 +8,8 @@ const PORT = process.env.PORT || 7777;
 var server = http.createServer(app);
 const io = require("socket.io")(server);
 
+require("dotenv").config()
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ type: ["application/json"] }));
 
