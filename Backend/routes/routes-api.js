@@ -23,7 +23,8 @@ router.post("/users", (req, res) => {
     },
   })
     .then(data => {
-      res.json(data);
+      console.log("hi");
+      res.send(data);
     })
     .catch(error => {
       console.log(error);
@@ -44,8 +45,10 @@ router.get("/dashboard/userMenu/matches", (req, res) => {
 });
 
 router.put("/dashboard/userMenu/friends", (req, res) => {
-  console.log(req);
-  db.User.find({})
+  console.log(req.body);
+  db.User.find({
+    username: req.body.user,
+  })
     .then(data => {
       res.json(data);
     })
@@ -60,7 +63,18 @@ router.post("/dashboard/userMenu/friends", (req, res) => {
     username: req.body.friend,
   })
     .then(data => {
-      res.json(data);
+      console.log(data[0]);
+      if (data[0] === undefined) {
+        res.json("Friend not Found.");
+      } else {
+        res.json("Friend added!");
+        db.User.findOneAndUpdate(
+          { username: req.body.user },
+          { $push: { Friends: req.body.friend } }
+        ).then(data => {
+          res.json(data);
+        });
+      }
     })
     .catch(({ message }) => {
       console.log(message);

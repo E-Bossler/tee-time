@@ -13,7 +13,8 @@ app.use(express.json({ type: ["application/json"] }));
 
 app.use(express.static("public"));
 
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/tee-time", {
   useUnifiedTopology: true,
