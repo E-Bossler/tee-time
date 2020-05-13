@@ -1,19 +1,13 @@
 import React, { Component } from "react";
-import api from "../utils/api";
+import API from "../utils/api";
 import "./stylesheet.css";
+import { Redirect } from "react-router-dom";
 import { setInStorage } from "../utils/storage";
 
 class LogInForm extends Component {
-  handleSubmit(e) {
-    e.preventDefault();
-    const email = document.getElementById("email-input").value;
-    const password = document.getElementById("password-input").value;
-    api.login(email, password).then(result => {
-      let successful = result.data.success;
-
 
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             toDashboard: false,
         }
@@ -36,14 +30,12 @@ class LogInForm extends Component {
 
                     // window.location.href = '/dashboard'
                     this.setState({ toDashboard: true });
-
-
-        window.location.href = "/dashboard";
-      } else {
-        alert("Error: your login data is wrong.");
-      }
-    });
-  }
+                } else {
+                    alert("Error: your login data is wrong.");
+                }
+            }
+        );
+    }
 
     render() {
         if (this.state.toDashboard === true) {
@@ -105,11 +97,8 @@ class LogInForm extends Component {
                     </div>
                 </div>
             </div>
-          </div>
-        </div>
-      </div>
     );
-  }
+    }
 }
 
 export default LogInForm;
