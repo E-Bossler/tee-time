@@ -45,7 +45,6 @@ router.get("/dashboard/userMenu/matches", (req, res) => {
 });
 
 router.put("/dashboard/userMenu/friends", (req, res) => {
-  console.log(req.body);
   db.User.find({
     username: req.body.user,
   })
@@ -58,7 +57,6 @@ router.put("/dashboard/userMenu/friends", (req, res) => {
 });
 
 router.put("/dashboard/userMenu/friendRequests", (req, res) => {
-  console.log(req.body);
   db.User.find({
     username: req.body.user,
   })
@@ -71,21 +69,28 @@ router.put("/dashboard/userMenu/friendRequests", (req, res) => {
 });
 
 router.post("/dashboard/userMenu/friends", (req, res) => {
-  console.log(req.body);
   db.User.find({
     username: req.body.friend,
   })
     .then(data => {
-      console.log(data[0]);
       if (data[0] === undefined) {
         res.json("Friend not Found.");
       } else {
         res.json("Friend added!");
-        db.User.findOneAndUpdate(
-          { username: req.body.friend },
-          { $push: { friendRequests: req.body.user } }
-        ).then(data => {
-          res.json(data);
+        db.User.find({ username: req.body.user }).then(userData => {
+          db.User.findOneAndUpdate(
+            { username: req.body.friend },
+            {
+              $push: {
+                friendRequests: {
+                  friendId: userData[0]._id,
+                  username: userData[0].username,
+                },
+              },
+            }
+          ).then(data => {
+            res.json(data);
+          });
         });
       }
     })
@@ -95,12 +100,45 @@ router.post("/dashboard/userMenu/friends", (req, res) => {
 });
 
 router.post("/dashboard/userMenu/friendRequests", (req, res) => {
-  console.log(req.body.request);
-  db.User.find({
-    username: req.body.friend,
-  })
+  db.User.find({ username: req.body.user })
+    .then(userData => {
+      console.log("USER DATA: ", userData);
+      console.log("USER REQ: ", req.body.user);
+      console.log("FRIEND REQ: ", req.body.request);
+      db.User.findOneAndUpdate(
+        {
+          _id: req.body.request.friendId,
+        },
+        {
+          $push: {
+            friends: {
+              friendId: userData[0]._id,
+              username: userData[0].username,
+            },
+          },
+        }
+      ).then(data => {
+        res.json(data);
+      });
+      db.User.findOneAndUpdate(
+        {
+          username: req.body.user,
+        },
+        {
+          $push: {
+            friends: {
+              friendId: req.body.request.friendId,
+              username: req.body.request.username,
+            },
+          },
+          $pull: { friendRequests: req.body.request },
+        }
+      ).then(data => {
+        res.json(data);
+      });
+    })
     .then(data => {
-      console.log(data);
+      res.json(data);
     })
     .catch(({ message }) => {
       console.log(message);
