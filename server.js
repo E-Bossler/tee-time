@@ -34,10 +34,6 @@ app.get("/api/test", (req, res) => {
   ]);
 });
 
-app.get("/", (req, res) => {
-  res.send("You are now connected to your dev server.");
-});
-
 app.use("/api", router);
 
 server.listen(PORT, () =>
