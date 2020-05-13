@@ -6,18 +6,24 @@ import FriendsList from "./FriendsList";
 import "./stylesheet.css";
 
 const findUser = name => {
-    fetch("/api/users", {
+    fetch("http://localhost:7777/api/users", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+            "Content-Type": "application/json"
         },
+        mode: "no-cors",
+        Origin: "http://localhost:3000/dashboard/matchForm",
         body: JSON.stringify(name)
     }).then(res => {
+        console.log("hello");
         res.json();
+        console.log(res);
     }).then(data => {
         console.log(data);
+    }).catch(error => {
+        console.error("Error:", error);
     })
-};
+}
 
 class Form extends Component {
     constructor(props) {
@@ -38,6 +44,8 @@ class Form extends Component {
         const friends = this.state.friends;
         friends.push(this.state.friend);
         this.setState({ friends: friends });
+
+        console.log(this.state.friend);
 
         findUser(this.state.friend);
 

@@ -16,13 +16,15 @@ router.get("/users", (req, res) => {
 });
 
 router.post("/users", (req, res) => {
+    console.log(req.body);
     db.User.findOne({
       where: {
         username: req.body.name
       }
     })
     .then(data => {
-      res.json(data);
+      console.log("hi");
+      res.send(data);
     })
     .catch(error => {
       console.log(error);
