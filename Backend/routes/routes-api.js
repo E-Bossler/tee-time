@@ -43,12 +43,10 @@ router.get("/dashboard/userMenu/matches", (req, res) => {
     });
 });
 
-router.get("/dashboard/userMenu/friends", (req, res) => {
-  console.log(req);
+router.put("/dashboard/userMenu/friends", (req, res) => {
+  console.log(req.body);
   db.User.find({
-    where: {
-      username: req.body.user,
-    },
+    username: req.body.user,
   })
     .then(data => {
       res.json(data);

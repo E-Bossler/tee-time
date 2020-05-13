@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+// ADD VALIDATION SO YOU CAN'T DOUBLE ADD FRIENDS
+// SEND OFF FRIEND ADD AS A REQUEST TO OTHER USER
+// UPDATE USER MODEL, HAS FRIEND REQUEST ARRAY
+// ALLOW FRIEND ADD, DECLINE FRIEND ADD
 class Friends extends Component {
   constructor(props) {
     super(props);
@@ -17,29 +21,31 @@ class Friends extends Component {
 
   componentDidMount() {
     const user = this.state.username;
-
-    axios.get("/api/dashboard/userMenu/friends", { user }).then(res => {
-      console.log(res.data);
+    axios.put("/api/dashboard/userMenu/friends", { user }).then(res => {
+      const friends = res.data[0].Friends;
+      this.setState({ friends });
     });
   }
 
   handleChange(e) {
     const { value } = e.target;
-
     this.setState({ friendName: value });
-    console.log(this.state.friendName);
   }
 
   handleSubmit(e) {
     e.preventDefault();
-
     const friend = this.state.friendName;
+    const friends = this.state.friends;
     const user = this.state.username;
 
     axios
       .post("/api/dashboard/userMenu/friends", { friend, user })
       .then(res => {
-        console.log(res.data);
+        if (res.data === "Friend added!") {
+          this.setState({ friends: [...friends, friend] });
+        } else if (res.data === "Friend not Found.") {
+          alert("You have added a friend that isn't in our records.");
+        }
       });
 
     this.setState({ friendName: "" });
@@ -56,8 +62,8 @@ class Friends extends Component {
 
         <h2>Your Friends</h2>
         <ul>
-          {this.state.friends.map(friend => {
-            return <li key={friend._id}>{friend.email}</li>;
+          {this.state.friends.map((friend, i) => {
+            return <li key={i}>{friend}</li>;
           })}
         </ul>
       </div>
