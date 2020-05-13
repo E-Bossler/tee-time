@@ -38,14 +38,24 @@ button {
         .form-group {
             margin: 5px auto;
             width: 90%;
-            #add-friend-btn {
+            #course-search-msg {
+                color: rgb(225, 70, 70);
+                font-size: 0.8em;
+                padding: 2px;
+            }
+            .hide {
+                display: none;
+            }
+            #add-friend-btn,
+            #find-course-btn {
                 background: rgb(26, 228, 26);
                 color: white;
                 font-family: 'Rubik', sans-serif;
                 margin: 10px 2px;
                 text-decoration: none;
                 text-transform: uppercase;
-            }
+                width: 110px;
+            } 
         }
         #friends-list-container {
             margin: 5px auto;

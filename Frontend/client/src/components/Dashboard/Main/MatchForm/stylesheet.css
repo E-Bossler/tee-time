@@ -52,13 +52,25 @@ button {
   width: 90%;
 }
 
-#form-container #form .form-group #add-friend-btn {
+#form-container #form .form-group #course-search-msg {
+  color: #e14646;
+  font-size: 0.8em;
+  padding: 2px;
+}
+
+#form-container #form .form-group .hide {
+  display: none;
+}
+
+#form-container #form .form-group #add-friend-btn,
+#form-container #form .form-group #find-course-btn {
   background: #1ae41a;
   color: white;
   font-family: 'Rubik', sans-serif;
   margin: 10px 2px;
   text-decoration: none;
   text-transform: uppercase;
+  width: 110px;
 }
 
 #form-container #form #friends-list-container {

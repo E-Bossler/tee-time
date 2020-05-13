@@ -74,12 +74,12 @@ class Main extends Component {
             <h4>Start a new match?</h4>
             <NewMatchBtn />
             <Greens />
-            <h4>© 2020 Ballard Study Group</h4>
+            {/* <h4>© 2020 Ballard Study Group</h4> */}
           </div>
         </Route>
 
         <Route path="/dashboard/matchForm">
-          <FormContainer />
+          <FormContainer  username={this.state.username} />
         </Route>
 
         <Route path="/dashboard/userMenu">

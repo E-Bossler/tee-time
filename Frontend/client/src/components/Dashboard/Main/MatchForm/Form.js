@@ -1,37 +1,44 @@
 import React, {Component} from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import CourseInput from "./CourseInput";
 import FriendsInput from "./FriendsInput";
 import FriendsList from "./FriendsList";
 import "./stylesheet.css";
 
-const findUser = name => {
-    fetch("http://localhost:7777/api/users", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        mode: "no-cors",
-        Origin: "http://localhost:3000/dashboard/matchForm",
-        body: JSON.stringify(name)
-    }).then(res => {
-        console.log("hello");
-        res.json();
-        console.log(res);
-    }).then(data => {
-        console.log(data);
-    }).catch(error => {
-        console.error("Error:", error);
-    })
+const findUser = (friend, friends, user) => {
+    axios
+      .post("/api/dashboard/userMenu/friends", { friend, user })
+      .then(res => {
+        if (res.data === "Friend added!") {
+          this.setState({ friends: [...friends, friend] });
+        } else if (res.data === "Friend not Found.") {
+          alert("You have added a friend that isn't in our records.");
+        }
+      });
 }
 
 class Form extends Component {
     constructor(props) {
-        super(props)
+        super(props);
+        console.log(props);
         this.state = {
-            friend: "",
-            friends: []
-        }
+          username: this.props.username,
+          friend: "",
+          friends: [],
+        };
+    }
+
+    componentDidMount() {
+        const user = this.state.username;
+        axios.put("/api/dashboard/userMenu/friends", { user }).then(res => {
+          const friends = res.data[0].Friends;
+          if (friends === undefined) {
+            alert("You don't have any friends! Add friends to become popular!");
+          } else {
+            this.setState({ friends });
+          }
+        });
     }
 
     handleInputChange(event) {
@@ -41,13 +48,15 @@ class Form extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        const friend = this.state.friendName;
         const friends = this.state.friends;
+        const user = this.state.username;
         friends.push(this.state.friend);
         this.setState({ friends: friends });
 
-        console.log(this.state.friend);
+        console.log(friend, user);
 
-        findUser(this.state.friend);
+        findUser(friend, user);
 
         this.setState({ friend: "" });
     }
