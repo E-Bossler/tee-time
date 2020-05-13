@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import API from '../utils/api';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Dashboard from '../../pages/Dashboard'
-
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+// import Dashboard from '../../pages/Dashboard'
 // import Form from "../components/Login/Form"
-// // import Greens from "../components/GreensCSS/Greens"
+// import Greens from "../components/GreensCSS/Greens"
 // import Container from "../Login/Container";
-
 import {
-    getFromStorage,
+    // getFromStorage,
     setInStorage
 } from "../utils/storage"
 
@@ -16,6 +14,9 @@ class LogInForm extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            toDashboard: false,
+        }
     }
 
     handleSubmit(e) {
@@ -29,12 +30,13 @@ class LogInForm extends Component {
             result => {
                 let successful = result.data.success;
 
-                if(successful) {
+                if (successful) {
                     // console.log("Dan look here", result)
                     setInStorage(result.data.token, result);
 
-                    window.location.href = '/dashboard'
-                    
+                    // window.location.href = '/dashboard'
+                    this.setState({ toDashboard: true });
+
 
                 } else {
                     alert('Error: your login data is wrong.')
@@ -44,6 +46,9 @@ class LogInForm extends Component {
     }
 
     render() {
+        if (this.state.toDashboard === true) {
+            return <Redirect to='/dashboard' />
+        }
         return (
             <div
                 className="container">
@@ -88,7 +93,7 @@ class LogInForm extends Component {
                                 id='login-btn'
                                 className="btn btn-default"
                                 onClick={
-                                    this.handleSubmit
+                                    (e) => this.handleSubmit(e)
                                 }
                             >Login
                                 </button>

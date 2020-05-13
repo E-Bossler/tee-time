@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import api from '../utils/api';
-import { Redirect, useHistory } from 'react-router-dom'
-import {
-    getFromStorage,
-    setInStorage
-} from "../utils/storage"
+import { Redirect } from 'react-router-dom'
+// import {
+//     getFromStorage,
+//     setInStorage
+// } from "../utils/storage"
 
 // let globalProps;
 
@@ -14,7 +14,10 @@ class SignUpForm extends Component {
         super(props)
         // globalProps = this.props
         // console.log(this.props)
-        this.handleSubmit = this.handleSubmit.bind(this)
+        // this.handleSubmit = this.handleSubmit.bind(this)
+        this.state = {
+            toLogin: false,
+        }
     }
 
     navigateToSignIn() {
@@ -35,17 +38,21 @@ class SignUpForm extends Component {
                 result => {
                     console.log(result.data.success, result.data.message)
                     let successful = result.data.success;
-                    if(successful) {
-                        window.location.href = '/'
+                    if (successful) {
+                        // window.location.href = '/'
+                        this.setState({toLogin: true});
+
                     } else {
                         alert('Error: this account already exists.')
                     }
                 }
             )
-    };
+    }
 
     render() {
-        return (
+        if (this.state.toLogin === true) {
+            return <Redirect to='/login' />
+        } return (
             <div className="container">
                 <div className="row">
                     <div className="col text-center">
@@ -94,9 +101,7 @@ class SignUpForm extends Component {
                                 id='login-btn'
                                 className="btn btn-default"
                                 onClick={
-                                    (e) => {
-                                        this.handleSubmit(e, this.props)
-                                    }
+                                    (e) => this.handleSubmit(e)
                                 }
                             >
                                 Sign Up
