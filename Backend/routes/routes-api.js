@@ -69,8 +69,8 @@ router.post("/dashboard/userMenu/friends", (req, res) => {
       } else {
         res.json("Friend added!");
         db.User.findOneAndUpdate(
-          { username: req.body.user },
-          { $push: { Friends: req.body.friend } }
+          { username: req.body.friend },
+          { $push: { friendRequests: req.body.user } }
         ).then(data => {
           res.json(data);
         });
