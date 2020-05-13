@@ -1,70 +1,139 @@
-const mongoose = require('mongoose');
-const db = require('../models');
+const mongoose = require("mongoose");
+const db = require("../models");
 const express = require("express");
 const app = express();
 
-var bodyParser = require('body-parser');
+var bodyParser = require("body-parser");
 
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect(
-  'mongodb://localhost/tee-time',
-  {
-    useNewUrlParser: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true
-  }
-);
-
+mongoose.connect("mongodb://localhost/tee-time", {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true,
+});
 
 const matchSeed = [
   {
     participants: [
-      'eric@test.gmail.com', 'Austen@test.gmail.com', 'Dustin@test.gmail.com', 'Jon@test.gmail.com'
+      "eric@test.gmail.com",
+      "Austen@test.gmail.com",
+      "Dustin@test.gmail.com",
+      "Jon@test.gmail.com",
     ],
     course: "Interbay Golf Course",
     holes: 18,
     parValues: [
       //fake data for the purpose of getting it to work... for now
-      3, 4, 3, 4, 5, 3, 4, 5, 4, 3, 4, 3, 4, 5, 3, 4, 5, 4
-    ]
+      3,
+      4,
+      3,
+      4,
+      5,
+      3,
+      4,
+      5,
+      4,
+      3,
+      4,
+      3,
+      4,
+      5,
+      3,
+      4,
+      5,
+      4,
+    ],
+    chat: [],
   },
   {
     participants: [
-      'eric@test.gmail.com', 'Austen@test.gmail.com', 'Dustin@test.gmail.com'
+      "eric@test.gmail.com",
+      "Austen@test.gmail.com",
+      "Dustin@test.gmail.com",
     ],
     course: "Jackson Park Golf Course",
     holes: 18,
     parValues: [
       //fake data for the purpose of getting it to work... for now
-      3, 4, 3, 4, 5, 3, 4, 5, 4, 3, 4, 3, 4, 5, 3, 4, 5, 4
-    ]
+      3,
+      4,
+      3,
+      4,
+      5,
+      3,
+      4,
+      5,
+      4,
+      3,
+      4,
+      3,
+      4,
+      5,
+      3,
+      4,
+      5,
+      4,
+    ],
+    chat: [],
   },
   {
-    participants: [
-      'eric@test.gmail.com', 'Jon@test.gmail.com'
-    ],
+    participants: ["eric@test.gmail.com", "Jon@test.gmail.com"],
     course: "Jefferson Park Golf Course",
     holes: 18,
     parValues: [
       //fake data for the purpose of getting it to work... for now
-      3, 4, 3, 4, 5, 3, 4, 5, 4, 3, 4, 3, 4, 5, 3, 4, 5, 4
-    ]
+      3,
+      4,
+      3,
+      4,
+      5,
+      3,
+      4,
+      5,
+      4,
+      3,
+      4,
+      3,
+      4,
+      5,
+      3,
+      4,
+      5,
+      4,
+    ],
+    chat: [],
   },
   {
-    participants: [
-      'Austen@test.gmail.com'
-    ],
+    participants: ["Austen@test.gmail.com"],
     course: "West Seattle Golf Course",
     holes: 18,
     parValues: [
       //fake data for the purpose of getting it to work... for now
-      3, 4, 3, 4, 5, 3, 4, 5, 4, 3, 4, 3, 4, 5, 3, 4, 5, 4
-    ]
-  }
-]
+      3,
+      4,
+      3,
+      4,
+      5,
+      3,
+      4,
+      5,
+      4,
+      3,
+      4,
+      3,
+      4,
+      5,
+      3,
+      4,
+      5,
+      4,
+    ],
+    chat: [],
+  },
+];
 
 db.Match.deleteMany({})
   .then(() => db.Match.collection.insertMany(matchSeed))
@@ -76,6 +145,3 @@ db.Match.deleteMany({})
     console.error(err);
     process.exit(1);
   });
-
-
-
