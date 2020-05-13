@@ -1,1 +1,123 @@
-/* No CSS *//*# sourceMappingURL=stylesheet.css.map */
+#scoreboard {
+  background: rgba(20, 160, 20, 0.6);
+  border: 1px solid black;
+  display: block;
+  height: calc(100vh - 67px - 29px - 45px);
+  margin: 0px auto;
+  width: 100vw;
+}
+
+#scoreboard .scorecard {
+  background: white;
+  border: 2px solid black;
+  -webkit-box-shadow: -2px 3px 5px rgba(0, 0, 0, 0.5);
+          box-shadow: -2px 3px 5px rgba(0, 0, 0, 0.5);
+  margin: 25px auto;
+  width: 80%;
+}
+
+#scoreboard .scorecard .icon-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#scoreboard .scorecard .icon-container .row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin: 4px 2px;
+}
+
+#scoreboard .scorecard .icon-container .row .icon {
+  background: -webkit-gradient(linear, left top, left bottom, from(#fdf361), to(#fdd319));
+  background: linear-gradient(#fdf361, #fdd319);
+  border: 1px solid #505050;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.8em;
+  height: 22px;
+  padding-top: 2px;
+  text-align: center;
+  width: 22px;
+}
+
+#scoreboard .scorecard .player-name {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2em;
+  font-weight: 600;
+  padding: 6px 8px 2px;
+}
+
+#scoreboard .scorecard .score-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+#scoreboard .scorecard .score-form .col {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 4px;
+  width: 25%;
+}
+
+#scoreboard .scorecard .score-form .col label {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.8em;
+  font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#scoreboard .scorecard .score-form .col input {
+  cursor: pointer;
+  font-weight: bold;
+  height: 25px;
+  margin: 1px auto;
+  text-align: center;
+  width: 38px;
+}
+
+#scoreboard .scorecard .score-form .col .current-hole-input {
+  background: lightgrey;
+}
+
+#scoreboard .scorecard .score-form .col .current-par-input {
+  background: #fdf361;
+}
+
+#scoreboard .scorecard .score-form .col .current-handicap-input {
+  background: #f0c83c;
+}
+
+#scoreboard .scorecard .score-form .col .current-strokes-input {
+  background: #fff0dc;
+}
+/*# sourceMappingURL=stylesheet.css.map */

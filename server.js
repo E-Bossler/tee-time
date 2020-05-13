@@ -1,15 +1,15 @@
 const express = require("express");
 const app = express();
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 const http = require("http");
-const path = require('path');
+const path = require("path");
 const mongoose = require("mongoose");
 const router = require("./Backend/routes/routes-api");
 const PORT = process.env.PORT || 7777;
 var server = http.createServer(app);
 const io = require("socket.io")(server);
 
-require("dotenv").config()
+require("dotenv").config();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ type: ["application/json"] }));
@@ -48,6 +48,13 @@ app.use('/',
         )
     }    
 );
+
+
+// app.use("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, "index.html"));
+// });
+
+
 
 app.use("/api", router);
 
