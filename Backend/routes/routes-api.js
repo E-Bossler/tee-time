@@ -157,7 +157,7 @@ router.post("/account/signup", (req, res) => {
           message: "WARNING WARNING! Account already exists! WARNING WARNING!",
         });
       }
-      return 
+      return;
     }
   );
 
@@ -199,7 +199,7 @@ router.post("/account/signin", (req, res, next) => {
   if (!password) {
     return res.send({
       success: false,
-      message: "Input a passwords",
+      message: "Input a password",
     });
   }
 
