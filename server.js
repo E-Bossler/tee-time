@@ -41,7 +41,7 @@ app.use('/',
     (req, res) => {
         res.sendFile(
             path.join(
-                __dirname, '/Frontend/client/public/index.html'
+                __dirname, 'index.html'
             )
         )
     }    
