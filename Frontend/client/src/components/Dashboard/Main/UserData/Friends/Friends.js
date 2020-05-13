@@ -18,7 +18,7 @@ class Friends extends Component {
   componentDidMount() {
     const user = this.state.username;
 
-    axios.put("/api/dashboard/userMenu/friends", { user }).then(res => {
+    axios.get("/api/dashboard/userMenu/friends", { user }).then(res => {
       console.log(res.data);
     });
   }
