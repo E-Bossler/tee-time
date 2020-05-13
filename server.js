@@ -19,7 +19,10 @@ app.use(express.json({ type: ["application/json"] }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/tee-time", {
+const mongo = "mongodb://user2020:password2020@ds119820.mlab.com:19820/heroku_l7c7wq9n"
+// const mongo = 'mongodb://localhost/tee-time'
+
+mongoose.connect(process.env.MONGODB_URI || mongo, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useFindAndModify: false,
