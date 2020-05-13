@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import NewMatchBtn from "./MatchForm/NewMatchBtn";
 import Greens from "../../GreensCSS/Greens";
 import FormContainer from "./MatchForm/FormContainer";
@@ -14,7 +14,12 @@ class Main extends Component {
     super(props);
     this.state = {
       username: "",
-    };
+
+      toLogin: false
+    }
+
+    
+
   }
 
   componentDidMount() {
@@ -55,6 +60,12 @@ class Main extends Component {
   }
 
   render() {
+
+    if (this.state.toLogin === true) {
+      return <Redirect to='/' />
+    }
+    
+
     return (
       <div>
         <Route exact path="/dashboard">
