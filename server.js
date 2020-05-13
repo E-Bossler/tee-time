@@ -14,7 +14,7 @@ require("dotenv").config();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ type: ["application/json"] }));
 
-app.use(express.static("public"));
+app.use(express.static("/Frontend/client/public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -37,9 +37,11 @@ app.get("/api/test", (req, res) => {
 
 // app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, "Frontend/client/public", "index.html")));
 
+
 // app.use("/", (req, res) => {
 //   res.sendFile(path.join(__dirname, "index.html"));
 // });
+
 
 app.use("/api", router);
 
