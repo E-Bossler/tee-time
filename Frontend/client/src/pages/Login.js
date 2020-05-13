@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import LogInForm from "../components/Login/LogInForm"
-import Form from "../components/Login/Form"
-import Greens from "../components/GreensCSS/Greens"
+import LogInForm from "../components/Login/LogInForm";
+import Greens from "../components/GreensCSS/Greens";
 
 // import {
 //   getFromStorage,
@@ -9,11 +8,6 @@ import Greens from "../components/GreensCSS/Greens"
 // } from "../../src/components/utils/storage"
 
 class Login extends Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div>
@@ -21,8 +15,8 @@ class Login extends Component {
         <LogInForm />
         <Greens />
         <div id="landing-container">
-            <h4>© 2020 Ballard Study Group</h4>
-          </div>
+          <h4>© 2020 Ballard Study Group</h4>
+        </div>
       </div>
     );
   }

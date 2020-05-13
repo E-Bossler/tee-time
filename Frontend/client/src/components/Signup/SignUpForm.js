@@ -1,14 +1,13 @@
 import React, { Component } from "react";
-import api from '../utils/api';
-import { Redirect } from 'react-router-dom'
-// import {
-//     getFromStorage,
-//     setInStorage
-// } from "../utils/storage"
-
-// let globalProps;
+import api from "../utils/api";
+import "./stylesheet.css";
 
 class SignUpForm extends Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
 
     constructor(props) {
         super(props)
@@ -24,14 +23,24 @@ class SignUpForm extends Component {
         this.props.history.push('/signin')
     }
 
-    handleSubmit(e, props) {
-        e.preventDefault();
 
-        const email = document.getElementById('email-input').value;
-        const password = document.getElementById('password-input').value;
-        const username = document.getElementById('username-input').value;
+  handleSubmit(e) {
+    e.preventDefault();
 
-        // const history = useHistory();
+    const email = document.getElementById("email-input").value;
+    const password = document.getElementById("password-input").value;
+    const username = document.getElementById("username-input").value;
+
+    api.signUp(email, password, username).then(result => {
+      console.log(result.data.success, result.data.message);
+      let successful = result.data.success;
+      if (successful) {
+        window.location.href = "/";
+      } else {
+        alert("Error: this account already exists.");
+      }
+    });
+  }
 
         api.signUp(email, password, username)
             .then(
@@ -112,10 +121,13 @@ class SignUpForm extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
-        )
-    }
 
-};
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
 
 export default SignUpForm;

@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import API from '../utils/api';
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-// import Dashboard from '../../pages/Dashboard'
-// import Form from "../components/Login/Form"
-// import Greens from "../components/GreensCSS/Greens"
-// import Container from "../Login/Container";
-import {
-    // getFromStorage,
-    setInStorage
-} from "../utils/storage"
+import api from "../utils/api";
+import "./stylesheet.css";
+import { setInStorage } from "../utils/storage";
 
 class LogInForm extends Component {
+  handleSubmit(e) {
+    e.preventDefault();
+    const email = document.getElementById("email-input").value;
+    const password = document.getElementById("password-input").value;
+    api.login(email, password).then(result => {
+      let successful = result.data.success;
+
 
     constructor(props) {
         super(props);
@@ -38,12 +38,12 @@ class LogInForm extends Component {
                     this.setState({ toDashboard: true });
 
 
-                } else {
-                    alert('Error: your login data is wrong.')
-                }
-            }
-        )
-    }
+        window.location.href = "/dashboard";
+      } else {
+        alert("Error: your login data is wrong.");
+      }
+    });
+  }
 
     render() {
         if (this.state.toDashboard === true) {
@@ -105,10 +105,11 @@ class LogInForm extends Component {
                     </div>
                 </div>
             </div>
-
-
-        );
-    }
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default LogInForm;
