@@ -2,7 +2,7 @@
   "name": "tee-time",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://tee-time-seattle.herokuapp.com/",
+  "homepage": "/",
   "proxy": "http://localhost:7777",
   "dependencies": {
     "@fortawesome/free-regular-svg-icons": "^5.13.0",
