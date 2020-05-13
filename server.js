@@ -14,7 +14,7 @@ require("dotenv").config()
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ type: ["application/json"] }));
 
-app.use(express.static("public"));
+app.use(express.static("/Frontend/client/public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
