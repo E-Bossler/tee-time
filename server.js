@@ -34,7 +34,17 @@ app.get("/api/test", (req, res) => {
   ]);
 });
 
-app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, "Frontend/client/public", "index.html")));
+// app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, "Frontend/client/public", "index.html")));
+
+app.use('/',
+    (req, res) => {
+        res.sendFile(
+            path.join(
+                __dirname, './Frontend/client/public/index.html'
+            )
+        )
+    }    
+);
 
 app.use("/api", router);
 
