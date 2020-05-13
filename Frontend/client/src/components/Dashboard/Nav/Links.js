@@ -27,6 +27,7 @@ class Links extends Component {
     e.preventDefault();
     setInStorage('',{})
     this.setState({toLogin: true})
+    window.location.href = '/login'
   }
 
   render() {
