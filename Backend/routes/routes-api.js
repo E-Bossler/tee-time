@@ -57,6 +57,19 @@ router.put("/dashboard/userMenu/friends", (req, res) => {
     });
 });
 
+router.put("/dashboard/userMenu/friendRequests", (req, res) => {
+  console.log(req.body);
+  db.User.find({
+    username: req.body.user,
+  })
+    .then(data => {
+      res.json(data);
+    })
+    .catch(({ message }) => {
+      console.log(message);
+    });
+});
+
 router.post("/dashboard/userMenu/friends", (req, res) => {
   console.log(req.body);
   db.User.find({
@@ -69,12 +82,25 @@ router.post("/dashboard/userMenu/friends", (req, res) => {
       } else {
         res.json("Friend added!");
         db.User.findOneAndUpdate(
-          { username: req.body.user },
-          { $push: { Friends: req.body.friend } }
+          { username: req.body.friend },
+          { $push: { friendRequests: req.body.user } }
         ).then(data => {
           res.json(data);
         });
       }
+    })
+    .catch(({ message }) => {
+      console.log(message);
+    });
+});
+
+router.post("/dashboard/userMenu/friendRequests", (req, res) => {
+  console.log(req.body.request);
+  db.User.find({
+    username: req.body.friend,
+  })
+    .then(data => {
+      console.log(data);
     })
     .catch(({ message }) => {
       console.log(message);
@@ -131,7 +157,7 @@ router.post("/account/signup", (req, res) => {
           message: "WARNING WARNING! Account already exists! WARNING WARNING!",
         });
       }
-      return 
+      return;
     }
   );
 
@@ -173,7 +199,7 @@ router.post("/account/signin", (req, res, next) => {
   if (!password) {
     return res.send({
       success: false,
-      message: "Input a passwords",
+      message: "Input a password",
     });
   }
 

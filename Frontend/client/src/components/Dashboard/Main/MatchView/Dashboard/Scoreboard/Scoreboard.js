@@ -1,11 +1,15 @@
-import React from "react";
+import React, { Component } from "react";
+import Scorecard from "./Scorecard";
+import "./stylesheet.css";
 
-function Scoreboard() {
-    return(
-        <div>
-            <h2>Scoreboard</h2>
-        </div>
-    );
+class Scoreboard extends Component {
+    render() {
+        return(
+            <div id="scoreboard">
+                <Scorecard />
+            </div>
+        )
+    }
 };
 
 export default Scoreboard;

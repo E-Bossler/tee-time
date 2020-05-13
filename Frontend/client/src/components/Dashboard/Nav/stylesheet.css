@@ -8,7 +8,7 @@
 }
 
 nav {
-  background: #a8f8a8;
+  background: white;
   font-family: 'Rubik', sans-serif;
   position: relative;
   z-index: 90;
@@ -21,13 +21,13 @@ nav #banner {
 }
 
 nav #banner h2 {
-  padding: 10px;
+  padding: 20px;
   text-align: center;
 }
 
 nav #banner #burger {
   cursor: pointer;
-  padding: 10px;
+  padding: 15px 10px;
   position: absolute;
   right: 0px;
   top: 0px;
@@ -65,7 +65,7 @@ nav #slider #nav-links {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  height: calc(100vh - 10vh - 38px);
+  height: calc(100vh - 10vh - 45px);
   -ms-flex-pack: distribute;
       justify-content: space-around;
   position: fixed;

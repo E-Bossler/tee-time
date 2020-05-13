@@ -8,7 +8,9 @@
 }
 
 #footer-container {
+  background: white;
   bottom: 0px;
+  height: 45px;
   position: fixed;
   width: 100vw;
 }

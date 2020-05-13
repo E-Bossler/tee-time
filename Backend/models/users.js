@@ -26,7 +26,10 @@ const UserSchema = new Schema({
     type: Boolean,
     default: "false",
   },
-  Friends: {
+  friends: {
+    type: Array,
+  },
+  friendRequests: {
     type: Array,
   },
 });
