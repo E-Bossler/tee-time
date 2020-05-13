@@ -7,14 +7,11 @@ import UserMenuContainer from "./UserData/UserMenuContainer";
 import MatchView from "./MatchView/MatchView";
 import "./stylesheet.css";
 import api from "../../utils/api";
-import {
-  getFromStorage,
-  // setInStorage
-} from "../../utils/storage";
+import { getFromStorage } from "../../utils/storage";
 
 class Main extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       username: "",
     };
@@ -29,7 +26,6 @@ class Main extends Component {
     let key = "SessionToken";
     const sessionToken = getFromStorage(key);
     // search user session db
-    // console.log("testing...", sessionToken)
 
     api.verify(sessionToken).then(response => {
       for (let i = 0; i < response.data.length; i++) {
@@ -39,10 +35,7 @@ class Main extends Component {
           response.data[i].isDeleted === false
         ) {
           const userId = response.data[i].userId;
-          // console.log("User Id:", userId)
           api.getUserWithId(userId).then(response => {
-            // console.log("Here is the userID results:",
-            // response.data)
             for (let i = 0; i < response.data.length; i++) {
               let checkAgainstId = response.data[i]._id;
               if (
@@ -50,9 +43,8 @@ class Main extends Component {
                 response.data[i].isDeleted === false
               ) {
                 const username = response.data[i].username;
-                // console.log("Current user:", username)
-                return this.setState({
-                  username: username,
+                this.setState({
+                  username,
                 });
               }
             }
@@ -63,8 +55,6 @@ class Main extends Component {
   }
 
   render() {
-    // this.findUserName()
-
     return (
       <div>
         <Route exact path="/dashboard">
@@ -82,7 +72,7 @@ class Main extends Component {
         </Route>
 
         <Route path="/dashboard/userMenu">
-          <UserMenuContainer />
+          <UserMenuContainer username={this.state.username} />
         </Route>
 
         <Route path="/dashboard/matchView">

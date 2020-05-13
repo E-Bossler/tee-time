@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import Main from "../../Main";
 
 class Matches extends Component {
   constructor() {

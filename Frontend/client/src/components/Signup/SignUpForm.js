@@ -5,8 +5,6 @@ import "./stylesheet.css";
 class SignUpForm extends Component {
   constructor(props) {
     super(props);
-    // globalProps = this.props
-    // console.log(this.props)
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -14,14 +12,12 @@ class SignUpForm extends Component {
     this.props.history.push("/signin");
   }
 
-  handleSubmit(e, props) {
+  handleSubmit(e) {
     e.preventDefault();
 
     const email = document.getElementById("email-input").value;
     const password = document.getElementById("password-input").value;
     const username = document.getElementById("username-input").value;
-
-    // const history = useHistory();
 
     api.signUp(email, password, username).then(result => {
       console.log(result.data.success, result.data.message);

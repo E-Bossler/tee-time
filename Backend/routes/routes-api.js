@@ -30,11 +30,36 @@ router.post("/users", (req, res) => {
     });
 });
 
+// Finds Matches when user goes to Matches (fetches all matches in DB right now)
 router.get("/dashboard/userMenu/matches", (req, res) => {
   console.log(req);
   db.Match.find({})
     .then(data => {
       console.log(data);
+      res.json(data);
+    })
+    .catch(({ message }) => {
+      console.log(message);
+    });
+});
+
+router.put("/dashboard/userMenu/friends", (req, res) => {
+  console.log(req);
+  db.User.find({})
+    .then(data => {
+      res.json(data);
+    })
+    .catch(({ message }) => {
+      console.log(message);
+    });
+});
+
+router.post("/dashboard/userMenu/friends", (req, res) => {
+  console.log(req.body);
+  db.User.find({
+    username: req.body.friend,
+  })
+    .then(data => {
       res.json(data);
     })
     .catch(({ message }) => {
