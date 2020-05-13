@@ -23,6 +23,7 @@ const userSeed = [
     matchHistory: [1, 2, 3, 4],
     isDeleted: false,
     friends: [],
+    friendRequests: [],
   },
   {
     email: "Austen@test.gmail.com",
@@ -31,6 +32,7 @@ const userSeed = [
     matchHistory: [1, 2, 3, 4],
     isDeleted: false,
     friends: [],
+    friendRequests: [],
   },
   {
     email: "Dustin@test.gmail.com",
@@ -39,6 +41,7 @@ const userSeed = [
     matchHistory: [1, 2, 3, 4],
     isDeleted: false,
     friends: [],
+    friendRequests: [],
   },
   {
     email: "Jon@test.gmail.com",
@@ -47,6 +50,7 @@ const userSeed = [
     matchHistory: [1, 2, 3, 4],
     isDeleted: false,
     friends: [],
+    friendRequests: [],
   },
 ];
 

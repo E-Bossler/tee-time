@@ -8,11 +8,11 @@ import axios from "axios";
 class Friends extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       username: this.props.username,
       friendName: "",
       friends: [],
+      friendRequests: [],
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,7 +23,11 @@ class Friends extends Component {
     const user = this.state.username;
     axios.put("/api/dashboard/userMenu/friends", { user }).then(res => {
       const friends = res.data[0].Friends;
-      this.setState({ friends });
+      if (friends === undefined) {
+        alert("You don't have any friends! Add friends to become popular!");
+      } else {
+        this.setState({ friends });
+      }
     });
   }
 
@@ -35,14 +39,14 @@ class Friends extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const friend = this.state.friendName;
-    const friends = this.state.friends;
     const user = this.state.username;
 
     axios
       .post("/api/dashboard/userMenu/friends", { friend, user })
       .then(res => {
+        console.log(res.data);
         if (res.data === "Friend added!") {
-          this.setState({ friends: [...friends, friend] });
+          alert(`Friend Request sent to: ${res.data}`);
         } else if (res.data === "Friend not Found.") {
           alert("You have added a friend that isn't in our records.");
         }
@@ -58,14 +62,18 @@ class Friends extends Component {
         <form onSubmit={this.handleSubmit}>
           <label>Find Friends!</label>
           <input className="friend-name" onChange={this.handleChange}></input>
+          <input type="submit"></input>
         </form>
 
         <h2>Your Friends</h2>
         <ul>
-          {this.state.friends.map((friend, i) => {
-            return <li key={i}>{friend}</li>;
+          {this.state.friends.map(friend => {
+            return <li>{friend}</li>;
           })}
         </ul>
+
+        <h2>Friend Requests</h2>
+        <ul></ul>
       </div>
     );
   }
