@@ -1,56 +1,32 @@
 import React, { Component } from "react";
-import api from "../utils/api";
+import API from "../utils/api";
 import "./stylesheet.css";
+import { Redirect } from "react-router-dom";
 
 class SignUpForm extends Component {
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
 
     constructor(props) {
         super(props)
-        // globalProps = this.props
-        // console.log(this.props)
-        // this.handleSubmit = this.handleSubmit.bind(this)
         this.state = {
             toLogin: false,
         }
     }
 
-    navigateToSignIn() {
-        this.props.history.push('/signin')
-    }
+    handleSubmit(e) {
+        e.preventDefault();
 
+        const email = document.getElementById("email-input").value;
+        const password = document.getElementById("password-input").value;
+        const username = document.getElementById("username-input").value;
 
-  handleSubmit(e) {
-    e.preventDefault();
-
-    const email = document.getElementById("email-input").value;
-    const password = document.getElementById("password-input").value;
-    const username = document.getElementById("username-input").value;
-
-    api.signUp(email, password, username).then(result => {
-      console.log(result.data.success, result.data.message);
-      let successful = result.data.success;
-      if (successful) {
-        window.location.href = "/";
-      } else {
-        alert("Error: this account already exists.");
-      }
-    });
-  }
-
-        api.signUp(email, password, username)
+        API.signUp(email, password, username)
             .then(
                 result => {
                     console.log(result.data.success, result.data.message)
                     let successful = result.data.success;
                     if (successful) {
                         // window.location.href = '/'
-                        this.setState({toLogin: true});
-
+                        this.setState({ toLogin: true });
                     } else {
                         alert('Error: this account already exists.')
                     }
@@ -121,13 +97,9 @@ class SignUpForm extends Component {
                         </div>
                     </div>
                 </div>
-
             </div>
-          </div>
-        </div>
-      </div>
     );
-  }
+    }
 }
 
 export default SignUpForm;

@@ -20,6 +20,7 @@ class Nav extends Component {
     };
 
     render() {
+        console.log(this.props)
         return(
             <nav>
                 <Banner action={this.animate.bind(this)} clicked={this.state.clicked}/>

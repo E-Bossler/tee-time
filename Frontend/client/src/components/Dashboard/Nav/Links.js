@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import "./stylesheet.css";
@@ -32,7 +32,7 @@ class Links extends Component {
   render() {
 
     if (this.state.toLogin === true) {
-      return <Redirect to='/' />
+      return <Redirect exact to='/signup' />
     }
 
     return (
