@@ -79,7 +79,7 @@ router.get("/rounds", (req, res) => {
 
 // SIGN UP SET UP
 
-router.post("/account/signup", (req, res, next) => {
+router.post("/account/signup", (req, res) => {
   const { body } = req;
   let { email, password, username, matchHistory } = body;
 
@@ -97,29 +97,27 @@ router.post("/account/signup", (req, res, next) => {
     });
   }
 
-  console.log("We are getting here");
-
   email = email.toLowerCase();
 
   // Verify email doesn't exist
-
   db.User.find(
     {
       email: email,
     },
     (err, previousUsers) => {
-      if (err) {
-        return res.send({
-          success: false,
-          message: `Please see error message: ${err}
-          location base`,
-        });
-      } else if (previousUsers.length > 0) {
+      // if (err) {
+      //   return res.send({
+      //     success: false,
+      //     message: `Please see error message: ${err}`,
+      //   });
+      // }
+      if (previousUsers.length > 0) {
         return res.send({
           success: false,
           message: "WARNING WARNING! Account already exists! WARNING WARNING!",
         });
       }
+      return 
     }
   );
 

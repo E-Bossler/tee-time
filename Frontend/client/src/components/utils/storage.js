@@ -16,10 +16,6 @@ export function getFromStorage(key) {
 }
 
 export function setInStorage(key, obj) {
-    if (!key) {
-        console.log(`Error: no key exists`)
-    }
-
     try {
         localStorage.setItem('SessionToken', key)
     } catch (err) {
