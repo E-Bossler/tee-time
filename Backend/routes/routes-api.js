@@ -23,7 +23,6 @@ router.post("/users", (req, res) => {
     },
   })
     .then(data => {
-      console.log("hi");
       res.send(data);
     })
     .catch(error => {
@@ -36,7 +35,6 @@ router.get("/dashboard/userMenu/matches", (req, res) => {
   console.log(req);
   db.Match.find({})
     .then(data => {
-      console.log(data);
       res.json(data);
     })
     .catch(({ message }) => {
@@ -71,93 +69,75 @@ router.put("/dashboard/userMenu/friendRequests", (req, res) => {
 router.post("/dashboard/userMenu/friends", (req, res) => {
   db.User.find({
     username: req.body.friend,
-  })
-    .then(data => {
-      if (data[0] === undefined) {
-        res.json("Friend not Found.");
-      } else {
-        res.json("Friend added!");
-        db.User.find({ username: req.body.user }).then(userData => {
-          db.User.findOneAndUpdate(
-            { username: req.body.friend },
-            {
-              $push: {
-                friendRequests: {
-                  friendId: userData[0]._id,
-                  username: userData[0].username,
-                },
+  }).then(data => {
+    if (data[0] === undefined) {
+      res.json("Friend not Found.");
+    } else {
+      db.User.find({ username: req.body.user }).then(userData => {
+        db.User.findOneAndUpdate(
+          { username: req.body.friend },
+          {
+            $push: {
+              friendRequests: {
+                friendId: userData[0]._id,
+                username: userData[0].username,
               },
-            }
-          )
-            .catch(({ message }) => {
-              console.log(message);
-            })
-            .then(data => {
-              res.json(data);
-            })
-            .catch(({ message }) => {
-              console.log(message);
-            });
-        });
-      }
-    })
-    .catch(({ message }) => {
-      console.log(message);
-    });
+            },
+          }
+        )
+          .then(data => {
+            res.json(data);
+          })
+          .catch(({ message }) => {
+            console.log(message);
+          });
+      });
+    }
+  });
 });
 
 router.post("/dashboard/userMenu/friendRequests", (req, res) => {
-  db.User.find({ username: req.body.user })
-    .then(userData => {
-      console.log("USER DATA: ", userData);
-      console.log("USER REQ: ", req.body.user);
-      console.log("FRIEND REQ: ", req.body.request);
-      db.User.findOneAndUpdate(
-        {
-          _id: req.body.request.friendId,
-        },
-        {
-          $push: {
-            friends: {
-              friendId: userData[0]._id,
-              username: userData[0].username,
-            },
+  db.User.find({ username: req.body.user }).then(userData => {
+    db.User.findOneAndUpdate(
+      {
+        _id: req.body.request.friendId,
+      },
+      {
+        $push: {
+          friends: {
+            friendId: userData[0]._id,
+            username: userData[0].username,
           },
-        }
-      )
-        .then(data => {
-          res.json(data);
-        })
-        .catch(({ message }) => {
-          console.log(message);
-        });
-      db.User.findOneAndUpdate(
-        {
-          username: req.body.user,
         },
-        {
-          $push: {
-            friends: {
-              friendId: req.body.request.friendId,
-              username: req.body.request.username,
-            },
+      }
+    )
+      .then(data => {
+        res.json(data);
+      })
+      .catch(({ message }) => {
+        console.log(message);
+      });
+    db.User.findOneAndUpdate(
+      {
+        username: req.body.user,
+      },
+      {
+        $push: {
+          friends: {
+            friendId: req.body.request.friendId,
+            username: req.body.request.username,
           },
-          $pull: { friendRequests: req.body.request },
-        }
-      )
-        .then(data => {
-          res.json(data);
-        })
-        .catch(({ message }) => {
-          console.log(message);
-        });
-    })
-    .then(data => {
-      res.json(data);
-    })
-    .catch(({ message }) => {
-      console.log(message);
-    });
+        },
+        $pull: { friendRequests: req.body.request },
+      }
+    )
+      .then(data => {
+        res.json(data);
+      })
+      .catch(({ message }) => {
+        console.log(message);
+      });
+  });
 });
 
 router.get("/rounds", (req, res) => {
@@ -299,7 +279,6 @@ router.post("/account/signin", (req, res, next) => {
           location 2`,
           });
         }
-        console.log("location 10");
         return res.send({
           success: true,
           message: "SUCCESS! YOU HAVE SIGNED IN! IT IS TEE TIME!!! FOOOOURRRRR",
@@ -325,7 +304,6 @@ router.get("/account/verify", (req, res) => {
     // _id: token
   })
     .then(data => {
-      console.log("We are getting here");
       res.json(data);
     })
     .catch(({ message }) => {

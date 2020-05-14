@@ -73,7 +73,7 @@ class Friends extends Component {
     axios
       .post("/api/dashboard/userMenu/friends", { friend, user })
       .then(res => {
-        if (res.data === "Friend added!") {
+        if (res.data !== "Friend not Found.") {
           alert(`Friend Request sent to: ${friend}`);
         } else if (res.data === "Friend not Found.") {
           alert("You have added a friend that isn't in our records.");
@@ -89,10 +89,17 @@ class Friends extends Component {
         <h2>Friends</h2>
         <form onSubmit={this.handleSubmit}>
           <label>Find Friends!</label>
-          <input className="friend-name" onChange={this.handleChange}></input>
-          <input type="submit"></input>
+          <input
+            onKeyDown={event => (event.keyCode === 13 ? this.addItem : "")}
+            className="friend-name"
+            onChange={this.handleChange}
+          ></input>
+          <input
+            onKeyDown={event => (event.keyCode === 13 ? this.addItem : "")}
+            type="submit"
+          ></input>
         </form>
-
+        event
         <h2>Your Friends</h2>
         <ul>
           {this.state.friends.map(friend => {
@@ -103,7 +110,6 @@ class Friends extends Component {
             );
           })}
         </ul>
-
         <h2>Friend Requests</h2>
         <ul>
           {this.state.friendRequests.map(friendRequest => {
