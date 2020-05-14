@@ -51,7 +51,7 @@ class CourseInput extends Component {
             <div className="form-group">
                 <label 
                     htmlFor="course-input">
-                    Select a Course:
+                    Find Course:
                 </label>
                 <input 
                     type="text" 

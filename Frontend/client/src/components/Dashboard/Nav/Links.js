@@ -54,6 +54,16 @@ class Links extends Component {
         </li>
         <li>
           <Link
+            id="saved-matches-link"
+            className="nav-link"
+            onClick={this.props.animate}
+            to="/dashboard/userMenu/matches"
+          >
+            Saved Matches
+          </Link>
+        </li>
+        <li>
+          <Link
             id="matchForm-link"
             className="nav-link"
             onClick={this.props.animate}
@@ -61,16 +71,6 @@ class Links extends Component {
             to="/dashboard/matchForm">
 
             New Match
-          </Link>
-        </li>
-        <li>
-          <Link
-            id="saved-matches-link"
-            className="nav-link"
-            onClick={this.props.animate}
-            to="/dashboard/userMenu/matches"
-          >
-            Saved Matches
           </Link>
         </li>
         <li>

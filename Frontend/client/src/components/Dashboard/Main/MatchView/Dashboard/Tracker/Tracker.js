@@ -3,7 +3,7 @@ import React from "react";
 function Tracker() {
     return(
         <div>
-            <h2>Tracker</h2>
+            <h2></h2>
         </div>
     );
 };

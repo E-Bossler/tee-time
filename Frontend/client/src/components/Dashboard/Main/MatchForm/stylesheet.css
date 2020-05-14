@@ -12,8 +12,6 @@ button {
   background: linear-gradient(#648eff, #3368fa);
   margin: 10px auto;
   border: none;
-  -webkit-box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.8);
-          box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.8);
   padding: 8px 10px;
   width: 100px;
 }
@@ -25,7 +23,7 @@ button {
 
 #match-btn-container #new-match-btn #new-match-link {
   color: white;
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   text-decoration: none;
   text-transform: uppercase;
 }

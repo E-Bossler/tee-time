@@ -10,10 +10,11 @@ const findUser = (friend, friends, user) => {
     axios
       .post("/api/dashboard/userMenu/friends", { friend, user })
       .then(res => {
+        console.log(res.data);
         if (res.data === "Friend added!") {
           this.setState({ friends: [...friends, friend] });
         } else if (res.data === "Friend not Found.") {
-          alert("You have added a friend that isn't in our records.");
+            console.log("Friend not found");
         }
       });
 }
@@ -26,6 +27,7 @@ class Form extends Component {
           username: this.props.username,
           friend: "",
           friends: [],
+          friendFound: true
         };
     }
 
@@ -56,7 +58,13 @@ class Form extends Component {
 
         console.log(friend, user);
 
-        findUser(friend, user);
+        // findUser(friend, user);
+
+        if (friends.indexOf(friend) !== -1) {
+            this.setState({ friendFound: true });
+        } else {
+            this.setState({ friendFound: false });
+        }
 
         this.setState({ friend: "" });
     }
@@ -69,6 +77,7 @@ class Form extends Component {
                     handleSubmit={this.handleSubmit.bind(this)} 
                     handleInputChange={this.handleInputChange.bind(this)} 
                     friend={this.state.friend}
+                    foundFriend={this.state.friendFound}
                 />
                 <FriendsList 
                     friends={this.state.friends}

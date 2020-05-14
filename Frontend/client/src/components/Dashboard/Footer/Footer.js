@@ -33,7 +33,7 @@ class Footer extends Component {
                             Stats
                         </Link>
                         <i 
-                            class="fad fa-chart-bar fa-lg" 
+                            className="fad fa-chart-bar fa-lg" 
                             style={statsIconStyles}>
                         </i>
                     </li>

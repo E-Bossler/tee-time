@@ -18,6 +18,9 @@ class FriendsInput extends Component {
                     onChange={this.props.handleInputChange}
                 >
                 </input>
+                <p className={this.props.friendFound ? "show" : "hide"}>
+                    Sorry, that user is not on your friends list.
+                </p>
                 <button 
                     id="add-friend-btn" 
                     onClick={this.props.handleSubmit}>

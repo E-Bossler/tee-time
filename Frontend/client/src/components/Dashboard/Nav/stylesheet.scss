@@ -8,14 +8,16 @@
 }
 
 nav {
-    background: white;
-    font-family: 'Rubik', sans-serif;
+    background: rgb(60, 60, 60);
+    color: white;
+    font-family: 'Open Sans', sans-serif;
     position: relative;
     z-index: 90;
     #banner {
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
         height: 10vh;
         h2 {
+            font-weight: 400;
             padding: 20px;
             text-align: center;
         }
@@ -27,7 +29,7 @@ nav {
             top: 0px;
             z-index: 4;
             .line {
-                background-color: black;
+                background-color: white;
                 border-radius: 5px;
                 height: 3px;
                 margin: 7px;
@@ -46,7 +48,7 @@ nav {
     }
     #slider {
         #nav-links {
-            background: white;
+            background: rgb(71, 172, 71);
             display: flex;
             flex-direction: column;
             height: calc(100vh - 10vh - 45px);
@@ -55,14 +57,16 @@ nav {
             transition: right 1000ms ease-in-out;
             width: 100vw;
             li {
-                border: 1px solid black;
+                // border: 1px solid black;
                 height: calc((100vh - 56.8px)/4);
                 list-style: none;
                 padding-top: 45px;
                 text-align: center;
                 .nav-link {
-                    color: black;
+                    color: white;
+                    font-size: 1.1em;
                     text-decoration: none;
+                    text-transform: uppercase;
                 }
             }
         }

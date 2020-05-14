@@ -23,7 +23,6 @@ router.post("/users", (req, res) => {
     },
   })
     .then(data => {
-      console.log("hi");
       res.send(data);
     })
     .catch(error => {
