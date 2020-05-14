@@ -1,5 +1,5 @@
 #scoreboard {
-  background: rgba(20, 160, 20, 0.6);
+  background: #47ac47;
   border: 1px solid black;
   display: block;
   height: calc(100vh - 67px - 29px - 45px);

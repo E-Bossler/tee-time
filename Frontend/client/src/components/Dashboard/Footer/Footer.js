@@ -21,47 +21,50 @@ const statsIconStyles = {
 };
 
 class Footer extends Component {
-  render() {
-    return (
-      <div id="footer-container">
-        <ul id="footer-list">
-          <li className="footer-item" id="stats-item">
-            <Link
-              id="stats-link"
-              className="footer-link"
-              to="/dashboard/userMenu/stats"
-            >
-              Stats
-            </Link>
-            <i className="fad fa-chart-bar fa-lg" style={statsIconStyles}></i>
-          </li>
-          <li className="footer-item" id="friends-item">
-            <Link
-              id="friends-link"
-              className="footer-link"
-              to="/dashboard/userMenu/friends"
-            >
-              Friends
-            </Link>
-            <i
-              className="fad fa-user-friends fa-lg"
-              style={friendsIconStyles}
-            ></i>
-          </li>
-          <li className="footer-item" id="courses-item">
-            <Link
-              id="courses-link"
-              className="footer-link"
-              to="/dashboard/userMenu/courses"
-            >
-              Courses
-            </Link>
-            <i className="fad fa-flag fa-lg" style={flagIconStyles}></i>
-          </li>
-        </ul>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div id="footer-container">
+                <ul id="footer-list">
+                    <li className="footer-item" id="stats-item">
+                        <Link 
+                            id="stats-link" 
+                            className="footer-link" 
+                            to="/dashboard/userMenu/stats">
+                            Stats
+                        </Link>
+                        <i 
+                            className="fad fa-chart-bar fa-lg" 
+                            style={statsIconStyles}>
+                        </i>
+                    </li>
+                    <li className="footer-item" id="friends-item">
+                        <Link 
+                            id="friends-link" 
+                            className="footer-link"
+                            to="/dashboard/userMenu/friends">
+                            Friends
+                        </Link>
+                        <i 
+                            className="fad fa-user-friends fa-lg" 
+                            style={friendsIconStyles}>
+                        </i>
+                    </li>
+                    <li className="footer-item" id="courses-item">
+                        <Link 
+                            id="courses-link" 
+                            className="footer-link" 
+                            to="/dashboard/userMenu/courses">
+                            Courses
+                        </Link>
+                        <i 
+                            className="fad fa-flag fa-lg" 
+                            style={flagIconStyles}>
+                        </i>
+                    </li>
+                </ul>
+            </div>
+        )
+    }
 }
 
 export default Footer;

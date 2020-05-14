@@ -8,8 +8,9 @@
 }
 
 nav {
-  background: white;
-  font-family: 'Rubik', sans-serif;
+  background: #3c3c3c;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
   position: relative;
   z-index: 90;
 }
@@ -21,6 +22,7 @@ nav #banner {
 }
 
 nav #banner h2 {
+  font-weight: 400;
   padding: 20px;
   text-align: center;
 }
@@ -35,7 +37,7 @@ nav #banner #burger {
 }
 
 nav #banner #burger .line {
-  background-color: black;
+  background-color: white;
   border-radius: 5px;
   height: 3px;
   margin: 7px;
@@ -57,7 +59,7 @@ nav #banner #burger .toggle3 {
 }
 
 nav #slider #nav-links {
-  background: white;
+  background: #47ac47;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -75,7 +77,6 @@ nav #slider #nav-links {
 }
 
 nav #slider #nav-links li {
-  border: 1px solid black;
   height: calc((100vh - 56.8px)/4);
   list-style: none;
   padding-top: 45px;
@@ -83,8 +84,10 @@ nav #slider #nav-links li {
 }
 
 nav #slider #nav-links li .nav-link {
-  color: black;
+  color: white;
+  font-size: 1.1em;
   text-decoration: none;
+  text-transform: uppercase;
 }
 
 nav #slider .slide-left {
