@@ -3,22 +3,22 @@ import { Link } from "react-router-dom";
 import "./stylesheet.css";
 
 const flagIconStyles = {
-    "--fa-secondary-opacity": "1.0",
-    "--fa-primary-color": "grey",
-    "--fa-secondary-color": "red"
-}
+  "--fa-secondary-opacity": "1.0",
+  "--fa-primary-color": "grey",
+  "--fa-secondary-color": "red",
+};
 
 const friendsIconStyles = {
-    "--fa-secondary-opacity": "1.0",
-    "--fa-primary-color": "blue",
-    "--fa-secondary-color": "dodgerblue"
-}
+  "--fa-secondary-opacity": "1.0",
+  "--fa-primary-color": "blue",
+  "--fa-secondary-color": "dodgerblue",
+};
 
 const statsIconStyles = {
-    "--fa-secondary-opacity": "1.0",
-    "--fa-primary-color": "green",
-    "--fa-secondary-color": "grey"
-}
+  "--fa-secondary-opacity": "1.0",
+  "--fa-primary-color": "green",
+  "--fa-secondary-color": "grey",
+};
 
 class Footer extends Component {
     render() {

@@ -26,12 +26,18 @@ const UserSchema = new Schema({
     type: Boolean,
     default: "false",
   },
-  friends: {
-    type: Array,
-  },
-  friendRequests: {
-    type: Array,
-  },
+  friends: [
+    {
+      friendId: String,
+      username: String,
+    },
+  ],
+  friendRequests: [
+    {
+      friendId: String,
+      username: String,
+    },
+  ],
 });
 
 UserSchema.methods.generateHash = function (password) {

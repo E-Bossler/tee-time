@@ -1,22 +1,31 @@
 const express = require("express");
 const app = express();
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 const http = require("http");
+const path = require("path");
 const mongoose = require("mongoose");
 const router = require("./Backend/routes/routes-api");
 const PORT = process.env.PORT || 7777;
 var server = http.createServer(app);
 const io = require("socket.io")(server);
 
+require("dotenv").config();
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ type: ["application/json"] }));
 
-app.use(express.static("public"));
+// app.use(express.static("/Frontend/client/public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/tee-time", {
+// THIS IS THE PRODUCTION DB
+// const mongo = "mongodb://user2020:password2020@ds119820.mlab.com:19820/heroku_l7c7wq9n"
+
+// THIS IS THE DEV DB
+const mongo = 'mongodb://localhost/tee-time'
+
+mongoose.connect(process.env.MONGODB_URI || mongo, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useFindAndModify: false,
@@ -32,9 +41,34 @@ app.get("/api/test", (req, res) => {
   ]);
 });
 
-app.get("/", (req, res) => {
-  res.send("You are now connected to your dev server.");
-});
+// app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, "Frontend/client/public", "index.html")));
+
+// app.use('/',
+//     (req, res) => {
+//         res.sendFile(
+//             path.join(
+//                 __dirname, 
+//                 'build',
+//                 'index.html'
+//             )
+//         )
+//     }    
+// );
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('/Frontend/client/public'));
+  
+  app.get('*', (req,res) => {
+    res.sendfile(path.resolve(__dirname, 'Frontend', 'client', 'build', 'index.html'))
+  })
+}
+
+
+// app.use("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, "index.html"));
+// });
+
+
 
 app.use("/api", router);
 
