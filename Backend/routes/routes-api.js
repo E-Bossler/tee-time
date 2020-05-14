@@ -87,9 +87,16 @@ router.post("/dashboard/userMenu/friends", (req, res) => {
                 },
               },
             }
-          ).then(data => {
-            res.json(data);
-          });
+          )
+            .catch(({ message }) => {
+              console.log(message);
+            })
+            .then(data => {
+              res.json(data);
+            })
+            .catch(({ message }) => {
+              console.log(message);
+            });
         });
       }
     })
@@ -116,9 +123,13 @@ router.post("/dashboard/userMenu/friendRequests", (req, res) => {
             },
           },
         }
-      ).then(data => {
-        res.json(data);
-      });
+      )
+        .then(data => {
+          res.json(data);
+        })
+        .catch(({ message }) => {
+          console.log(message);
+        });
       db.User.findOneAndUpdate(
         {
           username: req.body.user,
@@ -132,9 +143,13 @@ router.post("/dashboard/userMenu/friendRequests", (req, res) => {
           },
           $pull: { friendRequests: req.body.request },
         }
-      ).then(data => {
-        res.json(data);
-      });
+      )
+        .then(data => {
+          res.json(data);
+        })
+        .catch(({ message }) => {
+          console.log(message);
+        });
     })
     .then(data => {
       res.json(data);
