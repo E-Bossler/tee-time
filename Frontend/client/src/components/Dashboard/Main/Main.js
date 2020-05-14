@@ -15,11 +15,8 @@ class Main extends Component {
     this.state = {
       username: "",
 
-      toLogin: false
-    }
-
-    
-
+      toLogin: false,
+    };
   }
 
   componentDidMount() {
@@ -60,11 +57,9 @@ class Main extends Component {
   }
 
   render() {
-
     if (this.state.toLogin === true) {
-      return <Redirect to='/' />
+      return <Redirect to="/" />;
     }
-    
 
     return (
       <div>

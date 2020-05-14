@@ -18,7 +18,6 @@ class Friends extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.acceptFriend = this.acceptFriend.bind(this);
-    this.removeRequest = this.removeRequest.bind(this);
   }
 
   componentDidMount() {
@@ -29,7 +28,6 @@ class Friends extends Component {
         alert("You don't have any friends! Add friends to become popular!");
       } else {
         this.setState({ friends });
-        // console.log(this.state.friends);
       }
     });
 
@@ -39,14 +37,7 @@ class Friends extends Component {
         alert("No friend requests yet - golf more!");
       } else {
         this.setState({ friendRequests });
-        console.log(this.state.friendRequests);
       }
-    });
-  }
-
-  removeRequest(index) {
-    this.setState({
-      friendRequests: this.state.friendRequests.filter((_, i) => i !== index),
     });
   }
 
@@ -56,8 +47,16 @@ class Friends extends Component {
     axios
       .post("/api/dashboard/userMenu/friendRequests", { request, user })
       .then(res => {
-        console.log(res.data);
-        this.removeRequest(request);
+        const request = JSON.parse(res.config.data);
+        const newFriend = request.request.username;
+        const newFriendsArray = [...this.state.friends, newFriend];
+        const filteredArray = this.state.friendRequests.filter(
+          (_, i) => i !== newFriend
+        );
+        this.setState({
+          friendRequests: filteredArray,
+        });
+        this.setState({ friends: newFriendsArray });
       });
   }
 
@@ -97,10 +96,11 @@ class Friends extends Component {
         <h2>Your Friends</h2>
         <ul>
           {this.state.friends.map(friend => {
-            {
-              /* console.log(friend); */
-            }
-            return <li key={friend._id}>{friend.username}</li>;
+            return (
+              <li value={this.state.friends} key={friend._id}>
+                {friend.username}
+              </li>
+            );
           })}
         </ul>
 
@@ -108,16 +108,16 @@ class Friends extends Component {
         <ul>
           {this.state.friendRequests.map(friendRequest => {
             return (
-              <>
+              <div value={this.state.friendRequests}>
                 <li key={friendRequest._id}>{friendRequest.username}</li>
                 <button
-                  onClick={this.acceptFriend}
+                  onClick={this.acceptFriend.bind(this)}
                   key={friendRequest._id + 1}
                   value={JSON.stringify(friendRequest)}
                 >
                   Add Friend
                 </button>
-              </>
+              </div>
             );
           })}
         </ul>
