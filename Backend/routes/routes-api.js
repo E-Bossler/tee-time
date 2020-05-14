@@ -72,26 +72,42 @@ router.post("/dashboard/userMenu/friends", (req, res) => {
   }).then(data => {
     if (data[0] === undefined) {
       res.json("Friend not Found.");
+    } else if (req.body.friend === req.body.user) {
+      res.json("Cannot add yourself.");
     } else {
-      db.User.find({ username: req.body.user }).then(userData => {
-        db.User.findOneAndUpdate(
-          { username: req.body.friend },
-          {
-            $push: {
-              friendRequests: {
-                friendId: userData[0]._id,
-                username: userData[0].username,
-              },
-            },
+      db.User.find({ username: req.body.user })
+        .then(userData => {
+          for (let i = 0; i < userData[0].friends.length; i++) {
+            if (userData[0].friends[i].username === req.body.friend) {
+              return res.json("Already friended.");
+            }
           }
-        )
-          .then(data => {
-            res.json(data);
-          })
-          .catch(({ message }) => {
-            console.log(message);
-          });
-      });
+          for (let i = 0; i < data[0].friendRequests.length; i++) {
+            if (data[0].friendRequests[i].username === req.body.user) {
+              return res.json("Already sent request.");
+            } else {
+              db.User.findOneAndUpdate(
+                { username: req.body.friend },
+                {
+                  $push: {
+                    friendRequests: {
+                      friendId: userData[0]._id,
+                      username: userData[0].username,
+                    },
+                  },
+                }
+              ).then(data => {
+                res.json(data);
+              });
+            }
+          }
+        })
+        .then(data => {
+          res.json(data);
+        })
+        .catch(({ message }) => {
+          console.log(message);
+        });
     }
   });
 });

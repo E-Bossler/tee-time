@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-// ADD VALIDATION SO YOU CAN'T DOUBLE ADD FRIENDS
-// SEND OFF FRIEND ADD AS A REQUEST TO OTHER USER
-// UPDATE USER MODEL, HAS FRIEND REQUEST ARRAY
-// ALLOW FRIEND ADD, DECLINE FRIEND ADD
 class Friends extends Component {
   constructor(props) {
     super(props);
@@ -75,10 +71,17 @@ class Friends extends Component {
     axios
       .post("/api/dashboard/userMenu/friends", { friend, user })
       .then(res => {
-        if (res.data !== "Friend not Found.") {
+        console.log(res.data);
+        if (res.data.username === friend) {
           alert(`Friend Request sent to: ${friend}`);
         } else if (res.data === "Friend not Found.") {
           alert("You have added a friend that isn't in our records.");
+        } else if (res.data === "Cannot add yourself.") {
+          alert("You cannot add yourself.");
+        } else if (res.data === "Already friended.") {
+          alert(`${friend} is already your friend!`);
+        } else if (res.data === "Already sent request.") {
+          alert(`${friend} has already been sent a request.`);
         }
       });
 
