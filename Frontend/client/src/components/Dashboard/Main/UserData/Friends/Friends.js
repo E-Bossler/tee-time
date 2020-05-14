@@ -42,16 +42,18 @@ class Friends extends Component {
   }
 
   acceptFriend(e) {
+    e.preventDefault();
     const request = JSON.parse(e.target.value);
     const user = this.state.username;
     axios
       .post("/api/dashboard/userMenu/friendRequests", { request, user })
       .then(res => {
         const request = JSON.parse(res.config.data);
-        const newFriend = request.request.username;
+        const newFriend = request.request;
         const newFriendsArray = [...this.state.friends, newFriend];
+
         const filteredArray = this.state.friendRequests.filter(
-          (_, i) => i !== newFriend
+          i => i._id !== newFriend._id
         );
         this.setState({
           friendRequests: filteredArray,
@@ -99,7 +101,7 @@ class Friends extends Component {
             type="submit"
           ></input>
         </form>
-        event
+
         <h2>Your Friends</h2>
         <ul>
           {this.state.friends.map(friend => {
@@ -114,10 +116,10 @@ class Friends extends Component {
         <ul>
           {this.state.friendRequests.map(friendRequest => {
             return (
-              <div value={this.state.friendRequests}>
+              <div key={friendRequest._id + 2}>
                 <li key={friendRequest._id}>{friendRequest.username}</li>
                 <button
-                  onClick={this.acceptFriend.bind(this)}
+                  onClick={this.acceptFriend}
                   key={friendRequest._id + 1}
                   value={JSON.stringify(friendRequest)}
                 >
