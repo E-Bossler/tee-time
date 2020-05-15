@@ -27,12 +27,16 @@ class Form extends Component {
   findFriends = () => {
     const user = this.state.username;
     axios.put("/api/dashboard/userMenu/friends", { user }).then(res => {
-      const friends = res.data[0].friends;
-      if (friends === undefined) {
+      const friendsData = res.data[0].friends;
+      const friends = [];
+      if (friendsData === undefined) {
         alert("You don't have any friends! Add friends to become popular!");
       } else {
+        for (let i = 0; i < friendsData.length; i++) {
+            console.log(friendsData[i].username);
+            friends.push(friendsData[i].username);
+        }
         this.setState({ allFriends: friends });
-        console.log(this.state.allFriends);
       }
     });
   };
@@ -112,23 +116,14 @@ class Form extends Component {
     event.preventDefault();
     const friend = this.state.friend;
     const allFriends = this.state.allFriends;
-    const currentMatch = this.state.matchFriends;
+    const matchFriends = this.state.matchFriends;
 
-    console.log(currentMatch);
-    for (let i = 0; i < currentMatch; i++) {
-      if (currentMatch[i] === friend) {
-        alert("Friend already added to Match");
-      }
-    }
-
-    for (let i = 0; i < allFriends.length; i++) {
-      if (allFriends[i].username === friend) {
-        this.setState({ matchFriends: [...this.state.matchFriends, friend] });
+    if (allFriends.indexOf(friend) !== -1  && matchFriends.indexOf(friend) === -1) {
+        matchFriends.push(friend);
+        this.setState({ matchFriends: matchFriends});
         this.setState({ friendFound: true });
-        this.setState({ friend: "" });
-      } else {
+    } else {
         this.setState({ friendFound: false });
-      }
     }
 
     this.setState({ friend: "" });
