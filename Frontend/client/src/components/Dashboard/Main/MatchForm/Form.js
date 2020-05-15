@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import GolfAPI from "../../../utils/golfGeniusAPI";
 import CourseInput from "./CourseInput";
 import FriendsInput from "./FriendsInput";
 import MatchCourse from "./MatchCouse";
@@ -10,7 +11,6 @@ import "./stylesheet.css";
 class Form extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       username: this.props.username,
       allFriends: [],
@@ -33,28 +33,11 @@ class Form extends Component {
         alert("You don't have any friends! Add friends to become popular!");
       } else {
         for (let i = 0; i < friendsData.length; i++) {
-            console.log(friendsData[i].username);
             friends.push(friendsData[i].username);
         }
         this.setState({ allFriends: friends });
       }
     });
-  };
-
-  findCourses = () => {
-    axios
-      .get(
-        "https://www.golfgenius.com/api_v2/L7DBdFNJ4i-mR6ZeBOFPMw/events/4995124311334371081/courses"
-      )
-      .then(res => {
-        const courseData = res.data.courses;
-        const courses = this.state.courses;
-        for (let i = 0; i < courseData.length; i++) {
-          courses.push(courseData[i].name.toLowerCase());
-        }
-        this.setState({ courses: courses });
-        console.log(courses);
-      });
   };
 
   capCourse = course => {
@@ -77,7 +60,16 @@ class Form extends Component {
 
   componentDidMount() {
     const user = this.state.username;
-    this.findCourses();
+
+    GolfAPI.findCourses().then(res => {
+        const courseData = res.data.courses;
+        const courses = this.state.courses;
+        for (let i = 0; i < courseData.length; i++) {
+          courses.push(courseData[i].name.toLowerCase());
+        }
+        this.setState({ courses: courses });
+    });
+
     this.findFriends(user);
   }
 
@@ -138,7 +130,6 @@ class Form extends Component {
       }
     }
     this.setState({ matchFriends: matchFriends });
-    console.log(this.state.matchFriends);
   }
 
   render() {

@@ -1,17 +1,25 @@
 import axios from "axios";
 
+const apikey = "L7DBdFNJ4i-mR6ZeBOFPMw";
+
+const season2020 = "6346727312368647801";
+const season2019 = "4995124311334371081";
+const season2018 = "247716410559610772";
+
+const baseURL = `https://www.golfgenius.com/api_v2/${apikey}/events/`;
+
 const GolfAPI = {
     findCourses: () => {
-        axios
-            .get("https://www.golfgenius.com/api_v2/L7DBdFNJ4i-mR6ZeBOFPMw/events/4995124311334371081/courses")
-            .then(res => {
-              const courseData = res.data.courses;
-              const courses = this.state.courses;
-              for (let i = 0; i < courseData.length; i++) {
-                courses.push((courseData[i].name).toLowerCase());
-              }
-              return courses;
-            });
+        return axios
+            .get(`${baseURL}${season2019}/courses`);
+        // return axios.all([
+        //     axios
+        //         .get(`${baseURL}${season2020}/courses`),
+        //     axios
+        //         .get(`${baseURL}${season2019}/courses`),
+        //     axios
+        //         .get(`${baseURL}${season2018}/courses`)
+        // ]);
     }
 }
 
