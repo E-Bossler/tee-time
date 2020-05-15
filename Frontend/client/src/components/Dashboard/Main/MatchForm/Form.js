@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import CourseInput from "./CourseInput";
@@ -24,7 +24,8 @@ class Form extends Component {
     }
 
     findFriends = user => {
-        axios.put("/api/dashboard/userMenu/friends", { user }).then(res => {
+        axios.put("/api/dashboard/userMenu/friends", { user })
+          .then(res => {
             const friends = res.data[0].Friends;
             if (friends === undefined) {
               alert("You don't have any friends! Add friends to become popular!");
@@ -33,7 +34,7 @@ class Form extends Component {
             }
         });
     }
-
+      
     findUser = (friend, friends, user) => {
         axios
           .post("/api/dashboard/userMenu/friends", { friend, user })
@@ -58,7 +59,7 @@ class Form extends Component {
               }
               this.setState({ courses: courses });
               console.log(courses);
-            })
+            });
     }
 
     capCourse = course => {
@@ -120,10 +121,6 @@ class Form extends Component {
         const user = this.state.username;
         friends.push(this.state.friend);
         this.setState({ friends: friends });
-
-        console.log(friend, user);
-
-        // findUser(friend, user);
 
         if (friends.indexOf(friend) !== -1) {
             this.setState({ friendFound: true });

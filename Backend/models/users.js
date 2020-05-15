@@ -28,14 +28,26 @@ const UserSchema = new Schema({
   },
   friends: [
     {
-      friendId: String,
-      username: String,
+      friendId: {
+        type: String,
+        trim: true,
+      },
+      username: {
+        type: String,
+        trim: true,
+      },
     },
   ],
   friendRequests: [
     {
-      friendId: String,
-      username: String,
+      friendId: {
+        type: String,
+        trim: true,
+      },
+      username: {
+        type: String,
+        trim: true,
+      },
     },
   ],
 });

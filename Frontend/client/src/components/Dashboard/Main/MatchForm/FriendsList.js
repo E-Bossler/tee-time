@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import "./stylesheet.css";
 
 class FriendsList extends Component {
@@ -21,6 +21,6 @@ class FriendsList extends Component {
             </div>
         );
     }
-};
+}
 
 export default FriendsList;
