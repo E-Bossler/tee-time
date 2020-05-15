@@ -114,13 +114,6 @@ class Form extends Component {
     const allFriends = this.state.allFriends;
     const currentMatch = this.state.matchFriends;
 
-    console.log(currentMatch);
-    for (let i = 0; i < currentMatch; i++) {
-      if (currentMatch[i] === friend) {
-        alert("Friend already added to Match");
-      }
-    }
-
     for (let i = 0; i < allFriends.length; i++) {
       if (allFriends[i].username === friend) {
         this.setState({ matchFriends: [...this.state.matchFriends, friend] });

@@ -19,17 +19,16 @@ const matchSchema = new Schema({
     trim: true,
     required: "You must select a course",
   },
-  holes: {
-    type: Number,
-    required: "Select 9 or 18 holes",
-    default: 18,
-    min: 9,
-    max: 18,
-  },
-  parValues: {
-    type: Array,
-    length: 18,
-  },
+  holes: [
+    {
+      hole: {
+        name: Number,
+        score: Number,
+        par: Number,
+        yards: Number,
+      },
+    },
+  ],
   day: {
     type: Date,
     default: Date.now,
