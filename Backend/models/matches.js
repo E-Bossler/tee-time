@@ -2,11 +2,18 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const matchSchema = new Schema({
-  participants: {
-    type: Array,
-    trim: true,
-    required: "A match must have at least one participant",
-  },
+  participants: [
+    {
+      friendId: {
+        type: String,
+        trim: true,
+      },
+      username: {
+        type: String,
+        trim: true,
+      },
+    },
+  ],
   course: {
     type: String,
     trim: true,
@@ -27,9 +34,18 @@ const matchSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  chat: {
-    type: Array,
-  },
+  chat: [
+    {
+      message: {
+        type: String,
+        trim: true,
+      },
+      messager: {
+        type: String,
+        trim: true,
+      },
+    },
+  ],
 });
 
 const Match = mongoose.model("Match", matchSchema);
