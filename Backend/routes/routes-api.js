@@ -304,54 +304,13 @@ router.post("/account/signin", (req, res, next) => {
 // VERIFY SET UP
 
 router.get("/account/verify", (req, res) => {
-  //get the token
-  // console.log("This should be the params", req);
-  let token;
-  // console.log('This should be the token', token)
-  // console.log("here is your token", token)
-  // console.log('Here is the token we are locating:', token)
-  //verify the token is one of a kind and is not deleted
-
-  db.UserSession.find({
-    // _id: token
-  })
+  db.UserSession.find({})
     .then(data => {
       res.json(data);
     })
     .catch(({ message }) => {
       console.log("Message:", message);
     });
-
-  // db.UserSession.findById({
-  //   _id: token
-  // }, (err, results) => {
-  //   if (err) {
-  //     return res.send({
-  //       success: false,
-  //       message: `Please see error message: ${err}
-  //       location 3`
-  //     })
-  //   }
-  //   console.log('The session:',
-  //   results,
-  //   '----------------------------------------------------')
-  //   return res.send({
-  //     success: true,
-  //     message: 'Session Exists.'
-  //   })
-  //   if (results.length != 1) {
-  //     return res.send({
-  //       success: false,
-  //       message: "Something went wrong... "
-  //     })
-  //   } else {
-  //     return res.send({
-  //       success: true,
-  //       message: 'Good session.'
-  //     })
-  //   }
-
-  // })
 });
 
 // LOG OUT SET UP

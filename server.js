@@ -41,8 +41,6 @@ app.get("/api/test", (req, res) => {
   ]);
 });
 
-
-
 // if (process.env.NODE_ENV === "production") {
 //   app.use(express.static("/Frontend/client/public"));
 
@@ -53,20 +51,17 @@ app.get("/api/test", (req, res) => {
 //   });
 // }
 
-app.use(express.static(path.join(__dirname, 'Frontend/client/build')));
+// app.use(express.static(path.join(__dirname, "Frontend/client/build")));
 
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'Frontend/client/build', 'index.html'));
-});
+// app.get("/*", function (req, res) {
+//   res.sendFile(path.join(__dirname, "Frontend/client/build", "index.html"));
+// });
 
 // app.use(express.static("/Frontend/client/public"));
 
 // app.get("*", (req, res) => {
-//   res.sendfile(
-//     path.resolve(__dirname, "./Frontend/client/build")
-//   );
+//   res.sendfile(path.resolve(__dirname, "./Frontend/client/build"));
 // });
-
 
 app.use("/api", router);
 
