@@ -13,9 +13,10 @@ class Form extends Component {
         console.log(props);
         this.state = {
           username: this.props.username,
+          allFriends: ["friend1", "friend2"],
           friend: "",
-          friends: [],
           friendFound: true,
+          matchFriends: [],
           course: "",
           matchCourse: "",
           courses: [],
@@ -29,22 +30,9 @@ class Form extends Component {
             if (friends === undefined) {
               alert("You don't have any friends! Add friends to become popular!");
             } else {
-              this.setState({ friends });
+              this.setState({ allFriends: friends });
             }
         });
-    }
-
-    findUser = (friend, friends, user) => {
-        axios
-          .post("/api/dashboard/userMenu/friends", { friend, user })
-          .then(res => {
-            console.log(res.data);
-            if (res.data === "Friend added!") {
-              this.setState({ friends: [...friends, friend] });
-            } else if (res.data === "Friend not Found.") {
-                console.log("Friend not found");
-            }
-          });
     }
     
     findCourses = () => {
@@ -97,13 +85,11 @@ class Form extends Component {
 
     handleCourseSubmit(event) {
         event.preventDefault();
-        // console.log(this.state.course);
         const course = (this.state.course).toLowerCase();
         const courses = this.state.courses;
 
         if (courses.indexOf(course) !== -1) {
             const matchCourse = this.capCourse(course);
-            // console.log(matchCourse);
             this.setState({ courseFound: true });
             this.setState({ matchCourse: matchCourse });
         } else {
@@ -113,24 +99,37 @@ class Form extends Component {
         this.setState({ course: "" });
     }
 
+    handleCourseDelete() {
+        this.setState({ course: ""});
+        this.setState({ matchCourse: ""});
+    }
+
     handleFriendSubmit(event) {
         event.preventDefault();
-        const friend = this.state.friendName;
-        const friends = this.state.friends;
-        const user = this.state.username;
-        friends.push(this.state.friend);
-        this.setState({ friends: friends });
+        const friend = this.state.friend;
+        const allFriends = this.state.allFriends;
+        const matchFriends = this.state.matchFriends;
 
-        console.log(friend, user);
-
-        // findUser(friend, user);
-
-        if (friends.indexOf(friend) !== -1) {
+        if (allFriends.indexOf(friend) !== -1) {
+            matchFriends.push(friend);
+            this.setState({ matchFriends: matchFriends});
             this.setState({ friendFound: true });
         } else {
             this.setState({ friendFound: false });
         }
+
         this.setState({ friend: "" });
+    }
+
+    handleFriendDelete(event) {
+        const friendToDelete = event.target.id;
+        const matchFriends = this.state.matchFriends;
+        for (let i = 0; i < matchFriends.length; i++) {
+            if (matchFriends[i] === friendToDelete) {
+                matchFriends.splice(i, 1);
+            }
+        }
+        this.setState({ matchFriends: matchFriends });
     }
 
     render() {
@@ -146,13 +145,15 @@ class Form extends Component {
                     handleFriendSubmit={this.handleFriendSubmit.bind(this)} 
                     handleFriendInputChange={this.handleFriendInputChange.bind(this)} 
                     friend={this.state.friend}
-                    foundFriend={this.state.friendFound}
+                    friendFound={this.state.friendFound}
                 />
                 <MatchCourse 
                     matchCourse={this.state.matchCourse}
+                    handleCourseDelete={this.handleCourseDelete.bind(this)}
                 />
                 <FriendsList 
-                    friends={this.state.friends}
+                    matchFriends={this.state.matchFriends}
+                    handleFriendDelete={this.handleFriendDelete.bind(this)}
                 />
                 <button id="start-match-btn">
                     <Link id="match-link" to="/dashboard/matchView">

@@ -4,7 +4,7 @@ import "./stylesheet.css";
 class FriendsInput extends Component {
     render() {
         return(
-            <div className="form-group">
+            <form className="form-group">
                 <label 
                     htmlFor="friends-input">
                     Find Friends:
@@ -14,19 +14,22 @@ class FriendsInput extends Component {
                     className="form-control" 
                     id="friends-input" 
                     name='friend'
-                    defaultValue={this.props.friend}
-                    onChange={this.props.handleInputChange}
+                    value={this.props.friend}
+                    onChange={this.props.handleFriendInputChange}
                 >
                 </input>
-                <p className={this.props.friendFound ? "show" : "hide"}>
+                <p 
+                    id="not-found-msg"
+                    className={this.props.friendFound ? "hide" : "show"}
+                >
                     Sorry, that user is not on your friends list.
                 </p>
                 <button 
                     id="add-friend-btn" 
-                    onClick={this.props.handleSubmit}>
+                    onClick={this.props.handleFriendSubmit}>
                     Add Friend
                 </button>
-            </div>
+            </form>
         );
     }
 };

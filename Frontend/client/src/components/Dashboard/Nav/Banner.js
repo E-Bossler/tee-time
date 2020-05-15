@@ -6,7 +6,11 @@ class Banner extends Component {
         // console.log(this.props.message);
         return(
             <div id='banner'>
-                <h2>Tee Time</h2>
+                <h2>
+                    <a href="/dashboard">
+                        Tee Time
+                    </a>
+                </h2>
                 <Burger animate={this.props.action} burgerClicked={this.props.clicked}/>
             </div>
         );
