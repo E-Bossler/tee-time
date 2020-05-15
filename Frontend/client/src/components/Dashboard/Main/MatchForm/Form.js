@@ -61,6 +61,24 @@ class Form extends Component {
             })
     }
 
+    capCourse = course => {
+        const words = course.toLowerCase().split(' ');
+        let capCourse = '';
+        for (let i = 0; i < words.length; i++) {
+            const splitWord = words[i].split('');
+            const capfirst = splitWord[0].toUpperCase();
+            splitWord.shift([0]); 
+            splitWord.unshift(capfirst);
+            const capWord = splitWord.join(''); 
+            if (i === 0) {
+                capCourse += capWord;
+            } else {
+                capCourse += ` ${capWord}`;
+            }
+        }
+        return capCourse;
+    }
+
     componentDidMount() {
         const user = this.state.username;
         this.findCourses();
@@ -79,13 +97,15 @@ class Form extends Component {
 
     handleCourseSubmit(event) {
         event.preventDefault();
-        console.log(this.state.course);
+        // console.log(this.state.course);
         const course = (this.state.course).toLowerCase();
         const courses = this.state.courses;
 
         if (courses.indexOf(course) !== -1) {
+            const matchCourse = this.capCourse(course);
+            // console.log(matchCourse);
             this.setState({ courseFound: true });
-            this.setState({ matchCourse: course });
+            this.setState({ matchCourse: matchCourse });
         } else {
             this.setState({ courseFound: false });
         }
