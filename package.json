@@ -6,10 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "heroku-postbuild": "npm run build",
     "build" : "npm run build:backend && npm run build:frontend",
     "build:frontend": "cd Frontend && cd client && npm run build",
-    "build:backend": "npm run start",
+    "build:backend": "tsc",
     "seed": "node backend/seeders/matchseeds && node backend/seeders/roundseeds && node backend/seeders/userseeds"
   },
   "repository": {
