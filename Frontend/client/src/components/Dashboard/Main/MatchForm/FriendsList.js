@@ -13,8 +13,7 @@ class FriendsList extends Component {
             <div id="friends-list-container">
                 <h3>Match Players:</h3>
                 <p className={friendsAdded ? "hide" : "show"}>No friends added yet</p>
-                <ul id="friends-list"
-                ref={this.valRef}>
+                <ul id="friends-list">
                     {friends.map((value, index) => {
                         return <li 
                         key={index}
