@@ -57,21 +57,24 @@ button {
                 width: 110px;
             } 
         }
+        #course-container,
         #friends-list-container {
             margin: 5px auto;
             width: 85%;
-            h3 {
-                font-weight: 300;
-                margin: 5px 0;
-            }
+        }
+        h3 {
+            font-weight: 300;
+            margin: 5px 0;
+        }
+        .hide {
+            display: none;
+        }
+        #friends-list-container {
             #friends-list {
                 li {
                     list-style: none;
                     margin: 5px 0;
                 }
-            }
-            .hide {
-                display: none;
             }
         }
         #start-match-btn {

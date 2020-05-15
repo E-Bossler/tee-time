@@ -71,23 +71,24 @@ button {
   width: 110px;
 }
 
+#form-container #form #course-container,
 #form-container #form #friends-list-container {
   margin: 5px auto;
   width: 85%;
 }
 
-#form-container #form #friends-list-container h3 {
+#form-container #form h3 {
   font-weight: 300;
   margin: 5px 0;
+}
+
+#form-container #form .hide {
+  display: none;
 }
 
 #form-container #form #friends-list-container #friends-list li {
   list-style: none;
   margin: 5px 0;
-}
-
-#form-container #form #friends-list-container .hide {
-  display: none;
 }
 
 #form-container #form #start-match-btn #match-link {

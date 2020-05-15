@@ -3,48 +3,48 @@ import axios from "axios";
 import "./stylesheet.css";
 
 class CourseInput extends Component {
-    constructor(props) {
-        super(props);
-        console.log(props);
-        this.state = {
-          course: "",
-          courses: [],
-          courseFound: true
-        };
-    }
+    // constructor(props) {
+    //     super(props);
+    //     console.log(props);
+    //     this.state = {
+    //       course: "",
+    //       courses: [],
+    //       courseFound: true
+    //     };
+    // }
 
-    componentDidMount() {
-        axios
-        .get("https://www.golfgenius.com/api_v2/L7DBdFNJ4i-mR6ZeBOFPMw/events/4995124311334371081/courses")
-        .then(res => {
-          const courseData = res.data.courses;
-          const courses = this.state.courses;
-          for (let i = 0; i < courseData.length; i++) {
-            courses.push((courseData[i].name).toLowerCase());
-          }
-          this.setState({ courses: courses });
-        //   console.log(courses);
-        })
-    }
+    // componentDidMount() {
+    //     axios
+    //     .get("https://www.golfgenius.com/api_v2/L7DBdFNJ4i-mR6ZeBOFPMw/events/4995124311334371081/courses")
+    //     .then(res => {
+    //       const courseData = res.data.courses;
+    //       const courses = this.state.courses;
+    //       for (let i = 0; i < courseData.length; i++) {
+    //         courses.push((courseData[i].name).toLowerCase());
+    //       }
+    //       this.setState({ courses: courses });
+    //       console.log(courses);
+    //     })
+    // }
 
-    handleInputChange(event) {
-        let value = event.target.value;
-        this.setState({ course: value });
-    }
+    // handleCourseInputChange(event) {
+    //     let value = event.target.value;
+    //     this.setState({ course: value });
+    // }
 
-    handleSubmit(event) {
-        event.preventDefault();
-        const course = (this.state.course).toLowerCase();
-        const courses = this.state.courses;
+    // handleCourseSubmit(event) {
+    //     event.preventDefault();
+    //     const course = (this.state.course).toLowerCase();
+    //     const courses = this.state.courses;
 
-        if (courses.indexOf(course) !== -1) {
-            this.setState({ courseFound: true });
-        } else {
-            this.setState({ courseFound: false });
-        }
+    //     if (courses.indexOf(course) !== -1) {
+    //         this.setState({ courseFound: true });
+    //     } else {
+    //         this.setState({ courseFound: false });
+    //     }
 
-        this.setState({ course: "" });
-    }
+    //     this.setState({ course: "" });
+    // }
 
     render() {
         return(
@@ -58,18 +58,18 @@ class CourseInput extends Component {
                     className="form-control" 
                     id="course-input" 
                     name='course'
-                    defaultValue={this.state.course}
-                    onChange={this.handleInputChange.bind(this)} 
+                    defaultValue={this.props.course}
+                    onChange={this.props.handleCourseInputChange} 
                 />
                 <p 
                     id="course-search-msg"
-                    className={this.state.courseFound ? "hide" : "show"}>
+                    className={this.props.courseFound ? "hide" : "show"}>
                     Sorry, cannot find data for that course.
                 </p>
                 <button 
                     id="find-course-btn" 
-                    onClick={this.handleSubmit.bind(this)}>
-                    Find Course
+                    onClick={this.props.handleCourseSubmit}>
+                    Add Course
                 </button>
             </div>
         );
