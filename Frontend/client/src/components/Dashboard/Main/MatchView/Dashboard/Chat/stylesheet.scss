@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+#chat {
+    height: calc(100vh - 67px - 29px - 45px);
+    position: relative;
+    width: 100vw;
+    #input-container {
+        background: white;
+        // border: 1px solid black;
+        border-bottom: none;
+        bottom: 0px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        // padding: 15px 10px;
+        position: absolute;
+        width: 100%;
+        #chat-input {
+            font-size: 1em;
+            height: 30px;
+            padding: 2px;
+            width: 80%;
+        }
+        #send-btn {
+            align-self: center;
+            background: dodgerblue;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            padding: 6px;
+            text-transform: uppercase;
+        }
+    }
+}

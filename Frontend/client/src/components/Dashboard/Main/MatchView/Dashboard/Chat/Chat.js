@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Switch from "./Switch";
+import MsgInput from "./MsgInput";
 import io from "socket.io-client";
 export default class Chat extends Component {
   constructor(props) {
@@ -36,13 +38,19 @@ export default class Chat extends Component {
     ));
 
     return (
-      <>
+      <div id="chat">
+        <Switch />
         {chatMessages}
         <form onSubmit={this.submitChatMessage}>
           <input value={this.state.value} onChange={this.handleChange}></input>
           <input type="submit" value="Submit" />
         </form>
-      </>
+        {/* <MsgInput 
+          submitChatMessages={this.submitChatMessages}
+          value={this.state.value}
+          handleChange={this.handleChange}
+        /> */}
+      </div>
     );
   }
 }
