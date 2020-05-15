@@ -30,11 +30,12 @@ button {
 }
 
 #form-container {
-    padding: 10px;
+    // border: 1px solid black;
     #form {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        height: calc(100vh - 67px - 45px);
+        position: relative;
         .form-group {
             margin: 5px auto;
             width: 90%;
@@ -57,24 +58,39 @@ button {
                 width: 110px;
             } 
         }
+        #course-container,
         #friends-list-container {
             margin: 5px auto;
             width: 85%;
-            h3 {
-                font-weight: 300;
-                margin: 5px 0;
-            }
+        }
+        h3 {
+            font-weight: 300;
+            margin: 5px 0;
+        }
+        p {
+            font-size: 0.9em;
+        }
+        .hide {
+            display: none;
+        }
+        #friends-list-container {
             #friends-list {
+                // border: 1px solid black;
+                max-height: 100px;
+                margin: 5px auto;
+                overflow-y: auto;
                 li {
                     list-style: none;
                     margin: 5px 0;
                 }
             }
-            .hide {
-                display: none;
-            }
         }
         #start-match-btn {
+            bottom: 0;
+            left: 36.67%;
+            margin: 25px 0;
+            padding: 10px;
+            position: absolute;
             #match-link {
                 color: white;
                 font-family: 'Rubik', sans-serif;

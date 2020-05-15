@@ -28,10 +28,6 @@ button {
   text-transform: uppercase;
 }
 
-#form-container {
-  padding: 10px;
-}
-
 #form-container #form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -40,9 +36,8 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  height: calc(100vh - 67px - 45px);
+  position: relative;
 }
 
 #form-container #form .form-group {
@@ -71,14 +66,29 @@ button {
   width: 110px;
 }
 
+#form-container #form #course-container,
 #form-container #form #friends-list-container {
   margin: 5px auto;
   width: 85%;
 }
 
-#form-container #form #friends-list-container h3 {
+#form-container #form h3 {
   font-weight: 300;
   margin: 5px 0;
+}
+
+#form-container #form p {
+  font-size: 0.9em;
+}
+
+#form-container #form .hide {
+  display: none;
+}
+
+#form-container #form #friends-list-container #friends-list {
+  max-height: 100px;
+  margin: 5px auto;
+  overflow-y: auto;
 }
 
 #form-container #form #friends-list-container #friends-list li {
@@ -86,8 +96,12 @@ button {
   margin: 5px 0;
 }
 
-#form-container #form #friends-list-container .hide {
-  display: none;
+#form-container #form #start-match-btn {
+  bottom: 0;
+  left: 36.67%;
+  margin: 25px 0;
+  padding: 10px;
+  position: absolute;
 }
 
 #form-container #form #start-match-btn #match-link {

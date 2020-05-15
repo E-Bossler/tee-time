@@ -1,16 +1,16 @@
 #scoreboard {
-    // background: rgba(20 ,160, 20, 0.6);
-    background: rgb(71, 172, 71);
-    border: 1px solid black;
-    display: block;
-    height: calc(100vh - 67px - 29px - 45px);
-    margin: 0px auto;
+    background: rgb(100, 200, 100);
+    // border: 1px solid black;
+    // display: block;
+    height: calc(100vh - 67px - 40px - 46px);
+    margin: 6px auto;
+    padding: 20px;
     width: 100vw;
     .scorecard {
         background: white;
         border: 2px solid black;
         box-shadow: -2px 3px 5px rgba(0, 0, 0, 0.5);
-        margin: 25px auto;
+        margin: 0 auto;
         width: 80%;
         .icon-container {
             display: flex;
