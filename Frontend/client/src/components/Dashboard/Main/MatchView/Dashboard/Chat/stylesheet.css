@@ -7,14 +7,135 @@
   position: relative;
 }
 
-#chat {
-  height: calc(100vh - 67px - 29px - 45px);
+#chat-container {
+  background: #64c864;
+  height: calc(100vh - 67px - 40px - 45px);
+  margin-top: 6px;
+  padding: 20px;
   position: relative;
   width: 100vw;
 }
 
-#chat #input-container {
+#chat-container #msg-container {
   background: white;
+  border: 1px solid black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-family: 'Open Sans', sans-serif;
+  height: 420px;
+  margin: 0 auto;
+  overflow-y: scroll;
+}
+
+#chat-container #msg-container .user-msgs {
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-right: 20px;
+  overflow-anchor: none;
+}
+
+#chat-container #msg-container .user-msgs .message {
+  background: dodgerblue;
+  background-attachment: fixed;
+  color: white;
+  margin-left: 25%;
+  position: relative;
+}
+
+#chat-container #msg-container .user-msgs .message:before {
+  background: dodgerblue;
+  border-bottom-left-radius: 15px;
+  bottom: 0;
+  background-attachment: fixed;
+  content: "";
+  height: 20px;
+  position: absolute;
+  right: -8px;
+  width: 20px;
+  z-index: 0;
+}
+
+#chat-container #msg-container .user-msgs .message:after {
+  background: white;
+  border-bottom-left-radius: 10px;
+  bottom: 0;
+  content: "";
+  height: 20px;
+  position: absolute;
+  right: -10px;
+  width: 10px;
+  z-index: 1;
+}
+
+#chat-container #msg-container .friend-msgs {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-left: 20px;
+}
+
+#chat-container #msg-container .friend-msgs .message {
+  background-color: #eee;
+  margin-right: 25%;
+  position: relative;
+}
+
+#chat-container #msg-container .friend-msgs .message:before {
+  background: #eee;
+  bottom: 0;
+  border-bottom-right-radius: 15px;
+  content: "";
+  height: 20px;
+  left: -7px;
+  position: absolute;
+  width: 20px;
+  z-index: 0;
+}
+
+#chat-container #msg-container .friend-msgs .message:after {
+  background: white;
+  bottom: 0;
+  border-bottom-right-radius: 10px;
+  content: "";
+  height: 20px;
+  left: -10px;
+  position: absolute;
+  width: 10px;
+  z-index: 1;
+}
+
+#chat-container #msg-container .message {
+  border-radius: 10px;
+  display: inline-block;
+  font-size: 0.9em;
+  margin: 5px 0px;
+  min-height: 28px;
+  padding: 8px 15px;
+}
+
+#chat-container #input-container {
+  background: white;
+  border-top: 1px solid black;
   border-bottom: none;
   bottom: 0px;
   display: -webkit-box;
@@ -24,21 +145,21 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  position: absolute;
-  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 0 auto;
+  padding: 14px 12px;
 }
 
-#chat #input-container #chat-input {
+#chat-container #input-container #chat-input {
   font-size: 1em;
   height: 30px;
   padding: 2px;
-  width: 80%;
+  width: 72%;
 }
 
-#chat #input-container #send-btn {
+#chat-container #input-container #send-btn {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
@@ -47,7 +168,9 @@
   border-radius: 6px;
   color: white;
   cursor: pointer;
-  padding: 6px;
+  margin: 0;
+  padding: 6px 2px;
   text-transform: uppercase;
+  width: 24%;
 }
 /*# sourceMappingURL=stylesheet.css.map */
