@@ -7,8 +7,9 @@
 }
 
 #tabs-container {
-  background: #a8f8a8;
-  z-index: 1;
+  background: #3c3c3c;
+  height: 34px;
+  width: 100vw;
 }
 
 #tabs-container #tabs-list {
@@ -24,29 +25,41 @@
 }
 
 #tabs-container #tabs-list .nav-tab {
-  background: #969696;
-  border: 1px solid white;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f0f0f0), to(#aaaaaa));
+  background: linear-gradient(#f0f0f0, #aaaaaa);
+  border: 1px solid black;
   border-radius: 5px 5px 0 0;
-  -webkit-box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
-          box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
   font-family: 'Open Sans', sans-serif;
-  font-size: 0.9em;
   list-style: none;
-  padding: 5px;
+  padding: 8px;
   text-align: center;
-  width: 33.3%;
-  z-index: 2;
+  width: 50%;
 }
 
-#tabs-container #tabs-list .nav-tab #tracker-tab,
-#tabs-container #tabs-list .nav-tab #scoreboard-tab,
-#tabs-container #tabs-list .nav-tab #chat-tab {
+#tabs-container #tabs-list .nav-tab .nav-link {
   color: black;
   text-decoration: none;
 }
 
-#tabs-container #tabs-list .selected {
-  background: #c5c5c5;
-  border: 2px solid white;
+#tabs-container #tabs-list #score-tab {
+  border-left: none;
+  border-right: none;
+}
+
+#tabs-container #tabs-list #chat-tab {
+  border-right: none;
+}
+
+#tabs-container #tabs-list .selected-tab {
+  border-bottom: none;
+  background: -webkit-gradient(linear, left top, left bottom, from(#8cf08c), to(#64c864));
+  background: linear-gradient(#8cf08c, #64c864);
+  color: white;
+  font-weight: 600;
+}
+
+#tabs-container #tabs-list .selected-tab .nav-link {
+  color: white;
 }
 /*# sourceMappingURL=stylesheet.css.map */
