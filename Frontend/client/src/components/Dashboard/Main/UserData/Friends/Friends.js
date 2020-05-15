@@ -71,8 +71,7 @@ class Friends extends Component {
     axios
       .post("/api/dashboard/userMenu/friends", { friend, user })
       .then(res => {
-        console.log(res.data);
-        if (res.data.username === friend) {
+        if (res.status === 201) {
           alert(`Friend Request sent to: ${friend}`);
         } else if (res.data === "Friend not Found.") {
           alert("You have added a friend that isn't in our records.");
@@ -83,9 +82,9 @@ class Friends extends Component {
         } else if (res.data === "Already sent request.") {
           alert(`${friend} has already been sent a request.`);
         }
-      });
 
-    this.setState({ friendName: "" });
+        this.setState({ friendName: "" });
+      });
   }
 
   render() {

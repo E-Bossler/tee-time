@@ -85,25 +85,21 @@ router.post("/dashboard/userMenu/friends", (req, res) => {
           for (let i = 0; i < data[0].friendRequests.length; i++) {
             if (data[0].friendRequests[i].username === req.body.user) {
               return res.json("Already sent request.");
-            } else {
-              db.User.findOneAndUpdate(
-                { username: req.body.friend },
-                {
-                  $push: {
-                    friendRequests: {
-                      friendId: userData[0]._id,
-                      username: userData[0].username,
-                    },
-                  },
-                }
-              ).then(data => {
-                res.json(data);
-              });
             }
           }
-        })
-        .then(data => {
-          res.json(data);
+          db.User.findOneAndUpdate(
+            { username: req.body.friend },
+            {
+              $push: {
+                friendRequests: {
+                  friendId: userData[0]._id,
+                  username: userData[0].username,
+                },
+              },
+            }
+          ).then(data => {
+            res.status(201).json(data);
+          });
         })
         .catch(({ message }) => {
           console.log(message);
