@@ -14,7 +14,7 @@ require("dotenv").config();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ type: ["application/json"] }));
 
-// app.use(express.static("/Frontend/client/public"));
+app.use(express.static("/Frontend/client/build"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -52,7 +52,7 @@ if (process.env.NODE_ENV === "production") {
 
   app.get("*", (req, res) => {
     res.sendfile(
-      path.resolve(__dirname, "Frontend", "client", "build", "index.html")
+      path.resolve(__dirname, "./Frontend/client/build")
     );
   });
 }

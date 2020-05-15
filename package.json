@@ -6,9 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "build" : "npm run build:backend && npm run build:frontend",
-    "build:frontend": "cd Frontend && cd client && npm run build",
-    "build:backend": "tsc",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build",
     "seed": "node backend/seeders/matchseeds && node backend/seeders/roundseeds && node backend/seeders/userseeds"
   },
   "repository": {
