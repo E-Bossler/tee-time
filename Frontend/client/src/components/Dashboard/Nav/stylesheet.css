@@ -9,27 +9,31 @@
 
 nav {
   background: #3c3c3c;
-  color: white;
+  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
   font-family: 'Open Sans', sans-serif;
+  height: 65px;
   position: relative;
   z-index: 90;
 }
 
-nav #banner {
-  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
-          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
-  height: 10vh;
+nav #banner h2 {
+  cursor: pointer;
+  font-size: 1.4em;
+  font-weight: 400;
+  padding: 18px;
+  text-align: center;
 }
 
-nav #banner h2 {
-  font-weight: 400;
-  padding: 20px;
-  text-align: center;
+nav #banner h2 a {
+  color: white;
+  text-decoration: none;
 }
 
 nav #banner #burger {
   cursor: pointer;
-  padding: 15px 10px;
+  margin: 10px;
+  padding: 5px;
   position: absolute;
   right: 0px;
   top: 0px;
@@ -67,7 +71,7 @@ nav #slider #nav-links {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  height: calc(100vh - 10vh - 45px);
+  height: calc(100vh - 65px - 45px);
   -ms-flex-pack: distribute;
       justify-content: space-around;
   position: fixed;
@@ -77,9 +81,7 @@ nav #slider #nav-links {
 }
 
 nav #slider #nav-links li {
-  height: calc((100vh - 56.8px)/4);
   list-style: none;
-  padding-top: 45px;
   text-align: center;
 }
 
