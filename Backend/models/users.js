@@ -26,14 +26,26 @@ const UserSchema = new Schema({
       },
       players: {
         type: Array,
+        holes: [
+          {
+            hole: {
+              name: Number,
+              score: Number,
+              par: Number,
+              yards: Number,
+            },
+          },
+        ],
       },
-      holes: [
+      chat: [
         {
-          hole: {
-            name: Number,
-            score: Number,
-            par: Number,
-            yards: Number,
+          message: {
+            type: String,
+            trim: true,
+          },
+          messager: {
+            type: String,
+            trim: true,
           },
         },
       ],
