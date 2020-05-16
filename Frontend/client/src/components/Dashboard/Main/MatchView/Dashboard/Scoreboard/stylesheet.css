@@ -1,6 +1,6 @@
 #scoreboard {
   background: #64c864;
-  height: calc(100vh - 67px - 40px - 46px);
+  height: calc(100vh - 65px - 40px - 45px);
   margin: 6px auto;
   padding: 20px;
   width: 100vw;
@@ -11,21 +11,18 @@
   border: 2px solid black;
   -webkit-box-shadow: -2px 3px 5px rgba(0, 0, 0, 0.5);
           box-shadow: -2px 3px 5px rgba(0, 0, 0, 0.5);
-  margin: 0 auto;
+  margin: 25px auto;
   width: 80%;
 }
 
-#scoreboard .scorecard .icon-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+#scoreboard .player-name {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2em;
+  font-weight: 600;
+  padding: 6px 20px;
 }
 
-#scoreboard .scorecard .icon-container .row {
+#scoreboard .side-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -35,88 +32,44 @@
           flex-direction: row;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  margin: 4px 2px;
 }
 
-#scoreboard .scorecard .icon-container .row .icon {
-  background: -webkit-gradient(linear, left top, left bottom, from(#fdf361), to(#fdd319));
-  background: linear-gradient(#fdf361, #fdd319);
-  border: 1px solid #505050;
-  border-radius: 6px;
-  cursor: pointer;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 0.8em;
-  height: 22px;
-  padding-top: 2px;
+#scoreboard .side-container p {
+  border: 1px solid black;
+  padding: 4px;
   text-align: center;
-  width: 22px;
+  width: 50%;
 }
 
-#scoreboard .scorecard .player-name {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1.2em;
-  font-weight: 600;
-  padding: 6px 8px 2px;
+#scoreboard table {
+  border-collapse: collapse;
+  width: 100%;
 }
 
-#scoreboard .scorecard .score-form {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+#scoreboard table .in {
+  display: none;
 }
 
-#scoreboard .scorecard .score-form .col {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin: 4px;
-  width: 25%;
+#scoreboard table thead {
+  border: 1px solid #999;
 }
 
-#scoreboard .scorecard .score-form .col label {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 0.8em;
-  font-weight: 400;
+#scoreboard table td, #scoreboard table th {
+  border: 1px solid #999;
+  padding: 6px;
   text-align: center;
-  text-transform: uppercase;
+  width: 30%;
 }
 
-#scoreboard .scorecard .score-form .col input {
-  cursor: pointer;
-  font-weight: bold;
-  height: 25px;
-  margin: 1px auto;
+#scoreboard table .score-input {
+  margin: 0px auto;
+  padding: 2px 0;
   text-align: center;
-  width: 38px;
+  width: 100%;
 }
 
-#scoreboard .scorecard .score-form .col .current-hole-input {
-  background: lightgrey;
-}
-
-#scoreboard .scorecard .score-form .col .current-par-input {
-  background: #fdf361;
-}
-
-#scoreboard .scorecard .score-form .col .current-handicap-input {
-  background: #f0c83c;
-}
-
-#scoreboard .scorecard .score-form .col .current-strokes-input {
-  background: #fff0dc;
+#scoreboard table button {
+  background: none;
+  border: none;
 }
 /*# sourceMappingURL=stylesheet.css.map */
