@@ -58,8 +58,7 @@ class Form extends Component {
         for (let i = 0; i < courseData.length; i++) {
           courses.push(courseData[i].name.toLowerCase());
         }
-        this.setState({ courses: courses });
-        // console.log(courses);
+        this.setState({ courses });
       });
   };
 
@@ -130,11 +129,8 @@ class Form extends Component {
   handleMatchSubmit() {
     const course = this.state.matchCourse;
     const players = this.state.matchFriends;
+    const userData = this.state.userData;
     const allPlayers = [...players, userData];
-    const userData = {
-      username: this.state.userData.username,
-      friendId: this.state.username.id,
-    };
 
     axios
       .post("/dashboard/api/match/new", { course, allPlayers })
@@ -146,13 +142,10 @@ class Form extends Component {
     const friend = this.state.friend;
     const friendArr = this.state.allFriends;
     const allFriends = this.state.allFriends.map(friend => friend.username);
-    const matchFriends = this.state.matchFriends;
     const matchArr = this.state.matchFriends.map(mFriend => mFriend.username);
 
     if (allFriends.indexOf(friend) !== -1 && matchArr.indexOf(friend) === -1) {
       for (let i = 0; i < friendArr.length; i++) {
-        console.log(friendArr[i].username);
-        console.log(friend);
         if (friendArr[i].username === friend) {
           this.setState({
             matchFriends: [...this.state.matchFriends, friendArr[i]],
