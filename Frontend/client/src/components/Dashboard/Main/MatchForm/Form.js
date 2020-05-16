@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import GolfAPI from "../../../utils/golfGeniusAPI";
 import CourseInput from "./CourseInput";
 import FriendsInput from "./FriendsInput";
 import MatchCourse from "./MatchCouse";
@@ -32,8 +33,7 @@ class Form extends Component {
         alert("You don't have any friends! Add friends to become popular!");
       } else {
         for (let i = 0; i < friendsData.length; i++) {
-          friends.push(friendsData[i].username);
-          console.log(friendsData[i].username);
+            friends.push(friendsData[i].username);
         }
         this.setState({ allFriends: friends });
       }
@@ -76,7 +76,16 @@ class Form extends Component {
 
   componentDidMount() {
     const user = this.state.username;
-    this.findCourses();
+
+    GolfAPI.findCourses().then(res => {
+        const courseData = res.data.courses;
+        const courses = this.state.courses;
+        for (let i = 0; i < courseData.length; i++) {
+          courses.push(courseData[i].name.toLowerCase());
+        }
+        this.setState({ courses: courses });
+    });
+
     this.findFriends(user);
   }
 
@@ -151,7 +160,6 @@ class Form extends Component {
       }
     }
     this.setState({ matchFriends: matchFriends });
-    console.log(this.state.matchFriends);
   }
 
   render() {
