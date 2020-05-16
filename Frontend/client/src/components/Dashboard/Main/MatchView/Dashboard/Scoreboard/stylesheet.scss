@@ -2,13 +2,23 @@
     background: rgb(100, 200, 100);
     height: calc(100vh - 65px - 40px - 45px);
     margin: 6px auto;
-    padding: 20px;
+    padding: 10px;
+    overflow-y: auto;
     width: 100vw;
+    #card-selector {
+        border: 1px solid black;
+        margin: 10px auto;
+        form {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
+    }
     .scorecard {
         background: white;
         border: 2px solid black;
         box-shadow: -2px 3px 5px rgba(0, 0, 0, 0.5);
-        margin: 25px auto;
+        margin: 0px auto;
         width: 80%;
         }
         .player-name {
@@ -24,7 +34,7 @@
             justify-content: space-around;
             p {
                 border: 1px solid black;
-                padding: 4px;
+                padding: 2px;
                 text-align: center;
                 width: 50%;
             }
@@ -32,19 +42,21 @@
         table {
             border-collapse: collapse;
             width: 100%;
-            .in {
+            .hide {
                 display: none;
             }
             thead {
                 border: 1px solid #999;
             }
-            td, th {
+            td, 
+            th {
                 border: 1px solid #999;
-                padding: 6px;
+                padding: 2px;
                 text-align: center;
                 width: 30%;
             }
             .score-input {
+                height: 100%;
                 margin: 0px auto;
                 padding: 2px 0;
                 text-align: center;
@@ -53,6 +65,7 @@
             button {
                 background: none;
                 border: none;
+                padding: 4px;
             }
         }
 }
