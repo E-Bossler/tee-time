@@ -13,7 +13,6 @@ class Form extends Component {
     super(props);
     this.state = {
       username: this.props.username,
-      userData: {},
       allFriends: [],
       friend: "",
       friendFound: true,
@@ -28,11 +27,6 @@ class Form extends Component {
   findFriends = () => {
     const username = this.state.username;
     axios.put("/api/dashboard/userMenu/friends", { username }).then(res => {
-      const userData = {
-        username: res.data[0].username,
-        email: res.data[0].email,
-        id: res.data[0]._id,
-      };
       const friendsData = res.data[0].friends;
       const friends = [];
       if (friendsData === undefined) {
@@ -42,7 +36,6 @@ class Form extends Component {
           friends.push(friendsData[i]);
         }
         this.setState({ allFriends: friends });
-        this.setState({ userData });
       }
     });
   };
@@ -129,7 +122,7 @@ class Form extends Component {
   handleMatchSubmit() {
     const course = this.state.matchCourse;
     const players = this.state.matchFriends;
-    const userData = this.state.userData;
+    const userData = this.props.userData;
     const allPlayers = [...players, userData];
 
     axios

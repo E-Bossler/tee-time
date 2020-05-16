@@ -15,7 +15,6 @@ class MatchSplash extends Component {
   componentDidMount() {
     const username = this.props.username;
     axios.put("/api/match/current", { username }).then(res => {
-      console.log(res.data);
       const currentMatchName = res.data[0].currentMatch[0].courseName;
       const currentMatchPlayers = res.data[0].currentMatch[0].players;
       // const currentHole = res.data[0].currentMatch[0].holes[0];
@@ -24,7 +23,6 @@ class MatchSplash extends Component {
       this.setState({ currentMatchName });
       this.setState({ currentMatchPlayers });
       // this.setState({ currentHole });
-      console.log(this.state);
     });
   }
 

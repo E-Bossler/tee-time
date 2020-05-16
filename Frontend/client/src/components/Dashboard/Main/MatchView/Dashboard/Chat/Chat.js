@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import io from "socket.io-client";
-import { v4 as uuidv4 } from "uuid";
-import { v1 as uuidv1 } from "uuid";
-
 import "./stylesheet.css";
 
 export default class Chat extends Component {
@@ -11,11 +8,8 @@ export default class Chat extends Component {
     super(props);
     this.state = {
       user: true,
-      chatMessage: {
-        message: "",
-        username: "",
-      },
-      chatMessages: [{}],
+      chatMessage: "",
+      chatMessages: [],
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -38,42 +32,36 @@ export default class Chat extends Component {
 
   handleChange(event) {
     this.setState({
-      chatMessage: {
-        username: this.props.username,
-        message: event.target.value,
-      },
+      chatMessage: event.target.value,
     });
   }
 
   submitChatMessage(e) {
     e.preventDefault();
     const chatMessage = this.state.chatMessage;
-    const chatMessages = this.state.chatMessages;
-    console.log(chatMessage);
 
-    axios.post("/api/match/current/saveChatMessage", {});
-    this.socket.emit("chat message", this.state.chatMessage);
+    // axios.post("/api/match/current/saveChatMessage", {});
+    // this.socket.emit("chat message", this.state.chatMessage);
     this.setState({
-      chatMessages: [...this.state.chatMessages, chatMessage.message],
+      chatMessages: [...this.state.chatMessages, chatMessage],
     });
-    this.setState({ chatMessage: "" });
+
     this.scrollToBottom();
+    this.setState({ chatMessage: "" });
   }
 
   render() {
-    const uuid = [uuidv1(), uuidv4()];
-    const chatMessages = this.state.chatMessages.map(chatMessage => (
-      <li key={chatMessage.username} className="message">
-        <p key={uuid[0]}>{chatMessage.username}</p>
-        <p key={uuid[1]}>{chatMessage.message}</p>
-      </li>
-    ));
+    const userData = this.props.userData;
 
     return (
       <div id="chat-container">
         <div id="msg-container">
           <ul className={this.state.user ? "user-msgs" : "friend-msgs"}>
-            {chatMessages}
+            {this.state.chatMessages.map((chatMessage, i) => (
+              <li key={i} value={userData.id} className="message">
+                {chatMessage}
+              </li>
+            ))}
           </ul>
           <span
             ref={el => {
@@ -86,8 +74,8 @@ export default class Chat extends Component {
             type="text"
             id="chat-input"
             placeholder="Type your message here..."
-            value={this.state.value}
             onChange={this.handleChange}
+            value={this.state.chatMessage}
           />
           <button type="submit" id="send-btn">
             send

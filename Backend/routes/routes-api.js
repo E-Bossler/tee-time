@@ -1,7 +1,5 @@
 const db = require("../models");
-const bcrypt = require("bcrypt");
 const router = require("express").Router();
-const mongoose = require("mongoose");
 
 // remember that we add '/api' within the server so we can leave it off here
 
@@ -32,7 +30,6 @@ router.post("/api/users", (req, res) => {
 
 //Route for getting friends with friend Ids
 router.put("/api/dashboard/matchView/friends", (req, res) => {
-  console.log(req.body);
   db.User.find({ username: req.body.username })
     .then(data => {
       res.json(data[0].friends);
@@ -44,7 +41,6 @@ router.put("/api/dashboard/matchView/friends", (req, res) => {
 
 // Finds Matches when user goes to Matches (fetches all matches in DB right now)
 router.get("/api/dashboard/userMenu/matches", (req, res) => {
-  console.log(req);
   db.Match.find({})
     .then(data => {
       res.json(data);
@@ -68,7 +64,7 @@ router.put("/api/dashboard/userMenu/friends", (req, res) => {
 
 router.put("/api/dashboard/userMenu/friendRequests", (req, res) => {
   db.User.find({
-    username: req.body.user,
+    username: req.body.username,
   })
     .then(data => {
       res.json(data);
@@ -201,7 +197,7 @@ router.post("/api/account/signup", (req, res) => {
     {
       email: email,
     },
-    (err, previousUsers) => {
+    previousUsers => {
       // if (err) {
       //   return res.send({
       //     success: false,
