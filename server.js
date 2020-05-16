@@ -51,11 +51,11 @@ app.get("/api/test", (req, res) => {
 //   });
 // }
 
-// app.use(express.static(path.join(__dirname, "Frontend/client/build")));
+app.use(express.static(path.join(__dirname, "Frontend/client/build")));
 
-// app.get("/*", function (req, res) {
-//   res.sendFile(path.join(__dirname, "Frontend/client/build", "index.html"));
-// });
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "Frontend/client/build", "index.html"));
+});
 
 // app.use(express.static("/Frontend/client/public"));
 
