@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Switch from "./Switch";
+import axios from "axios";
 import io from "socket.io-client";
 import "./stylesheet.css";
 
@@ -8,8 +8,11 @@ export default class Chat extends Component {
     super(props);
     this.state = {
       user: true,
-      chatMessage: "",
-      chatMessages: [],
+      chatMessage: {
+        message: "",
+        username: "",
+      },
+      chatMessages: [{}],
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -18,10 +21,11 @@ export default class Chat extends Component {
 
   scrollToBottom = () => {
     this.messagesEnd.scrollIntoView({ behavior: "smooth" });
-  }
+  };
 
   componentDidMount() {
-    this.socket = io("http://10.0.0.67:7777");
+    axios.put();
+    this.socket = io("http://192.168.138.2:7777");
     this.socket.on("connect", () => console.log("connected"));
     this.socket.on("chat message", msg => {
       this.setState({ chatMessages: [...this.state.chatMessages, msg] });
@@ -30,24 +34,31 @@ export default class Chat extends Component {
   }
 
   handleChange(event) {
-    this.setState({ chatMessage: event.target.value });
+    this.setState({
+      chatMessage: {
+        username: this.props.username,
+        message: event.target.value,
+      },
+    });
   }
 
   submitChatMessage(e) {
     e.preventDefault();
+    const chatMessage = this.state.chatMessage;
+    const chatMessages = this.state.chatMessages;
+    console.log(chatMessage);
+
+    axios.post("/api/match/current/saveChatMessage", {});
     this.socket.emit("chat message", this.state.chatMessage);
-    console.log(this.state.chatMessage);
     this.setState({ chatMessage: "" });
     this.scrollToBottom();
   }
 
   render() {
-    const chatMessages = this.state.chatMessages.map(chatMessage => (
-      <li 
-        key={chatMessage}
-        className="message"
-      >
-        {chatMessage}
+    const chatMessages = this.state.chatMessages.map((chatMessage, i, j) => (
+      <li key={chatMessage} className="message">
+        <p key={i}>{chatMessage.username}</p>
+        <p key={j}>{chatMessage.message}</p>
       </li>
     ));
 
@@ -55,30 +66,26 @@ export default class Chat extends Component {
       <div id="chat-container">
         {/* <Switch /> */}
         <div id="msg-container">
-          <ul 
-            className={this.state.user ? "user-msgs" : "friend-msgs"}
-          >
+          <ul className={this.state.user ? "user-msgs" : "friend-msgs"}>
             {chatMessages}
           </ul>
-          <span ref={(el) => { this.messagesEnd = el; }}></span>    
+          <span
+            ref={el => {
+              this.messagesEnd = el;
+            }}
+          ></span>
         </div>
-        <form 
-            id="input-container" 
-            onSubmit={this.submitChatMessage}
-        >
-            <input 
-                type="text" 
-                id="chat-input" 
-                placeholder="Type your message here..."
-                value={this.state.value} 
-                onChange={this.handleChange}
-            />
-            <button 
-                type="submit" 
-                id="send-btn"
-            >
-                send
-            </button>
+        <form id="input-container" onSubmit={this.submitChatMessage}>
+          <input
+            type="text"
+            id="chat-input"
+            placeholder="Type your message here..."
+            value={this.state.value}
+            onChange={this.handleChange}
+          />
+          <button type="submit" id="send-btn">
+            send
+          </button>
         </form>
       </div>
     );

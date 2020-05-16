@@ -74,7 +74,7 @@ class Main extends Component {
         </Route>
 
         <Route path="/dashboard/matchForm">
-          <FormContainer  username={this.state.username} />
+          <FormContainer username={this.state.username} />
         </Route>
 
         <Route path="/dashboard/userMenu">
@@ -82,7 +82,7 @@ class Main extends Component {
         </Route>
 
         <Route path="/dashboard/matchView">
-          <MatchView />
+          <MatchView username={this.state.username} />
         </Route>
       </div>
     );

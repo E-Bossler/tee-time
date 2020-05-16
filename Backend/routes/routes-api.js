@@ -395,4 +395,14 @@ router.get("/api/match/history", (req, res, next) => {
   //STILL NEED TO SET UP THIS ROUTE
 });
 
+//GET CURRENT MATCH
+router.put("/api/match/current", (req, res) => {
+  db.User.find({ username: req.body.username }).then(data => {
+    res.json(data);
+  });
+});
+
+//SAVES MESSAGES TO CHAT LOG IN MATCH
+router.post("/api/match/current/saveChatMessage", (req, res) => {});
+
 module.exports = router;
