@@ -1,17 +1,33 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
+import axios from "axios";
 import TabsContainer from "./Tabs/TabsContainer";
 import DashboardContainer from "./Dashboard/DashboardContainer";
 import "./stylesheet.css";
 
 class MatchView extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      friends: [],
+    };
+  }
+
+  componentDidMount() {
+    const username = this.props.username;
+    axios.put("/api/dashboard/matchView/friends", { username }).then(res => {});
+  }
+
   render() {
     return (
       <div>
         <Router>
           <TabsContainer />
           <Switch>
-            <DashboardContainer username={this.props.username} />
+            <DashboardContainer
+              userData={this.props.userData}
+              username={this.props.username}
+            />
           </Switch>
         </Router>
       </div>

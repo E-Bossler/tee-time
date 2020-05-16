@@ -11,9 +11,12 @@ class DashboardContainer extends Component {
   render() {
     return (
       <div>
-        {/* <Route exact path="/dashboard/matchView">
-          <MatchSplash username={this.props.username} />
-        </Route> */}
+        <Route exact path="/dashboard/matchView">
+          <MatchSplash
+            userData={this.props.userData}
+            username={this.props.username}
+          />
+        </Route>
 
         <Route path="/dashboard/matchView/tracker">
           <Tracker />
@@ -26,7 +29,7 @@ class DashboardContainer extends Component {
         </Route>
 
         <Route path="/dashboard/matchView/chat">
-          <Chat username={this.props.username} />
+          <Chat userData={this.props.userData} username={this.props.username} />
         </Route>
       </div>
     );

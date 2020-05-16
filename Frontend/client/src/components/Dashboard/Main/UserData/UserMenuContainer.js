@@ -9,7 +9,10 @@ class UserMenuContainer extends Component {
   render() {
     return (
       <div>
-        <UserMenu username={this.props.username} />
+        <UserMenu
+          userData={this.props.userData}
+          username={this.props.username}
+        />
       </div>
     );
   }
