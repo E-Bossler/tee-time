@@ -15,6 +15,7 @@ class Main extends Component {
     super(props);
     this.state = {
       username: "",
+      userData: {},
       toLogin: false,
     };
   }
@@ -44,10 +45,22 @@ class Main extends Component {
                 userId === checkAgainstId &&
                 response.data[i].isDeleted === false
               ) {
-                const username = response.data[i].username;
+                const user = response.data[i].username;
                 this.setState({
-                  username: username,
+                  username: user,
                 });
+                const username = this.state.username;
+                axios
+                  .put("/api/dashboard/userMenu/friends", { username })
+                  .then(res => {
+                    const userData = {
+                      username: res.data[0].username,
+                      email: res.data[0].email,
+                      id: res.data[0]._id,
+                    };
+
+                    this.setState({ userData });
+                  });
               }
             }
           });
@@ -74,15 +87,24 @@ class Main extends Component {
         </Route>
 
         <Route path="/dashboard/matchForm">
-          <FormContainer username={this.state.username} />
+          <FormContainer
+            userData={this.state.userData}
+            username={this.state.username}
+          />
         </Route>
 
         <Route path="/dashboard/userMenu">
-          <UserMenuContainer username={this.state.username} />
+          <UserMenuContainer
+            userData={this.state.userData}
+            username={this.state.username}
+          />
         </Route>
 
         <Route path="/dashboard/matchView">
-          <MatchView username={this.state.username} />
+          <MatchView
+            userData={this.state.userData}
+            username={this.state.username}
+          />
         </Route>
       </div>
     );

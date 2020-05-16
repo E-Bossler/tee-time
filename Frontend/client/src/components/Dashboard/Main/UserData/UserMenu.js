@@ -14,19 +14,22 @@ class UserMenu extends Component {
       <div>
         <Switch>
           <Route path="/dashboard/userMenu/stats">
-            <Stats />
+            <Stats userData={this.props.userData} />
           </Route>
 
           <Route path="/dashboard/userMenu/courses">
-            <Courses />
+            <Courses userData={this.props.userData} />
           </Route>
 
           <Route path="/dashboard/userMenu/friends">
-            <Friends username={this.props.username} />
+            <Friends
+              userData={this.props.userData}
+              username={this.props.username}
+            />
           </Route>
 
           <Route path="/dashboard/userMenu/matches">
-            <Matches />
+            <Matches userData={this.props.userData} />
           </Route>
         </Switch>
       </div>

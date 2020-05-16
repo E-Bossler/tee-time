@@ -15,9 +15,7 @@ class MatchView extends Component {
 
   componentDidMount() {
     const username = this.props.username;
-    axios.put("/api/dashboard/matchView/friends", { username }).then(res => {
-      console.log(res.data);
-    });
+    axios.put("/api/dashboard/matchView/friends", { username }).then(res => {});
   }
 
   render() {
@@ -26,7 +24,10 @@ class MatchView extends Component {
         <Router>
           <TabsContainer />
           <Switch>
-            <DashboardContainer username={this.props.username} />
+            <DashboardContainer
+              userData={this.props.userData}
+              username={this.props.username}
+            />
           </Switch>
         </Router>
       </div>
