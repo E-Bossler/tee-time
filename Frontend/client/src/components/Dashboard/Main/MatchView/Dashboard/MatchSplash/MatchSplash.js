@@ -19,12 +19,12 @@ class MatchSplash extends Component {
       console.log(res.data);
       const currentMatchName = res.data[0].currentMatch[0].courseName;
       const currentMatchPlayers = res.data[0].currentMatch[0].players;
-      const currentHole = res.data[0].currentMatch[0].holes[0];
+      // const currentHole = res.data[0].currentMatch[0].holes[0];
 
       this.setState({ username });
       this.setState({ currentMatchName });
       this.setState({ currentMatchPlayers });
-      this.setState({ currentHole });
+      // this.setState({ currentHole });
       console.log(this.state);
     });
   }

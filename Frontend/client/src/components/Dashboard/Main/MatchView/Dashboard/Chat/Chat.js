@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import io from "socket.io-client";
+import { v4 as uuidv4 } from "uuid";
+import { v1 as uuidv1 } from "uuid";
+
 import "./stylesheet.css";
 
 export default class Chat extends Component {
@@ -50,21 +53,24 @@ export default class Chat extends Component {
 
     axios.post("/api/match/current/saveChatMessage", {});
     this.socket.emit("chat message", this.state.chatMessage);
+    this.setState({
+      chatMessages: [...this.state.chatMessages, chatMessage.message],
+    });
     this.setState({ chatMessage: "" });
     this.scrollToBottom();
   }
 
   render() {
-    const chatMessages = this.state.chatMessages.map((chatMessage, i, j) => (
-      <li key={chatMessage} className="message">
-        <p key={i}>{chatMessage.username}</p>
-        <p key={j}>{chatMessage.message}</p>
+    const uuid = [uuidv1(), uuidv4()];
+    const chatMessages = this.state.chatMessages.map(chatMessage => (
+      <li key={chatMessage.username} className="message">
+        <p key={uuid[0]}>{chatMessage.username}</p>
+        <p key={uuid[1]}>{chatMessage.message}</p>
       </li>
     ));
 
     return (
       <div id="chat-container">
-        {/* <Switch /> */}
         <div id="msg-container">
           <ul className={this.state.user ? "user-msgs" : "friend-msgs"}>
             {chatMessages}
