@@ -12,14 +12,6 @@ const GolfAPI = {
     findCourses: () => {
         return axios
             .get(`${baseURL}${season2019}/courses`);
-        // return axios.all([
-        //     axios
-        //         .get(`${baseURL}${season2020}/courses`),
-        //     axios
-        //         .get(`${baseURL}${season2019}/courses`),
-        //     axios
-        //         .get(`${baseURL}${season2018}/courses`)
-        // ]);
     }
 }
 

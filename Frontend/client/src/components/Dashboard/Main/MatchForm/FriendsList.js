@@ -18,15 +18,15 @@ class FriendsList extends Component {
                         return <li 
                         key={index}
                         >
-                        <p>
-                            {value}
-                        </p>
-                        <i 
-                            className={"fas fa-times"}
-                            id={value}
-                            onClick={this.props.handleFriendDelete}
-                        >
-                        </i> 
+                            <p>
+                                {value} 
+                            </p>
+                            <i 
+                                className={"fas fa-times"}
+                                id={value}
+                                onClick={this.props.handleFriendDelete}
+                            >
+                            </i> 
                         </li>
                     })}
                 </ul>

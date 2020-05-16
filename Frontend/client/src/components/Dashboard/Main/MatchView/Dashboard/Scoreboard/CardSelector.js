@@ -1,16 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
-import CardSelector from "./CardSelector";
-import Scorecard from "./Scorecard";
 import "./stylesheet.css";
 
-class Scoreboard extends Component {
+class CardSelector extends Component {
     constructor(props) {
         super(props);
         this.state = {
           username: "",
           players: [],
-          course: "",
+          course: ""
         };
     }
     
@@ -33,18 +31,27 @@ class Scoreboard extends Component {
     }
 
     render() {
+        const players = this.props.players;
+
         return(
-            <div id="scoreboard">
-                <CardSelector 
-                    username={this.props.username} 
-                    players={this.state.players}
-                />
-                <Scorecard 
-                    username={this.props.username} 
-                />
+            <div id="card-selector">
+                <form>
+                    {players.map((value, index) => {
+                        return <div 
+                        key={index}
+                        >
+                            <input type="radio" id={value} name="scorecard-radio" value={value} />
+                            <label htmlFor={value}>{value}</label> 
+                        </div>
+                    })}
+                    <div id="radio-group">
+                        <input type="radio" id="all" name="scorecard-radio" value="all" />
+                        <label htmlFor="all">View All</label>
+                    </div>
+                </form>
             </div>
         )
     }
 };
 
-export default Scoreboard;
+export default CardSelector;

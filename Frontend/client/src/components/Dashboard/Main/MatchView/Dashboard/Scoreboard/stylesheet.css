@@ -2,8 +2,27 @@
   background: #64c864;
   height: calc(100vh - 65px - 40px - 45px);
   margin: 6px auto;
-  padding: 20px;
+  padding: 10px;
+  overflow-y: auto;
   width: 100vw;
+}
+
+#scoreboard #card-selector {
+  border: 1px solid black;
+  margin: 10px auto;
+}
+
+#scoreboard #card-selector form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
 }
 
 #scoreboard .scorecard {
@@ -11,7 +30,7 @@
   border: 2px solid black;
   -webkit-box-shadow: -2px 3px 5px rgba(0, 0, 0, 0.5);
           box-shadow: -2px 3px 5px rgba(0, 0, 0, 0.5);
-  margin: 25px auto;
+  margin: 0px auto;
   width: 80%;
 }
 
@@ -36,7 +55,7 @@
 
 #scoreboard .side-container p {
   border: 1px solid black;
-  padding: 4px;
+  padding: 2px;
   text-align: center;
   width: 50%;
 }
@@ -46,7 +65,7 @@
   width: 100%;
 }
 
-#scoreboard table .in {
+#scoreboard table .hide {
   display: none;
 }
 
@@ -54,14 +73,16 @@
   border: 1px solid #999;
 }
 
-#scoreboard table td, #scoreboard table th {
+#scoreboard table td,
+#scoreboard table th {
   border: 1px solid #999;
-  padding: 6px;
+  padding: 2px;
   text-align: center;
   width: 30%;
 }
 
 #scoreboard table .score-input {
+  height: 100%;
   margin: 0px auto;
   padding: 2px 0;
   text-align: center;
@@ -71,5 +92,6 @@
 #scoreboard table button {
   background: none;
   border: none;
+  padding: 4px;
 }
 /*# sourceMappingURL=stylesheet.css.map */
