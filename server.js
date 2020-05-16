@@ -14,10 +14,10 @@ require("dotenv").config();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ type: ["application/json"] }));
 
-// app.use(express.static("/Frontend/client/build"));
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use("/", router);
 
 // THIS IS THE PRODUCTION DB
 const mongo = "mongodb://user2020:password2020@ds119820.mlab.com:19820/heroku_l7c7wq9n"
@@ -41,15 +41,9 @@ app.get("/api/test", (req, res) => {
   ]);
 });
 
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("/Frontend/client/public"));
+// FOR PRODUCTION WE NEED THE FOLLOWING UNCOMMENTED
 
-//   app.get("*", (req, res) => {
-//     res.sendfile(
-//       path.resolve(__dirname, "./Frontend/client/build")
-//     );
-//   });
-// }
+// ********************************************************************************
 
 app.use(express.static(path.join(__dirname, "Frontend/client/build")));
 
@@ -57,13 +51,7 @@ app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "Frontend/client/build", "index.html"));
 });
 
-// app.use(express.static("/Frontend/client/public"));
-
-// app.get("*", (req, res) => {
-//   res.sendfile(path.resolve(__dirname, "./Frontend/client/build", "index.html"));
-// });
-
-app.use("/", router);
+// ********************************************************************************
 
 server.listen(PORT, () =>
   console.log(`Welcome to port ${PORT}! You are going to rock your day!`)
