@@ -352,7 +352,29 @@ router.get("/api/account/logout", (req, res, next) => {
 // SET UP A  NEW MATCH
 
 router.post("/dashboard/api/match/new", (req, res, next) => {
-  console.log(req.body);
+  db.Match.collection
+    .insertOne({
+      course: req.body.course,
+      participants: req.body.allPlayers,
+    })
+    .then(() => {
+      db.User.updateMany(
+        { username: { $in: req.body.allPlayers } },
+        {
+          $set: {
+            currentMatch: {
+              courseName: req.body.course,
+              players: req.body.allPlayers,
+            },
+          },
+        }
+      ).then(data => {
+        res.json(data);
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
 
 // CREATE A NEW NEW ROUND

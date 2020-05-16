@@ -115,9 +115,11 @@ class Form extends Component {
   handleMatchSubmit() {
     const course = this.state.matchCourse;
     const players = this.state.matchFriends;
+    const username = this.state.username;
+    const allPlayers = [...players, username];
 
-    axios.post("api/match/new", { course, players }).then(res => {
-      console.log(res.data);
+    axios.post("/dashboard/api/match/new", { course, allPlayers }).then(res => {
+      // console.log(res.data);
     });
   }
 
@@ -180,7 +182,9 @@ class Form extends Component {
         <button
           onClick={this.handleMatchSubmit.bind(this)}
           id="start-match-btn"
-        ></button>
+        >
+          <p>Start</p>
+        </button>
         {/* </Link> */}
       </div>
     );
