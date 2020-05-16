@@ -24,12 +24,9 @@ const UserSchema = new Schema({
         type: String,
         trim: true,
       },
-      players: [
-        {
-          friendId: String,
-          username: String,
-        },
-      ],
+      players: {
+        type: Array,
+      },
       holes: [
         {
           hole: {

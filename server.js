@@ -63,7 +63,7 @@ app.get("/api/test", (req, res) => {
 //   res.sendfile(path.resolve(__dirname, "./Frontend/client/build"));
 // });
 
-app.use("/api", router);
+app.use("/", router);
 
 server.listen(PORT, () =>
   console.log(`Welcome to port ${PORT}! You are going to rock your day!`)

@@ -40,6 +40,22 @@ class Form extends Component {
     });
   };
 
+  findCourses = () => {
+    axios
+      .get(
+        "https://www.golfgenius.com/api_v2/L7DBdFNJ4i-mR6ZeBOFPMw/events/4995124311334371081/courses"
+      )
+      .then(res => {
+        const courseData = res.data.courses;
+        const courses = this.state.courses;
+        for (let i = 0; i < courseData.length; i++) {
+          courses.push(courseData[i].name.toLowerCase());
+        }
+        this.setState({ courses: courses });
+        // console.log(courses);
+      });
+  };
+
   capCourse = course => {
     const words = course.toLowerCase().split(" ");
     let capCourse = "";
@@ -104,18 +120,32 @@ class Form extends Component {
     this.setState({ matchCourse: "" });
   }
 
+  handleMatchSubmit() {
+    const course = this.state.matchCourse;
+    const players = this.state.matchFriends;
+    const username = this.state.username;
+    const allPlayers = [...players, username];
+
+    axios
+      .post("/dashboard/api/match/new", { course, allPlayers })
+      .then(res => {});
+  }
+
   handleFriendSubmit(event) {
     event.preventDefault();
     const friend = this.state.friend;
     const allFriends = this.state.allFriends;
     const matchFriends = this.state.matchFriends;
 
-    if (allFriends.indexOf(friend) !== -1  && matchFriends.indexOf(friend) === -1) {
-        matchFriends.push(friend);
-        this.setState({ matchFriends: matchFriends});
-        this.setState({ friendFound: true });
+    if (
+      allFriends.indexOf(friend) !== -1 &&
+      matchFriends.indexOf(friend) === -1
+    ) {
+      matchFriends.push(friend);
+      this.setState({ matchFriends: matchFriends });
+      this.setState({ friendFound: true });
     } else {
-        this.setState({ friendFound: false });
+      this.setState({ friendFound: false });
     }
 
     this.setState({ friend: "" });
@@ -139,13 +169,17 @@ class Form extends Component {
           handleCourseSubmit={this.handleCourseSubmit.bind(this)}
           handleCourseInputChange={this.handleCourseInputChange.bind(this)}
           course={this.state.course}
+          courses={this.state.courses}
           courseFound={this.state.courseFound}
+          capCourse={this.capCourse.bind(this)}
         />
+
         <FriendsInput
           handleFriendSubmit={this.handleFriendSubmit.bind(this)}
           handleFriendInputChange={this.handleFriendInputChange.bind(this)}
           friend={this.state.friend}
           friendFound={this.state.friendFound}
+          allFriends={this.state.allFriends}
         />
         <MatchCourse
           matchCourse={this.state.matchCourse}
@@ -155,11 +189,14 @@ class Form extends Component {
           matchFriends={this.state.matchFriends}
           handleFriendDelete={this.handleFriendDelete.bind(this)}
         />
-        <button id="start-match-btn">
-          <Link id="match-link" to="/dashboard/matchView">
-            Start Game
-          </Link>
-        </button>
+        <Link id="match-link" to="/dashboard/matchView">
+          <button
+            onClick={this.handleMatchSubmit.bind(this)}
+            id="start-match-btn"
+          >
+            <p>Start</p>
+          </button>
+        </Link>
       </div>
     );
   }
