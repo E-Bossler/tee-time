@@ -46,7 +46,7 @@ class Main extends Component {
               ) {
                 const username = response.data[i].username;
                 this.setState({
-                  username,
+                  username: username,
                 });
               }
             }
