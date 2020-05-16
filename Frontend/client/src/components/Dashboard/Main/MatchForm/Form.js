@@ -181,14 +181,14 @@ class Form extends Component {
           matchFriends={this.state.matchFriends}
           handleFriendDelete={this.handleFriendDelete.bind(this)}
         />
-        {/* <Link id="match-link" to="/dashboard/matchView"> */}
-        <button
-          onClick={this.handleMatchSubmit.bind(this)}
-          id="start-match-btn"
-        >
-          <p>Start</p>
-        </button>
-        {/* </Link> */}
+        <Link id="match-link" to="/dashboard/matchView">
+          <button
+            onClick={this.handleMatchSubmit.bind(this)}
+            id="start-match-btn"
+          >
+            <p>Start</p>
+          </button>
+        </Link>
       </div>
     );
   }
