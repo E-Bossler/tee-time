@@ -1,8 +1,6 @@
 #scoreboard {
     background: rgb(100, 200, 100);
-    // border: 1px solid black;
-    // display: block;
-    height: calc(100vh - 67px - 40px - 46px);
+    height: calc(100vh - 65px - 40px - 45px);
     margin: 6px auto;
     padding: 20px;
     width: 100vw;
@@ -10,75 +8,51 @@
         background: white;
         border: 2px solid black;
         box-shadow: -2px 3px 5px rgba(0, 0, 0, 0.5);
-        margin: 0 auto;
+        margin: 25px auto;
         width: 80%;
-        .icon-container {
-            display: flex;
-            flex-direction: column;
-            .row {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            margin: 4px 2px;
-            .icon {
-                background: linear-gradient(rgb(253, 243, 97), rgb(253, 211, 25));
-                border: 1px solid rgb(80, 80, 80);
-                border-radius: 6px;
-                cursor: pointer;
-                font-family: 'Open Sans', sans-serif;
-                font-size: 0.8em;
-                height: 22px;
-                padding-top: 2px;
-                text-align: center;
-                width: 22px;
-                }
-            }
         }
         .player-name {
             font-family: 'Open Sans', sans-serif;
             font-size: 1.2em;
             font-weight: 600;
-            padding: 6px 8px 2px;
+            padding: 6px 20px;
         }
-        .score-form {
+        .side-container {
+            // border: 1px solid black;
             display: flex;
             flex-direction: row;
-            justify-content: space-evenly;
-            .col {
-                // border: 1px solid black;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                margin: 4px;
-                width: 25%;
-                label {
-                    font-family: 'Open Sans', sans-serif;
-                    font-size: 0.8em;
-                    font-weight: 400;
-                    text-align: center;
-                    text-transform: uppercase;
-                }
-                input {
-                    cursor: pointer;
-                    font-weight: bold;
-                    height: 25px;
-                    margin: 1px auto;
-                    text-align: center;
-                    width: 38px;
-                }
-                .current-hole-input {
-                    background: lightgrey;
-                }
-                .current-par-input {
-                    background: rgb(253, 243, 97);
-                }
-                .current-handicap-input {
-                    background: rgb(240, 200, 60);
-                }
-                .current-strokes-input {
-                    background: rgb(255, 240, 220);
-                }
+            justify-content: space-around;
+            p {
+                border: 1px solid black;
+                padding: 4px;
+                text-align: center;
+                width: 50%;
             }
         }
-    }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            .in {
+                display: none;
+            }
+            thead {
+                border: 1px solid #999;
+            }
+            td, th {
+                border: 1px solid #999;
+                padding: 6px;
+                text-align: center;
+                width: 30%;
+            }
+            .score-input {
+                margin: 0px auto;
+                padding: 2px 0;
+                text-align: center;
+                width: 100%;
+            }
+            button {
+                background: none;
+                border: none;
+            }
+        }
 }
