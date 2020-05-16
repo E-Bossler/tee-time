@@ -30,6 +30,18 @@ router.post("/api/users", (req, res) => {
     });
 });
 
+//Route for getting friends with friend Ids
+router.put("/api/dashboard/matchView/friends", (req, res) => {
+  console.log(req.body);
+  db.User.find({ username: req.body.username })
+    .then(data => {
+      res.json(data[0].friends);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
 // Finds Matches when user goes to Matches (fetches all matches in DB right now)
 router.get("/api/dashboard/userMenu/matches", (req, res) => {
   console.log(req);
@@ -44,7 +56,7 @@ router.get("/api/dashboard/userMenu/matches", (req, res) => {
 
 router.put("/api/dashboard/userMenu/friends", (req, res) => {
   db.User.find({
-    username: req.body.user,
+    username: req.body.username,
   })
     .then(data => {
       res.json(data);
@@ -352,29 +364,30 @@ router.get("/api/account/logout", (req, res, next) => {
 // SET UP A  NEW MATCH
 
 router.post("/dashboard/api/match/new", (req, res, next) => {
-  db.Match.collection
-    .insertOne({
-      course: req.body.course,
-      participants: req.body.allPlayers,
-    })
-    .then(() => {
-      db.User.updateMany(
-        { username: { $in: req.body.allPlayers } },
-        {
-          $set: {
-            currentMatch: {
-              courseName: req.body.course,
-              players: req.body.allPlayers,
-            },
-          },
-        }
-      ).then(data => {
-        res.json(data);
-      });
-    })
-    .catch(err => {
-      console.log(err);
-    });
+  console.log(req.body.allPlayers);
+  // db.Match.collection
+  //   .insertOne({
+  //     course: req.body.course,
+  //     participants: req.body.allPlayers,
+  //   })
+  //   .then(() => {
+  //     db.User.updateMany(
+  //       { username: { $in: req.body.allPlayers } },
+  //       {
+  //         $set: {
+  //           currentMatch: {
+  //             courseName: req.body.course,
+  //             players: req.body.allPlayers,
+  //           },
+  //         },
+  //       }
+  //     ).then(data => {
+  //       res.json(data);
+  //     });
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //   });
 });
 
 // CREATE A NEW NEW ROUND

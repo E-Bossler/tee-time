@@ -5,7 +5,7 @@ class FriendDatalist extends Component {
     return (
       <datalist id="friends">
         {this.props.allFriends.map((friend, key) => (
-          <option key={key} value={friend} />
+          <option key={key} value={friend.username} />
         ))}
       </datalist>
     );
