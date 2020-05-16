@@ -10,7 +10,6 @@ import "./stylesheet.css";
 class Form extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       username: this.props.username,
       allFriends: [],
@@ -33,8 +32,8 @@ class Form extends Component {
         alert("You don't have any friends! Add friends to become popular!");
       } else {
         for (let i = 0; i < friendsData.length; i++) {
-          console.log(friendsData[i].username);
           friends.push(friendsData[i].username);
+          console.log(friendsData[i].username);
         }
         this.setState({ allFriends: friends });
       }
@@ -53,7 +52,7 @@ class Form extends Component {
           courses.push(courseData[i].name.toLowerCase());
         }
         this.setState({ courses: courses });
-        console.log(courses);
+        // console.log(courses);
       });
   };
 
@@ -115,10 +114,12 @@ class Form extends Component {
   handleMatchSubmit() {
     const course = this.state.matchCourse;
     const players = this.state.matchFriends;
+    const username = this.state.username;
+    const allPlayers = [...players, username];
 
-    axios.post("api/match/new", { course, players }).then(res => {
-      console.log(res.data);
-    });
+    axios
+      .post("/dashboard/api/match/new", { course, allPlayers })
+      .then(res => {});
   }
 
   handleFriendSubmit(event) {
@@ -160,13 +161,17 @@ class Form extends Component {
           handleCourseSubmit={this.handleCourseSubmit.bind(this)}
           handleCourseInputChange={this.handleCourseInputChange.bind(this)}
           course={this.state.course}
+          courses={this.state.courses}
           courseFound={this.state.courseFound}
+          capCourse={this.capCourse.bind(this)}
         />
+
         <FriendsInput
           handleFriendSubmit={this.handleFriendSubmit.bind(this)}
           handleFriendInputChange={this.handleFriendInputChange.bind(this)}
           friend={this.state.friend}
           friendFound={this.state.friendFound}
+          allFriends={this.state.allFriends}
         />
         <MatchCourse
           matchCourse={this.state.matchCourse}
@@ -180,7 +185,9 @@ class Form extends Component {
         <button
           onClick={this.handleMatchSubmit.bind(this)}
           id="start-match-btn"
-        ></button>
+        >
+          <p>Start</p>
+        </button>
         {/* </Link> */}
       </div>
     );
