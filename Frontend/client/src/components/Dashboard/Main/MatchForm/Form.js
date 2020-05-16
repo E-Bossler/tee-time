@@ -33,8 +33,8 @@ class Form extends Component {
         alert("You don't have any friends! Add friends to become popular!");
       } else {
         for (let i = 0; i < friendsData.length; i++) {
-            console.log(friendsData[i].username);
-            friends.push(friendsData[i].username);
+          console.log(friendsData[i].username);
+          friends.push(friendsData[i].username);
         }
         this.setState({ allFriends: friends });
       }
@@ -112,18 +112,30 @@ class Form extends Component {
     this.setState({ matchCourse: "" });
   }
 
+  handleMatchSubmit() {
+    const course = this.state.matchCourse;
+    const players = this.state.matchFriends;
+
+    axios.post("api/match/new", { course, players }).then(res => {
+      console.log(res.data);
+    });
+  }
+
   handleFriendSubmit(event) {
     event.preventDefault();
     const friend = this.state.friend;
     const allFriends = this.state.allFriends;
     const matchFriends = this.state.matchFriends;
 
-    if (allFriends.indexOf(friend) !== -1  && matchFriends.indexOf(friend) === -1) {
-        matchFriends.push(friend);
-        this.setState({ matchFriends: matchFriends});
-        this.setState({ friendFound: true });
+    if (
+      allFriends.indexOf(friend) !== -1 &&
+      matchFriends.indexOf(friend) === -1
+    ) {
+      matchFriends.push(friend);
+      this.setState({ matchFriends: matchFriends });
+      this.setState({ friendFound: true });
     } else {
-        this.setState({ friendFound: false });
+      this.setState({ friendFound: false });
     }
 
     this.setState({ friend: "" });
@@ -164,11 +176,12 @@ class Form extends Component {
           matchFriends={this.state.matchFriends}
           handleFriendDelete={this.handleFriendDelete.bind(this)}
         />
-        <button id="start-match-btn">
-          <Link id="match-link" to="/dashboard/matchView">
-            Start Game
-          </Link>
-        </button>
+        {/* <Link id="match-link" to="/dashboard/matchView"> */}
+        <button
+          onClick={this.handleMatchSubmit.bind(this)}
+          id="start-match-btn"
+        ></button>
+        {/* </Link> */}
       </div>
     );
   }

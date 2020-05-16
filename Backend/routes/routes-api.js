@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 // remember that we add '/api' within the server so we can leave it off here
 
 // get all the users
-router.get("/users", (req, res) => {
+router.get("/api/users", (req, res) => {
   db.User.find({})
     .then(data => {
       res.json(data);
@@ -16,7 +16,7 @@ router.get("/users", (req, res) => {
     });
 });
 
-router.post("/users", (req, res) => {
+router.post("/api/users", (req, res) => {
   db.User.findOne({
     where: {
       username: req.body.name,
@@ -31,7 +31,7 @@ router.post("/users", (req, res) => {
 });
 
 // Finds Matches when user goes to Matches (fetches all matches in DB right now)
-router.get("/dashboard/userMenu/matches", (req, res) => {
+router.get("/api/dashboard/userMenu/matches", (req, res) => {
   console.log(req);
   db.Match.find({})
     .then(data => {
@@ -42,7 +42,7 @@ router.get("/dashboard/userMenu/matches", (req, res) => {
     });
 });
 
-router.put("/dashboard/userMenu/friends", (req, res) => {
+router.put("/api/dashboard/userMenu/friends", (req, res) => {
   db.User.find({
     username: req.body.user,
   })
@@ -54,7 +54,7 @@ router.put("/dashboard/userMenu/friends", (req, res) => {
     });
 });
 
-router.put("/dashboard/userMenu/friendRequests", (req, res) => {
+router.put("/api/dashboard/userMenu/friendRequests", (req, res) => {
   db.User.find({
     username: req.body.user,
   })
@@ -66,7 +66,7 @@ router.put("/dashboard/userMenu/friendRequests", (req, res) => {
     });
 });
 
-router.post("/dashboard/userMenu/friends", (req, res) => {
+router.post("/api/dashboard/userMenu/friends", (req, res) => {
   db.User.find({
     username: req.body.friend,
   }).then(data => {
@@ -108,7 +108,7 @@ router.post("/dashboard/userMenu/friends", (req, res) => {
   });
 });
 
-router.post("/dashboard/userMenu/friendRequests", (req, res) => {
+router.post("/api/dashboard/userMenu/friendRequests", (req, res) => {
   db.User.find({ username: req.body.user }).then(userData => {
     db.User.findOneAndUpdate(
       {
@@ -152,7 +152,7 @@ router.post("/dashboard/userMenu/friendRequests", (req, res) => {
   });
 });
 
-router.get("/rounds", (req, res) => {
+router.get("/api/rounds", (req, res) => {
   db.Round.find({})
     .then(data => {
       res.json(data);
@@ -164,7 +164,7 @@ router.get("/rounds", (req, res) => {
 
 // SIGN UP SET UP
 
-router.post("/account/signup", (req, res) => {
+router.post("/api/account/signup", (req, res) => {
   const { body } = req;
   let { email, password, username, matchHistory } = body;
 
@@ -230,7 +230,7 @@ router.post("/account/signup", (req, res) => {
 
 // SIGN IN SET UP
 
-router.post("/account/signin", (req, res, next) => {
+router.post("/api/account/signin", (req, res, next) => {
   const { body } = req;
   let { email, password } = body;
 
@@ -303,7 +303,7 @@ router.post("/account/signin", (req, res, next) => {
 
 // VERIFY SET UP
 
-router.get("/account/verify", (req, res) => {
+router.get("/api/account/verify", (req, res) => {
   db.UserSession.find({})
     .then(data => {
       res.json(data);
@@ -315,7 +315,7 @@ router.get("/account/verify", (req, res) => {
 
 // LOG OUT SET UP
 
-router.get("/account/logout", (req, res, next) => {
+router.get("/api/account/logout", (req, res, next) => {
   //get the token
   // const query = req;
   console.log(req.body);
@@ -351,25 +351,25 @@ router.get("/account/logout", (req, res, next) => {
 
 // SET UP A  NEW MATCH
 
-router.post("/match/new", (req, res, next) => {
-  //STILL NEED TO SET UP THIS ROUTE
+router.post("/dashboard/api/match/new", (req, res, next) => {
+  console.log(req.body);
 });
 
 // CREATE A NEW NEW ROUND
 
-router.post("/round/new", (req, res, next) => {
+router.post("/api/round/new", (req, res, next) => {
   //STILL NEED TO SET UP THIS ROUTE
 });
 
 // ADD MATCH TO HISTORY
 
-router.post("/match/history", (req, res, next) => {
+router.post("/api/match/history", (req, res, next) => {
   //STILL NEED TO SET UP THIS ROUTE
 });
 
 // GET MATCH HISTORY
 
-router.get("/match/history", (req, res, next) => {
+router.get("/api/match/history", (req, res, next) => {
   //STILL NEED TO SET UP THIS ROUTE
 });
 
