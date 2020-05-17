@@ -8,8 +8,11 @@
 }
 
 #scoreboard #card-selector {
+  background: white;
   border: 1px solid black;
+  padding: 10px;
   margin: 10px auto;
+  width: 90%;
 }
 
 #scoreboard #card-selector form {
@@ -23,6 +26,51 @@
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
+  /* Hide Old Radio Button */
+}
+
+#scoreboard #card-selector form label {
+  margin: 5px;
+}
+
+#scoreboard #card-selector form input[type=radio]:not(old) {
+  font-size: 1em;
+  margin: 0;
+  opacity: 0;
+  padding: 0;
+  width: 2em;
+}
+
+#scoreboard #card-selector form input[type=radio]:not(old) + label {
+  display: inline-block;
+  line-height: 1.5em;
+  margin-left: -2em;
+}
+
+#scoreboard #card-selector form input[type=radio]:not(old) + label > span {
+  background: #f1f1f1;
+  border: 0.0625em solid silver;
+  border-radius: 1em;
+  display: inline-block;
+  height: 1em;
+  margin: 0.25em 0.5em 0.25em 0.25em;
+  vertical-align: bottom;
+  width: 1em;
+}
+
+#scoreboard #card-selector form input[type=radio]:not(old):checked + label > span {
+  border: 0.0625em solid #3d3d3d;
+}
+
+#scoreboard #card-selector form input[type=radio]:not(old):checked + label > span > span {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#969696), to(#3d3d3d));
+  background-image: linear-gradient(#969696, #3d3d3d);
+  border: 0.0625em solid #3d3d3d;
+  border-radius: 1em;
+  display: block;
+  height: 0.6em;
+  margin: 0.125em;
+  width: 0.6em;
 }
 
 #scoreboard .scorecard {
@@ -31,14 +79,18 @@
   -webkit-box-shadow: -2px 3px 5px rgba(0, 0, 0, 0.5);
           box-shadow: -2px 3px 5px rgba(0, 0, 0, 0.5);
   margin: 0px auto;
-  width: 80%;
+  width: 90%;
+}
+
+#scoreboard .hide {
+  display: none;
 }
 
 #scoreboard .player-name {
   font-family: 'Open Sans', sans-serif;
   font-size: 1.2em;
   font-weight: 600;
-  padding: 6px 20px;
+  padding: 8px 20px;
 }
 
 #scoreboard .side-container {
@@ -54,10 +106,18 @@
 }
 
 #scoreboard .side-container p {
+  background: white;
   border: 1px solid black;
-  padding: 2px;
+  border-radius: 5px;
+  font-weight: 600;
+  padding: 6px;
   text-align: center;
   width: 50%;
+}
+
+#scoreboard .side-container .selected {
+  background: -webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#bebebe));
+  background: linear-gradient(#f1f1f1, #bebebe);
 }
 
 #scoreboard table {
@@ -69,29 +129,41 @@
   display: none;
 }
 
-#scoreboard table thead {
-  border: 1px solid #999;
-}
-
 #scoreboard table td,
 #scoreboard table th {
-  border: 1px solid #999;
-  padding: 2px;
+  border: 1px solid #3c3c3c;
+  border-bottom: 2px solid black;
+  font-size: 1.1em;
+  height: 33px;
   text-align: center;
-  width: 30%;
+  width: 25%;
+}
+
+#scoreboard table th {
+  border-bottom: 3px solid black;
+  padding: 4px;
+}
+
+#scoreboard table td:nth-child(1),
+#scoreboard table th:nth-child(1) {
+  background: #fafa8f;
+}
+
+#scoreboard table td:nth-child(2),
+#scoreboard table th:nth-child(2) {
+  background: #a6e1f8;
+}
+
+#scoreboard table td:nth-child(3),
+#scoreboard table th:nth-child(3) {
+  background: #ffbdeb;
 }
 
 #scoreboard table .score-input {
-  height: 100%;
-  margin: 0px auto;
-  padding: 2px 0;
+  font-size: 1.1em;
+  font-weight: 600;
+  height: 30px;
   text-align: center;
   width: 100%;
-}
-
-#scoreboard table button {
-  background: none;
-  border: none;
-  padding: 4px;
 }
 /*# sourceMappingURL=stylesheet.css.map */

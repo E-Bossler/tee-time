@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-import GolfAPI from "../../../../utils/golfGeniusAPI";
-import axios from "axios";
 import Tracker from "./Tracker/Tracker";
 import Scoreboard from "./Scoreboard/Scoreboard";
 import Chat from "./Chat/Chat";
