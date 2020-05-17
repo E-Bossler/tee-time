@@ -11,9 +11,9 @@ class DashboardContainer extends Component {
   render() {
     return (
       <div>
-        {/* <Route exact path="/dashboard/matchView">
+        <Route exact path="/dashboard/matchView">
           <MatchSplash username={this.props.username} />
-        </Route> */}
+        </Route>
 
         <Route path="/dashboard/matchView/tracker">
           <Tracker />

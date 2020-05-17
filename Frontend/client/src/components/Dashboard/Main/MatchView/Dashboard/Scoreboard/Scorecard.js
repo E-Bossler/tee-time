@@ -3,12 +3,6 @@ import GolfAPI from "../../../../../utils/golfGeniusAPI";
 import axios from "axios";
 import "./stylesheet.css";
 
-const saveIconStyles = {
-    "--fa-secondary-opacity": "1.0",
-    "--fa-primary-color": "white",
-    "--fa-secondary-color": "limegreen",
-};
-
 class Scorecard extends Component {
     constructor(props) {
         super(props);
@@ -25,25 +19,26 @@ class Scorecard extends Component {
           yardageData: [],
           viewSideOut: true
         };
-      }
+    }
     
     getMatchData = username => {
         return axios
           .put("/api/match/current", {username})
     }
     
-      componentDidMount() {
+    componentDidMount() {
         const username = this.props.username;
         this.getMatchData(username).then(res => {
-            console.log(res.data);
+            // console.log(res.data);
             const players = res.data[0].currentMatch[0].players;
             const course = res.data[0].currentMatch[0].courseName;
     
             this.setState({ username: username });
             this.setState({ players: players });
             this.setState({ course: course });
+            this.setState({ scorecardView: username });
         });
-    
+
         GolfAPI.findCourses().then(res => {
             const allCourseData = res.data.courses;
             let matchCourseData;
@@ -71,8 +66,10 @@ class Scorecard extends Component {
             const yardageData = matchCourseData.tees[0].hole_data.yardage;
             this.setState({ yardageData: yardageData });
     
-            console.log(this.state);
-        }).then(() => {
+            // console.log(this.state);
+        })
+    
+        .then(() => {
             this.setState({ loading: false });
         })
     }
@@ -89,90 +86,142 @@ class Scorecard extends Component {
         if (!this.state.loading) {
             const sideOut = this.state.sideOut;
             const sideIn = this.state.sideIn;
-            console.log(sideIn);
             const parData = this.state.parData;
             const hcpData = this.state.hcpData;
+            const players = this.state.players;
+            const username = this.props.username;
+            const indexToSplice = players.indexOf(username);
+            players.splice(1, indexToSplice);
+            
             return(
-                <div className="scorecard">
-                    <p className="player-name">Player1</p>
-                    <div className="side-container">
-                        <p 
-                            id="side-out"
-                            onClick={this.handleSideViewChange.bind(this)}
-                        >
-                            OUT
-                        </p>
-                        <p 
-                            id="side-in"
-                            onClick={this.handleSideViewChange.bind(this)}
-                        >
-                            IN
-                        </p>
+                <div>
+                    <div 
+                        className={this.props.scorecardView === username ? "show scorecard" : "hide scorecard"}
+                    >
+                        <p className="player-name">{username}</p>
+                        <div className="side-container">
+                            <p 
+                                id="side-out"
+                                className={this.state.viewSideOut ? "selected" : "hidden"}
+                                onClick={this.handleSideViewChange.bind(this)}
+                            >
+                                OUT
+                            </p>
+                            <p 
+                                id="side-in"
+                                className={this.state.viewSideOut ? "hidden" : "selected"}
+                                onClick={this.handleSideViewChange.bind(this)}
+                            >
+                                IN
+                            </p>
+                        </div>
+                        <table className="score-table">
+                            <thead>
+                                <tr>
+                                    <th>Hole</th>
+                                    <th>Par</th>
+                                    <th>Hcp</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+        
+                            <tbody className={this.state.viewSideOut ? "out show" : "out hide"}>
+                                {sideOut.map((value, index) => {
+                                    return <tr 
+                                    key={index}>
+                                        <td className="hole">
+                                            <span>{value}</span>
+                                        </td>
+                                        <td className="par">{parData[index]}</td>
+                                        <td className="hcp">{hcpData[index]}</td>
+                                        <td className="score">
+                                            <form>
+                                                <input className="score-input"/>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                })}
+                            </tbody>
+                            <tbody className={this.state.viewSideOut ? "in hide" : "in show"}>
+                                {sideIn.map((value, index) => {
+                                    return <tr 
+                                    key={index}>
+                                        <td className="hole">
+                                            <span>{value}</span>
+                                        </td>
+                                        <td className="par-cell">{parData[index + 9]}</td>
+                                        <td className="hcp-cell">{hcpData[index + 9]}</td>
+                                        <td className="score-cell">
+                                            <form>
+                                                <input className="score-input"/>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                })}  
+                            </tbody>
+                        </table>
                     </div>
-                    <table className="score-table">
-                        <thead>
-                            <tr>
-                                <th>Hole</th>
-                                <th>Par</th>
-                                <th>Hcp</th>
-                                <th>Score</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-    
-                        <tbody className={this.state.viewSideOut ? "out show" : "out hide"}>
-                            {sideOut.map((value, index) => {
-                                return <tr 
-                                key={index}>
-                                    <td className="hole">
-                                        <span>{value}</span>
-                                    </td>
-                                    <td className="par">{parData[index]}</td>
-                                    <td className="hcp">{hcpData[index]}</td>
-                                    <td className="score">
-                                        <form>
-                                            <input className="score-input"/>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <button>
-                                            <i 
-                                                className="fad fa-check-square fa-2x" 
-                                                style={saveIconStyles}
-                                            >
-                                            </i>
-                                        </button>
-                                    </td>
+                    {players.map((value, index) => {
+                        return <div 
+                        key={index}
+                        className={this.props.scorecardView === value ? "show scorecard" : "hide scorecard"}
+                    >
+                        <p className="player-name">{value}</p>
+                        <div className="side-container">
+                            <p 
+                                id="side-out"
+                                className={this.state.viewSideOut ? "selected" : "hidden"}
+                                onClick={this.handleSideViewChange.bind(this)}
+                            >
+                                OUT
+                            </p>
+                            <p 
+                                id="side-in"
+                                className={this.state.viewSideOut ? "hidden" : "selected"}
+                                onClick={this.handleSideViewChange.bind(this)}
+                            >
+                                IN
+                            </p>
+                        </div>
+                        <table className="score-table">
+                            <thead>
+                                <tr>
+                                    <th>Hole</th>
+                                    <th>Par</th>
+                                    <th>Hcp</th>
+                                    <th>Score</th>
                                 </tr>
-                            })}
-                        </tbody>
-                        <tbody className={this.state.viewSideOut ? "in hide" : "in show"}>
-                            {sideIn.map((value, index) => {
-                                return <tr 
-                                key={index}>
-                                    <td className="hole">
-                                        <span>{value}</span>
-                                    </td>
-                                    <td className="par-cell">{parData[index + 9]}</td>
-                                    <td className="hcp-cell">{hcpData[index + 9]}</td>
-                                    <td className="score-cell">
-                                        <form>
-                                            <input className="score-input"/>
-                                        </form>
-                                    </td>
-                                    <td className="save-btn-cell">
-                                        <button>
-                                            <i 
-                                                className="fad fa-check-square fa-2x" 
-                                                style={saveIconStyles}
-                                            >
-                                            </i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            })}  
-                        </tbody>
-                    </table>
+                            </thead>
+        
+                            <tbody className={this.state.viewSideOut ? "out show" : "out hide"}>
+                                {sideOut.map((value, index) => {
+                                    return <tr 
+                                    key={index}>
+                                        <td className="hole">
+                                            <span>{value}</span>
+                                        </td>
+                                        <td className="par">{parData[index]}</td>
+                                        <td className="hcp">{hcpData[index]}</td>
+                                        <td className="score">?</td>
+                                    </tr>
+                                })}
+                            </tbody>
+                            <tbody className={this.state.viewSideOut ? "in hide" : "in show"}>
+                                {sideIn.map((value, index) => {
+                                    return <tr 
+                                    key={index}>
+                                        <td className="hole">
+                                            <span>{value}</span>
+                                        </td>
+                                        <td className="par-cell">{parData[index + 9]}</td>
+                                        <td className="hcp-cell">{hcpData[index + 9]}</td>
+                                        <td className="score-cell">?</td>
+                                    </tr>
+                                })}  
+                            </tbody>
+                        </table>
+                    </div>
+                    })}
                 </div>
             )
         } else {
@@ -182,8 +231,6 @@ class Scorecard extends Component {
                 </div>
             )
         }
-
-        
     }
 };
 

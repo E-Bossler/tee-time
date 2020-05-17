@@ -11,6 +11,7 @@ class Scoreboard extends Component {
           username: "",
           players: [],
           course: "",
+          scorecardView: ""
         };
     }
     
@@ -29,7 +30,14 @@ class Scoreboard extends Component {
             this.setState({ username: username });
             this.setState({ players: players });
             this.setState({ course: course });
+            this.setState({ scorecardView: username });
         });
+    }
+
+    handleCardViewChange(event) {
+        const radioValue = event.target.value;
+        this.setState({ scorecardView: radioValue});
+        // console.log(this.state.scorecardView);
     }
 
     render() {
@@ -38,9 +46,15 @@ class Scoreboard extends Component {
                 <CardSelector 
                     username={this.props.username} 
                     players={this.state.players}
+                    scorecardView={this.state.scorecardView}
+                    handleCardViewChange={this.handleCardViewChange.bind(this)}
                 />
                 <Scorecard 
-                    username={this.props.username} 
+                    username={this.props.username}
+                    players={this.state.players}
+                    course={this.state.course}
+                    scorecardView={this.state.scorecardView}
+                    handleCardViewChange={this.handleCardViewChange.bind(this)} 
                 />
             </div>
         )
