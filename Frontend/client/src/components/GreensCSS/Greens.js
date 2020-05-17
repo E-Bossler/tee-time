@@ -2,7 +2,7 @@ import React from "react";
 import "./stylesheet.css";
 
 function Greens() {
-    return(
+    return (
         <div id="greens-container">
             <div id="flag-container">
                 <div id="flag"></div>

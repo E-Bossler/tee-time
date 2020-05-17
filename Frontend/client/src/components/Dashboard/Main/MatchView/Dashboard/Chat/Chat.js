@@ -8,11 +8,8 @@ export default class Chat extends Component {
     super(props);
     this.state = {
       user: true,
-      chatMessage: {
-        message: "",
-        username: "",
-      },
-      chatMessages: [{}],
+      chatMessage: "",
+      chatMessages: [],
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -35,39 +32,36 @@ export default class Chat extends Component {
 
   handleChange(event) {
     this.setState({
-      chatMessage: {
-        username: this.props.username,
-        message: event.target.value,
-      },
+      chatMessage: event.target.value,
     });
   }
 
   submitChatMessage(e) {
     e.preventDefault();
     const chatMessage = this.state.chatMessage;
-    const chatMessages = this.state.chatMessages;
-    console.log(chatMessage);
 
-    axios.post("/api/match/current/saveChatMessage", {});
-    this.socket.emit("chat message", this.state.chatMessage);
-    this.setState({ chatMessage: "" });
+    // axios.post("/api/match/current/saveChatMessage", {});
+    // this.socket.emit("chat message", this.state.chatMessage);
+    this.setState({
+      chatMessages: [...this.state.chatMessages, chatMessage],
+    });
+
     this.scrollToBottom();
+    this.setState({ chatMessage: "" });
   }
 
   render() {
-    const chatMessages = this.state.chatMessages.map((chatMessage, i, j) => (
-      <li key={chatMessage} className="message">
-        <p key={i}>{chatMessage.username}</p>
-        <p key={j}>{chatMessage.message}</p>
-      </li>
-    ));
+    const userData = this.props.userData;
 
     return (
       <div id="chat-container">
-        {/* <Switch /> */}
         <div id="msg-container">
           <ul className={this.state.user ? "user-msgs" : "friend-msgs"}>
-            {chatMessages}
+            {this.state.chatMessages.map((chatMessage, i) => (
+              <li key={i} value={userData.id} className="message">
+                {chatMessage}
+              </li>
+            ))}
           </ul>
           <span
             ref={el => {
@@ -80,8 +74,8 @@ export default class Chat extends Component {
             type="text"
             id="chat-input"
             placeholder="Type your message here..."
-            value={this.state.value}
             onChange={this.handleChange}
+            value={this.state.chatMessage}
           />
           <button type="submit" id="send-btn">
             send

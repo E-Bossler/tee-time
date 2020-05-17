@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-import GolfAPI from "../../../../utils/golfGeniusAPI";
-import axios from "axios";
 import Tracker from "./Tracker/Tracker";
 import Scoreboard from "./Scoreboard/Scoreboard";
 import Chat from "./Chat/Chat";
@@ -12,7 +10,10 @@ class DashboardContainer extends Component {
     return (
       <div>
         <Route exact path="/dashboard/matchView">
-          <MatchSplash username={this.props.username} />
+          <MatchSplash
+            userData={this.props.userData}
+            username={this.props.username}
+          />
         </Route>
 
         <Route path="/dashboard/matchView/tracker">
@@ -26,7 +27,7 @@ class DashboardContainer extends Component {
         </Route>
 
         <Route path="/dashboard/matchView/chat">
-          <Chat username={this.props.username} />
+          <Chat userData={this.props.userData} username={this.props.username} />
         </Route>
       </div>
     );

@@ -17,8 +17,8 @@ class Friends extends Component {
   }
 
   componentDidMount() {
-    const user = this.state.username;
-    axios.put("/api/dashboard/userMenu/friends", { user }).then(res => {
+    const username = this.state.username;
+    axios.put("/api/dashboard/userMenu/friends", { username }).then(res => {
       const friends = res.data[0].friends;
       if (friends === undefined) {
         alert("You don't have any friends! Add friends to become popular!");
@@ -27,22 +27,24 @@ class Friends extends Component {
       }
     });
 
-    axios.put("/api/dashboard/userMenu/friendRequests", { user }).then(res => {
-      const friendRequests = res.data[0].friendRequests;
-      if (friendRequests === undefined) {
-        alert("No friend requests yet - golf more!");
-      } else {
-        this.setState({ friendRequests });
-      }
-    });
+    axios
+      .put("/api/dashboard/userMenu/friendRequests", { username })
+      .then(res => {
+        const friendRequests = res.data[0].friendRequests;
+        if (friendRequests === undefined) {
+          alert("No friend requests yet - golf more!");
+        } else {
+          this.setState({ friendRequests });
+        }
+      });
   }
 
   acceptFriend(e) {
     e.preventDefault();
     const request = JSON.parse(e.target.value);
-    const user = this.state.username;
+    const username = this.state.username;
     axios
-      .post("/api/dashboard/userMenu/friendRequests", { request, user })
+      .post("/api/dashboard/userMenu/friendRequests", { request, username })
       .then(res => {
         const request = JSON.parse(res.config.data);
         const newFriend = request.request;

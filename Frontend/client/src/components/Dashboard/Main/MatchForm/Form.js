@@ -25,15 +25,15 @@ class Form extends Component {
   }
 
   findFriends = () => {
-    const user = this.state.username;
-    axios.put("/api/dashboard/userMenu/friends", { user }).then(res => {
+    const username = this.state.username;
+    axios.put("/api/dashboard/userMenu/friends", { username }).then(res => {
       const friendsData = res.data[0].friends;
       const friends = [];
       if (friendsData === undefined) {
         alert("You don't have any friends! Add friends to become popular!");
       } else {
         for (let i = 0; i < friendsData.length; i++) {
-            friends.push(friendsData[i].username);
+          friends.push(friendsData[i]);
         }
         this.setState({ allFriends: friends });
       }
@@ -51,8 +51,7 @@ class Form extends Component {
         for (let i = 0; i < courseData.length; i++) {
           courses.push(courseData[i].name.toLowerCase());
         }
-        this.setState({ courses: courses });
-        // console.log(courses);
+        this.setState({ courses });
       });
   };
 
@@ -78,12 +77,12 @@ class Form extends Component {
     const user = this.state.username;
 
     GolfAPI.findCourses().then(res => {
-        const courseData = res.data.courses;
-        const courses = this.state.courses;
-        for (let i = 0; i < courseData.length; i++) {
-          courses.push(courseData[i].name.toLowerCase());
-        }
-        this.setState({ courses: courses });
+      const courseData = res.data.courses;
+      const courses = this.state.courses;
+      for (let i = 0; i < courseData.length; i++) {
+        courses.push(courseData[i].name.toLowerCase());
+      }
+      this.setState({ courses: courses });
     });
 
     this.findFriends(user);
@@ -123,8 +122,8 @@ class Form extends Component {
   handleMatchSubmit() {
     const course = this.state.matchCourse;
     const players = this.state.matchFriends;
-    const username = this.state.username;
-    const allPlayers = [...players, username];
+    const userData = this.props.userData;
+    const allPlayers = [...players, userData];
 
     axios
       .post("/dashboard/api/match/new", { course, allPlayers })
@@ -134,15 +133,18 @@ class Form extends Component {
   handleFriendSubmit(event) {
     event.preventDefault();
     const friend = this.state.friend;
-    const allFriends = this.state.allFriends;
-    const matchFriends = this.state.matchFriends;
+    const friendArr = this.state.allFriends;
+    const allFriends = this.state.allFriends.map(friend => friend.username);
+    const matchArr = this.state.matchFriends.map(mFriend => mFriend.username);
 
-    if (
-      allFriends.indexOf(friend) !== -1 &&
-      matchFriends.indexOf(friend) === -1
-    ) {
-      matchFriends.push(friend);
-      this.setState({ matchFriends: matchFriends });
+    if (allFriends.indexOf(friend) !== -1 && matchArr.indexOf(friend) === -1) {
+      for (let i = 0; i < friendArr.length; i++) {
+        if (friendArr[i].username === friend) {
+          this.setState({
+            matchFriends: [...this.state.matchFriends, friendArr[i]],
+          });
+        }
+      }
       this.setState({ friendFound: true });
     } else {
       this.setState({ friendFound: false });
@@ -155,11 +157,11 @@ class Form extends Component {
     const friendToDelete = event.target.id;
     const matchFriends = this.state.matchFriends;
     for (let i = 0; i < matchFriends.length; i++) {
-      if (matchFriends[i] === friendToDelete) {
+      if (matchFriends[i].username === friendToDelete) {
         matchFriends.splice(i, 1);
       }
     }
-    this.setState({ matchFriends: matchFriends });
+    this.setState({ matchFriends });
   }
 
   render() {
