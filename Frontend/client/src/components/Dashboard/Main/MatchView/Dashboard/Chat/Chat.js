@@ -21,7 +21,11 @@ export default class Chat extends Component {
   };
 
   componentDidMount() {
-    axios.put();
+    const userData = this.props.userData;
+
+    axios.put("/api/match/current/getChat", { userData }).then(res => {
+      console.log("Initial Chat Messages on Mount: " + res.data);
+    });
     this.socket = io("http://192.168.138.2:7777");
     this.socket.on("connect", () => console.log("connected"));
     this.socket.on("chat message", msg => {
@@ -38,20 +42,26 @@ export default class Chat extends Component {
 
   submitChatMessage(e) {
     e.preventDefault();
+    const userData = this.props.userData;
     const chatMessage = this.state.chatMessage;
 
-    // axios.post("/api/match/current/saveChatMessage", {});
-    // this.socket.emit("chat message", this.state.chatMessage);
-    this.setState({
-      chatMessages: [...this.state.chatMessages, chatMessage],
-    });
+    axios
+      .post("/api/match/current/saveChatMessage", { userData, chatMessage })
+      .then(res => {
+        console.log("Post Data after Chat Message Store: " + res.data);
 
-    this.scrollToBottom();
-    this.setState({ chatMessage: "" });
+        this.setState({
+          chatMessages: [...this.state.chatMessages, chatMessage],
+        });
+        this.scrollToBottom();
+        this.setState({ chatMessage: "" });
+      });
+    // this.socket.emit("chat message", this.state.chatMessage);
   }
 
   render() {
     const userData = this.props.userData;
+    console.log(userData);
 
     return (
       <div id="chat-container">
@@ -59,6 +69,8 @@ export default class Chat extends Component {
           <ul className={this.state.user ? "user-msgs" : "friend-msgs"}>
             {this.state.chatMessages.map((chatMessage, i) => (
               <li key={i} value={userData.id} className="message">
+                {userData.username}
+                <br />
                 {chatMessage}
               </li>
             ))}

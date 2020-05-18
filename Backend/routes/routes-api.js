@@ -366,14 +366,16 @@ router.post("/dashboard/api/match/new", (req, res, next) => {
       course: req.body.course,
       participants: req.body.allPlayers,
     })
-    .then(() => {
+    .then(data => {
+      console.log(data.ops[0]);
       db.User.updateMany(
         { username: { $in: players } },
         {
           $set: {
             currentMatch: {
-              courseName: req.body.course,
-              players: req.body.allPlayers,
+              courseId: data.ops[0]._id,
+              courseName: data.ops[0].course,
+              players: data.ops[0].participants,
             },
           },
         }
@@ -412,6 +414,18 @@ router.put("/api/match/current", (req, res) => {
 });
 
 //SAVES MESSAGES TO CHAT LOG IN MATCH
-router.post("/api/match/current/saveChatMessage", (req, res) => { });
+router.post("/api/match/current/saveChatMessage", (req, res) => {
+  console.log(req.body);
+});
+
+//Get Chat Message Log
+router.put("/api/match/current/getChat", (req, res) => {
+  const currentMatch = req.body.userData.currentMatchId;
+  console.log(currentMatch);
+
+  db.Match.find({ _id: currentMatch }).then(data => {
+    console.log("Found Match Data: " + data);
+  });
+});
 
 module.exports = router;

@@ -20,6 +20,7 @@ const UserSchema = new Schema({
   },
   currentMatch: [
     {
+      courseId: String,
       courseName: {
         type: String,
         trim: true,
@@ -38,18 +39,6 @@ const UserSchema = new Schema({
               },
             },
           ],
-        },
-      ],
-      chat: [
-        {
-          message: {
-            type: String,
-            trim: true,
-          },
-          messager: {
-            type: String,
-            trim: true,
-          },
         },
       ],
     },

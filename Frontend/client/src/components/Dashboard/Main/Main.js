@@ -57,6 +57,7 @@ class Main extends Component {
                       username: res.data[0].username,
                       email: res.data[0].email,
                       id: res.data[0]._id,
+                      currentMatchId: res.data[0].currentMatch[0].courseId,
                     };
 
                     this.setState({ userData });
