@@ -16,10 +16,10 @@ class MatchSplash extends Component {
   componentDidMount() {
     const username = this.props.username;
     axios.put("/api/match/current", { username }).then(res => {
+      console.log(res);
       const currentMatchName = res.data[0].currentMatch[0].courseName;
       const currentMatchPlayers = res.data[0].currentMatch[0].players;
       // const currentHole = res.data[0].currentMatch[0].holes[0];
-
 
       this.setState({ username });
       this.setState({ currentMatchName });
@@ -44,8 +44,14 @@ class MatchSplash extends Component {
             return <li key={i}>{player.username}</li>;
           })}
         </ul>
-        <p id="scoreboard-msg">Enter your score or track your friend's score using the <span>Scoreboard</span> tab.</p>
-        <p id="chatroom-msg">Chat with your friends during the match using the <span>Chatroom</span> tab.</p>
+        <p id="scoreboard-msg">
+          Enter your score or track your friend's score using the{" "}
+          <span>Scoreboard</span> tab.
+        </p>
+        <p id="chatroom-msg">
+          Chat with your friends during the match using the{" "}
+          <span>Chatroom</span> tab.
+        </p>
         <p id="enjoy-msg">Enjoy your match!</p>
       </div>
     );

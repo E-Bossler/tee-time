@@ -7,7 +7,7 @@ class NavTabs extends Component {
     super(props);
     this.state = {
       scoreTab: false,
-      chatTab: false
+      chatTab: false,
     };
   }
 
@@ -29,10 +29,12 @@ class NavTabs extends Component {
             Course
           </Link>
         </li> */}
-        <li className={this.state.scoreTab ? "nav-tab selected-tab" : "nav-tab"}>
-          <Link 
-            className="nav-link" 
-            id="score-tab" 
+        <li
+          className={this.state.scoreTab ? "nav-tab selected-tab" : "nav-tab"}
+        >
+          <Link
+            className="nav-link"
+            id="score-tab"
             to="/dashboard/matchView/scoreboard"
             onClick={this.selectScoreTab.bind(this)}
           >
@@ -40,9 +42,9 @@ class NavTabs extends Component {
           </Link>
         </li>
         <li className={this.state.chatTab ? "nav-tab selected-tab" : "nav-tab"}>
-          <Link 
+          <Link
             className="nav-link"
-            id="chat-tab" 
+            id="chat-tab"
             to="/dashboard/matchView/chat"
             onClick={this.selectChatTab.bind(this)}
           >
