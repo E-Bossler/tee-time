@@ -197,13 +197,13 @@ router.post("/api/account/signup", (req, res) => {
     {
       email: email,
     },
-    previousUsers => {
-      // if (err) {
-      //   return res.send({
-      //     success: false,
-      //     message: `Please see error message: ${err}`,
-      //   });
-      // }
+    (err, previousUsers) => {
+      if (err) {
+        return res.send({
+          success: false,
+          message: `Please see error message: ${err}`,
+        });
+      }
       if (previousUsers.length > 0) {
         return res.send({
           success: false,
@@ -412,6 +412,6 @@ router.put("/api/match/current", (req, res) => {
 });
 
 //SAVES MESSAGES TO CHAT LOG IN MATCH
-router.post("/api/match/current/saveChatMessage", (req, res) => {});
+router.post("/api/match/current/saveChatMessage", (req, res) => { });
 
 module.exports = router;
