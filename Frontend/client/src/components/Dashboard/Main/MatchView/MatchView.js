@@ -17,8 +17,9 @@ class MatchView extends Component {
     const matchId = this.props.userData.currentMatchId;
     console.log(matchId);
     axios.put("/api/match/current", { matchId }).then(res => {
+      console.log(res.data);
       const currentMatch = res.data[0];
-      this.setState({ currentMatch });
+      this.setState({ currentMatch: currentMatch });
     });
   }
 

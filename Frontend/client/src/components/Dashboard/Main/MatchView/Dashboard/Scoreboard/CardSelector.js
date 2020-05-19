@@ -6,7 +6,9 @@ class CardSelector extends Component {
         const players = this.props.players;
         const username = this.props.username;
         const indexToSplice = players.indexOf(username);
-        players.splice(1, indexToSplice);
+        players.splice(indexToSplice, 1);
+
+        console.log(players);
 
         return(
             <div id="card-selector">
