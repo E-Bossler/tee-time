@@ -11,8 +11,8 @@ class DashboardContainer extends Component {
       <div>
         <Route exact path="/dashboard/matchView">
           <MatchSplash
+            currentMatch={this.props.currentMatch}
             userData={this.props.userData}
-            username={this.props.username}
           />
         </Route>
 
@@ -21,13 +21,14 @@ class DashboardContainer extends Component {
         </Route>
 
         <Route path="/dashboard/matchView/scoreboard">
-          <Scoreboard 
-            username={this.props.username}
-          />
+          <Scoreboard username={this.props.username} />
         </Route>
 
         <Route path="/dashboard/matchView/chat">
-          <Chat userData={this.props.userData} username={this.props.username} />
+          <Chat
+            currentMatch={this.props.currentMatch}
+            userData={this.props.userData}
+          />
         </Route>
       </div>
     );

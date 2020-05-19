@@ -11,7 +11,7 @@ const matchSchema = new Schema({
       username: {
         type: String,
         trim: true,
-      }
+      },
     },
   ],
   course: {
@@ -40,6 +40,10 @@ const matchSchema = new Schema({
         trim: true,
       },
       messager: {
+        type: String,
+        trim: true,
+      },
+      messagerId: {
         type: String,
         trim: true,
       },

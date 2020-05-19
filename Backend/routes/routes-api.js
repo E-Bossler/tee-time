@@ -17,8 +17,20 @@ router.get("/api/users", (req, res) => {
 router.post("/api/users", (req, res) => {
   db.User.findOne({
     where: {
-      username: req.body.name,
+      username: req.body.username,
     },
+  })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+});
+
+router.put("/api/users", (req, res) => {
+  db.User.find({
+    username: req.body.username,
   })
     .then(data => {
       res.send(data);
@@ -367,7 +379,6 @@ router.post("/dashboard/api/match/new", (req, res, next) => {
       participants: req.body.allPlayers,
     })
     .then(data => {
-      console.log(data.ops[0]);
       db.User.updateMany(
         { username: { $in: players } },
         {
@@ -408,7 +419,7 @@ router.get("/api/match/history", (req, res, next) => {
 
 //GET CURRENT MATCH
 router.put("/api/match/current", (req, res) => {
-  db.User.find({ username: req.body.username }).then(data => {
+  db.Match.find({ _id: req.body.matchId }).then(data => {
     res.json(data);
   });
 });
@@ -416,15 +427,29 @@ router.put("/api/match/current", (req, res) => {
 //SAVES MESSAGES TO CHAT LOG IN MATCH
 router.post("/api/match/current/saveChatMessage", (req, res) => {
   console.log(req.body);
+  const matchId = req.body.userData.currentMatchId;
+  db.Match.findOneAndUpdate(
+    { _id: matchId },
+    {
+      $push: {
+        chat: {
+          message: req.body.chatMessage,
+          messager: req.body.userData.username,
+          messagerId: req.body.userData.id,
+        },
+      },
+    }
+  ).then(data => {
+    res.json(data);
+  });
 });
 
 //Get Chat Message Log
 router.put("/api/match/current/getChat", (req, res) => {
   const currentMatch = req.body.userData.currentMatchId;
-  console.log(currentMatch);
 
   db.Match.find({ _id: currentMatch }).then(data => {
-    console.log("Found Match Data: " + data);
+    res.json(data);
   });
 });
 
