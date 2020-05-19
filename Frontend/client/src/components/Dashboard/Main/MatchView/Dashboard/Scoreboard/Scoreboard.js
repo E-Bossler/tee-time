@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import CardSelector from "./CardSelector";
 import Scorecard from "./Scorecard";
 import "./stylesheet.css";
@@ -11,7 +10,7 @@ class Scoreboard extends Component {
       // username: "",
       // players: [],
       // course: "",
-      scorecardView: this.props.userData.username
+      scorecardView: this.props.userData.username,
     };
   }
 
@@ -29,18 +28,18 @@ class Scoreboard extends Component {
       players.push(list[i].username);
     }
     const course = this.props.currentMatch.course;
-    
+
     if (username === undefined || list === undefined || course === undefined) {
-      console.log("waiting for props...")
-      return(
+      console.log("waiting for props...");
+      return (
         <div>
           <p>Loading...</p>
         </div>
-      )
+      );
     } else {
       console.log(username, list, players, course);
 
-      return(
+      return (
         <div id="scoreboard">
           <CardSelector
             username={username}

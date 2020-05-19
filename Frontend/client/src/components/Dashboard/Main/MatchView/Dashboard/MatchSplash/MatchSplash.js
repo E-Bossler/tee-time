@@ -9,7 +9,7 @@ class MatchSplash extends Component {
     const course = this.props.currentMatch.course;
     if (list === undefined || course === undefined) {
       console.log("no props yet...");
-      return(
+      return (
         <div>
           <p>Loading...</p>
         </div>
@@ -27,18 +27,15 @@ class MatchSplash extends Component {
           <p>Friends on the the field:</p>
           <ul>
             {players.map((value, index) => {
-              return <li 
-                key={index}>
-                {value}
-              </li>
+              return <li key={index}>{value}</li>;
             })}
           </ul>
           <p id="scoreboard-msg">
-            Enter your score or track your friend's score using the 
+            Enter your score or track your friend's score using the
             <span>Scoreboard</span> tab.
           </p>
           <p id="chatroom-msg">
-            Chat with your friends during the match using the 
+            Chat with your friends during the match using the
             <span>Chatroom</span> tab.
           </p>
           <p id="enjoy-msg">Enjoy your match!</p>
