@@ -17,13 +17,9 @@ class MatchSplash extends Component {
         <p id="course-name">{this.props.currentMatch.course}</p>
         <p>Friends on the the field:</p>
         <ul>
-          {
-            {
-              /* this.props.currentMatch.participants.map((player, i) => {
+          {/* this.props.currentMatch.participants.map((player, i) => {
             return <li key={i}>{player.username}</li>;
-          }) */
-            }
-          }
+          }) */}
         </ul>
         <p id="scoreboard-msg">
           Enter your score or track your friend's score using the{" "}

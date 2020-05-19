@@ -33,7 +33,7 @@ router.put("/api/users", (req, res) => {
     username: req.body.username,
   })
     .then(data => {
-      res.send(data);
+      res.json(data);
     })
     .catch(error => {
       console.log(error);
@@ -129,7 +129,9 @@ router.post("/api/dashboard/userMenu/friends", (req, res) => {
 });
 
 router.post("/api/dashboard/userMenu/friendRequests", (req, res) => {
-  db.User.find({ username: req.body.user }).then(userData => {
+  console.log(req.body.request);
+  db.User.find({ username: req.body.username }).then(userData => {
+    console.log(userData);
     db.User.findOneAndUpdate(
       {
         _id: req.body.request.friendId,
@@ -151,7 +153,7 @@ router.post("/api/dashboard/userMenu/friendRequests", (req, res) => {
       });
     db.User.findOneAndUpdate(
       {
-        username: req.body.user,
+        username: req.body.username,
       },
       {
         $push: {
