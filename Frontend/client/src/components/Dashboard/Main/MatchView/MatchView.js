@@ -9,13 +9,17 @@ class MatchView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      friends: [],
+      currentMatch: {},
     };
   }
 
   componentDidMount() {
-    const username = this.props.username;
-    axios.put("/api/dashboard/matchView/friends", { username }).then(res => {});
+    const matchId = this.props.userData.currentMatchId;
+    console.log(matchId);
+    axios.put("/api/match/current", { matchId }).then(res => {
+      const currentMatch = res.data[0];
+      this.setState({ currentMatch });
+    });
   }
 
   render() {
@@ -27,6 +31,7 @@ class MatchView extends Component {
             <DashboardContainer
               userData={this.props.userData}
               username={this.props.username}
+              currentMatch={this.state.currentMatch}
             />
           </Switch>
         </Router>

@@ -7,12 +7,13 @@ import MatchSplash from "./MatchSplash/MatchSplash";
 
 class DashboardContainer extends Component {
   render() {
+    console.log(this.props);
     return (
       <div>
         <Route exact path="/dashboard/matchView">
           <MatchSplash
+            currentMatch={this.props.currentMatch}
             userData={this.props.userData}
-            username={this.props.username}
           />
         </Route>
 
@@ -21,13 +22,17 @@ class DashboardContainer extends Component {
         </Route>
 
         <Route path="/dashboard/matchView/scoreboard">
-          <Scoreboard 
+          <Scoreboard
+            currentMatch={this.props.currentMatch}
             username={this.props.username}
           />
         </Route>
 
         <Route path="/dashboard/matchView/chat">
-          <Chat userData={this.props.userData} username={this.props.username} />
+          <Chat
+            currentMatch={this.props.currentMatch}
+            userData={this.props.userData}
+          />
         </Route>
       </div>
     );

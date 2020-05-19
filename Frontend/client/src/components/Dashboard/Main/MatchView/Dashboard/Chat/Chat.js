@@ -24,14 +24,19 @@ export default class Chat extends Component {
     const userData = this.props.userData;
 
     axios.put("/api/match/current/getChat", { userData }).then(res => {
-      console.log("Initial Chat Messages on Mount: " + res.data);
+      const chatMessages = res.data[0].chat;
+      this.setState({ chatMessages });
+      this.scrollToBottom();
     });
     this.socket = io("http://192.168.138.2:7777");
     this.socket.on("connect", () => console.log("connected"));
     this.socket.on("chat message", msg => {
-      this.setState({ chatMessages: [...this.state.chatMessages, msg] });
+      axios.put("/api/match/current/getChat", { userData }).then(res => {
+        const chatMessages = res.data[0].chat;
+        this.setState({ chatMessages });
+        this.scrollToBottom();
+      });
     });
-    this.scrollToBottom();
   }
 
   handleChange(event) {
@@ -44,34 +49,36 @@ export default class Chat extends Component {
     e.preventDefault();
     const userData = this.props.userData;
     const chatMessage = this.state.chatMessage;
+    const chatMessageObj = {
+      message: this.state.chatMessage,
+      messager: userData.username,
+      messagerId: userData.id,
+    };
+    console.log(chatMessage);
+    console.log(this.state.chatMessages);
 
     axios
       .post("/api/match/current/saveChatMessage", { userData, chatMessage })
       .then(res => {
-        console.log("Post Data after Chat Message Store: " + res.data);
-
+        this.socket.emit("chat message", this.state.chatMessage);
         this.setState({
-          chatMessages: [...this.state.chatMessages, chatMessage],
+          chatMessages: [...this.state.chatMessages, chatMessageObj],
         });
         this.scrollToBottom();
         this.setState({ chatMessage: "" });
       });
-    // this.socket.emit("chat message", this.state.chatMessage);
   }
 
   render() {
-    const userData = this.props.userData;
-    console.log(userData);
-
     return (
       <div id="chat-container">
         <div id="msg-container">
           <ul className={this.state.user ? "user-msgs" : "friend-msgs"}>
             {this.state.chatMessages.map((chatMessage, i) => (
-              <li key={i} value={userData.id} className="message">
-                {userData.username}
+              <li key={i} value={chatMessage.id} className="message">
+                {chatMessage.messager}
                 <br />
-                {chatMessage}
+                {chatMessage.message}
               </li>
             ))}
           </ul>
