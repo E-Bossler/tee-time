@@ -26,7 +26,7 @@ class DashboardContainer extends Component {
         <Route path="/dashboard/matchView/scoreboard">
           <Scoreboard
             currentMatch={this.props.currentMatch}
-            username={this.props.username}
+            userData={this.props.userData}
           />
         </Route>
 

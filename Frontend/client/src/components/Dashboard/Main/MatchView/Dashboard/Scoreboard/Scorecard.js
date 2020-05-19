@@ -8,9 +8,6 @@ class Scorecard extends Component {
         super(props);
         this.state = {
           loading: true,
-          username: "",
-          course: "",
-          players: [],
           holes: "",
           sideOut: [],
           sideIn: [],
@@ -21,29 +18,14 @@ class Scorecard extends Component {
         };
     }
     
-    getMatchData = username => {
-        return axios
-          .put("/api/match/current", {username})
-    }
-    
     componentDidMount() {
-        const username = this.props.username;
-        this.getMatchData(username).then(res => {
-            // console.log(res.data);
-            const players = res.data[0].currentMatch[0].players;
-            const course = res.data[0].currentMatch[0].courseName;
-    
-            this.setState({ username: username });
-            this.setState({ players: players });
-            this.setState({ course: course });
-            this.setState({ scorecardView: username });
-        });
+        const course = this.props.course;
 
         GolfAPI.findCourses().then(res => {
             const allCourseData = res.data.courses;
             let matchCourseData;
             for (let i = 0; i < allCourseData.length; i++) {
-                if (allCourseData[i].name === this.state.course) {
+                if (allCourseData[i].name === course) {
                     matchCourseData = allCourseData[i];
                 }
             }
@@ -68,7 +50,6 @@ class Scorecard extends Component {
     
             // console.log(this.state);
         })
-    
         .then(() => {
             this.setState({ loading: false });
         })
@@ -88,10 +69,11 @@ class Scorecard extends Component {
             const sideIn = this.state.sideIn;
             const parData = this.state.parData;
             const hcpData = this.state.hcpData;
-            const players = this.state.players;
+            const players = this.props.players;
             const username = this.props.username;
             const indexToSplice = players.indexOf(username);
             players.splice(1, indexToSplice);
+            console.log(players);
             
             return(
                 <div>
@@ -227,7 +209,7 @@ class Scorecard extends Component {
         } else {
             return(
                 <div>
-                    <p>Loading...</p>
+                    <p id="loading-msg">Loading...</p>
                 </div>
             )
         }

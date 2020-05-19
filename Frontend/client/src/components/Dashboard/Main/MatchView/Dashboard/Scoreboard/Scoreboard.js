@@ -8,29 +8,11 @@ class Scoreboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      players: [],
-      course: "",
-      scorecardView: "",
+      // username: "",
+      // players: [],
+      // course: "",
+      scorecardView: this.props.userData.username
     };
-  }
-
-  getMatchData = username => {
-    return axios.put("/api/users", { username });
-  };
-
-  componentDidMount() {
-    const username = this.props.username;
-    this.getMatchData(username).then(res => {
-      console.log(res.data);
-      const players = res.data[0].currentMatch[0].players;
-      const course = res.data[0].currentMatch[0].courseName;
-
-      this.setState({ username: username });
-      this.setState({ players: players });
-      this.setState({ course: course });
-      this.setState({ scorecardView: username });
-    });
   }
 
   handleCardViewChange(event) {
@@ -40,23 +22,42 @@ class Scoreboard extends Component {
   }
 
   render() {
-    return (
-      <div id="scoreboard">
-        <CardSelector
-          username={this.props.username}
-          players={this.state.players}
-          scorecardView={this.state.scorecardView}
-          handleCardViewChange={this.handleCardViewChange.bind(this)}
-        />
-        <Scorecard
-          username={this.props.username}
-          players={this.state.players}
-          course={this.state.course}
-          scorecardView={this.state.scorecardView}
-          handleCardViewChange={this.handleCardViewChange.bind(this)}
-        />
-      </div>
-    );
+    const username = this.props.userData.username;
+    const list = this.props.currentMatch.participants;
+    const players = [];
+    for (let i = 0; i < list.length; i++) {
+      players.push(list[i].username);
+    }
+    const course = this.props.currentMatch.course;
+    
+    if (username === undefined || list === undefined || course === undefined) {
+      console.log("waiting for props...")
+      return(
+        <div>
+          <p>Loading...</p>
+        </div>
+      )
+    } else {
+      console.log(username, list, players, course);
+
+      return(
+        <div id="scoreboard">
+          <CardSelector
+            username={username}
+            players={players}
+            scorecardView={this.state.scorecardView}
+            handleCardViewChange={this.handleCardViewChange.bind(this)}
+          />
+          <Scorecard
+            username={username}
+            players={players}
+            course={course}
+            scorecardView={this.state.scorecardView}
+            handleCardViewChange={this.handleCardViewChange.bind(this)}
+          />
+        </div>
+      );
+    }
   }
 }
 
