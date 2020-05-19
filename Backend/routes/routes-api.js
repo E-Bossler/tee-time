@@ -421,6 +421,7 @@ router.get("/api/match/history", (req, res, next) => {
 
 //GET CURRENT MATCH
 router.put("/api/match/current", (req, res) => {
+  console.log(req.body); // matchId object
   db.Match.find({ _id: req.body.matchId }).then(data => {
     res.json(data);
   });
@@ -428,7 +429,6 @@ router.put("/api/match/current", (req, res) => {
 
 //SAVES MESSAGES TO CHAT LOG IN MATCH
 router.post("/api/match/current/saveChatMessage", (req, res) => {
-  console.log(req.body);
   const matchId = req.body.userData.currentMatchId;
   db.Match.findOneAndUpdate(
     { _id: matchId },
@@ -442,12 +442,14 @@ router.post("/api/match/current/saveChatMessage", (req, res) => {
       },
     }
   ).then(data => {
+    console.log(data);
     res.json(data);
   });
 });
 
 //Get Chat Message Log
 router.put("/api/match/current/getChat", (req, res) => {
+  console.log(req.body);
   const currentMatch = req.body.userData.currentMatchId;
 
   db.Match.find({ _id: currentMatch }).then(data => {

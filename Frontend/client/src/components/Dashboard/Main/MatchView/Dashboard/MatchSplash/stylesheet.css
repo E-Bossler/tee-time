@@ -31,7 +31,7 @@
 #match-splash #scoreboard-msg,
 #match-splash #chatroom-msg {
   line-height: 2em;
-  margin: 15px 0;
+  margin: 8px 0;
 }
 
 #match-splash #scoreboard-msg span,
