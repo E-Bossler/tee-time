@@ -77,11 +77,11 @@ class Friends extends Component {
         if (res.status === 201) {
           swal("SENT", `Friend Request sent to: ${friend}`, 'success');
         } else if (res.data === "Friend not Found.") {
-          swal(":(", "Unfortunately, that user does not exist.", 'warning');
+          swal("Oh no...", "Unfortunately, that user does not exist.", 'warning');
         } else if (res.data === "Cannot add yourself.") {
           swal("Wait...", "You can't add yourself.","error")
         } else if (res.data === "Already friended.") {
-          swal("Can't do that!", `${friend} is already your friend.`, "error")
+          swal("Already friended", `${friend} is already your friend.`, "error")
         } else if (res.data === "Already sent request.") {
           swal("Relax", `${friend} hasn't responded to your request yet.`,"error")
         }
