@@ -25,20 +25,16 @@ const UserSchema = new Schema({
         type: String,
         trim: true,
       },
+      holes: [
+        {
+          name: Number,
+          score: Number,
+        },
+      ],
       players: [
         {
           username: String,
           friendId: String,
-          holes: [
-            {
-              hole: {
-                name: Number,
-                score: Number,
-                par: Number,
-                yards: Number,
-              },
-            },
-          ],
         },
       ],
     },
