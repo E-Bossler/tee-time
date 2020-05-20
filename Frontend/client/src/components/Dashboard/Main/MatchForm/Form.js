@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import GolfAPI from "../../../utils/golfGeniusAPI";
 import CourseInput from "./CourseInput";
@@ -22,7 +22,6 @@ class Form extends Component {
       matchCourse: "",
       courses: [],
       courseFound: true,
-      redirectToReferrer: false,
     };
   }
 
@@ -131,9 +130,7 @@ class Form extends Component {
     const userData = this.props.userData;
     const allPlayers = [...players, userData];
 
-    axios.post("/dashboard/api/match/new", { course, allPlayers }).then(res => {
-      this.setState({ redirectToReferrer: true });
-    });
+    axios.post("/dashboard/api/match/new", { course, allPlayers });
   }
 
   handleFriendSubmit(event) {
@@ -171,10 +168,6 @@ class Form extends Component {
   }
 
   render() {
-    const redirectToReferrer = this.state.redirectToReferrer;
-    if (redirectToReferrer === true) {
-      return <Redirect to="/dashboard/matchview" />;
-    }
     return (
       <div id="form">
         <CourseInput
@@ -201,13 +194,14 @@ class Form extends Component {
           matchFriends={this.state.matchFriends}
           handleFriendDelete={this.handleFriendDelete.bind(this)}
         />
-
-        <button
-          onClick={this.handleMatchSubmit.bind(this)}
-          id="start-match-btn"
-        >
-          <p>Start</p>
-        </button>
+        <Link to="/dashboard/matchView">
+          <button
+            onClick={this.handleMatchSubmit.bind(this)}
+            id="start-match-btn"
+          >
+            <p>Start</p>
+          </button>
+        </Link>
       </div>
     );
   }

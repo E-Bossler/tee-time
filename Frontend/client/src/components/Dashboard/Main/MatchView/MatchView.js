@@ -9,16 +9,19 @@ class MatchView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentMatch: {},
+      currentMatch: "",
     };
   }
 
-  componentDidMount() {
-    const matchId = this.props.userData.currentMatchId;
-    axios.put("/api/match/current", { matchId }).then(res => {
-      console.log(res.data);
-      const currentMatch = res.data[0];
-      this.setState({ currentMatch: currentMatch });
+  async componentDidMount() {
+    const username = this.props.userData.username;
+    await axios.put("/api/users", { username }).then(res => {
+      const matchId = res.data[0].currentMatch.courseId;
+      axios.put("/api/match/current", { matchId }).then(res => {
+        const currentMatch = res.data[0];
+        this.setState({ currentMatch: currentMatch });
+        this.forceUpdate();
+      });
     });
   }
 
