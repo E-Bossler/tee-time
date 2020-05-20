@@ -53,6 +53,7 @@ class Main extends Component {
                 axios
                   .put("/api/dashboard/userMenu/friends", { username })
                   .then(res => {
+                    console.log(res.data[0]);
                     const userData = {
                       username: res.data[0].username,
                       email: res.data[0].email,
@@ -61,13 +62,14 @@ class Main extends Component {
                     };
 
                     if (res.data[0].currentMatch[0] === undefined) {
-                      console.log('')
+                      console.log("no current match");
                     } else {
                       userData.currentMatchId =
                         res.data[0].currentMatch[0].courseId;
                     }
 
                     this.setState({ userData });
+                    console.log(this.state.userData);
                   });
               }
             }

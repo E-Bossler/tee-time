@@ -52,15 +52,15 @@ router.put("/api/dashboard/matchView/friends", (req, res) => {
 });
 
 // Finds Matches when user goes to Matches (fetches all matches in DB right now)
-router.get("/api/dashboard/userMenu/matches", (req, res) => {
-  db.Match.find({})
-    .then(data => {
-      res.json(data);
-    })
-    .catch(({ message }) => {
-      console.log(message);
-    });
-});
+// router.get("/api/dashboard/userMenu/matches", (req, res) => {
+//   db.Match.find({})
+//     .then(data => {
+//       res.json(data);
+//     })
+//     .catch(({ message }) => {
+//       console.log(message);
+//     });
+// });
 
 router.put("/api/dashboard/userMenu/friends", (req, res) => {
   db.User.find({
@@ -87,11 +87,9 @@ router.put("/api/dashboard/userMenu/friendRequests", (req, res) => {
 });
 
 router.post("/api/dashboard/userMenu/friends", (req, res) => {
-  console.log(req.body.friend);
   db.User.find({
     username: req.body.friend,
   }).then(data => {
-    console.log(data[0]);
     if (data[0] === undefined) {
       res.json("Friend not Found.");
     } else if (req.body.friend === req.body.user) {
@@ -99,6 +97,7 @@ router.post("/api/dashboard/userMenu/friends", (req, res) => {
     } else {
       db.User.find({ username: req.body.user })
         .then(userData => {
+          console.log(userData[0]);
           for (let i = 0; i < userData[0].friends.length; i++) {
             if (userData[0].friends[i].username === req.body.friend) {
               return res.json("Already friended.");
@@ -116,6 +115,7 @@ router.post("/api/dashboard/userMenu/friends", (req, res) => {
                 friendRequests: {
                   friendId: userData[0]._id,
                   username: userData[0].username,
+                  currentMatchId: req.body.userData.currentMatchId,
                 },
               },
             }
@@ -134,6 +134,7 @@ router.post("/api/dashboard/userMenu/friendRequests", (req, res) => {
   console.log(req.body.request);
   db.User.find({ username: req.body.username }).then(userData => {
     console.log(userData);
+    console.log(req.body.userData);
     db.User.findOneAndUpdate(
       {
         _id: req.body.request.friendId,
@@ -143,6 +144,7 @@ router.post("/api/dashboard/userMenu/friendRequests", (req, res) => {
           friends: {
             friendId: userData[0]._id,
             username: userData[0].username,
+            currentMatchId: req.body.userData.currentMatchId,
           },
         },
       }
@@ -162,6 +164,7 @@ router.post("/api/dashboard/userMenu/friendRequests", (req, res) => {
           friends: {
             friendId: req.body.request.friendId,
             username: req.body.request.username,
+            currentMatchId: req.body.request.currentMatchId,
           },
         },
         $pull: { friendRequests: req.body.request },
@@ -357,7 +360,7 @@ router.get("/api/account/logout", (req, res, next) => {
     },
     updateLogOut,
     null,
-    (err, sessions) => {
+    err => {
       if (err) {
         return res.send({
           success: false,
@@ -376,27 +379,38 @@ router.get("/api/account/logout", (req, res, next) => {
 // SET UP A  NEW MATCH
 
 router.post("/dashboard/api/match/new", (req, res, next) => {
-  const players = req.body.allPlayers.map(player => player.username);
   db.Match.collection
     .insertOne({
       course: req.body.course,
       participants: req.body.allPlayers,
     })
     .then(data => {
-      db.User.updateMany(
-        { username: { $in: players } },
-        {
-          $set: {
-            currentMatch: {
-              courseId: data.ops[0]._id,
-              courseName: data.ops[0].course,
-              players: data.ops[0].participants,
-            },
-          },
-        }
-      ).then(data => {
-        res.json(data);
+      req.body.allPlayers.map((player, i) => {
+        const match = player.currentMatchId;
+        // console.log("Current Match ID", match);
+        // db.User.updateMany(
+        //   { username: { $in: player.username } },
+        //   {
+        //     $push: {
+        //       matchHistory: player.currentMatchId,
+        //     },
+        //     $set: {
+        //       currentMatch: {
+        //         courseId: data.ops[0]._id,
+        //         courseName: data.ops[0].course,
+        //         players: data.ops[0].participants,
+        //       },
+        //     },
+        //   }
+        // ).then(data => {
+        //   res.json(data);
+        // });
       });
+      // const lastMatch = req.body.allPlayers[0].currentMatch;
+
+      // console.log("Players: ", players);
+      // console.log("Req Body", req.body);
+      // console.log(".then Data", data.ops);
     })
     .catch(err => {
       console.log(err);
@@ -407,7 +421,6 @@ router.post("/dashboard/api/match/new", (req, res, next) => {
 
 router.post("/api/round/new", (req, res, next) => {
   //STILL NEED TO SET UP THIS ROUTE
-  
 });
 
 // ADD MATCH TO HISTORY
@@ -425,20 +438,19 @@ router.get("/api/match/history", (req, res, next) => {
 router.post("/api/user/score", (req, res) => {
   console.log(req.body);
   db.User.findOneAndUpdate(
-    {_id: req.body.userData.id},
+    { _id: req.body.userData.id },
     {
-      currentMatch: { 
-          $push: { 
-              holes: {
-                  name: req.body.currentHole,
-                  score: req.body.currentScore
-              } 
-          }
-      }
+      currentMatch: {
+        $push: {
+          holes: {
+            name: req.body.currentHole,
+            score: req.body.currentScore,
+          },
+        },
+      },
     }
-  )
-})
-
+  );
+});
 
 //GET CURRENT MATCH
 router.put("/api/match/current", (req, res) => {
