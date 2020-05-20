@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
 import axios from "axios";
+import swal from "sweetalert";
 import TabsContainer from "./Tabs/TabsContainer";
 import DashboardContainer from "./Dashboard/DashboardContainer";
 import "./stylesheet.css";
@@ -10,6 +11,7 @@ class MatchView extends Component {
     super(props);
     this.state = {
       currentMatch: "",
+      error: false,
     };
   }
 
@@ -19,13 +21,25 @@ class MatchView extends Component {
       const matchId = res.data[0].currentMatch.courseId;
       axios.put("/api/match/current", { matchId }).then(res => {
         const currentMatch = res.data[0];
-        this.setState({ currentMatch: currentMatch });
-        this.forceUpdate();
+        if (currentMatch === undefined) {
+          swal({
+            title: "No Current Match",
+            text:
+              "You're not currently playing in a match! Go to 'New Match' to tee off!",
+            icon: "warning",
+          });
+          this.setState({ error: true });
+        } else {
+          this.setState({ currentMatch: currentMatch });
+        }
       });
     });
   }
 
   render() {
+    if (this.state.error === true) {
+      return <Redirect to="/dashboard/matchForm" />;
+    }
     return (
       <div>
         <Router>

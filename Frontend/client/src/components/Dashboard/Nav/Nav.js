@@ -16,7 +16,6 @@ class Nav extends Component {
       this.setState({ clicked: false });
     } else {
       this.setState({ clicked: true });
-
     }
   }
 

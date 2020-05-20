@@ -52,15 +52,15 @@ router.put("/api/dashboard/matchView/friends", (req, res) => {
 });
 
 // Finds Matches when user goes to Matches (fetches all matches in DB right now)
-// router.get("/api/dashboard/userMenu/matches", (req, res) => {
-//   db.Match.find({})
-//     .then(data => {
-//       res.json(data);
-//     })
-//     .catch(({ message }) => {
-//       console.log(message);
-//     });
-// });
+router.get("/api/dashboard/userMenu/matches", (req, res) => {
+  db.Match.find({})
+    .then(data => {
+      res.json(data);
+    })
+    .catch(({ message }) => {
+      console.log(message);
+    });
+});
 
 router.put("/api/dashboard/userMenu/friends", (req, res) => {
   db.User.find({

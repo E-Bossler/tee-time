@@ -85,7 +85,7 @@ export default class Chat extends Component {
           <ul className={this.state.user ? "user-msgs" : "friend-msgs"}>
             {this.state.chatMessages.map((chatMessage, i) => (
               <li key={i} value={chatMessage.id} className="message">
-                {/* {chatMessage.messager} */}
+                {chatMessage.messager}
                 <br />
                 {chatMessage.message}
               </li>
