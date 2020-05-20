@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
 class Friends extends Component {
   constructor(props) {
@@ -22,7 +22,11 @@ class Friends extends Component {
     axios.put("/api/dashboard/userMenu/friends", { username }).then(res => {
       const friends = res.data[0].friends;
       if (friends === undefined) {
-        swal("Add Friends", "You do not yet have any friends added. Add some friends!", 'info');
+        swal(
+          "Add Friends",
+          "You do not yet have any friends added. Add some friends!",
+          "info"
+        );
       } else {
         this.setState({ friends });
       }
@@ -33,7 +37,7 @@ class Friends extends Component {
       .then(res => {
         const friendRequests = res.data[0].friendRequests;
         if (friendRequests === undefined) {
-          swal("No Friend Requests", "Meet some fellow golfers!", 'info');
+          swal("No Friend Requests", "Meet some fellow golfers!", "info");
         } else {
           this.setState({ friendRequests });
         }
@@ -44,13 +48,17 @@ class Friends extends Component {
     e.preventDefault();
     const request = JSON.parse(e.target.value);
     const username = this.state.username;
+    const userData = this.props.userData;
     axios
-      .post("/api/dashboard/userMenu/friendRequests", { request, username })
+      .post("/api/dashboard/userMenu/friendRequests", {
+        request,
+        username,
+        userData,
+      })
       .then(res => {
         const request = JSON.parse(res.config.data);
         const newFriend = request.request;
         const newFriendsArray = [...this.state.friends, newFriend];
-
         const filteredArray = this.state.friendRequests.filter(
           i => i._id !== newFriend._id
         );
@@ -69,22 +77,34 @@ class Friends extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const friend = this.state.friendName;
-    console.log(friend);
     const user = this.state.username;
+    const userData = this.props.userData;
 
     axios
-      .post("/api/dashboard/userMenu/friends", { friend, user })
+      .post("/api/dashboard/userMenu/friends", { friend, user, userData })
       .then(res => {
         if (res.status === 201) {
-          swal("SENT", `Friend Request sent to: ${friend}`, 'success');
+          swal("SENT", `Friend Request sent to: ${friend}`, "success");
         } else if (res.data === "Friend not Found.") {
-          swal("Oh no...", "Unfortunately, that user does not exist.", 'warning');
+          swal(
+            "Oh no...",
+            "Unfortunately, that user does not exist.",
+            "warning"
+          );
         } else if (res.data === "Cannot add yourself.") {
-          swal("Wait...", "You can't add yourself.","error")
+          swal("Wait...", "You can't add yourself.", "error");
         } else if (res.data === "Already friended.") {
-          swal("Already friended", `${friend} is already your friend.`, "error")
+          swal(
+            "Already friended",
+            `${friend} is already your friend.`,
+            "error"
+          );
         } else if (res.data === "Already sent request.") {
-          swal("Relax", `${friend} hasn't responded to your request yet.`,"error")
+          swal(
+            "Relax",
+            `${friend} hasn't responded to your request yet.`,
+            "error"
+          );
         }
 
         this.setState({ friendName: "" });
