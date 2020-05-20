@@ -4,7 +4,7 @@ import axios from "axios";
 import GolfAPI from "../../../utils/golfGeniusAPI";
 import CourseInput from "./CourseInput";
 import FriendsInput from "./FriendsInput";
-import MatchCourse from "./MatchCouse";
+import MatchCourse from "./MatchCourse";
 import FriendsList from "./FriendsList";
 import swal from "sweetalert";
 import "./stylesheet.css";
@@ -101,7 +101,6 @@ class Form extends Component {
 
   handleFriendInputChange(event) {
     let value = event.target.value;
-    console.log(value);
     this.setState({ friend: value });
   }
 

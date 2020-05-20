@@ -53,7 +53,6 @@ class Main extends Component {
                 axios
                   .put("/api/dashboard/userMenu/friends", { username })
                   .then(res => {
-                    console.log(res.data[0]);
                     const userData = {
                       username: res.data[0].username,
                       email: res.data[0].email,

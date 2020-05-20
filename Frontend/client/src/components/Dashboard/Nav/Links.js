@@ -3,52 +3,40 @@ import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import "./stylesheet.css";
-// import Login from "../../../pages/Login";
-// import App from '../../../App'
-// import Main from '../Main/Main'
-
-
-import {
-  // getFromStorage,
-  setInStorage
-} from "../../utils/storage"
-// import API from "../../utils/api";
+import { setInStorage } from "../../utils/storage";
 
 class Links extends Component {
-
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       toLogin: false,
-    }
+    };
   }
 
   handleLogOut(e) {
     e.preventDefault();
-    setInStorage('',{})
-    this.setState({toLogin: true})
-    window.location.href = '/login'
+    setInStorage("", {});
+    this.setState({ toLogin: true });
+    window.location.href = "/login";
   }
 
   render() {
-
     if (this.state.toLogin === true) {
-      return <Redirect exact to='/signup' />
+      return <Redirect exact to="/signup" />;
     }
 
     return (
-      <ul id="nav-links" 
-      className={
-        this.props.burgerClicked ? "slide-left" : "slide-right"}>
-
+      <ul
+        id="nav-links"
+        className={this.props.burgerClicked ? "slide-left" : "slide-right"}
+      >
         <li>
           <Link
             id="matchView-link"
             className="nav-link"
             onClick={this.props.animate}
-
-            to="/dashboard/matchView">
-
+            to="/dashboard/matchView"
+          >
             Current Match
           </Link>
         </li>
@@ -67,9 +55,8 @@ class Links extends Component {
             id="matchForm-link"
             className="nav-link"
             onClick={this.props.animate}
-
-            to="/dashboard/matchForm">
-
+            to="/dashboard/matchForm"
+          >
             New Match
           </Link>
         </li>
@@ -77,11 +64,9 @@ class Links extends Component {
           <Link
             id="logout-link"
             className="nav-link"
-            onClick={
-              (e) => {
-                // this.props.animate;
-                this.handleLogOut(e)
-              }}
+            onClick={e => {
+              this.handleLogOut(e);
+            }}
             to="/"
           >
             Logout

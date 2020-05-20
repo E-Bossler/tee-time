@@ -6,9 +6,6 @@ import Friends from "./Friends/Friends";
 import Matches from "./Matches/Matches";
 
 class UserMenu extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <div>
