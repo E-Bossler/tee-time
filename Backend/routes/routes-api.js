@@ -97,7 +97,6 @@ router.post("/api/dashboard/userMenu/friends", (req, res) => {
     } else {
       db.User.find({ username: req.body.user })
         .then(userData => {
-          console.log(userData[0]);
           for (let i = 0; i < userData[0].friends.length; i++) {
             if (userData[0].friends[i].username === req.body.friend) {
               return res.json("Already friended.");
@@ -108,6 +107,7 @@ router.post("/api/dashboard/userMenu/friends", (req, res) => {
               return res.json("Already sent request.");
             }
           }
+          console.log(req.body.userData);
           db.User.findOneAndUpdate(
             { username: req.body.friend },
             {
@@ -132,9 +132,8 @@ router.post("/api/dashboard/userMenu/friends", (req, res) => {
 
 router.post("/api/dashboard/userMenu/friendRequests", (req, res) => {
   console.log(req.body.request);
+  console.log("FULL REQ BODY: ", req.body);
   db.User.find({ username: req.body.username }).then(userData => {
-    console.log(userData);
-    console.log(req.body.userData);
     db.User.findOneAndUpdate(
       {
         _id: req.body.request.friendId,
@@ -193,7 +192,7 @@ router.get("/api/rounds", (req, res) => {
 
 router.post("/api/account/signup", (req, res) => {
   const { body } = req;
-  let { email, password, username, matchHistory } = body;
+  let { email, password, username } = body;
 
   if (!email) {
     return res.send({
@@ -240,7 +239,7 @@ router.post("/api/account/signup", (req, res) => {
   newUser.email = email;
   newUser.username = username;
   newUser.password = newUser.generateHash(password);
-  newUser.save((err, user) => {
+  newUser.save(err => {
     if (err) {
       return res.send({
         success: false,
@@ -387,24 +386,24 @@ router.post("/dashboard/api/match/new", (req, res, next) => {
     .then(data => {
       req.body.allPlayers.map((player, i) => {
         const match = player.currentMatchId;
-        // console.log("Current Match ID", match);
-        // db.User.updateMany(
-        //   { username: { $in: player.username } },
-        //   {
-        //     $push: {
-        //       matchHistory: player.currentMatchId,
-        //     },
-        //     $set: {
-        //       currentMatch: {
-        //         courseId: data.ops[0]._id,
-        //         courseName: data.ops[0].course,
-        //         players: data.ops[0].participants,
-        //       },
-        //     },
-        //   }
-        // ).then(data => {
-        //   res.json(data);
-        // });
+        console.log("Current Match ID", match);
+        db.User.updateMany(
+          { username: { $in: player.username } },
+          {
+            $push: {
+              matchHistory: player.currentMatchId,
+            },
+            $set: {
+              currentMatch: {
+                courseId: data.ops[0]._id,
+                courseName: data.ops[0].course,
+                players: data.ops[0].participants,
+              },
+            },
+          }
+        ).then(data => {
+          res.json(data);
+        });
       });
       // const lastMatch = req.body.allPlayers[0].currentMatch;
 

@@ -49,6 +49,10 @@ class Friends extends Component {
     const request = JSON.parse(e.target.value);
     const username = this.state.username;
     const userData = this.props.userData;
+
+    console.log("USER DATA BEING SENT: ", userData);
+
+    console.log("REQUEST DATA BEING SENT: ", request);
     axios
       .post("/api/dashboard/userMenu/friendRequests", {
         request,
@@ -79,6 +83,8 @@ class Friends extends Component {
     const friend = this.state.friendName;
     const user = this.state.username;
     const userData = this.props.userData;
+
+    console.log(userData);
 
     axios
       .post("/api/dashboard/userMenu/friends", { friend, user, userData })

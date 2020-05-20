@@ -61,11 +61,11 @@ class Main extends Component {
                       currentMatchId: "",
                     };
 
-                    if (res.data[0].currentMatch[0] === undefined) {
+                    if (res.data[0].currentMatch === undefined) {
                       console.log("no current match");
                     } else {
                       userData.currentMatchId =
-                        res.data[0].currentMatch[0].courseId;
+                        res.data[0].currentMatch.courseId;
                     }
 
                     this.setState({ userData });

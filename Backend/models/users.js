@@ -18,28 +18,27 @@ const UserSchema = new Schema({
     trim: true,
     required: "Please enter a valid Username",
   },
-  currentMatch: [
-    {
-      courseId: String,
-      courseName: {
-        type: String,
-        trim: true,
-      },
-      holes: [
-        {
-          name: Number,
-          score: Number,
-        },
-      ],
-      players: [
-        {
-          username: String,
-          friendId: String,
-          currentMatchId: String,
-        },
-      ],
+  currentMatch: {
+    courseId: String,
+    courseName: {
+      type: String,
+      trim: true,
     },
-  ],
+    holes: [
+      {
+        name: Number,
+        score: Number,
+      },
+    ],
+    players: [
+      {
+        username: String,
+        friendId: String,
+        currentMatchId: String,
+      },
+    ],
+  },
+
   matchHistory: {
     type: Array,
   },

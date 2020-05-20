@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const db = require("../models");
 const express = require("express");
+const bcrypt = require("bcrypt");
 const app = express();
 
 var bodyParser = require("body-parser");
@@ -17,37 +18,41 @@ mongoose.connect("mongodb://localhost/tee-time", {
 
 const userSeed = [
   {
-    email: "eric@test.gmail.com",
-    password: "password",
-    username: "erictest",
-    matchHistory: [1, 2, 3, 4],
+    email: "dustin.guy.jackson@gmail.com",
+    password: bcrypt.hashSync("Raptor99!", bcrypt.genSaltSync(8), null),
+    username: "dustin.guy.jackson@gmail.com",
+    currentMatch: {},
+    matchHistory: [],
     isDeleted: false,
     friends: [],
     friendRequests: [],
   },
   {
-    email: "Austen@test.gmail.com",
-    password: "password",
-    username: "austentest",
-    matchHistory: [1, 2, 3, 4],
+    email: "amber@gmail.com",
+    password: bcrypt.hashSync("ber", bcrypt.genSaltSync(8), null),
+    username: "amber@gmail.com",
+    currentMatch: {},
+    matchHistory: [],
     isDeleted: false,
     friends: [],
     friendRequests: [],
   },
   {
-    email: "Dustin@test.gmail.com",
-    password: "password",
-    username: "dustintest",
-    matchHistory: [1, 2, 3, 4],
+    email: "hardibois@gmail.com",
+    password: bcrypt.hashSync("har", bcrypt.genSaltSync(8), null),
+    username: "hardibois@gmail.com",
+    currentMatch: {},
+    matchHistory: [],
     isDeleted: false,
     friends: [],
     friendRequests: [],
   },
   {
-    email: "Jon@test.gmail.com",
-    password: "password",
-    username: "jontest",
-    matchHistory: [1, 2, 3, 4],
+    email: "alhommer5678@gmail.com",
+    password: bcrypt.hashSync("Raptor99!", bcrypt.genSaltSync(8), null),
+    username: "alhommer5678@gmail.com",
+    currentMatch: {},
+    matchHistory: [],
     isDeleted: false,
     friends: [],
     friendRequests: [],
