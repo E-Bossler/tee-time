@@ -69,6 +69,32 @@ export default class Chat extends Component {
     this.scrollToBottom();
   }
 
+  handleUserChange() {
+    // const userMsg = this.state.user;
+    const lastMsgObj = this.state.chatMessages.pop();
+    const user = lastMsgObj.messager;
+    if (user === this.props.userData.username) {
+      console.log("my message");
+      this.setState({ user: true});
+    } else {
+      console.log("friend's message");
+      this.setState({ user: false});
+    }
+  }
+
+  handleUserChange() {
+    // const userMsg = this.state.user;
+    const lastMsgObj = this.state.chatMessages.pop();
+    const user = lastMsgObj.messager;
+    if (user === this.props.userData.username) {
+      console.log("my message");
+      this.setState({ user: true});
+    } else {
+      console.log("friend's message");
+      this.setState({ user: false});
+    }
+  }
+
   render() {
     return (
       <div id="chat-container">
@@ -76,7 +102,8 @@ export default class Chat extends Component {
           <ul className={this.state.user ? "user-msgs" : "friend-msgs"}>
             {this.state.chatMessages.map((chatMessage, i) => (
               <li key={i} value={chatMessage.id} className="message">
-                {chatMessage.messager}
+                
+                {/* {chatMessage.messager} */}
                 <br />
                 {chatMessage.message}
               </li>

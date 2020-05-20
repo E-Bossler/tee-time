@@ -62,4 +62,12 @@
 #tabs-container #tabs-list .selected-tab .nav-link {
   color: white;
 }
+
+#tabs-container #tabs-list .selected-tab ::nth-child(2) {
+  border-right: none;
+}
+
+#tabs-container #tabs-list ::nth-child(1) .selected-tab {
+  border-left: none;
+}
 /*# sourceMappingURL=stylesheet.css.map */

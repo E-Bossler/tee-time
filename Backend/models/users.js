@@ -29,7 +29,7 @@ const UserSchema = new Schema({
         {
           name: Number,
           score: Number,
-        },
+        }
       ],
       players: [
         {
