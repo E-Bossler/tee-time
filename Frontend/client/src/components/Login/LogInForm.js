@@ -23,7 +23,6 @@ class LogInForm extends Component {
       if (successful) {
         // console.log("Dan look here", result)
         setInStorage(result.data.token, result);
-        swal("Hello",'Try a new course!',"success")
         // window.location.href = '/dashboard'
         this.setState({ toDashboard: true });
       } else {
