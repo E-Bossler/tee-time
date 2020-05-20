@@ -378,6 +378,7 @@ router.get("/api/account/logout", (req, res, next) => {
 // SET UP A  NEW MATCH
 
 router.post("/dashboard/api/match/new", (req, res, next) => {
+  console.log(req.body);
   db.Match.collection
     .insertOne({
       course: req.body.course,
@@ -385,8 +386,6 @@ router.post("/dashboard/api/match/new", (req, res, next) => {
     })
     .then(data => {
       req.body.allPlayers.map((player, i) => {
-        const match = player.currentMatchId;
-        console.log("Current Match ID", match);
         db.User.updateMany(
           { username: { $in: player.username } },
           {
@@ -405,11 +404,6 @@ router.post("/dashboard/api/match/new", (req, res, next) => {
           res.json(data);
         });
       });
-      // const lastMatch = req.body.allPlayers[0].currentMatch;
-
-      // console.log("Players: ", players);
-      // console.log("Req Body", req.body);
-      // console.log(".then Data", data.ops);
     })
     .catch(err => {
       console.log(err);

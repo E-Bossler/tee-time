@@ -101,6 +101,7 @@ class Form extends Component {
 
   handleFriendInputChange(event) {
     let value = event.target.value;
+    console.log(value);
     this.setState({ friend: value });
   }
 
@@ -132,8 +133,7 @@ class Form extends Component {
     const allPlayers = [...players, userData];
 
     axios.post("/dashboard/api/match/new", { course, allPlayers }).then(res => {
-      console.log(res.data);
-      // this.setState({ redirectToReferrer: true });
+      this.setState({ redirectToReferrer: true });
     });
   }
 
