@@ -87,9 +87,11 @@ router.put("/api/dashboard/userMenu/friendRequests", (req, res) => {
 });
 
 router.post("/api/dashboard/userMenu/friends", (req, res) => {
+  console.log(req.body.friend);
   db.User.find({
     username: req.body.friend,
   }).then(data => {
+    console.log(data[0]);
     if (data[0] === undefined) {
       res.json("Friend not Found.");
     } else if (req.body.friend === req.body.user) {

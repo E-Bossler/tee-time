@@ -57,8 +57,17 @@ class Main extends Component {
                       username: res.data[0].username,
                       email: res.data[0].email,
                       id: res.data[0]._id,
-                      currentMatchId: res.data[0].currentMatch[0].courseId,
+                      currentMatchId: "",
                     };
+
+                    if (res.data[0].currentMatch[0] === undefined) {
+                      alert(
+                        "You haven't started a game of golf yet! Find some friends, then let's hit the green!"
+                      );
+                    } else {
+                      userData.currentMatchId =
+                        res.data[0].currentMatch[0].courseId;
+                    }
 
                     this.setState({ userData });
                   });

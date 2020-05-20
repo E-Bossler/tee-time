@@ -64,9 +64,9 @@ export default class Chat extends Component {
         this.setState({
           chatMessages: [...this.state.chatMessages, chatMessageObj],
         });
-        this.scrollToBottom();
         this.setState({ chatMessage: "" });
       });
+    this.scrollToBottom();
   }
 
   render() {

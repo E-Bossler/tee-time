@@ -68,6 +68,7 @@ class Friends extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const friend = this.state.friendName;
+    console.log(friend);
     const user = this.state.username;
 
     axios
@@ -93,12 +94,12 @@ class Friends extends Component {
     return (
       <div>
         <h2>Friends</h2>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit.bind(this)}>
           <label>Find Friends!</label>
           <input
             onKeyDown={event => (event.keyCode === 13 ? this.addItem : "")}
             className="friend-name"
-            onChange={this.handleChange}
+            onChange={this.handleChange.bind(this)}
           ></input>
           <input
             onKeyDown={event => (event.keyCode === 13 ? this.addItem : "")}
