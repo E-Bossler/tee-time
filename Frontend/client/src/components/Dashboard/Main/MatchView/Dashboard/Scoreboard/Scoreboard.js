@@ -48,6 +48,7 @@ class Scoreboard extends Component {
             handleCardViewChange={this.handleCardViewChange.bind(this)}
           />
           <Scorecard
+            userData={this.props.userData}
             username={username}
             players={players}
             course={course}

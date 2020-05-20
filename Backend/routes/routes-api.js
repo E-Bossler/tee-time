@@ -407,6 +407,7 @@ router.post("/dashboard/api/match/new", (req, res, next) => {
 
 router.post("/api/round/new", (req, res, next) => {
   //STILL NEED TO SET UP THIS ROUTE
+  
 });
 
 // ADD MATCH TO HISTORY
@@ -420,6 +421,24 @@ router.post("/api/match/history", (req, res, next) => {
 router.get("/api/match/history", (req, res, next) => {
   //STILL NEED TO SET UP THIS ROUTE
 });
+
+router.post("/api/user/score", (req, res) => {
+  console.log(req.body);
+  db.User.findOneAndUpdate(
+    {_id: req.body.userData.id},
+    {
+      currentMatch: { 
+          $push: { 
+              holes: {
+                  name: req.body.currentHole,
+                  score: req.body.currentScore
+              } 
+          }
+      }
+    }
+  )
+})
+
 
 //GET CURRENT MATCH
 router.put("/api/match/current", (req, res) => {
