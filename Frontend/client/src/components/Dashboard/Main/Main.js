@@ -61,9 +61,7 @@ class Main extends Component {
                     };
 
                     if (res.data[0].currentMatch[0] === undefined) {
-                      alert(
-                        "You haven't started a game of golf yet! Find some friends, then let's hit the green!"
-                      );
+                      console.log('')
                     } else {
                       userData.currentMatchId =
                         res.data[0].currentMatch[0].courseId;
