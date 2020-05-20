@@ -3,6 +3,7 @@ import api from "../utils/api";
 import "./stylesheet.css";
 import { Redirect } from "react-router-dom";
 import { setInStorage } from "../utils/storage";
+import swal from 'sweetalert'
 
 class LogInForm extends Component {
   constructor(props) {
@@ -22,11 +23,11 @@ class LogInForm extends Component {
       if (successful) {
         // console.log("Dan look here", result)
         setInStorage(result.data.token, result);
-
+        swal("Hello",'Try a new course!',"success")
         // window.location.href = '/dashboard'
         this.setState({ toDashboard: true });
       } else {
-        alert("Error: your login data is wrong.");
+        swal("ERROR",'Your login information is incorrect.',"error")
       }
     });
   }

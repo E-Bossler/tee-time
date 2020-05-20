@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import swal from 'sweetalert';
 
 class Friends extends Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class Friends extends Component {
     axios.put("/api/dashboard/userMenu/friends", { username }).then(res => {
       const friends = res.data[0].friends;
       if (friends === undefined) {
-        alert("You don't have any friends! Add friends to become popular!");
+        swal("Add Friends", "You do not yet have any friends added. Add some friends!", 'info');
       } else {
         this.setState({ friends });
       }
@@ -32,7 +33,7 @@ class Friends extends Component {
       .then(res => {
         const friendRequests = res.data[0].friendRequests;
         if (friendRequests === undefined) {
-          alert("No friend requests yet - golf more!");
+          swal("No Friend Requests", "Meet some fellow golfers!", 'info');
         } else {
           this.setState({ friendRequests });
         }
@@ -75,15 +76,15 @@ class Friends extends Component {
       .post("/api/dashboard/userMenu/friends", { friend, user })
       .then(res => {
         if (res.status === 201) {
-          alert(`Friend Request sent to: ${friend}`);
+          swal("SENT", `Friend Request sent to: ${friend}`, 'success');
         } else if (res.data === "Friend not Found.") {
-          alert("You have added a friend that isn't in our records.");
+          swal(":(", "Unfortunately, that user does not exist.", 'warning');
         } else if (res.data === "Cannot add yourself.") {
-          alert("You cannot add yourself.");
+          swal("Wait...", "You can't add yourself.","error")
         } else if (res.data === "Already friended.") {
-          alert(`${friend} is already your friend!`);
+          swal("Can't do that!", `${friend} is already your friend.`, "error")
         } else if (res.data === "Already sent request.") {
-          alert(`${friend} has already been sent a request.`);
+          swal("Relax", `${friend} hasn't responded to your request yet.`,"error")
         }
 
         this.setState({ friendName: "" });

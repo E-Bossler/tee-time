@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import API from "../utils/api";
 import "./stylesheet.css";
 import { Redirect } from "react-router-dom";
+import swal from 'sweetalert'
 
 class SignUpForm extends Component {
 
@@ -22,13 +23,13 @@ class SignUpForm extends Component {
         API.signUp(email, password, username)
             .then(
                 result => {
-                    console.log(result.data.success, result.data.message)
                     let successful = result.data.success;
                     if (successful) {
                         // window.location.href = '/'
+                        swal("SUCCESS",'You have created an account. Please log in to your account.',"success")
                         this.setState({ toLogin: true });
                     } else {
-                        alert('Error: this account already exists.')
+                        swal("ERROR",'This account already exists.',"error")
                     }
                 }
             )

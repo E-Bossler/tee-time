@@ -6,6 +6,7 @@ import CourseInput from "./CourseInput";
 import FriendsInput from "./FriendsInput";
 import MatchCourse from "./MatchCouse";
 import FriendsList from "./FriendsList";
+import swal from 'sweetalert';
 import "./stylesheet.css";
 
 class Form extends Component {
@@ -31,7 +32,7 @@ class Form extends Component {
       const friendsData = res.data[0].friends;
       const friends = [];
       if (friendsData === undefined) {
-        alert("You don't have any friends! Add friends to become popular!");
+        swal("Add Friends", "You do not yet have any friends added. Add some friends!", 'info');
       } else {
         for (let i = 0; i < friendsData.length; i++) {
           friends.push(friendsData[i]);
