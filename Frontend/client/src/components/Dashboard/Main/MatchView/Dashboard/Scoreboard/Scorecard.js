@@ -232,9 +232,16 @@ class Scorecard extends Component {
             )
         } else {
             return(
-                <div>
+                <div id="loading-animation">
                     <div className="lds-roller">
-                        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
                     </div>
                     {/* <p id="loading-msg">Loading...</p> */}
                 </div>
