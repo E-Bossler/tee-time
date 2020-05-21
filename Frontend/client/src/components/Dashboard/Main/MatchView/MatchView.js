@@ -30,7 +30,7 @@ class MatchView extends Component {
           });
           this.setState({ error: true });
         } else {
-          this.setState({ currentMatch: currentMatch });
+          this.setState({ currentMatch });
         }
       });
     });

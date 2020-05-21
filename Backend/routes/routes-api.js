@@ -389,9 +389,9 @@ router.post("/dashboard/api/match/new", (req, res, next) => {
         db.User.updateMany(
           { username: { $in: player.username } },
           {
-            $push: {
-              matchHistory: player.currentMatchId,
-            },
+            // $push: {
+            //   matchHistory: player.currentMatchId,
+            // },
             $set: {
               currentMatch: {
                 courseId: data.ops[0]._id,
