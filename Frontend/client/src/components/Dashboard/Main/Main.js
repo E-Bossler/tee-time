@@ -58,6 +58,8 @@ class Main extends Component {
                       email: res.data[0].email,
                       id: res.data[0]._id,
                       currentMatchId: "",
+                      currentCourse: "",
+                      currentCoursePlayers: "",
                     };
 
                     if (res.data[0].currentMatch === undefined) {
@@ -65,10 +67,13 @@ class Main extends Component {
                     } else {
                       userData.currentMatchId =
                         res.data[0].currentMatch.courseId;
+                      userData.currentCourse =
+                        res.data[0].currentMatch.courseName;
+                      userData.currentCoursePlayers =
+                        res.data[0].currentMatch.players;
                     }
 
                     this.setState({ userData });
-                    console.log(this.state.userData);
                   });
               }
             }
