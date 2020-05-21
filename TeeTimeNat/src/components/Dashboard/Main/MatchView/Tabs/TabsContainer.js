@@ -1,26 +1,13 @@
-import React from 'react';
-import {View} from 'react-native';
-import {Route} from 'react-router-native';
-import Tracker from './Tracker';
-import Chat from './Chat';
-import Stats from './Stats';
+import React from "react";
+import NavTabs from "./NavTabs";
+import "./stylesheet.css";
 
 function TabsContainer() {
-  return (
-    <View>
-      <Route path="/dashboard/game/tracker">
-        <Tracker />
-      </Route>
-
-      <Route path="/dashboard/game/chat">
-        <Chat />
-      </Route>
-
-      <Route path="/dashboard/game/stats">
-        <Stats />
-      </Route>
-    </View>
-  );
-}
+    return(
+        <div id="tabs-container">
+            <NavTabs />
+        </div>
+    );
+};
 
 export default TabsContainer;

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import { Link } from "react-router-dom";
-
+import { Redirect, Link } from "react-router-dom";
 import "./stylesheet.css";
 import { setInStorage } from "../../utils/storage";
 
