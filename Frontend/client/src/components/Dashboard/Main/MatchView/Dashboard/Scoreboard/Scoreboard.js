@@ -17,7 +17,7 @@ class Scoreboard extends Component {
   handleCardViewChange(event) {
     const radioValue = event.target.value;
     this.setState({ scorecardView: radioValue });
-    console.log(this.state.scorecardView);
+    // console.log(this.state.scorecardView);
   }
 
   render() {
@@ -37,7 +37,7 @@ class Scoreboard extends Component {
         </div>
       );
     } else {
-      console.log(username, list, players, course);
+      // console.log(username, list, players, course);
 
       return (
         <div id="scoreboard">

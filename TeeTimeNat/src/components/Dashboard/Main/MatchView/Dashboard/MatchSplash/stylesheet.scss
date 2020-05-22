@@ -1,0 +1,43 @@
+#match-splash {
+    // border: 1px solid black;
+    font-family: 'Open Sans', sans-serif;
+    margin: 20px auto;
+    padding: 15px;
+    width: 90%;
+    h4 {
+        font-size: 1.5em;
+        font-weight: 400;
+        padding: 2px 0px 20px;
+        text-align: center;
+    }
+    #course-name {
+        color: rgb(31, 142, 253);
+        padding: 8px 20px;
+        text-transform: uppercase;
+    }
+    ul {
+        padding: 5px;
+        li {
+            list-style: none;
+            color: rgb(31, 142, 253);
+            padding: 2px 20px;
+        }
+    }
+    #scoreboard-msg,
+    #chatroom-msg {
+        line-height: 2em;
+        margin: 8px 0;
+        span {
+            background: linear-gradient(rgb(241, 241, 241), rgb(190, 190, 190));
+            border: 1px solid rgb(60, 60, 60);
+            border-radius: 5px; 
+            margin: 0px 3px;
+            padding: 1px 3px;
+        }
+    }
+    #enjoy-msg {
+        font-size: 1.4em;
+        padding: 20px;
+        text-align: center;
+    }
+}
