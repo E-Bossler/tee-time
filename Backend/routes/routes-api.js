@@ -138,7 +138,7 @@ router.put("/api/dashboard/userMenu/deleteFriends", (req, res) => {
   //     id: id
   //   },
   //   {
-      
+
   //   }
   // )
   // db.User.deleteOne({
@@ -243,37 +243,37 @@ router.post("/api/account/signup", (req, res) => {
           success: false,
           message: `Please see error message: ${err}`,
         });
-      }
-      if (previousUsers.length > 0) {
+      } else if (previousUsers.length > 0) {
         return res.send({
           success: false,
           message: "WARNING WARNING! Account already exists! WARNING WARNING!",
         });
+      } else {
+
+        // save the email
+
+        const newUser = new db.User();
+
+        newUser.email = email;
+        newUser.username = username;
+        newUser.password = newUser.generateHash(password);
+        newUser.save(err => {
+          if (err) {
+            return res.send({
+              success: false,
+              message: `Please see error message: ${err}
+        location 0`,
+            });
+          }
+          return res.send({
+            success: true,
+            message: "SUCCESS! YOU HAVE SIGNED UP! PLEASE LOGIN!",
+          });
+        });
+
       }
-      return;
     }
   );
-
-  // save the email
-
-  const newUser = new db.User();
-
-  newUser.email = email;
-  newUser.username = username;
-  newUser.password = newUser.generateHash(password);
-  newUser.save(err => {
-    if (err) {
-      return res.send({
-        success: false,
-        message: `Please see error message: ${err}
-        location 0`,
-      });
-    }
-    return res.send({
-      success: true,
-      message: "SUCCESS! YOU HAVE SIGNED UP! PLEASE LOGIN!",
-    });
-  });
 });
 
 // SIGN IN SET UP
