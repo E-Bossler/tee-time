@@ -1,15 +1,20 @@
-import React from 'react';
-import {View} from 'react-native';
-import Form from '../components/Login/Form';
+import React, {Component} from 'react';
+import {Divider, Text} from 'react-native-elements';
+import LogInForm from '../components/Login/LogInForm';
 import Greens from '../components/GreensCSS/Greens';
 
-function Login() {
-  return (
-    <View>
-      <Form />
-      <Greens />
-    </View>
-  );
+class Login extends Component {
+  render() {
+    return (
+      <Divider>
+        <LogInForm />
+        <Greens />
+        <Divider id="landing-container">
+          <Text h4>© 2020 Ballard Study Group</Text>
+        </Divider>
+      </Divider>
+    );
+  }
 }
 
 export default Login;

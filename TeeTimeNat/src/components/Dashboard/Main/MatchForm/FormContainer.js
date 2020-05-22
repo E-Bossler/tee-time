@@ -1,17 +1,16 @@
-import React from 'react';
-import {View, Text, Button} from 'react-native';
-import {Link} from 'react-router-native';
+import React, {Component} from 'react';
+import {Divider} from 'react-native-elements';
 import Form from './Form';
+import style from './stylesheet.scss';
 
-function FormContainer() {
-  return (
-    <View id="form-container">
-      <Form />
-      <Link to="/dashboard/game/tracker">
-        <Text>Start Game</Text>
-      </Link>
-    </View>
-  );
+class FormContainer extends Component {
+  render() {
+    return (
+      <Divider style={style} id="form-container">
+        <Form userData={this.props.userData} username={this.props.username} />
+      </Divider>
+    );
+  }
 }
 
 export default FormContainer;
