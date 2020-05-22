@@ -15,13 +15,16 @@ class Form extends Component {
     this.state = {
       username: this.props.username,
       allFriends: [],
-      friend: "",
-      friendFound: true,
-      matchFriends: [],
-      course: "",
-      matchCourse: "",
       courses: [],
+      courseHoles: [],
+      friend: "",
+      course: "",
+      matchFriends: [],
+      matchCourse: "",
+      matchHoles: "",
+      friendFound: true,
       courseFound: true,
+      courseSelected: true
     };
   }
 
@@ -43,21 +46,6 @@ class Form extends Component {
         this.setState({ allFriends: friends });
       }
     });
-  };
-
-  findCourses = () => {
-    axios
-      .get(
-        "https://www.golfgenius.com/api_v2/L7DBdFNJ4i-mR6ZeBOFPMw/events/4995124311334371081/courses"
-      )
-      .then(res => {
-        const courseData = res.data.courses;
-        const courses = this.state.courses;
-        for (let i = 0; i < courseData.length; i++) {
-          courses.push(courseData[i].name.toLowerCase());
-        }
-        this.setState({ courses });
-      });
   };
 
   capCourse = course => {
@@ -84,10 +72,13 @@ class Form extends Component {
     GolfAPI.findCourses().then(res => {
       const courseData = res.data.courses;
       const courses = this.state.courses;
+      const courseHoles = this.state.courseHoles;
       for (let i = 0; i < courseData.length; i++) {
+        courseHoles.push(courseData[i].hole_labels.length);
         courses.push(courseData[i].name.toLowerCase());
       }
       this.setState({ courses: courses });
+      this.setState({ couseHoles: courseHoles });
     });
 
     this.findFriends(user);
@@ -96,6 +87,7 @@ class Form extends Component {
   handleCourseInputChange(event) {
     let value = event.target.value;
     this.setState({ course: value });
+    this.setState({ courseSelected: true });
   }
 
   handleFriendInputChange(event) {
@@ -107,11 +99,14 @@ class Form extends Component {
     event.preventDefault();
     const course = this.state.course.toLowerCase();
     const courses = this.state.courses;
+    const courseHoles = this.state.courseHoles;
+    const courseIndex = courses.indexOf(course);
 
-    if (courses.indexOf(course) !== -1) {
+    if (courseIndex !== -1) {
       const matchCourse = this.capCourse(course);
       this.setState({ courseFound: true });
       this.setState({ matchCourse: matchCourse });
+      this.setState({ matchHoles: courseHoles[courseIndex] });
     } else {
       this.setState({ courseFound: false });
     }
@@ -124,13 +119,22 @@ class Form extends Component {
     this.setState({ matchCourse: "" });
   }
 
-  handleMatchSubmit() {
+  handleMatchSubmit(event) {
     const course = this.state.matchCourse;
     const players = this.state.matchFriends;
+    const holes = this.state.matchHoles;
+    if (course === "") {
+      event.preventDefault();
+      console.log("no course selected");
+      this.setState({ courseSelected: false });
+    }
     const userData = this.props.userData;
     const allPlayers = [...players, userData];
 
-    axios.post("/dashboard/api/match/new", { course, allPlayers });
+    console.log(this.state.matchHoles);
+    console.log(this.state.matchCourse);
+
+    axios.post("/dashboard/api/match/new", { course, allPlayers, holes });
   }
 
   handleFriendSubmit(event) {
@@ -194,17 +198,22 @@ class Form extends Component {
           matchFriends={this.state.matchFriends}
           handleFriendDelete={this.handleFriendDelete.bind(this)}
         />
-        <Link 
-          to="/dashboard/matchView"
-          id="new-match-link"
-        >
-          <button
+        
+        <button id="start-match-btn">
+          <Link 
+            to="/dashboard/matchView"
+            id="start-match-link"
             onClick={this.handleMatchSubmit.bind(this)}
-            id="start-match-btn"
           >
             Start Match
-          </button>
-        </Link>
+          </Link>
+        </button>
+        <p 
+          id="select-course-msg"
+          className={this.state.courseSelected ? "hide" : "show"}
+        >
+          Please add a course
+        </p>
       </div>
     );
   }

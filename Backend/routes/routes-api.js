@@ -401,15 +401,24 @@ router.get("/api/account/logout", (req, res, next) => {
 
 // SET UP A  NEW MATCH
 
-router.post("/dashboard/api/match/new", (req, res, next) => {
-  console.log(req.body);
+router.post("/dashboard/api/match/new", (req, res) => {
+  // console.log(req.body);
   db.Match.collection
     .insertOne({
       course: req.body.course,
+      holes: req.body.holes,
       participants: req.body.allPlayers,
     })
     .then(data => {
       req.body.allPlayers.map((player, i) => {
+        const holeObjs = [];
+        for (let i = 0; i < data.ops[0].holes; i++) {
+          const holeData = {
+            number: i,
+            score: ""
+          }
+          holeObjs.push(holeData);
+        }
         db.User.updateMany(
           { username: { $in: player.username } },
           {
@@ -421,11 +430,12 @@ router.post("/dashboard/api/match/new", (req, res, next) => {
                 courseId: data.ops[0]._id,
                 courseName: data.ops[0].course,
                 players: data.ops[0].participants,
+                holes: holeObjs
               },
             },
           }
         ).then(data => {
-          res.json(data);
+          // res.json(data);
         });
       });
     })
@@ -453,25 +463,36 @@ router.get("/api/match/history", (req, res, next) => {
 });
 
 router.post("/api/user/score", (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
+  const userId = req.body.userId;
+  db.User.findOne({ _id: userId}).then(data => {
+    res.json(data);
+  });
+});
+
+router.put("/api/user/score", (req, res) => {
+  // console.log(req.body);
+  const userId = req.body.userId;
   db.User.findOneAndUpdate(
-    { _id: req.body.userData.id },
-    {
-      currentMatch: {
-        $push: {
-          holes: {
-            name: req.body.currentHole,
-            score: req.body.currentScore,
-          },
-        },
-      },
+    { 
+      _id: userId, 
+      "currentMatch.holes.number": req.body.currentHole 
+    },
+    { 
+      $set: { 
+        "currentMatch.holes.$.score" : req.body.currentScore
+      } 
     }
-  );
+  )
+    .then(data => {
+      console.log(data);
+      res.json(data);
+    });
 });
 
 //GET CURRENT MATCH
 router.put("/api/match/current", (req, res) => {
-  console.log(req.body); // matchId object
+  // console.log(req.body); // matchId object
   db.Match.find({ _id: req.body.matchId }).then(data => {
     res.json(data);
   });
@@ -499,7 +520,7 @@ router.post("/api/match/current/saveChatMessage", (req, res) => {
 
 //Get Chat Message Log
 router.put("/api/match/current/getChat", (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const currentMatch = req.body.userData.currentMatchId;
 
   db.Match.find({ _id: currentMatch }).then(data => {

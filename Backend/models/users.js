@@ -26,7 +26,7 @@ const UserSchema = new Schema({
     },
     holes: [
       {
-        name: Number,
+        number: Number,
         score: Number,
       },
     ],

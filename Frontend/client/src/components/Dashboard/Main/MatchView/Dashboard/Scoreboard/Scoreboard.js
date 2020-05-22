@@ -7,9 +7,6 @@ class Scoreboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // username: "",
-      // players: [],
-      // course: "",
       scorecardView: this.props.userData.username,
     };
   }
@@ -17,7 +14,6 @@ class Scoreboard extends Component {
   handleCardViewChange(event) {
     const radioValue = event.target.value;
     this.setState({ scorecardView: radioValue });
-    // console.log(this.state.scorecardView);
   }
 
   render() {
@@ -37,8 +33,6 @@ class Scoreboard extends Component {
         </div>
       );
     } else {
-      // console.log(username, list, players, course);
-
       return (
         <div id="scoreboard">
           <CardSelector

@@ -130,9 +130,7 @@ class Friends extends Component {
 
   handleDelete(event) {
     const userId = this.props.userData.id;
-    console.log(userId);
     const friendToDelete = event.target.id;
-    console.log(friendToDelete);
     axios
       .put("/api/dashboard/userMenu/deleteFriends", { friendToDelete, userId })
       .then(res => {

@@ -17,11 +17,20 @@ class Scorecard extends Component {
       viewSideOut: true,
       currentScore: "",
       currentHole: "",
+      scoreData: []
     };
   }
 
   componentDidMount() {
     const course = this.props.course;
+    const userId = this.props.userData.id;
+
+    axios
+      .post("/api/user/score", { userId })
+      .then(res => {
+        const scoreData = res.data.currentMatch.holes;
+        this.setState({ scoreData: scoreData });
+      });
 
     GolfAPI.findCourses()
       .then(res => {
@@ -50,8 +59,6 @@ class Scorecard extends Component {
 
         const yardageData = matchCourseData.tees[0].hole_data.yardage;
         this.setState({ yardageData: yardageData });
-
-        // console.log(this.state);
       })
       .then(() => {
         this.setState({ loading: false });
@@ -65,15 +72,18 @@ class Scorecard extends Component {
       this.setState({ viewSideOut: false });
     }
   }
+
   handleScoreInput(event) {
     event.preventDefault();
-    const userData = this.props.userData;
+    const userId = this.props.userData.id;
     const currentScore = event.target.value;
-    const currentHole = event.target.id;
+    const currentHole = event.target.id - 1;
+
     this.setState({ currentScore: currentScore });
     this.setState({ currentHole: currentHole });
+
     axios
-      .post("/api/user/score", { currentScore, currentHole, userData })
+      .put("/api/user/score", { currentScore, currentHole, userId })
       .then(res => {
         console.log(res.data);
       });
@@ -89,16 +99,12 @@ class Scorecard extends Component {
       const username = this.props.username;
       const indexToSplice = players.indexOf(username);
       players.splice(1, indexToSplice);
-      console.log(players);
+      // console.log(players);
 
       return (
         <div>
           <div
-            className={
-              this.props.scorecardView === username
-                ? "show scorecard"
-                : "hide scorecard"
-            }
+            className={this.props.scorecardView === username ? "show scorecard" : "hide scorecard"}
           >
             <p className="player-name">{username}</p>
             <div className="side-container">
@@ -143,7 +149,7 @@ class Scorecard extends Component {
                           <input
                             className="score-input"
                             id={value}
-                            // value={event.target.value}
+                            defaultValue={this.state.scoreData[index].score ? this.state.scoreData[index].score : ""}
                             onChange={this.handleScoreInput.bind(this)}
                           />
                         </form>
@@ -165,7 +171,8 @@ class Scorecard extends Component {
                         <form>
                           <input
                             className="score-input"
-                            value={this.state.currentScore}
+                            id={value}
+                            // value={this.state.currentScore}
                             onChange={this.handleScoreInput.bind(this)}
                           />
                         </form>
