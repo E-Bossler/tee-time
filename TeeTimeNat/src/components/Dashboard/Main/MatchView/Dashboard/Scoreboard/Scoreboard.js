@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Divider, Text} from 'react-native-elements';
 // import CardSelector from "./CardSelector";
 import Scorecard from './Scorecard';
-import './stylesheet.scss';
+import style from './stylesheet.scss';
 
 class Scoreboard extends Component {
   constructor(props) {
@@ -41,7 +41,7 @@ class Scoreboard extends Component {
       // console.log(username, list, players, course);
 
       return (
-        <Divider id="scoreboard">
+        <Divider style={style} id="scoreboard">
           <CardSelector
             username={username}
             players={players}

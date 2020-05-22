@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {Divider, Input, Text, Button} from 'react-native-elements';
 import CourseDatalist from './CourseDatalist';
-import './stylesheet.scss';
+import style from './stylesheet.scss';
 
 class CourseInput extends Component {
   render() {
     return (
-      <Divider className="form-group">
+      <Divider style={style} className="form-group">
         <CourseDatalist
           capCourse={this.props.capCourse}
           courses={this.props.courses}

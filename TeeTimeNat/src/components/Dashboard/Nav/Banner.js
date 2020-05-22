@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Divider, Text} from 'react-native-elements';
 import {Link} from 'react-router-native';
 import Burger from './Burger';
-import './stylesheet.scss';
+
 class Banner extends Component {
   render() {
     // console.log(this.props.message);

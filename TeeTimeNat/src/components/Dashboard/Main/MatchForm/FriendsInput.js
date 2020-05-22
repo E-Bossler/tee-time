@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {Divider, Input, Button, Text} from 'react-native-elements';
 import FriendDatalist from './FriendDatalist';
-import './stylesheets.css';
+import style from './stylesheet.scss';
 
 class FriendsInput extends Component {
   render() {
     return (
-      <Divider className="form-group">
+      <Divider style={style} className="form-group">
         <FriendDatalist allFriends={this.props.allFriends} />
         <Input
           list="friends"

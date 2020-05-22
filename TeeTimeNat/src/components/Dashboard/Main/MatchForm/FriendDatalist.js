@@ -7,7 +7,7 @@ class FriendDatalist extends Component {
       ///this was a datalist
       <Divider id="friends">
         {this.props.allFriends.map((friend, key) => (
-          <ListItems key={key} value={friend.username} />
+          <ListItem key={key} value={friend.username} />
         ))}
       </Divider>
     );

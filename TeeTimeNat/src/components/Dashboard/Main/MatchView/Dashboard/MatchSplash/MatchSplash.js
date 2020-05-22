@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Divider, Text, ListItem} from 'react-native-elements';
-import './stylesheet.scss';
+import style from './stylesheet.scss';
 
 class MatchSplash extends Component {
   render() {
@@ -20,7 +20,7 @@ class MatchSplash extends Component {
         players.push(list[i].username);
       }
       return (
-        <Divider id="match-splash">
+        <Divider style={style} id="match-splash">
           <Text h4>Welcome back to the green, {username}!</Text>
           <Text>Your current course:</Text>
           <Text id="course-name">{course}</Text>

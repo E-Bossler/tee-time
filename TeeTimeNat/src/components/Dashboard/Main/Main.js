@@ -7,7 +7,7 @@ import Greens from '../../GreensCSS/Greens';
 import FormContainer from './MatchForm/FormContainer';
 import UserMenuContainer from './UserData/UserMenuContainer';
 import MatchView from './MatchView/MatchView';
-import './stylesheet.scss';
+import style from './stylesheet.scss';
 import api from '../../utils/api';
 import {getFromStorage} from '../../utils/storage';
 
@@ -90,7 +90,7 @@ class Main extends Component {
     }
 
     return (
-      <Divider>
+      <Divider style={style}>
         <Route exact path="/dashboard">
           <Divider id="landing-container">
             <Text h2>Welcome, {this.state.username}</Text>

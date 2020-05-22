@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import styles from './App.scss';
 import {SafeAreaView} from 'react-native';
 import {NativeRouter, Route, Switch} from 'react-router-native';
 import Login from './src/pages/Login';

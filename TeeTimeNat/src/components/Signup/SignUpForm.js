@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Divider, Text, Input, Button} from 'react-native-elements';
 import api from '../utils/api';
-import './stylesheet.css';
+import style from './stylesheet.scss';
 import {Redirect, Link} from 'react-router-native';
 import SweetAlert from 'react-native-sweet-alert';
 
@@ -45,7 +45,7 @@ class SignUpForm extends Component {
       return <Redirect to="/login" />;
     }
     return (
-      <Divider className="container">
+      <Divider style={style} className="container">
         <Divider className="row">
           <Divider className="col text-center">
             <Text h1>Welcome to Tee-Time!</Text>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Divider, Text, Input, Button} from 'react-native-elements';
 import api from '../utils/api';
-import './stylesheet.scss';
+import style from './stylesheet.scss';
 import {Redirect, Link} from 'react-router-native';
 import {setInStorage} from '../utils/storage';
 import SweetAlert from 'react-native-sweet-alert';
@@ -39,7 +39,7 @@ class LogInForm extends Component {
       return <Redirect to="/dashboard" />;
     }
     return (
-      <Divider className="container">
+      <Divider style={style} className="container">
         <Divider className="row">
           <Divider className="col text-center">
             <Text h1>Welcome to Tee-Time!</Text>

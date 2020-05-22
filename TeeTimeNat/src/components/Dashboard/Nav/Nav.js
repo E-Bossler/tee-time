@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Divider} from 'react-native-elements';
 import Banner from './Banner';
 import Slider from './Slider';
-import './stylesheet.css';
 
 class Nav extends Component {
   constructor(props) {

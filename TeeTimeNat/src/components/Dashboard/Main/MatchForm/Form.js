@@ -7,8 +7,8 @@ import CourseInput from './CourseInput';
 import FriendsInput from './FriendsInput';
 import MatchCourse from './MatchCourse';
 import FriendsList from './FriendsList';
-import swal from 'sweetalert';
-import './stylesheet.css';
+import style from './stylesheet.scss';
+import SweetAlert from 'react-native-sweet-alert';
 
 class Form extends Component {
   constructor(props) {
@@ -32,11 +32,11 @@ class Form extends Component {
       const friendsData = res.data[0].friends;
       const friends = [];
       if (friendsData === undefined) {
-        swal(
-          'Add Friends',
-          'You do not yet have any friends added. Add some friends!',
-          'info',
-        );
+        SweetAlert.showAlertWithOptions({
+          title: 'Add Friends',
+          subTitle: 'You do not yet have any friends added. Add some friends!',
+          style: 'info',
+        });
       } else {
         for (let i = 0; i < friendsData.length; i++) {
           friends.push(friendsData[i]);
@@ -170,7 +170,7 @@ class Form extends Component {
 
   render() {
     return (
-      <Divider id="form">
+      <Divider style={style} id="form">
         <CourseInput
           handleCourseSubmit={this.handleCourseSubmit.bind(this)}
           handleCourseInputChange={this.handleCourseInputChange.bind(this)}

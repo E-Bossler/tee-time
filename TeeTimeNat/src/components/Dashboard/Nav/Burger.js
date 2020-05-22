@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Divider} from 'react-native-elements';
-import './stylesheet.scss';
 
 class Burger extends Component {
   render() {

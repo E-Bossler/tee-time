@@ -1,7 +1,7 @@
 //THIS IS NOT READY TO CONVERT YET
 
 import React, {Component} from 'react';
-import './stylesheet.scss';
+import style from './stylesheet.scss';
 
 class CardSelector extends Component {
   render() {
@@ -13,7 +13,7 @@ class CardSelector extends Component {
     // console.log(players);
 
     return (
-      <div id="card-selector">
+      <div style={style} id="card-selector">
         <form>
           <div id="radio-group">
             <input

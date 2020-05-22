@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Divider, Text, ListItem} from 'react-native-elements';
 import GolfAPI from '../../../../utils/golfGeniusAPI';
-import './stylesheet.css';
+import style from './stylesheet.scss';
 
 class Courses extends Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class Courses extends Component {
 
   render() {
     return (
-      <Divider id="courses-container">
+      <Divider style={style} id="courses-container">
         <Text h3>My Favorite Courses:</Text>
         <Divider id="user-courses-list">
           <ListItem>Placeholder Greens</ListItem>

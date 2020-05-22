@@ -5,7 +5,6 @@ import axios from 'axios';
 import SweetAlert from 'react-native-sweet-alert';
 import TabsContainer from './Tabs/TabsContainer';
 import DashboardContainer from './Dashboard/DashboardContainer';
-import './stylesheet.css';
 
 class MatchView extends Component {
   constructor(props) {
@@ -42,7 +41,7 @@ class MatchView extends Component {
       return <Redirect to="/dashboard/matchForm" />;
     }
     return (
-      <Divider>
+      <Divider style={style}>
         <Router>
           <TabsContainer />
           <Switch>

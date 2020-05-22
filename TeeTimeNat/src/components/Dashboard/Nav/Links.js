@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Divider, ListItem} from 'react-native-elements';
-import {Redirect, Link} from 'react-router-dom';
-import './stylesheet.css';
+import {Redirect, Link} from 'react-router-native';
 import {setInStorage} from '../../utils/storage';
 
 class Links extends Component {

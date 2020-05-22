@@ -1,13 +1,14 @@
-import React from "react";
-import NavTabs from "./NavTabs";
-import "./stylesheet.css";
+import React from 'react';
+import {Divider} from 'react-native-elements';
+import NavTabs from './NavTabs';
+import style from './stylesheet.scss';
 
 function TabsContainer() {
-    return(
-        <div id="tabs-container">
-            <NavTabs />
-        </div>
-    );
-};
+  return (
+    <Divider style={style} id="tabs-container">
+      <NavTabs />
+    </Divider>
+  );
+}
 
 export default TabsContainer;

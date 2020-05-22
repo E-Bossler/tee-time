@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Divider, ListItem} from 'react-native-elements';
 import {Link} from 'react-router-native';
-import './stylesheet.css';
+import style from './stylesheet.scss';
 
 class NavTabs extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class NavTabs extends Component {
 
   render() {
     return (
-      <Divider id="tabs-list">
+      <Divider style={style} id="tabs-list">
         {/* <li className="nav-tab">
           <Link id="tracker-tab" to="/dashboard/matchView/tracker">
             Course

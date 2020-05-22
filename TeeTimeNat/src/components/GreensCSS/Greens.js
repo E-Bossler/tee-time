@@ -1,10 +1,10 @@
 import React from 'react';
 import {View} from 'react-native';
-import './stylesheet.scss';
+import style from './stylesheet.scss';
 
 function Greens() {
   return (
-    <View id="greens-container">
+    <View style={style} id="greens-container">
       <View id="flag-container">
         <View id="flag" />
         <View id="pole" />

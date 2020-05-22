@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Divider, Text, Icon} from 'react-native-elements';
-import './stylesheet.scss';
+import style from './stylesheet.scss';
 
 class MatchCourse extends Component {
   render() {
@@ -11,7 +11,7 @@ class MatchCourse extends Component {
     }
 
     return (
-      <Divider id="course-container">
+      <Divider style={style} id="course-container">
         <Text h3>Match Course:</Text>
         <Text className={courseFound ? 'hide' : 'show'}>
           No course added yet

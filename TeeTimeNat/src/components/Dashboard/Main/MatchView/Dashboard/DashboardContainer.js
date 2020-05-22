@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Divider} from 'react-native-elements';
 import {Route} from 'react-router-native';
 // import Tracker from "./Tracker/Tracker";
-import Scoreboard from './Scoreboard/Scoreboard';
+// import Scoreboard from './Scoreboard/Scoreboard';
 import Chat from './Chat/Chat';
 import MatchSplash from './MatchSplash/MatchSplash';
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Divider, Text, Icon, ListItem} from 'react-native-elements';
-import './stylesheet.css';
+import style from './stylesheet.scss';
 
 class FriendsList extends Component {
   render() {
@@ -11,7 +11,7 @@ class FriendsList extends Component {
     }
 
     return (
-      <Divider id="friends-list-container">
+      <Divider style={style} id="friends-list-container">
         <Text h3>Match Players:</Text>
         <Text className={friendsAdded ? 'hide' : 'show'}>
           No friends added yet

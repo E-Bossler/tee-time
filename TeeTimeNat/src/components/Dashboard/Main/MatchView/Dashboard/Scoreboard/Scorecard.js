@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Divider, Text} from 'react-native-elements';
 import GolfAPI from '../../../../../utils/golfGeniusAPI';
 import axios from 'axios';
-import './stylesheet.scss';
+import style from './stylesheet.scss';
 
 /// IMPORT REACT NATIVE TABLE COMPONENT
 /// This is not ready to convert
@@ -97,7 +97,7 @@ class Scorecard extends Component {
       console.log(players);
 
       return (
-        <Divider>
+        <Divider style={style}>
           <Divider
             className={
               this.props.scorecardView === username

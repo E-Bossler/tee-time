@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Divider, ListItem, Icon} from 'react-native-elements';
 import {Link} from 'react-router-native';
-import './stylesheet.scss';
+import style from './stylesheet.scss';
 
 const flagIconStyles = {
   '--fa-secondary-opacity': '1.0',
@@ -24,7 +24,7 @@ const statsIconStyles = {
 class Footer extends Component {
   render() {
     return (
-      <Divider id="footer-container">
+      <Divider style={style} id="footer-container">
         <Divider id="footer-list">
           <ListItem className="footer-item" id="stats-item">
             <Link
