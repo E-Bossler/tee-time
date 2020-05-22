@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-import Tracker from "./Tracker/Tracker";
+// import Tracker from "./Tracker/Tracker";
 import Scoreboard from "./Scoreboard/Scoreboard";
 import Chat from "./Chat/Chat";
 import MatchSplash from "./MatchSplash/MatchSplash";
 
 class DashboardContainer extends Component {
   render() {
-    console.log(this.props);
     console.log(this.props.currentMatch);
-    console.log(this.props.userData);
     return (
       <div>
         <Route exact path="/dashboard/matchView">
@@ -19,9 +17,9 @@ class DashboardContainer extends Component {
           />
         </Route>
 
-        <Route path="/dashboard/matchView/tracker">
+        {/* <Route path="/dashboard/matchView/tracker">
           <Tracker />
-        </Route>
+        </Route> */}
 
         <Route path="/dashboard/matchView/scoreboard">
           <Scoreboard

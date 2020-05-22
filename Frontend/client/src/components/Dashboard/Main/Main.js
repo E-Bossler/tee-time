@@ -58,15 +58,19 @@ class Main extends Component {
                       email: res.data[0].email,
                       id: res.data[0]._id,
                       currentMatchId: "",
+                      currentCourse: "",
+                      currentCoursePlayers: "",
                     };
 
-                    if (res.data[0].currentMatch[0] === undefined) {
-                      alert(
-                        "You haven't started a game of golf yet! Find some friends, then let's hit the green!"
-                      );
+                    if (res.data[0].currentMatch === undefined) {
+                      console.log("no current match");
                     } else {
                       userData.currentMatchId =
-                        res.data[0].currentMatch[0].courseId;
+                        res.data[0].currentMatch.courseId;
+                      userData.currentCourse =
+                        res.data[0].currentMatch.courseName;
+                      userData.currentCoursePlayers =
+                        res.data[0].currentMatch.players;
                     }
 
                     this.setState({ userData });

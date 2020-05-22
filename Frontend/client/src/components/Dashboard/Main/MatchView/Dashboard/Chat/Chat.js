@@ -69,8 +69,6 @@ export default class Chat extends Component {
       messager: userData.username,
       messagerId: userData.id,
     };
-    console.log(chatMessage);
-    console.log(this.state.chatMessages);
 
     axios
       .post("/api/match/current/saveChatMessage", { userData, chatMessage })
@@ -83,6 +81,18 @@ export default class Chat extends Component {
         this.scrollToBottom();
         this.setState({ chatMessage: "" });
       });
+    this.scrollToBottom();
+  }
+
+  handleUserChange() {
+    // const userMsg = this.state.user;
+    const lastMsgObj = this.state.chatMessages.pop();
+    const user = lastMsgObj.messager;
+    if (user === this.props.userData.username) {
+      this.setState({ user: true });
+    } else {
+      this.setState({ user: false });
+    }
   }
 
   render() {
@@ -91,11 +101,7 @@ export default class Chat extends Component {
         <div id="msg-container">
           <ul className={this.state.user ? "user-msgs" : "friend-msgs"}>
             {this.state.chatMessages.map((chatMessage, i) => (
-              <li 
-                key={i} 
-                value={chatMessage.id} 
-                className="message"
-              >
+              <li key={i} value={chatMessage.id} className="message">
                 {chatMessage.messager}
                 <br />
                 {chatMessage.message}

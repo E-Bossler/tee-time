@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = {
+const api = {
   // logs the user in, creates a new usersession for the user
 
   login: function (email, password) {
@@ -80,4 +80,4 @@ const API = {
   },
 };
 
-export default API;
+export default api;
