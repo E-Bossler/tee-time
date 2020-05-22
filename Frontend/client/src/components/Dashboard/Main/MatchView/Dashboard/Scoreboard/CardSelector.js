@@ -2,13 +2,9 @@ import React, { Component } from "react";
 import "./stylesheet.css";
 
 class CardSelector extends Component {
-  render() {
+ render() {
     const players = this.props.players;
     const username = this.props.username;
-    const indexToSplice = players.indexOf(username);
-    players.splice(indexToSplice, 1);
-
-    // console.log(players);
 
     return (
       <div id="card-selector">
@@ -49,16 +45,6 @@ class CardSelector extends Component {
               </div>
             );
           })}
-          {/* <div id="radio-group">
-                        <input 
-                            type="radio" 
-                            id="all" 
-                            name="scorecard-radio" 
-                            value="all" 
-                            onChange={this.props.handleCardViewChange}
-                        />
-                        <label htmlFor="all">View All</label>
-                    </div> */}
         </form>
       </div>
     );

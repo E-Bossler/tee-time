@@ -97,9 +97,7 @@ class Scorecard extends Component {
       const hcpData = this.state.hcpData;
       const players = this.props.players;
       const username = this.props.username;
-      const indexToSplice = players.indexOf(username);
-      players.splice(1, indexToSplice);
-      // console.log(players);
+      console.log("scorecard: ", players);
 
       return (
         <div>
@@ -187,11 +185,7 @@ class Scorecard extends Component {
             return (
               <div
                 key={index}
-                className={
-                  this.props.scorecardView === value
-                    ? "show scorecard"
-                    : "hide scorecard"
-                }
+                className={this.props.scorecardView === value ? "show scorecard" : "hide scorecard"}
               >
                 <p className="player-name">{value}</p>
                 <div className="side-container">
@@ -260,7 +254,7 @@ class Scorecard extends Component {
       );
     } else {
       return (
-        <div>
+        <div id="loading-animation">
           <div className="lds-roller">
             <div></div>
             <div></div>
