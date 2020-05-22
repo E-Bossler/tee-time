@@ -65,7 +65,6 @@ class Scorecard extends Component {
       this.setState({ viewSideOut: false });
     }
   }
-
   handleScoreInput(event) {
     event.preventDefault();
     const userData = this.props.userData;

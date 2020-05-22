@@ -1,0 +1,122 @@
+#friends-page {
+  font-family: 'Open Sans', sans-serif;
+  padding-top: 5px;
+  overflow-y: auto;
+}
+
+#friends-page h2 {
+  text-align: center;
+}
+
+#friends-page h3 {
+  color: #3c3c3c;
+  margin: 2px 0 12px;
+}
+
+#friends-page ul li {
+  list-style: none;
+  margin: 6px;
+}
+
+#friends-page .section {
+  border-bottom: 1px solid #3c3c3c;
+  padding: 20px;
+}
+
+#friends-page #request-container {
+  padding-bottom: 10px;
+}
+
+#friends-page #request-container ul div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 4px;
+}
+
+#friends-page #request-container ul div li {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+#friends-page #request-container ul div button {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0 10px;
+  padding: 5px;
+}
+
+#friends-page #find-container form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+}
+
+#friends-page #find-container form label,
+#friends-page #find-container form input,
+#friends-page #find-container form button {
+  margin: 2px;
+}
+
+#friends-page #find-container form label {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin-right: 4px;
+}
+
+#friends-page #find-container form input {
+  border: 1px solid #646464;
+}
+
+#friends-page #friends-container {
+  border: none;
+}
+
+#friends-page #friends-container ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  font-size: 1.1em;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 12px 0;
+  position: relative;
+}
+
+#friends-page #friends-container ul li span {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  font-size: 0.9em;
+  position: absolute;
+  right: 75px;
+}
+
+#friends-page #friends-container ul li .hide {
+  display: none;
+}
+
+#friends-page #friends-container ul li .red {
+  background: #f35c5c;
+}
+/*# sourceMappingURL=stylesheet.css.map */

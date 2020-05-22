@@ -130,6 +130,28 @@ router.post("/api/dashboard/userMenu/friends", (req, res) => {
   });
 });
 
+router.put("/api/dashboard/userMenu/deleteFriends", (req, res) => {
+  const id = req.body.userId;
+  console.log(req.body.friendToDelete);
+  // db.User.findOneAndDelete(
+  //   {
+  //     id: id
+  //   },
+  //   {
+      
+  //   }
+  // )
+  // db.User.deleteOne({
+  //   friend: req.body.friendToDelete,
+  // })
+  //   .then(data => {
+  //     res.json(data);
+  //   })
+  //   .catch(({ message }) => {
+  //     console.log(message);
+  //   });
+})
+
 router.post("/api/dashboard/userMenu/friendRequests", (req, res) => {
   console.log(req.body.request);
   console.log("FULL REQ BODY: ", req.body);

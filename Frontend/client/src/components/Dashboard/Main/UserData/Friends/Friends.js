@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-import swal from "sweetalert";
+import swal from 'sweetalert';
+import "./stylesheet.css";
+
 
 class Friends extends Component {
   constructor(props) {
@@ -10,6 +12,8 @@ class Friends extends Component {
       friendName: "",
       friends: [],
       friendRequests: [],
+      deleteFriend: false,
+      friendToDelete: ""
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -111,50 +115,105 @@ class Friends extends Component {
       });
   }
 
+  handlePossibleDelete(event) {
+    const friendToDelete = event.target.id;
+    this.setState({ friendToDelete: friendToDelete });
+  }
+
+  handleCancel() {
+    this.setState({ friendToDelete: ""});
+  }
+
+  handleDelete(event) {
+    const userId = this.props.userData.id;
+    console.log(userId);
+    const friendToDelete = event.target.id;
+    console.log(friendToDelete);
+    axios
+      .put("/api/dashboard/userMenu/deleteFriends", { friendToDelete, userId })
+      .then(res => {
+        console.log(res.data);
+      })
+
+  }
+
   render() {
     return (
-      <div>
-        <h2>Friends</h2>
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <label>Find Friends!</label>
-          <input
-            onKeyDown={event => (event.keyCode === 13 ? this.addItem : "")}
-            className="friend-name"
-            onChange={this.handleChange.bind(this)}
-          ></input>
-          <input
-            onKeyDown={event => (event.keyCode === 13 ? this.addItem : "")}
-            type="submit"
-          ></input>
-        </form>
+      <div id="friends-page">
+        {/* <h2>Friends</h2> */}
 
-        <h2>Your Friends</h2>
-        <ul>
-          {this.state.friends.map(friend => {
-            return (
-              <li value={this.state.friends} key={friend._id}>
-                {friend.username}
-              </li>
-            );
-          })}
-        </ul>
-        <h2>Friend Requests</h2>
-        <ul>
-          {this.state.friendRequests.map(friendRequest => {
-            return (
-              <div key={friendRequest._id + 2}>
-                <li key={friendRequest._id}>{friendRequest.username}</li>
-                <button
-                  onClick={this.acceptFriend}
-                  key={friendRequest._id + 1}
-                  value={JSON.stringify(friendRequest)}
-                >
-                  Add Friend
-                </button>
-              </div>
-            );
-          })}
-        </ul>
+        <div id="request-container" className="section">
+          <h3>Friend Requests</h3>
+          <ul>
+            {this.state.friendRequests.map(friendRequest => {
+              return (
+                <div key={friendRequest._id + 2}>
+                  <li key={friendRequest._id}>{friendRequest.username}</li>
+                  <button
+                    onClick={this.acceptFriend}
+                    key={friendRequest._id + 1}
+                    value={JSON.stringify(friendRequest)}
+                  >
+                    Add Friend
+                  </button>
+                </div>
+              );
+            })}
+          </ul>
+        </div>
+        
+        <div id="find-container" className="section">
+          <form onSubmit={this.handleSubmit.bind(this)}>
+            <label>Find Friends</label>
+            <input
+              onKeyDown={event => (event.keyCode === 13 ? this.addItem : "")}
+              className="friend-name"
+              onChange={this.handleChange.bind(this)}
+            ></input>
+            <button
+              onKeyDown={event => (event.keyCode === 13 ? this.addItem : "")}
+              type="submit"
+            >
+              <i className="fas fa-search fa-lg"></i>
+            </button>
+          </form>
+        </div>
+        
+        <div id="friends-container" className="section">
+          <h3>Your Friends</h3>
+          <ul>
+            {this.state.friends.map(friend => {
+              return (
+                <li 
+                  value={this.state.friends} // why not friend.username?
+                  key={friend._id}>
+                  {friend.username}
+                  <span
+                    className={this.state.friendToDelete === friend._id ? "show" : "hide"}
+                    onClick={this.handleCancel.bind(this)}
+                  >
+                    cancel
+                  </span>
+                  <button
+                    id={friend._id}
+                    className={this.state.friendToDelete === friend._id ? "show red" : "hide"}
+                    onClick={this.handleDelete.bind(this)}
+                  >
+                    Delete?
+                  </button>
+                  <button
+                    id={friend._id}
+                    className={this.state.friendToDelete === friend._id ? "hide" : "show"}
+                    onClick={this.handlePossibleDelete.bind(this)}
+                  >
+                    Friends
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      
       </div>
     );
   }

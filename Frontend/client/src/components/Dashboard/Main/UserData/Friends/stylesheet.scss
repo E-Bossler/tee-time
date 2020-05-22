@@ -1,0 +1,89 @@
+#friends-page {
+    font-family: 'Open Sans', sans-serif; 
+    padding-top: 5px;
+    overflow-y: auto;
+    h2 {
+        text-align: center;
+    }
+    h3 {
+        color: rgb(60, 60, 60);
+        // font-weight: 300;
+        margin: 2px 0 12px;
+        // text-transform: uppercase;
+    }
+    ul {
+        li {
+            list-style: none;
+            margin: 6px;
+        }
+    }
+    .section {
+        border-bottom: 1px solid rgb(60, 60, 60);
+        padding: 20px;
+    }
+    #request-container {
+        padding-bottom: 10px;
+        ul {
+            div {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 4px;
+                li {
+                    align-self: center;
+                }
+                
+                button {
+                    font-family: 'Open Sans', sans-serif; 
+                    margin: 0 10px;
+                    padding: 5px;
+                }
+            }
+        }
+    }
+    #find-container {
+        form {
+            display: flex;
+            flex-direction: row;
+            justify-content: left; 
+            label,
+            input,
+            button {
+                margin: 2px;
+            }
+            label {
+                align-self: center;
+                margin-right: 4px;
+            }
+            input {
+                border: 1px solid rgb(100, 100, 100);
+            }
+        }
+    }
+    #friends-container {
+        border: none;
+        ul {
+            li {
+                // color: dodgerblue;
+                display: flex;
+                flex-direction: row;
+                font-size: 1.1em;
+                justify-content: space-between;
+                margin: 12px 0;
+                position: relative;
+                span {
+                    align-self: center;
+                    font-size: 0.9em;
+                    position: absolute;
+                    right: 75px;
+                }
+                .hide {
+                    display: none;
+                }
+                .red {
+                    background: rgb(243, 92, 92);
+                }
+            }
+        }
+    }
+}
