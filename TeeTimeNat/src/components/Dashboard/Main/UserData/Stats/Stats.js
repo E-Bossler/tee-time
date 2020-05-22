@@ -1,19 +1,20 @@
-import React, {Component} from 'react';
-import {Divider, ListItem, Text} from 'react-native-elements';
-import api from '../../../../utils/api';
-import {getFromStorage} from '../../../../utils/storage';
+import React, { Component } from "react";
+import Text from "react-native";
+import { Divider, ListItem } from "react-native-elements";
+import api from "../../../../utils/api";
+import { getFromStorage } from "../../../../utils/storage";
 
 class Stats extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      username: '',
+      username: "",
       userMatchHistory: [1234],
       userBestMatch: [1234],
       userMostRecentMatch: [1234],
-      userFavoriteCourse: '1234',
-      userHandicap: [11234],
+      userFavoriteCourse: "1234",
+      userHandicap: [11234]
     };
   }
 
@@ -23,7 +24,7 @@ class Stats extends Component {
 
   findUserStats() {
     // get token from storage
-    let key = 'SessionToken';
+    let key = "SessionToken";
     const sessionToken = getFromStorage(key);
     // search user session db
 
@@ -46,7 +47,7 @@ class Stats extends Component {
                 const userMatchHistory = response.data[i].matchHistory;
                 this.setState({
                   username: username,
-                  userMatchHistory: userMatchHistory,
+                  userMatchHistory: userMatchHistory
                 });
 
                 this.findUserBestMatch(username);
@@ -54,21 +55,21 @@ class Stats extends Component {
                 this.findUserFavoriteCourse(username);
                 this.calculateUserHandicap(username);
 
-                console.log('Username: ', this.state.username);
+                console.log("Username: ", this.state.username);
                 console.log(
-                  'User match history: ',
-                  this.state.userMatchHistory,
+                  "User match history: ",
+                  this.state.userMatchHistory
                 );
-                console.log('User best match: ', this.state.userBestMatch);
+                console.log("User best match: ", this.state.userBestMatch);
                 console.log(
-                  'User most recent match: ',
-                  this.state.userMostRecentMatch,
+                  "User most recent match: ",
+                  this.state.userMostRecentMatch
                 );
                 console.log(
-                  'User favorite course: ',
-                  this.state.userFavoriteCourse,
+                  "User favorite course: ",
+                  this.state.userFavoriteCourse
                 );
-                console.log('Handicap: ', this.state.userHandicap);
+                console.log("Handicap: ", this.state.userHandicap);
               }
             }
           });
@@ -98,24 +99,23 @@ class Stats extends Component {
   calculateUserHandicap(username) {
     // this.setState({
     //     userHandicap: userHandicap,
-    // })
+    //Text
   }
-
   render() {
     return (
-      <Divider>
-        <Text h3>Stats for {this.state.username}:</Text>
+      <>
+        {/* <Text>{this.state.username}</Text>
         <Divider>
           <ListItem>Personal Best:</ListItem>
-          {this.state.userBestMatch}
+          <Text>{this.state.userBestMatch}</Text>
           <ListItem>Most Recent Match:</ListItem>
-          {this.state.userMostRecentMatch}
+          <Text>{this.state.userMostRecentMatch}</Text>
           <ListItem>Favorite Course:</ListItem>
-          {this.state.userFavoriteCourse}
+          <Text>{this.state.userFavoriteCourse}</Text>
           <ListItem>Handicap:</ListItem>
-          {this.state.userHandicap}
-        </Divider>
-      </Divider>
+          <Text>{this.state.userHandicap}</Text>
+        </Divider> */}
+      </>
     );
   }
 }

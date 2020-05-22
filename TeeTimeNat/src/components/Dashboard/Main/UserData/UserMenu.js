@@ -1,36 +1,29 @@
-import React, {Component} from 'react';
-import {Divider} from 'react-native-elements';
-import {Switch, Route} from 'react-router-native';
-import Stats from './Stats/Stats';
-import Courses from './Courses/Courses';
-import Friends from './Friends/Friends';
-import Matches from './Matches/Matches';
+import React, { Component } from "react";
+import { Divider } from "react-native-elements";
+import Stats from "./Stats/Stats";
+import Courses from "./Courses/Courses";
+import Friends from "./Friends/Friends";
+import Matches from "./Matches/Matches";
 
 class UserMenu extends Component {
+  /* <Route path="/dashboard/userMenu/stats"> */
+  /* <Route path="/dashboard/userMenu/courses"> */
+  /* <Route path="/dashboard/userMenu/friends"> */
+  /* <Route path="/dashboard/userMenu/matches"> */
   render() {
     return (
-      <Divider>
-        <Switch>
-          <Route path="/dashboard/userMenu/stats">
-            <Stats userData={this.props.userData} />
-          </Route>
+      <>
+        <Stats userData={this.props.userData} />
 
-          <Route path="/dashboard/userMenu/courses">
-            <Courses userData={this.props.userData} />
-          </Route>
+        <Courses userData={this.props.userData} />
 
-          <Route path="/dashboard/userMenu/friends">
-            <Friends
-              userData={this.props.userData}
-              username={this.props.username}
-            />
-          </Route>
+        <Friends
+          userData={this.props.userData}
+          username={this.props.username}
+        />
 
-          <Route path="/dashboard/userMenu/matches">
-            <Matches userData={this.props.userData} />
-          </Route>
-        </Switch>
-      </Divider>
+        <Matches userData={this.props.userData} />
+      </>
     );
   }
 }

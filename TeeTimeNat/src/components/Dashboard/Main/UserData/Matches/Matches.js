@@ -1,19 +1,21 @@
-import React, {Component} from 'react';
-import {Divider, Text, ListItem} from 'react-native-elements';
-import axios from 'axios';
+import React, { Component } from "react";
+import { Divider, Text, ListItem } from "react-native-elements";
+import axios from "axios";
 
 class Matches extends Component {
   constructor() {
     super();
     this.state = {
-      matches: [],
+      matches: []
     };
   }
 
   componentDidMount() {
-    axios.get('/api/dashboard/userMenu/matches').then(matches => {
-      this.setState({matches});
-    });
+    axios
+      .get("http://192.168.138.2:7777/api/dashboard/userMenu/matches")
+      .then(matches => {
+        this.setState({ matches });
+      });
   }
 
   render() {
