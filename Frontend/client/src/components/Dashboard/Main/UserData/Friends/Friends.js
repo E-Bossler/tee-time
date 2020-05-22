@@ -21,7 +21,7 @@ class Friends extends Component {
     this.acceptFriend = this.acceptFriend.bind(this);
   }
 
-  componentDidMount() {
+  findFriends() {
     const username = this.state.username;
     axios.put("/api/dashboard/userMenu/friends", { username }).then(res => {
       const friends = res.data[0].friends;
@@ -35,7 +35,11 @@ class Friends extends Component {
         this.setState({ friends });
       }
     });
+  }
 
+  componentDidMount() {
+    const username = this.state.username;
+    this.findFriends();
     axios
       .put("/api/dashboard/userMenu/friendRequests", { username })
       .then(res => {
@@ -134,13 +138,13 @@ class Friends extends Component {
       .then(res => {
         console.log(res.data);
       })
-
+    this.setState({ friendToDelete: ""});
+    this.findFriends();
   }
 
   render() {
     return (
       <div id="friends-page">
-        {/* <h2>Friends</h2> */}
 
         <div id="request-container" className="section">
           <h3>Friend Requests</h3>
