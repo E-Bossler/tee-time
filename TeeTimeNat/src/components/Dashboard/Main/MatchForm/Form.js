@@ -1,14 +1,13 @@
-import React, {Component} from 'react';
-import {Divider, Text, Button} from 'react-native-elements';
-import {Link} from 'react-router-native';
-import axios from 'axios';
-import GolfAPI from '../../../utils/golfGeniusAPI';
-import CourseInput from './CourseInput';
-import FriendsInput from './FriendsInput';
-import MatchCourse from './MatchCourse';
-import FriendsList from './FriendsList';
-import style from './stylesheet.scss';
-import SweetAlert from 'react-native-sweet-alert';
+import React, { Component } from "react";
+import { Divider, Text, Button } from "react-native-elements";
+import axios from "axios";
+import GolfAPI from "../../../utils/golfGeniusAPI";
+import CourseInput from "./CourseInput";
+import FriendsInput from "./FriendsInput";
+import MatchCourse from "./MatchCourse";
+import FriendsList from "./FriendsList";
+import style from "./stylesheet.scss";
+import SweetAlert from "react-native-sweet-alert";
 
 class Form extends Component {
   constructor(props) {
@@ -16,40 +15,45 @@ class Form extends Component {
     this.state = {
       username: this.props.username,
       allFriends: [],
-      friend: '',
+      friend: "",
       friendFound: true,
       matchFriends: [],
-      course: '',
-      matchCourse: '',
+      course: "",
+      matchCourse: "",
       courses: [],
-      courseFound: true,
+      courseFound: true
     };
   }
 
   findFriends = () => {
     const username = this.state.username;
-    axios.put('/api/dashboard/userMenu/friends', {username}).then(res => {
-      const friendsData = res.data[0].friends;
-      const friends = [];
-      if (friendsData === undefined) {
-        SweetAlert.showAlertWithOptions({
-          title: 'Add Friends',
-          subTitle: 'You do not yet have any friends added. Add some friends!',
-          style: 'info',
-        });
-      } else {
-        for (let i = 0; i < friendsData.length; i++) {
-          friends.push(friendsData[i]);
+    axios
+      .put("http://192.168.138.2:7777/api/dashboard/userMenu/friends", {
+        username
+      })
+      .then(res => {
+        const friendsData = res.data[0].friends;
+        const friends = [];
+        if (friendsData === undefined) {
+          SweetAlert.showAlertWithOptions({
+            title: "Add Friends",
+            subTitle:
+              "You do not yet have any friends added. Add some friends!",
+            style: "info"
+          });
+        } else {
+          for (let i = 0; i < friendsData.length; i++) {
+            friends.push(friendsData[i]);
+          }
+          this.setState({ allFriends: friends });
         }
-        this.setState({allFriends: friends});
-      }
-    });
+      });
   };
 
   findCourses = () => {
     axios
       .get(
-        'https://www.golfgenius.com/api_v2/L7DBdFNJ4i-mR6ZeBOFPMw/events/4995124311334371081/courses',
+        "https://www.golfgenius.com/api_v2/L7DBdFNJ4i-mR6ZeBOFPMw/events/4995124311334371081/courses"
       )
       .then(res => {
         const courseData = res.data.courses;
@@ -57,19 +61,19 @@ class Form extends Component {
         for (let i = 0; i < courseData.length; i++) {
           courses.push(courseData[i].name.toLowerCase());
         }
-        this.setState({courses});
+        this.setState({ courses });
       });
   };
 
   capCourse = course => {
-    const words = course.toLowerCase().split(' ');
-    let capCourse = '';
+    const words = course.toLowerCase().split(" ");
+    let capCourse = "";
     for (let i = 0; i < words.length; i++) {
-      const splitWord = words[i].split('');
+      const splitWord = words[i].split("");
       const capfirst = splitWord[0].toUpperCase();
       splitWord.shift([0]);
       splitWord.unshift(capfirst);
-      const capWord = splitWord.join('');
+      const capWord = splitWord.join("");
       if (i === 0) {
         capCourse += capWord;
       } else {
@@ -88,7 +92,7 @@ class Form extends Component {
       for (let i = 0; i < courseData.length; i++) {
         courses.push(courseData[i].name.toLowerCase());
       }
-      this.setState({courses: courses});
+      this.setState({ courses: courses });
     });
 
     this.findFriends(user);
@@ -96,12 +100,12 @@ class Form extends Component {
 
   handleCourseInputChange(event) {
     let value = event.target.value;
-    this.setState({course: value});
+    this.setState({ course: value });
   }
 
   handleFriendInputChange(event) {
     let value = event.target.value;
-    this.setState({friend: value});
+    this.setState({ friend: value });
   }
 
   handleCourseSubmit(event) {
@@ -111,18 +115,18 @@ class Form extends Component {
 
     if (courses.indexOf(course) !== -1) {
       const matchCourse = this.capCourse(course);
-      this.setState({courseFound: true});
-      this.setState({matchCourse: matchCourse});
+      this.setState({ courseFound: true });
+      this.setState({ matchCourse: matchCourse });
     } else {
-      this.setState({courseFound: false});
+      this.setState({ courseFound: false });
     }
 
-    this.setState({course: ''});
+    this.setState({ course: "" });
   }
 
   handleCourseDelete() {
-    this.setState({course: ''});
-    this.setState({matchCourse: ''});
+    this.setState({ course: "" });
+    this.setState({ matchCourse: "" });
   }
 
   handleMatchSubmit() {
@@ -131,7 +135,10 @@ class Form extends Component {
     const userData = this.props.userData;
     const allPlayers = [...players, userData];
 
-    axios.post('/dashboard/api/match/new', {course, allPlayers});
+    axios.post("http://192.168.138.2:7777/dashboard/api/match/new", {
+      course,
+      allPlayers
+    });
   }
 
   handleFriendSubmit(event) {
@@ -145,16 +152,16 @@ class Form extends Component {
       for (let i = 0; i < friendArr.length; i++) {
         if (friendArr[i].username === friend) {
           this.setState({
-            matchFriends: [...this.state.matchFriends, friendArr[i]],
+            matchFriends: [...this.state.matchFriends, friendArr[i]]
           });
         }
       }
-      this.setState({friendFound: true});
+      this.setState({ friendFound: true });
     } else {
-      this.setState({friendFound: false});
+      this.setState({ friendFound: false });
     }
 
-    this.setState({friend: ''});
+    this.setState({ friend: "" });
   }
 
   handleFriendDelete(event) {
@@ -165,7 +172,7 @@ class Form extends Component {
         matchFriends.splice(i, 1);
       }
     }
-    this.setState({matchFriends});
+    this.setState({ matchFriends });
   }
 
   render() {
@@ -195,13 +202,13 @@ class Form extends Component {
           matchFriends={this.state.matchFriends}
           handleFriendDelete={this.handleFriendDelete.bind(this)}
         />
-        <Link to="/dashboard/matchView">
-          <Button
-            onClick={this.handleMatchSubmit.bind(this)}
-            id="start-match-btn">
-            <Text>Start</Text>
-          </Button>
-        </Link>
+        {/* <Link to="/dashboard/matchView"> */}
+        <Button
+          onClick={this.handleMatchSubmit.bind(this)}
+          id="start-match-btn"
+        >
+          <Text>Start</Text>
+        </Button>
       </Divider>
     );
   }

@@ -1,23 +1,23 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 import {
   Divider,
   Input,
   Button,
   Text,
   ListItem,
-  Icon,
-} from 'react-native-elements';
-import axios from 'axios';
-import io from 'socket.io-client';
-import style from './stylesheet.scss';
+  Icon
+} from "react-native-elements";
+import axios from "axios";
+import io from "socket.io-client";
+import style from "./stylesheet.scss";
 
 export default class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
       user: true,
-      chatMessage: '',
-      chatMessages: [],
+      chatMessage: "",
+      chatMessages: []
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -25,23 +25,25 @@ export default class Chat extends Component {
   }
 
   scrollToBottom = () => {
-    this.messagesEnd.scrollIntoView({behavior: 'smooth'});
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
   };
 
   componentDidMount() {
     const userData = this.props.userData;
 
-    axios.put('/api/match/current/getChat', {userData}).then(res => {
-      const chatMessages = res.data[0].chat;
-      this.setState({chatMessages});
-      this.scrollToBottom();
-    });
-    this.socket = io('http://192.168.138.2:7777');
-    this.socket.on('connect', () => console.log('connected'));
-    this.socket.on('chat message', msg => {
-      axios.put('/api/match/current/getChat', {userData}).then(res => {
+    axios
+      .put("http://192.168.138.2:7777/api/match/current/getChat", { userData })
+      .then(res => {
         const chatMessages = res.data[0].chat;
-        this.setState({chatMessages});
+        this.setState({ chatMessages });
+        this.scrollToBottom();
+      });
+    this.socket = io("http://192.168.138.2:7777");
+    this.socket.on("connect", () => console.log("connected"));
+    this.socket.on("chat message", msg => {
+      axios.put("/api/match/current/getChat", { userData }).then(res => {
+        const chatMessages = res.data[0].chat;
+        this.setState({ chatMessages });
         this.scrollToBottom();
       });
     });
@@ -49,7 +51,7 @@ export default class Chat extends Component {
 
   handleChange(event) {
     this.setState({
-      chatMessage: event.target.value,
+      chatMessage: event.target.value
     });
   }
 
@@ -60,17 +62,20 @@ export default class Chat extends Component {
     const chatMessageObj = {
       message: this.state.chatMessage,
       messager: userData.username,
-      messagerId: userData.id,
+      messagerId: userData.id
     };
 
     axios
-      .post('/api/match/current/saveChatMessage', {userData, chatMessage})
+      .post("http://192.168.138.2:7777/api/match/current/saveChatMessage", {
+        userData,
+        chatMessage
+      })
       .then(res => {
-        this.socket.emit('chat message', this.state.chatMessage);
+        this.socket.emit("chat message", this.state.chatMessage);
         this.setState({
-          chatMessages: [...this.state.chatMessages, chatMessageObj],
+          chatMessages: [...this.state.chatMessages, chatMessageObj]
         });
-        this.setState({chatMessage: ''});
+        this.setState({ chatMessage: "" });
       });
     this.scrollToBottom();
   }
@@ -80,9 +85,9 @@ export default class Chat extends Component {
     const lastMsgObj = this.state.chatMessages.pop();
     const user = lastMsgObj.messager;
     if (user === this.props.userData.username) {
-      this.setState({user: true});
+      this.setState({ user: true });
     } else {
-      this.setState({user: false});
+      this.setState({ user: false });
     }
   }
 
@@ -90,7 +95,7 @@ export default class Chat extends Component {
     return (
       <Divider style={style} id="chat-container">
         <Divider id="msg-container">
-          <Divider className={this.state.user ? 'user-msgs' : 'friend-msgs'}>
+          <Divider className={this.state.user ? "user-msgs" : "friend-msgs"}>
             {this.state.chatMessages.map((chatMessage, i) => (
               <ListItem key={i} value={chatMessage.id} className="message">
                 {chatMessage.messager}

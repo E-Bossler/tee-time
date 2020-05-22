@@ -1,23 +1,26 @@
-import React, {Component} from 'react';
-import {Divider, Text} from 'react-native-elements';
-import {Route, Redirect} from 'react-router-native';
-import axios from 'axios';
-import NewMatchBtn from './MatchForm/NewMatchBtn';
-import Greens from '../../GreensCSS/Greens';
-import FormContainer from './MatchForm/FormContainer';
-import UserMenuContainer from './UserData/UserMenuContainer';
-import MatchView from './MatchView/MatchView';
-import style from './stylesheet.scss';
-import api from '../../utils/api';
-import {getFromStorage} from '../../utils/storage';
+import React, { Component } from "react";
+import { Divider, Text } from "react-native-elements";
+import axios from "axios";
+import NewMatchBtn from "./MatchForm/NewMatchBtn";
+import Greens from "../../GreensCSS/Greens";
+import FormContainer from "./MatchForm/FormContainer";
+import UserMenuContainer from "./UserData/UserMenuContainer";
+import MatchView from "./MatchView/MatchView";
+import style from "./stylesheet.scss";
+import api from "../../utils/api";
+import { getFromStorage } from "../../utils/storage";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
+const Stack = createStackNavigator();
 
 class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      username: "",
       userData: {},
-      toLogin: false,
+      toLogin: false
     };
   }
 
@@ -27,7 +30,7 @@ class Main extends Component {
 
   findUserName() {
     // get token from storage
-    let key = 'SessionToken';
+    let key = "SessionToken";
     const sessionToken = getFromStorage(key);
     // search user session db
 
@@ -48,23 +51,23 @@ class Main extends Component {
               ) {
                 const user = response.data[i].username;
                 this.setState({
-                  username: user,
+                  username: user
                 });
                 const username = this.state.username;
                 axios
-                  .put('/api/dashboard/userMenu/friends', {username})
+                  .put("/api/dashboard/userMenu/friends", { username })
                   .then(res => {
                     const userData = {
                       username: res.data[0].username,
                       email: res.data[0].email,
                       id: res.data[0]._id,
-                      currentMatchId: '',
-                      currentCourse: '',
-                      currentCoursePlayers: '',
+                      currentMatchId: "",
+                      currentCourse: "",
+                      currentCoursePlayers: ""
                     };
 
                     if (res.data[0].currentMatch === undefined) {
-                      console.log('no current match');
+                      console.log("no current match");
                     } else {
                       userData.currentMatchId =
                         res.data[0].currentMatch.courseId;
@@ -74,7 +77,7 @@ class Main extends Component {
                         res.data[0].currentMatch.players;
                     }
 
-                    this.setState({userData});
+                    this.setState({ userData });
                   });
               }
             }
@@ -86,41 +89,46 @@ class Main extends Component {
 
   render() {
     if (this.state.toLogin === true) {
-      return <Redirect to="/" />;
+      //return <Redirect to="/" />
     }
 
     return (
       <Divider style={style}>
-        <Route exact path="/dashboard">
-          <Divider id="landing-container">
-            <Text h2>Welcome, {this.state.username}</Text>
-            <Text h4>Start a new match?</Text>
-            <NewMatchBtn />
-            <Greens />
-            {/* <h4>© 2020 Ballard Study Group</h4> */}
-          </Divider>
-        </Route>
-
-        <Route path="/dashboard/matchForm">
-          <FormContainer
-            userData={this.state.userData}
-            username={this.state.username}
-          />
-        </Route>
-
-        <Route path="/dashboard/userMenu">
-          <UserMenuContainer
-            userData={this.state.userData}
-            username={this.state.username}
-          />
-        </Route>
-
-        <Route path="/dashboard/matchView">
-          <MatchView
-            userData={this.state.userData}
-            username={this.state.username}
-          />
-        </Route>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen>
+              {/* <Route exact path="/dashboard"> */}
+              <Divider id="landing-container">
+                <Text h2>Welcome, {this.state.username}</Text>
+                <Text h4>Start a new match?</Text>
+                <NewMatchBtn />
+                <Greens />
+                <Text>© 2020 Ballard Study Group</Text>
+              </Divider>
+            </Stack.Screen>
+            <Stack.Screen>
+              {/* <Route path="/dashboard/matchForm"> */}
+              <FormContainer
+                userData={this.state.userData}
+                username={this.state.username}
+              />
+            </Stack.Screen>
+            <Stack.Screen>
+              {/* <Route path="/dashboard/userMenu"> */}
+              <UserMenuContainer
+                userData={this.state.userData}
+                username={this.state.username}
+              />
+            </Stack.Screen>
+            <Stack.Screen>
+              {/* <Route path="/dashboard/matchView"> */}
+              <MatchView
+                userData={this.state.userData}
+                username={this.state.username}
+              />
+            </Stack.Screen>
+          </Stack.Navigator>
+        </NavigationContainer>
       </Divider>
     );
   }

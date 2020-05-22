@@ -137,14 +137,14 @@ router.put("/api/dashboard/userMenu/deleteFriends", (req, res) => {
 
   db.User.findOneAndUpdate(
     {
-      _id: id
+      _id: id,
     },
     {
       $pull: {
         friends: {
-          _id: friendId
-        }
-      }
+          _id: friendId,
+        },
+      },
     }
   )
     .then(data => {
@@ -153,7 +153,7 @@ router.put("/api/dashboard/userMenu/deleteFriends", (req, res) => {
     .catch(({ message }) => {
       console.log(message);
     });
-})
+});
 
 router.post("/api/dashboard/userMenu/friendRequests", (req, res) => {
   console.log(req.body.request);
@@ -252,7 +252,6 @@ router.post("/api/account/signup", (req, res) => {
           message: "WARNING WARNING! Account already exists! WARNING WARNING!",
         });
       } else {
-
         // save the email
 
         const newUser = new db.User();
@@ -273,7 +272,6 @@ router.post("/api/account/signup", (req, res) => {
             message: "SUCCESS! YOU HAVE SIGNED UP! PLEASE LOGIN!",
           });
         });
-
       }
     }
   );
@@ -282,6 +280,7 @@ router.post("/api/account/signup", (req, res) => {
 // SIGN IN SET UP
 
 router.post("/api/account/signin", (req, res, next) => {
+  console.log(req.body);
   const { body } = req;
   let { email, password } = body;
 
