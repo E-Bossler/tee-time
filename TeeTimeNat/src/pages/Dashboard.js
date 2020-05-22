@@ -1,20 +1,26 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {NativeRouter, Switch} from 'react-router-native';
-import {View} from 'react-native';
+import {Divider} from 'react-native-elements';
 import Nav from '../components/Dashboard/Nav/Nav';
-import Page from '../components/Dashboard/Main/Page';
+import Main from '../components/Dashboard/Main/Main';
+import Footer from '../components/Dashboard/Footer/Footer';
 
-function Dashboard() {
-  return (
-    <View>
-      <NativeRouter>
-        <Nav />
-        <Switch>
-          <Page />
-        </Switch>
-      </NativeRouter>
-    </View>
-  );
+class Dashboard extends Component {
+  render() {
+    return (
+      <Divider>
+        <NativeRouter>
+          <Nav props={this.props} />
+          <Switch>
+            <Main />
+          </Switch>
+          <Switch>
+            <Footer />
+          </Switch>
+        </NativeRouter>
+      </Divider>
+    );
+  }
 }
 
 export default Dashboard;

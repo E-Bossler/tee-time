@@ -1,13 +1,15 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {View} from 'react-native';
 import Links from './Links';
 
-function Slider() {
-  return (
-    <View id="links-container">
-      <Links />
-    </View>
-  );
+class Slider extends Component {
+  render() {
+    return (
+      <View id="slider">
+        <Links animate={this.props.action} burgerClicked={this.props.clicked} />
+      </View>
+    );
+  }
 }
 
 export default Slider;

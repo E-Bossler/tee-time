@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+$lightBlue: rgb(100, 142, 255);
+$darkBlue: rgb(51, 104, 250);
+
+button {
+    background: linear-gradient($lightBlue, $darkBlue);
+    color: white;
+    // margin: 10px auto;
+    border: none;
+    padding: 8px 10px;
+    // width: 100px;
+}
+
+#match-btn-container {
+    margin: 40px auto;
+    width: 100px;
+    #new-match-btn {
+        #new-match-link {
+            color: white;
+            font-family: 'Open Sans', sans-serif;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+    }
+}
+
+#form-container {
+    margin: 0px auto;
+    max-width: 720px;
+    overflow-y: scroll;
+    #form {
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - 65px - 45px);
+        margin: 0 auto;
+        padding: 20px;
+        position: relative;
+        .form-group {
+            margin: 0px auto;
+            width: 90%;
+            label {
+                font-size: 0.9em;
+            }
+            #not-found-msg {
+                color: rgb(225, 70, 70);
+                font-size: 0.8em;
+                padding: 2px;
+            }
+            .hide {
+                display: none;
+            }
+            #add-friend-btn,
+            #find-course-btn {
+                background: rgb(26, 228, 26);
+                color: white;
+                font-family: 'Open Sans', sans-serif;
+                font-weight: 600;
+                margin: 10px 2px;
+                text-decoration: none;
+                text-transform: uppercase;
+                width: 110px;
+            } 
+        }
+        #course-container,
+        #friends-list-container {
+            margin: 5px auto;
+            width: 90%;
+        }
+        h3 {
+            color: rgb(60, 60, 60);
+            font-size: 1em;
+            font-weight: 400;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+        }
+        p {
+            font-size: 0.9em;
+        }
+        .hide {
+            display: none;
+        }
+        #course-container {
+            #course-name {
+                background: $lightBlue;
+                border-radius: 10px;
+                color: white;
+                margin: 0 auto;
+                padding: 6px 6px 6px 10px;
+                p {
+                    display: inline-block;
+                    width: 90%;
+                }
+                i {
+                    text-align: center;
+                    width: 10%;
+                }
+            }
+        }
+        #friends-list-container {
+            #friends-list {
+                margin: 5px auto 8px;
+                li {
+                    background: $lightBlue;
+                    border-radius: 10px;
+                    color: white;
+                    list-style: none;
+                    margin: 4px auto;
+                    padding: 6px 6px 6px 10px;
+                    p {
+                        display: inline-block;
+                        width: 90%;
+                    }
+                    i {
+                        text-align: center;
+                        width: 10%;
+                    }
+                }
+            }
+        }
+        #start-match-btn {
+            margin-bottom: 20px;
+            padding: 10px;
+            align-self: center;
+            #match-link {
+                background: linear-gradient($lightBlue, $darkBlue);
+                color: white;
+                font-family: 'Rubik', sans-serif;
+                text-decoration: none;
+                text-transform: uppercase;
+            }
+        }
+    }
+}

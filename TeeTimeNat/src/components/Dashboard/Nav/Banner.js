@@ -1,14 +1,23 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import React, {Component} from 'react';
+import {Divider, Text} from 'react-native-elements';
+import {Link} from 'react-router-native';
 import Burger from './Burger';
 
-function Banner() {
-  return (
-    <View id="banner">
-      <Text>Tee-Time</Text>
-      <Burger />
-    </View>
-  );
+class Banner extends Component {
+  render() {
+    // console.log(this.props.message);
+    return (
+      <Divider id="banner">
+        <Text h2>
+          <Link to="/dashboard/matchView">Tee Time</Link>
+        </Text>
+        <Burger
+          animate={this.props.action}
+          burgerClicked={this.props.clicked}
+        />
+      </Divider>
+    );
+  }
 }
 
 export default Banner;
