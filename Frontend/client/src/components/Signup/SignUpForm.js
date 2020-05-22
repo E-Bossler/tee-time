@@ -17,21 +17,52 @@ class SignUpForm extends Component {
 
     const email = document.getElementById("email-input").value;
     const password = document.getElementById("password-input").value;
+    const passwordCheck = document.getElementById("password-input-check").value;
     const username = document.getElementById("username-input").value;
 
-    api.signUp(email, password, username).then(result => {
-      let successful = result.data.success;
-      if (successful) {
-        swal(
-          "SUCCESS",
-          "You have created an account. Please log in to your account.",
-          "success"
-        );
-        this.setState({ toLogin: true });
-      } else {
-        swal("ERROR", "This account already exists.", "error");
-      }
-    });
+    if (username === "") {
+      swal("ERROR", 
+      "Please input a username.",
+      "warning")
+      return
+    }
+    
+    if (email === "") {
+      swal("ERROR", 
+      "Please input an email address.", 
+      "warning")
+      return
+    }
+
+    if (password === "") {
+      swal("ERROR", 
+      "Please input a password.", 
+      "warning")
+      return
+    }
+
+    if (password === passwordCheck) {
+      api.signUp(email, password, username).then(result => {
+        let successful = result.data.success;
+        if (successful) {
+          swal(
+            "SUCCESS",
+            "You have created an account. Please log in.",
+            "success");
+          this.setState({ toLogin: true });
+        } else {
+          swal("ERROR", 
+          "This email address already has an account associated with it.", 
+          "error");
+        }
+      });
+    } else {
+      swal("PASSWORD ISSUE", 
+      "Both passwords must match.", 
+      "warning")
+    }
+
+
   }
 
   render() {
@@ -72,6 +103,16 @@ class SignUpForm extends Component {
                   id="password-input"
                   name="password"
                   placeholder="Password"
+                ></input>
+              </div>
+              <div className="form-group">
+                <label htmlFor="password-input-check">Confirm Password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password-input-check"
+                  name="password-check"
+                  placeholder="Confirm Password"
                 ></input>
               </div>
               <button
