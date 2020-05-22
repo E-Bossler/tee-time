@@ -15,6 +15,7 @@ class Links extends Component {
     e.preventDefault();
     setInStorage('', {});
     this.setState({toLogin: true});
+    ///change this to redirect
     window.location.href = '/login';
   }
 

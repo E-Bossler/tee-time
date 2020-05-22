@@ -1,3 +1,6 @@
+///path that reads and write json file
+///seperate json file that stores the users
+
 export function getFromStorage(key) {
   if (!key) {
     return null;
@@ -16,7 +19,7 @@ export function getFromStorage(key) {
 
 export function setInStorage(key, obj) {
   try {
-    localStorage.setItem("SessionToken", key);
+    localStorage.setItem('SessionToken', key);
   } catch (err) {
     console.log(`Error: ${err}`);
   }

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Divider, Text, Input, Button} from 'react-native-elements';
 import api from '../utils/api';
-import style from './stylesheet.scss';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import styles from './stylesheet.scss';
 import {Redirect, Link} from 'react-router-native';
 import {setInStorage} from '../utils/storage';
 import SweetAlert from 'react-native-sweet-alert';
@@ -11,13 +12,16 @@ class LogInForm extends Component {
     super(props);
     this.state = {
       toDashboard: api,
+      email: '',
+      password: '',
     };
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    const email = document.getElementById('email-input').value;
-    const password = document.getElementById('password-input').value;
+    console.log(this.state);
+    const email = this.state.email;
+    const password = this.state.password;
     api.login(email, password).then(result => {
       let successful = result.data.success;
 
@@ -35,27 +39,35 @@ class LogInForm extends Component {
   }
 
   render() {
+    console.log(styles);
     if (this.state.toDashboard === true) {
       return <Redirect to="/dashboard" />;
     }
     return (
-      <Divider style={style} className="container">
+      <Divider style={styles.container} className="container">
         <Divider className="row">
-          <Divider className="col text-center">
-            <Text h1>Welcome to Tee-Time!</Text>
-            <Divider>
-              <Divider className="form-group">
+          <Divider style={stylse.col} className="col text-center">
+            <Text style={styles.h1} h1>
+              Welcome to Tee-Time!
+            </Text>
+            <Divider style={styles.form}>
+              <Divider style={styles.formGroup} className="form-group">
                 <Input
+                  onChangeText={value => this.setState({email: value})}
+                  style={styles.input}
                   label="Email Address"
                   type="email"
                   className="form-control"
                   id="email-input"
                   name="email"
                   placeholder="Email"
+                  leftIcon={{type: 'font-awesome', name: 'chevron-left'}}
                 />
               </Divider>
-              <Divider className="form-group">
+              <Divider style={styles.formGroup} className="form-group">
                 <Input
+                  onChangeText={value => this.setState({password: value})}
+                  style={styles.input}
                   label="Password"
                   type="password"
                   className="form-control"
@@ -65,17 +77,17 @@ class LogInForm extends Component {
                 />
               </Divider>
               <Button
-                type="submit"
+                title="Login"
+                style={styles.button}
                 id="login-btn"
                 className="btn btn-default"
-                onPress={e => this.handleSubmit(e)}>
-                Login
-              </Button>
+                onPress={e => this.handleSubmit(e)}
+              />
             </Divider>
             <Divider>
-              <Text>
-                Don't have an account? Sign up <Link to="/signup">here</Link>
-              </Text>
+              <Link to="/signup">
+                <Text style={styles.p}>Sign up here</Text>
+              </Link>
             </Divider>
           </Divider>
         </Divider>

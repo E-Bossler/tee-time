@@ -1,46 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap');
-
-.col {
-    font-family: 'Rubik', sans-serif;
-    h1 {
-        font-size: 1.6em;
-        margin: 50px auto 20px;
-        text-align: center;
-    }
-    form {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin: 20px auto 10px;
-        width: 80%;
-        button {
-            color: white;
-            font-family: 'Rubik', sans-serif;
-            padding: 10px;
-            margin: 20px auto 10px;
-            text-transform: uppercase;
-            width: 100px;
-        }
-    }
-    div {
-        p {
-            font-size: 0.8em;
-            text-align: center;
-        }
-    }
+.container {
+  align-items: center;
 }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-    margin: 4px 0;
-    label {
-        font-size: 0.8em;
-        margin: 4px 0;
-    }
-    input {
-        border: 1px solid grey;
-        height: 35px;
-        padding: 5px;
-    }
+.col {
+  font-family: 'Rubik', sans-serif;
+}
+
+.h1 {
+  font-size: 1.6em;
+  margin: 50px auto 20px;
+  text-align: center;
+}
+.form {
+  background-color: blue;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px auto 10px;
+  width: 80%;
+}
+.button {
+  color: white;
+  font-family: 'Rubik', sans-serif;
+  padding: 10px;
+  margin: 20px auto 10px;
+  text-transform: uppercase;
+  width: 100px;
+}
+
+.p {
+  font-size: 0.8em;
+  text-align: center;
+}
+
+.formGroup {
+  flex-direction: column;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.input {
+  border-width: 1;
+  border-color: grey;
+  border-style: solid;
+  height: 35px;
+  padding: 5px;
 }
