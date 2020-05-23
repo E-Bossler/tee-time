@@ -22,45 +22,47 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.route.params.email);
+    console.log(this.props);
     this.findUserName();
   }
 
   findUserName() {
     const email = this.props.route.params.email;
-    axios.put("/api/dashboard/email", { email }).then(res => {
-      console.log(res.data);
-      const userData = {
-        username: res.data[0].username,
-        email: res.data[0].email,
-        id: res.data[0]._id,
-        currentMatchId: "",
-        currentCourse: "",
-        currentCoursePlayers: ""
-      };
+    return axios
+      .put("http://192.168.138.2:7777/api/dashboard/email", { email })
+      .then(res => {
+        console.log(res.data);
+        const userData = {
+          username: res.data[0].username,
+          email: res.data[0].email,
+          id: res.data[0]._id,
+          currentMatchId: "",
+          currentCourse: "",
+          currentCoursePlayers: ""
+        };
 
-      if (res.data[0].currentMatch === undefined) {
-        console.log("no current match");
-      } else {
-        userData.currentMatchId = res.data[0].currentMatch.courseId;
-        userData.currentCourse = res.data[0].currentMatch.courseName;
-        userData.currentCoursePlayers = res.data[0].currentMatch.players;
-      }
+        if (res.data[0].currentMatch === undefined) {
+          console.log("no current match");
+        } else {
+          userData.currentMatchId = res.data[0].currentMatch.courseId;
+          userData.currentCourse = res.data[0].currentMatch.courseName;
+          userData.currentCoursePlayers = res.data[0].currentMatch.players;
+        }
 
-      this.setState({ userData });
-    });
+        this.setState({ userData });
+      });
   }
 
   render() {
     if (this.state.toLogin === true) {
       //return <Redirect to="/" />
     }
-
+    const userData = this.state.userData;
     return (
       <>
         {/* <Route exact path="/dashboard"> */}
 
-        <Text h2>Welcome, {this.state.username}</Text>
+        <Text h2>Welcome, {userData.username}</Text>
         <Text h4>Start a new match?</Text>
         <Button title="New Match" id="new-match-btn" />
         {/* <Greens /> */}

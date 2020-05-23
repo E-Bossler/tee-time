@@ -41,6 +41,7 @@ router.put('/api/users', (req, res) => {
 });
 
 router.put('/api/dashboard/email', (req, res) => {
+  console.log(req.body);
   db.User.find({ email: req.body.email }).then(data => {
     res.json(data);
   });

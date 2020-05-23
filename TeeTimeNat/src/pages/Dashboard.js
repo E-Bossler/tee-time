@@ -13,7 +13,7 @@ class Dashboard extends Component {
         <ScrollView>
           <Links navigation={this.props.navigation} />
 
-          <Main navigation={this.props.navigation} />
+          <Main route={this.props.route} navigation={this.props.navigation} />
         </ScrollView>
 
         <Footer />
