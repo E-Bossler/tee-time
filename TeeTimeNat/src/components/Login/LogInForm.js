@@ -3,7 +3,6 @@ import { Text, Input, Button } from "react-native-elements";
 import api from "../utils/api";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./stylesheet.scss";
-import { setInStorage } from "../utils/storage";
 import SweetAlert from "react-native-sweet-alert";
 import Greens from "../GreensCSS/Greens";
 
@@ -13,6 +12,10 @@ class LogInForm extends Component {
     email: "",
     password: ""
   };
+
+  componentDidMount() {
+    this.setState({ toDashboard: false });
+  }
 
   handleChangeEmail(e) {
     this.setState({ email: e });
@@ -31,7 +34,6 @@ class LogInForm extends Component {
       let successful = result.data.success;
 
       if (successful) {
-        setInStorage(result.data.token, result);
         this.setState({ toDashboard: true });
       } else {
         SweetAlert.showAlertWithOptions({
@@ -46,7 +48,8 @@ class LogInForm extends Component {
   render() {
     console.log(this.props);
     if (this.state.toDashboard === true) {
-      this.props.navigation.navigate("Dashboard");
+      const email = this.state.email;
+      this.props.navigation.navigate("Dashboard", { email });
     }
     return (
       <>

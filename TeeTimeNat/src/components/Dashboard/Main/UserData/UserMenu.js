@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Divider } from "react-native-elements";
-import Stats from "./Stats/Stats";
+// import Stats from "./Stats/Stats";
 import Courses from "./Courses/Courses";
 import Friends from "./Friends/Friends";
 import Matches from "./Matches/Matches";
@@ -13,7 +13,7 @@ class UserMenu extends Component {
   render() {
     return (
       <>
-        <Stats userData={this.props.userData} />
+        {/* <Stats userData={this.props.userData} /> */}
 
         <Courses userData={this.props.userData} />
 
