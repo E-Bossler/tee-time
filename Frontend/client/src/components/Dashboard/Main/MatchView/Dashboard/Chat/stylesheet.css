@@ -124,13 +124,21 @@
   z-index: 1;
 }
 
+#chat-container #msg-container li {
+  font-size: 0.9em;
+  list-style: none;
+  margin: 1px;
+  text-align: right;
+}
+
 #chat-container #msg-container .message {
   border-radius: 10px;
   display: inline-block;
-  font-size: 0.9em;
-  margin: 5px 0px;
+  font-size: 1.1em;
+  margin: 5px;
   min-height: 28px;
-  padding: 8px 15px;
+  padding: 8px 12px;
+  text-align: left;
 }
 
 #chat-container #input-container {
