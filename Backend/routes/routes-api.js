@@ -402,7 +402,7 @@ router.get("/api/account/logout", (req, res, next) => {
 // SET UP A  NEW MATCH
 
 router.post("/dashboard/api/match/new", (req, res) => {
-  // console.log(req.body);
+  console.log(req.body);
   db.Match.collection
     .insertOne({
       course: req.body.course,
@@ -463,15 +463,15 @@ router.get("/api/match/history", (req, res, next) => {
 });
 
 router.post("/api/user/score", (req, res) => {
-  // console.log(req.body);
-  const userId = req.body.userId;
-  db.User.findOne({ _id: userId}).then(data => {
+  console.log(req.body);
+  const username = req.body.username;
+  db.User.findOne({ username: username }).then(data => {
     res.json(data);
   });
 });
 
 router.put("/api/user/score", (req, res) => {
-  // console.log(req.body);
+  console.log(req.body);
   const userId = req.body.userId;
   db.User.findOneAndUpdate(
     { 

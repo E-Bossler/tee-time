@@ -10,7 +10,7 @@ class Scoreboard extends Component {
       username: "",
       players: "",
       course: "",
-      scorecardView: this.props.userData.username,
+      scorecardView: this.props.userData.username
     };
   }
 
@@ -22,16 +22,17 @@ class Scoreboard extends Component {
   render() {
     const username = this.props.userData.username;
     const course = this.props.currentMatch.course;
+    const playerData = this.props.currentMatch.participants;
 
-    const list = this.props.currentMatch.participants;
-    // console.log(list);
     const players = [];
-    for (let i = 0; i < list.length; i++) {
-      players.push(list[i].username);
+
+    for (let i = 0; i < playerData.length; i++) {
+      if (playerData[i].username !== username) {
+        players.push(playerData[i].username);
+      } else {
+        playerData.splice(i, 1);
+      }
     }
-    const indexToSplice = players.indexOf(username);
-    players.splice(indexToSplice, 1);
-    console.log(players);
 
     if (username === undefined || players === undefined || course === undefined) {
       console.log("waiting for props...");
@@ -45,12 +46,13 @@ class Scoreboard extends Component {
         <div id="scoreboard">
           <CardSelector
             username={username}
-            players={players}
+            playerData={playerData}
             scorecardView={this.state.scorecardView}
             handleCardViewChange={this.handleCardViewChange.bind(this)}
           />
           <Scorecard
             userData={this.props.userData}
+            playerData={playerData}
             username={username}
             players={players}
             course={course}

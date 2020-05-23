@@ -17,19 +17,42 @@ class Scorecard extends Component {
       viewSideOut: true,
       currentScore: "",
       currentHole: "",
-      scoreData: []
+      userScoreData: [],
+      playerScoreData: []
     };
   }
 
   componentDidMount() {
     const course = this.props.course;
-    const userId = this.props.userData.id;
+    const username = this.props.userData.username;
+    const playerData = this.props.playerData;
 
-    axios
-      .post("/api/user/score", { userId })
+    const friends = [];
+    for (let i = 0; i < playerData.length; i++) {
+      friends.push(playerData[i].username);
+    }
+
+    const playerScoreData = [];
+    for (let i = 0; i < friends.length; i++) {
+      let username = friends[i];
+      axios
+      .post("/api/user/score", { username })
       .then(res => {
         const scoreData = res.data.currentMatch.holes;
-        this.setState({ scoreData: scoreData });
+        const playerData = {
+          username: username,
+          scoreData: scoreData
+        }
+        playerScoreData.push(playerData);
+        this.setState({ playerScoreData: playerScoreData});
+      });
+    }
+
+    axios
+      .post("/api/user/score", { username })
+      .then(res => {
+        const scoreData = res.data.currentMatch.holes;
+        this.setState({ userScoreData: scoreData });
       });
 
     GolfAPI.findCourses()
@@ -97,7 +120,6 @@ class Scorecard extends Component {
       const hcpData = this.state.hcpData;
       const players = this.props.players;
       const username = this.props.username;
-      console.log("scorecard: ", players);
 
       return (
         <div>
@@ -147,7 +169,7 @@ class Scorecard extends Component {
                           <input
                             className="score-input"
                             id={value}
-                            defaultValue={this.state.scoreData[index].score ? this.state.scoreData[index].score : ""}
+                            defaultValue={this.state.userScoreData[index].score ? this.state.userScoreData[index].score : ""}
                             onChange={this.handleScoreInput.bind(this)}
                           />
                         </form>
@@ -170,7 +192,7 @@ class Scorecard extends Component {
                           <input
                             className="score-input"
                             id={value}
-                            // value={this.state.currentScore}
+                            defaultValue={this.state.userScoreData[index].score ? this.state.userScoreData[index].score : ""}
                             onChange={this.handleScoreInput.bind(this)}
                           />
                         </form>
@@ -181,10 +203,10 @@ class Scorecard extends Component {
               </tbody>
             </table>
           </div>
-          {players.map((value, index) => {
+          {players.map((value, i) => {
             return (
               <div
-                key={index}
+                key={i}
                 className={this.props.scorecardView === value ? "show scorecard" : "hide scorecard"}
               >
                 <p className="player-name">{value}</p>
@@ -225,7 +247,10 @@ class Scorecard extends Component {
                           </td>
                           <td className="par">{parData[index]}</td>
                           <td className="hcp">{hcpData[index]}</td>
-                          <td className="score">?</td>
+                          <td className="score">
+                            {this.state.playerScoreData[i].scoreData[index].score ? 
+                            this.state.playerScoreData[i].scoreData[index].score : ""}
+                          </td>
                         </tr>
                       );
                     })}
@@ -241,7 +266,10 @@ class Scorecard extends Component {
                           </td>
                           <td className="par-cell">{parData[index + 9]}</td>
                           <td className="hcp-cell">{hcpData[index + 9]}</td>
-                          <td className="score-cell">?</td>
+                          <td className="score">
+                            {this.state.playerScoreData[i].scoreData[index].score ? 
+                            this.state.playerScoreData[i].scoreData[index].score : ""}
+                          </td>
                         </tr>
                       );
                     })}

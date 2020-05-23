@@ -130,7 +130,6 @@ class Form extends Component {
     }
     const userData = this.props.userData;
     const allPlayers = [...players, userData];
-
     console.log(this.state.matchHoles);
     console.log(this.state.matchCourse);
 

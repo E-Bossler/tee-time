@@ -2,9 +2,19 @@ import React, { Component } from "react";
 import "./stylesheet.css";
 
 class CardSelector extends Component {
- render() {
-    const players = this.props.players;
+  render() {
     const username = this.props.username;
+    const playerData = this.props.playerData;
+
+    const players = [];
+
+    for (let i = 0; i < playerData.length; i++) {
+      if (playerData[i].username !== username) {
+        players.push(playerData[i].username);
+      } else {
+        playerData.splice(i, 1);
+      }
+    }
 
     return (
       <div id="card-selector">
