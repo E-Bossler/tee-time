@@ -93,43 +93,38 @@ class Main extends Component {
     }
 
     return (
-      <Divider style={style}>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen>
-              {/* <Route exact path="/dashboard"> */}
-              <Divider id="landing-container">
-                <Text h2>Welcome, {this.state.username}</Text>
-                <Text h4>Start a new match?</Text>
-                <NewMatchBtn />
-                <Greens />
-                <Text>© 2020 Ballard Study Group</Text>
-              </Divider>
-            </Stack.Screen>
-            <Stack.Screen>
-              {/* <Route path="/dashboard/matchForm"> */}
-              <FormContainer
-                userData={this.state.userData}
-                username={this.state.username}
-              />
-            </Stack.Screen>
-            <Stack.Screen>
-              {/* <Route path="/dashboard/userMenu"> */}
-              <UserMenuContainer
-                userData={this.state.userData}
-                username={this.state.username}
-              />
-            </Stack.Screen>
-            <Stack.Screen>
-              {/* <Route path="/dashboard/matchView"> */}
-              <MatchView
-                userData={this.state.userData}
-                username={this.state.username}
-              />
-            </Stack.Screen>
-          </Stack.Navigator>
-        </NavigationContainer>
-      </Divider>
+      <>
+        {/* <Route exact path="/dashboard"> */}
+        <Divider id="landing-container">
+          <Text h2>Welcome, {this.state.username}</Text>
+          <Text h4>Start a new match?</Text>
+          <NewMatchBtn />
+          <Greens />
+          <Text>© 2020 Ballard Study Group</Text>
+        </Divider>
+
+        <Stack.Screen>
+          {/* <Route path="/dashboard/matchForm"> */}
+          <FormContainer
+            userData={this.state.userData}
+            username={this.state.username}
+          />
+        </Stack.Screen>
+        <Stack.Screen>
+          {/* <Route path="/dashboard/userMenu"> */}
+          <UserMenuContainer
+            userData={this.state.userData}
+            username={this.state.username}
+          />
+        </Stack.Screen>
+        <Stack.Screen>
+          {/* <Route path="/dashboard/matchView"> */}
+          <MatchView
+            userData={this.state.userData}
+            username={this.state.username}
+          />
+        </Stack.Screen>
+      </>
     );
   }
 }

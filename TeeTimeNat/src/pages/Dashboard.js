@@ -7,13 +7,14 @@ import Footer from "../components/Dashboard/Footer/Footer";
 
 class Dashboard extends Component {
   render() {
+    console.log(this.props);
     return (
       <>
         <Nav props={this.props} />
 
-        {/* <Main />
+        {/* <Main /> */}
 
-          <Footer /> */}
+        <Footer />
       </>
     );
   }
