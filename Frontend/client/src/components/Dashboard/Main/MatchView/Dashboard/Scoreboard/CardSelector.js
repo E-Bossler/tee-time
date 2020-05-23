@@ -3,12 +3,18 @@ import "./stylesheet.css";
 
 class CardSelector extends Component {
   render() {
-    const players = this.props.players;
     const username = this.props.username;
-    const indexToSplice = players.indexOf(username);
-    players.splice(indexToSplice, 1);
+    const playerData = this.props.playerData;
 
-    // console.log(players);
+    const players = [];
+
+    for (let i = 0; i < playerData.length; i++) {
+      if (playerData[i].username !== username) {
+        players.push(playerData[i].username);
+      } else {
+        playerData.splice(i, 1);
+      }
+    }
 
     return (
       <div id="card-selector">
@@ -49,16 +55,6 @@ class CardSelector extends Component {
               </div>
             );
           })}
-          {/* <div id="radio-group">
-                        <input 
-                            type="radio" 
-                            id="all" 
-                            name="scorecard-radio" 
-                            value="all" 
-                            onChange={this.props.handleCardViewChange}
-                        />
-                        <label htmlFor="all">View All</label>
-                    </div> */}
         </form>
       </div>
     );

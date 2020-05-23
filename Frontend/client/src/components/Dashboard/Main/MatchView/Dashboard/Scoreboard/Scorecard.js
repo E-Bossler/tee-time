@@ -17,11 +17,43 @@ class Scorecard extends Component {
       viewSideOut: true,
       currentScore: "",
       currentHole: "",
+      userScoreData: [],
+      playerScoreData: []
     };
   }
 
   componentDidMount() {
     const course = this.props.course;
+    const username = this.props.userData.username;
+    const playerData = this.props.playerData;
+
+    const friends = [];
+    for (let i = 0; i < playerData.length; i++) {
+      friends.push(playerData[i].username);
+    }
+
+    const playerScoreData = [];
+    for (let i = 0; i < friends.length; i++) {
+      let username = friends[i];
+      axios
+      .post("/api/user/score", { username })
+      .then(res => {
+        const scoreData = res.data.currentMatch.holes;
+        const playerData = {
+          username: username,
+          scoreData: scoreData
+        }
+        playerScoreData.push(playerData);
+        this.setState({ playerScoreData: playerScoreData});
+      });
+    }
+
+    axios
+      .post("/api/user/score", { username })
+      .then(res => {
+        const scoreData = res.data.currentMatch.holes;
+        this.setState({ userScoreData: scoreData });
+      });
 
     GolfAPI.findCourses()
       .then(res => {
@@ -50,8 +82,6 @@ class Scorecard extends Component {
 
         const yardageData = matchCourseData.tees[0].hole_data.yardage;
         this.setState({ yardageData: yardageData });
-
-        // console.log(this.state);
       })
       .then(() => {
         this.setState({ loading: false });
@@ -65,15 +95,18 @@ class Scorecard extends Component {
       this.setState({ viewSideOut: false });
     }
   }
+
   handleScoreInput(event) {
     event.preventDefault();
-    const userData = this.props.userData;
+    const userId = this.props.userData.id;
     const currentScore = event.target.value;
-    const currentHole = event.target.id;
+    const currentHole = event.target.id - 1;
+
     this.setState({ currentScore: currentScore });
     this.setState({ currentHole: currentHole });
+
     axios
-      .post("/api/user/score", { currentScore, currentHole, userData })
+      .put("/api/user/score", { currentScore, currentHole, userId })
       .then(res => {
         console.log(res.data);
       });
@@ -87,18 +120,11 @@ class Scorecard extends Component {
       const hcpData = this.state.hcpData;
       const players = this.props.players;
       const username = this.props.username;
-      const indexToSplice = players.indexOf(username);
-      players.splice(1, indexToSplice);
-      console.log(players);
 
       return (
         <div>
           <div
-            className={
-              this.props.scorecardView === username
-                ? "show scorecard"
-                : "hide scorecard"
-            }
+            className={this.props.scorecardView === username ? "show scorecard" : "hide scorecard"}
           >
             <p className="player-name">{username}</p>
             <div className="side-container">
@@ -143,7 +169,7 @@ class Scorecard extends Component {
                           <input
                             className="score-input"
                             id={value}
-                            // value={event.target.value}
+                            defaultValue={this.state.userScoreData[index].score ? this.state.userScoreData[index].score : ""}
                             onChange={this.handleScoreInput.bind(this)}
                           />
                         </form>
@@ -165,7 +191,8 @@ class Scorecard extends Component {
                         <form>
                           <input
                             className="score-input"
-                            value={this.state.currentScore}
+                            id={value}
+                            defaultValue={this.state.userScoreData[index].score ? this.state.userScoreData[index].score : ""}
                             onChange={this.handleScoreInput.bind(this)}
                           />
                         </form>
@@ -176,15 +203,11 @@ class Scorecard extends Component {
               </tbody>
             </table>
           </div>
-          {players.map((value, index) => {
+          {players.map((value, i) => {
             return (
               <div
-                key={index}
-                className={
-                  this.props.scorecardView === value
-                    ? "show scorecard"
-                    : "hide scorecard"
-                }
+                key={i}
+                className={this.props.scorecardView === value ? "show scorecard" : "hide scorecard"}
               >
                 <p className="player-name">{value}</p>
                 <div className="side-container">
@@ -224,7 +247,10 @@ class Scorecard extends Component {
                           </td>
                           <td className="par">{parData[index]}</td>
                           <td className="hcp">{hcpData[index]}</td>
-                          <td className="score">?</td>
+                          <td className="score">
+                            {this.state.playerScoreData[i].scoreData[index].score ? 
+                            this.state.playerScoreData[i].scoreData[index].score : ""}
+                          </td>
                         </tr>
                       );
                     })}
@@ -240,7 +266,10 @@ class Scorecard extends Component {
                           </td>
                           <td className="par-cell">{parData[index + 9]}</td>
                           <td className="hcp-cell">{hcpData[index + 9]}</td>
-                          <td className="score-cell">?</td>
+                          <td className="score">
+                            {this.state.playerScoreData[i].scoreData[index].score ? 
+                            this.state.playerScoreData[i].scoreData[index].score : ""}
+                          </td>
                         </tr>
                       );
                     })}
@@ -253,7 +282,7 @@ class Scorecard extends Component {
       );
     } else {
       return (
-        <div>
+        <div id="loading-animation">
           <div className="lds-roller">
             <div></div>
             <div></div>

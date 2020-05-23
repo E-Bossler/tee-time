@@ -7,7 +7,7 @@ import MatchSplash from "./MatchSplash/MatchSplash";
 
 class DashboardContainer extends Component {
   render() {
-    console.log(this.props.currentMatch);
+    // console.log(this.props.currentMatch);
     return (
       <div>
         <Route exact path="/dashboard/matchView">

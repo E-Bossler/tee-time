@@ -7,9 +7,8 @@ export default class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: true,
       chatMessage: "",
-      chatMessages: [],
+      chatMessages: []
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -20,26 +19,12 @@ export default class Chat extends Component {
     this.messagesEnd.scrollIntoView({ behavior: "smooth" });
   };
 
-  handleUserChange() {
-    // const userMsg = this.state.user;
-    const lastMsgObj = this.state.chatMessages.pop();
-    const user = lastMsgObj.messager;
-    if (user === this.props.userData.username) {
-      console.log("my message");
-      this.setState({ user: true});
-    } else {
-      console.log("friend's message");
-      this.setState({ user: false});
-    }
-  }
-
   componentDidMount() {
     const userData = this.props.userData;
 
     axios.put("/api/match/current/getChat", { userData }).then(res => {
       const chatMessages = res.data[0].chat;
       this.setState({ chatMessages });
-      this.handleUserChange();
       this.scrollToBottom();
     });
     this.socket = io("http://192.168.138.2:7777");
@@ -48,7 +33,6 @@ export default class Chat extends Component {
       axios.put("/api/match/current/getChat", { userData }).then(res => {
         const chatMessages = res.data[0].chat;
         this.setState({ chatMessages });
-        this.handleUserChange();
         this.scrollToBottom();
       });
     });
@@ -77,34 +61,28 @@ export default class Chat extends Component {
         this.setState({
           chatMessages: [...this.state.chatMessages, chatMessageObj],
         });
-        this.handleUserChange();
         this.scrollToBottom();
         this.setState({ chatMessage: "" });
       });
     this.scrollToBottom();
   }
 
-  handleUserChange() {
-    // const userMsg = this.state.user;
-    const lastMsgObj = this.state.chatMessages.pop();
-    const user = lastMsgObj.messager;
-    if (user === this.props.userData.username) {
-      this.setState({ user: true });
-    } else {
-      this.setState({ user: false });
-    }
-  }
-
   render() {
+    const user = this.props.userData.username;
+
     return (
       <div id="chat-container">
+
         <div id="msg-container">
-          <ul className={this.state.user ? "user-msgs" : "friend-msgs"}>
+          <ul >
             {this.state.chatMessages.map((chatMessage, i) => (
-              <li key={i} value={chatMessage.id} className="message">
+              <li 
+                key={i} 
+                value={chatMessage.id}
+                className={chatMessage.messager === user ? "user-msgs" : "friend-msgs"}
+              >
                 {chatMessage.messager}
-                <br />
-                {chatMessage.message}
+                <span className="message">{chatMessage.message}</span>
               </li>
             ))}
           </ul>
@@ -114,6 +92,7 @@ export default class Chat extends Component {
             }}
           ></span>
         </div>
+
         <form id="input-container" onSubmit={this.submitChatMessage}>
           <input
             type="text"
@@ -126,6 +105,7 @@ export default class Chat extends Component {
             send
           </button>
         </form>
+
       </div>
     );
   }

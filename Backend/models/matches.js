@@ -19,16 +19,10 @@ const matchSchema = new Schema({
     trim: true,
     required: "You must select a course",
   },
-  holes: [
-    {
-      hole: {
-        name: Number,
-        score: Number,
-        par: Number,
-        yards: Number,
-      },
-    },
-  ],
+  holes: {
+    type: Number,
+    trim: true
+  },
   day: {
     type: Date,
     default: Date.now,

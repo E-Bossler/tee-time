@@ -20,17 +20,30 @@ button {
   width: 100px;
 }
 
+#match-btn-container #new-match-btn {
+  border: none;
+  background: -webkit-gradient(linear, left top, left bottom, from(#648eff), to(#3368fa));
+  background: linear-gradient(#648eff, #3368fa);
+  width: 100px;
+}
+
 #match-btn-container #new-match-btn #new-match-link {
   color: white;
+  display: inline-block;
   font-family: 'Open Sans', sans-serif;
   text-decoration: none;
   text-transform: uppercase;
+  width: 100%;
 }
 
 #form-container {
   margin: 0px auto;
   max-width: 720px;
   overflow-y: scroll;
+}
+
+#form-container .hide {
+  display: none;
 }
 
 #form-container #form {
@@ -102,7 +115,7 @@ button {
 
 #form-container #form #course-container #course-name {
   background: #648eff;
-  border-radius: 10px;
+  border-radius: 5px;
   color: white;
   margin: 0 auto;
   padding: 6px 6px 6px 10px;
@@ -124,7 +137,7 @@ button {
 
 #form-container #form #friends-list-container #friends-list li {
   background: #648eff;
-  border-radius: 10px;
+  border-radius: 5px;
   color: white;
   list-style: none;
   margin: 4px auto;
@@ -142,19 +155,26 @@ button {
 }
 
 #form-container #form #start-match-btn {
-  margin: 20px auto 5px;
-  padding: 10px;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
-}
-
-#form-container #form #start-match-btn #match-link {
+  border: none;
   background: -webkit-gradient(linear, left top, left bottom, from(#648eff), to(#3368fa));
   background: linear-gradient(#648eff, #3368fa);
+  margin: 20px auto;
+  width: 120px;
+}
+
+#form-container #form #start-match-btn #start-match-link {
   color: white;
-  font-family: 'Rubik', sans-serif;
+  display: inline-block;
+  font-family: 'Open Sans', sans-serif;
   text-decoration: none;
   text-transform: uppercase;
+  width: 100%;
+}
+
+#form-container #select-course-msg {
+  color: #e14646;
+  font-size: 0.8em;
+  margin: -8px auto;
+  padding: 2px;
 }
 /*# sourceMappingURL=stylesheet.css.map */

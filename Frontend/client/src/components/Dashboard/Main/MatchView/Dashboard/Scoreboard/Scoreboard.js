@@ -7,29 +7,34 @@ class Scoreboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // username: "",
-      // players: [],
-      // course: "",
-      scorecardView: this.props.userData.username,
+      username: "",
+      players: "",
+      course: "",
+      scorecardView: this.props.userData.username
     };
   }
 
   handleCardViewChange(event) {
     const radioValue = event.target.value;
     this.setState({ scorecardView: radioValue });
-    // console.log(this.state.scorecardView);
   }
 
   render() {
     const username = this.props.userData.username;
-    const list = this.props.currentMatch.participants;
-    const players = [];
-    for (let i = 0; i < list.length; i++) {
-      players.push(list[i].username);
-    }
     const course = this.props.currentMatch.course;
+    const playerData = this.props.currentMatch.participants;
 
-    if (username === undefined || list === undefined || course === undefined) {
+    const players = [];
+
+    for (let i = 0; i < playerData.length; i++) {
+      if (playerData[i].username !== username) {
+        players.push(playerData[i].username);
+      } else {
+        playerData.splice(i, 1);
+      }
+    }
+
+    if (username === undefined || players === undefined || course === undefined) {
       console.log("waiting for props...");
       return (
         <div>
@@ -37,18 +42,17 @@ class Scoreboard extends Component {
         </div>
       );
     } else {
-      // console.log(username, list, players, course);
-
       return (
         <div id="scoreboard">
           <CardSelector
             username={username}
-            players={players}
+            playerData={playerData}
             scorecardView={this.state.scorecardView}
             handleCardViewChange={this.handleCardViewChange.bind(this)}
           />
           <Scorecard
             userData={this.props.userData}
+            playerData={playerData}
             username={username}
             players={players}
             course={course}
