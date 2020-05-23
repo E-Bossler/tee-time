@@ -29,7 +29,11 @@ class Links extends Component {
       // id="nav-links"
       // className={this.props.burgerClicked ? "slide-left" : "slide-right"}
       >
-        <Button title="Current Match" name="/dashboard/matchView" />
+        <Button
+          title="Current Match"
+          onPress={this.props.n}
+          name="/dashboard/matchView"
+        />
 
         <Button title="Saved Matches" name="/dashboard/userMenu/matches" />
 

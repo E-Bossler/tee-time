@@ -1,25 +1,26 @@
-import React, {Component} from 'react';
-import {Divider} from 'react-native-elements';
-import Banner from './Banner';
-import Slider from './Slider';
+import React, { Component } from "react";
+import { Divider } from "react-native-elements";
+import Banner from "./Banner";
+import Slider from "./Slider";
 
 class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      clicked: false,
+      clicked: false
     };
   }
 
   animate() {
     if (this.state.clicked) {
-      this.setState({clicked: false});
+      this.setState({ clicked: false });
     } else {
-      this.setState({clicked: true});
+      this.setState({ clicked: true });
     }
   }
 
   render() {
+    console.log(this.props);
     return (
       <Divider>
         <Banner action={this.animate.bind(this)} clicked={this.state.clicked} />
