@@ -23,7 +23,7 @@ const statsIconStyles = {
 class Footer extends Component {
   render() {
     return (
-      <Divider style={style} id="footer-container">
+      <>
         {/* <Link
               to="/dashboard/userMenu/stats"> */}
 
@@ -45,7 +45,7 @@ class Footer extends Component {
               to="/dashboard/userMenu/courses"> */}
 
         <Button title="Courses" icon={{ type: "font-awesome", name: "flag" }} />
-      </Divider>
+      </>
     );
   }
 }

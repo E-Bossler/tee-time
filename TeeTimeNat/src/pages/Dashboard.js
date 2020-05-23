@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Divider } from "react-native-elements";
-import Nav from "../components/Dashboard/Nav/Nav";
+import Links from "../components/Dashboard/Nav/Links";
 import Main from "../components/Dashboard/Main/Main";
 import Footer from "../components/Dashboard/Footer/Footer";
 
@@ -9,13 +9,15 @@ class Dashboard extends Component {
   render() {
     console.log(this.props);
     return (
-      <>
-        <Nav props={this.props} />
+      <View style={{ flex: 1 }}>
+        <ScrollView>
+          <Links navigation={this.props.navigation} />
 
-        {/* <Main /> */}
+          <Main navigation={this.props.navigation} />
+        </ScrollView>
 
         <Footer />
-      </>
+      </View>
     );
   }
 }

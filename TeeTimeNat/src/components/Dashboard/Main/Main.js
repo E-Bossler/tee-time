@@ -1,14 +1,11 @@
 import React, { Component } from "react";
-import { Divider, Text } from "react-native-elements";
+import { Button, Text } from "react-native-elements";
 import axios from "axios";
-import NewMatchBtn from "./MatchForm/NewMatchBtn";
 import Greens from "../../GreensCSS/Greens";
 import FormContainer from "./MatchForm/FormContainer";
 import UserMenuContainer from "./UserData/UserMenuContainer";
 import MatchView from "./MatchView/MatchView";
 import style from "./stylesheet.scss";
-import api from "../../utils/api";
-import { getFromStorage } from "../../utils/storage";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -25,65 +22,32 @@ class Main extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props.route.params.email);
     this.findUserName();
   }
 
   findUserName() {
-    // get token from storage
-    let key = "SessionToken";
-    const sessionToken = getFromStorage(key);
-    // search user session db
+    const email = this.props.route.params.email;
+    axios.put("/api/dashboard/email", { email }).then(res => {
+      console.log(res.data);
+      const userData = {
+        username: res.data[0].username,
+        email: res.data[0].email,
+        id: res.data[0]._id,
+        currentMatchId: "",
+        currentCourse: "",
+        currentCoursePlayers: ""
+      };
 
-    api.verify(sessionToken).then(response => {
-      for (let i = 0; i < response.data.length; i++) {
-        let checkAgainstId = response.data[i]._id;
-        if (
-          sessionToken === checkAgainstId &&
-          response.data[i].isDeleted === false
-        ) {
-          const userId = response.data[i].userId;
-          api.getUserWithId(userId).then(response => {
-            for (let i = 0; i < response.data.length; i++) {
-              let checkAgainstId = response.data[i]._id;
-              if (
-                userId === checkAgainstId &&
-                response.data[i].isDeleted === false
-              ) {
-                const user = response.data[i].username;
-                this.setState({
-                  username: user
-                });
-                const username = this.state.username;
-                axios
-                  .put("/api/dashboard/userMenu/friends", { username })
-                  .then(res => {
-                    const userData = {
-                      username: res.data[0].username,
-                      email: res.data[0].email,
-                      id: res.data[0]._id,
-                      currentMatchId: "",
-                      currentCourse: "",
-                      currentCoursePlayers: ""
-                    };
-
-                    if (res.data[0].currentMatch === undefined) {
-                      console.log("no current match");
-                    } else {
-                      userData.currentMatchId =
-                        res.data[0].currentMatch.courseId;
-                      userData.currentCourse =
-                        res.data[0].currentMatch.courseName;
-                      userData.currentCoursePlayers =
-                        res.data[0].currentMatch.players;
-                    }
-
-                    this.setState({ userData });
-                  });
-              }
-            }
-          });
-        }
+      if (res.data[0].currentMatch === undefined) {
+        console.log("no current match");
+      } else {
+        userData.currentMatchId = res.data[0].currentMatch.courseId;
+        userData.currentCourse = res.data[0].currentMatch.courseName;
+        userData.currentCoursePlayers = res.data[0].currentMatch.players;
       }
+
+      this.setState({ userData });
     });
   }
 
@@ -95,13 +59,12 @@ class Main extends Component {
     return (
       <>
         {/* <Route exact path="/dashboard"> */}
-        <Divider id="landing-container">
-          <Text h2>Welcome, {this.state.username}</Text>
-          <Text h4>Start a new match?</Text>
-          <NewMatchBtn />
-          <Greens />
-          <Text>© 2020 Ballard Study Group</Text>
-        </Divider>
+
+        <Text h2>Welcome, {this.state.username}</Text>
+        <Text h4>Start a new match?</Text>
+        <Button title="New Match" id="new-match-btn" />
+        {/* <Greens /> */}
+        <Text>© 2020 Ballard Study Group</Text>
 
         <Stack.Screen>
           {/* <Route path="/dashboard/matchForm"> */}
