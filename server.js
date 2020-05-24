@@ -17,7 +17,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use("/", router);
-app.use("/", router);
 
 // FOR PRODUCTION WE NEED THE PRODUCTION DB UNCOMMENTED AND THE DEV DB COMMENTED
 // ********************************************************************************
