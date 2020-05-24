@@ -2,7 +2,7 @@
   "name": "tee-time",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http:///",
+  "homepage": "/",
   "proxy": "http://localhost:7777",
   "secure": "false",
   "dependencies": {
