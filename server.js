@@ -51,9 +51,9 @@ app.get("/api/test", (req, res) => {
 
 // ********************************************************************************
 
-app.use(express.static(path.join(__dirname, "Frontend/client/build")));
-
 const path = require("path");
+
+app.use(express.static(path.join(__dirname, "Frontend/client/build")));
 
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "Frontend/client/build", "index.html"));
