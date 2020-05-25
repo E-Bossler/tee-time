@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import api from "../../../../utils/api";
 import { getFromStorage } from "../../../../utils/storage";
 
+
+
 class Stats extends Component {
 
     constructor(props) {
@@ -49,7 +51,7 @@ class Stats extends Component {
                                     username: username,
                                     userMatchHistory: userMatchHistory
                                 });
-                                
+
                                 this.findUserBestMatch(username)
                                 this.findUserMostRecentMatch(username)
                                 this.findUserFavoriteCourse(username)
@@ -73,7 +75,7 @@ class Stats extends Component {
     findUserBestMatch(username) {
 
 
-        
+
         // this.setState({
         //     userBestMatch: userBestMatch,
         // })
@@ -98,31 +100,39 @@ class Stats extends Component {
     }
 
     calculateUserHandicap(username) {
-        
-        
+
+
 
         // this.setState({
         //     userHandicap: userHandicap,
         // })
     }
 
-    render() {
-        return (
-            <div>
-                <h3>Stats for {this.state.username}:</h3>
-                <ul>
-                    <li>Personal Best:</li>
-                    {this.state.userBestMatch}
-                    <li>Most Recent Match:</li>
-                    {this.state.userMostRecentMatch}
-                    <li>Favorite Course:</li>
-                    {this.state.userFavoriteCourse}
-                    <li>Handicap:</li>
-                    {this.state.userHandicap}
-                </ul>
-            </div>
-        );
-    }
+
+
+
+
+
+
+
+render() {
+
+    return (
+        <div>
+            <h3>Stats for {this.state.username}:</h3>
+            <ul>
+                <li>Personal Best:</li>
+                {this.state.userBestMatch}
+                <li>Most Recent Match:</li>
+                {this.state.userMostRecentMatch}
+                <li>Favorite Course:</li>
+                {this.state.userFavoriteCourse}
+                <li>Handicap:</li>
+                {this.state.userHandicap}
+            </ul>
+        </div>
+    );
+}
 };
 
 export default Stats;

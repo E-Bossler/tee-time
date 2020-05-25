@@ -45,6 +45,7 @@ class SignUpForm extends Component {
     if (password === passwordCheck) {
       api.signUp(email, password, username).then(result => {
         let successful = result.data.success;
+        let message = result.data.message;
         if (successful) {
           swal(
             "SUCCESS",
@@ -53,7 +54,7 @@ class SignUpForm extends Component {
           this.setState({ toLogin: true });
         } else {
           swal("ERROR", 
-          "This email address already has an account associated with it.", 
+          message, 
           "error");
         }
       });

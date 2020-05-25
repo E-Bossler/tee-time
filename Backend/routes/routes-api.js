@@ -242,48 +242,73 @@ router.post('/api/account/signup', (req, res) => {
 
   email = email.toLowerCase();
 
-  username = username.toLowerCase();
+  // username = username.toLowerCase();
 
-  // Verify email doesn't exist
+
+  // verify username doesn't exist 
+
   db.User.find(
     {
-      email: email,
+      username: username
     },
-    (err, previousUsers) => {
+    (err, previousUserNames) => {
       if (err) {
         return res.send({
           success: false,
           message: `Please see error message: ${err}`,
         });
-      } else if (previousUsers.length > 0) {
+      } else if (previousUserNames.length > 0) {
         return res.send({
           success: false,
-          message: 'WARNING WARNING! Account already exists! WARNING WARNING!',
+          message: 'That username is already taken. Please select another.',
         });
       } else {
-        // save the email
+        db.User.find(
+          {
+            email: email,
+          },
+          (err, previousUsers) => {
+            if (err) {
+              return res.send({
+                success: false,
+                message: `Please see error message: ${err}`,
+              });
+            } else if (previousUsers.length > 0) {
+              return res.send({
+                success: false,
+                message: 'This email address already has an account associated with it.',
+              });
+            } else {
+              // save the email
 
-        const newUser = new db.User();
+              const newUser = new db.User();
 
-        newUser.email = email;
-        newUser.username = username;
-        newUser.password = newUser.generateHash(password);
-        newUser.save(err => {
-          if (err) {
-            return res.send({
-              success: false,
-              message: `Please see error message: ${err}
-        location 0`,
-            });
+              newUser.email = email;
+              newUser.username = username;
+              newUser.password = newUser.generateHash(password);
+              newUser.save(err => {
+                if (err) {
+                  return res.send({
+                    success: false,
+                    message: `Please see error message: ${err}
+              location 0`,
+                  });
+                }
+                return res.send({
+                  success: true,
+                  message: 'SUCCESS! YOU HAVE SIGNED UP! PLEASE LOGIN!',
+                });
+              });
+            }
           }
-          return res.send({
-            success: true,
-            message: 'SUCCESS! YOU HAVE SIGNED UP! PLEASE LOGIN!',
-          });
-        });
+        );
       }
     }
-  );
+  )
+
+
+  // Verify email doesn't exist
+
 });
 
 // SIGN IN SET UP
@@ -540,9 +565,9 @@ router.post("/api/user/favoriteCourses/delete", (req, res) => {
   ).then(data => {
     res.json(data);
   })
-  .catch(({ message }) => {
-    console.log(message);
-  });
+    .catch(({ message }) => {
+      console.log(message);
+    });
 });
 
 //GET CURRENT MATCH
