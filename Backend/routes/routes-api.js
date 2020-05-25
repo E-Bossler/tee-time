@@ -1,10 +1,10 @@
-const db = require("../models");
-const router = require("express").Router();
+const db = require('../models');
+const router = require('express').Router();
 
 // remember that we add '/api' within the server so we can leave it off here
 
 // get all the users
-router.get("/api/users", (req, res) => {
+router.get('/api/users', (req, res) => {
   db.User.find({})
     .then(data => {
       res.json(data);
@@ -14,7 +14,7 @@ router.get("/api/users", (req, res) => {
     });
 });
 
-router.post("/api/users", (req, res) => {
+router.post('/api/users', (req, res) => {
   db.User.findOne({
     where: {
       username: req.body.username,
@@ -28,7 +28,7 @@ router.post("/api/users", (req, res) => {
     });
 });
 
-router.put("/api/users", (req, res) => {
+router.put('/api/users', (req, res) => {
   db.User.find({
     username: req.body.username,
   })
@@ -40,8 +40,15 @@ router.put("/api/users", (req, res) => {
     });
 });
 
+router.put('/api/dashboard/email', (req, res) => {
+  console.log(req.body);
+  db.User.find({ email: req.body.email }).then(data => {
+    res.json(data);
+  });
+});
+
 //Route for getting friends with friend Ids
-router.put("/api/dashboard/matchView/friends", (req, res) => {
+router.put('/api/dashboard/matchView/friends', (req, res) => {
   db.User.find({ username: req.body.username })
     .then(data => {
       res.json(data[0].friends);
@@ -52,7 +59,7 @@ router.put("/api/dashboard/matchView/friends", (req, res) => {
 });
 
 // Finds Matches when user goes to Matches (fetches all matches in DB right now)
-router.get("/api/dashboard/userMenu/matches", (req, res) => {
+router.get('/api/dashboard/userMenu/matches', (req, res) => {
   db.Match.find({})
     .then(data => {
       res.json(data);
@@ -62,7 +69,7 @@ router.get("/api/dashboard/userMenu/matches", (req, res) => {
     });
 });
 
-router.put("/api/dashboard/userMenu/friends", (req, res) => {
+router.put('/api/dashboard/userMenu/friends', (req, res) => {
   db.User.find({
     username: req.body.username,
   })
@@ -74,7 +81,7 @@ router.put("/api/dashboard/userMenu/friends", (req, res) => {
     });
 });
 
-router.put("/api/dashboard/userMenu/friendRequests", (req, res) => {
+router.put('/api/dashboard/userMenu/friendRequests', (req, res) => {
   db.User.find({
     username: req.body.username,
   })
@@ -86,25 +93,25 @@ router.put("/api/dashboard/userMenu/friendRequests", (req, res) => {
     });
 });
 
-router.post("/api/dashboard/userMenu/friends", (req, res) => {
+router.post('/api/dashboard/userMenu/friends', (req, res) => {
   db.User.find({
     username: req.body.friend,
   }).then(data => {
     if (data[0] === undefined) {
-      res.json("Friend not Found.");
+      res.json('Friend not Found.');
     } else if (req.body.friend === req.body.user) {
-      res.json("Cannot add yourself.");
+      res.json('Cannot add yourself.');
     } else {
       db.User.find({ username: req.body.user })
         .then(userData => {
           for (let i = 0; i < userData[0].friends.length; i++) {
             if (userData[0].friends[i].username === req.body.friend) {
-              return res.json("Already friended.");
+              return res.json('Already friended.');
             }
           }
           for (let i = 0; i < data[0].friendRequests.length; i++) {
             if (data[0].friendRequests[i].username === req.body.user) {
-              return res.json("Already sent request.");
+              return res.json('Already sent request.');
             }
           }
           console.log(req.body.userData);
@@ -130,7 +137,7 @@ router.post("/api/dashboard/userMenu/friends", (req, res) => {
   });
 });
 
-router.put("/api/dashboard/userMenu/deleteFriends", (req, res) => {
+router.put('/api/dashboard/userMenu/deleteFriends', (req, res) => {
   const id = req.body.userId;
   const friendId = req.body.friendToDelete;
   console.log(req.body.friendToDelete);
@@ -155,9 +162,9 @@ router.put("/api/dashboard/userMenu/deleteFriends", (req, res) => {
     });
 });
 
-router.post("/api/dashboard/userMenu/friendRequests", (req, res) => {
+router.post('/api/dashboard/userMenu/friendRequests', (req, res) => {
   console.log(req.body.request);
-  console.log("FULL REQ BODY: ", req.body);
+  console.log('FULL REQ BODY: ', req.body);
   db.User.find({ username: req.body.username }).then(userData => {
     db.User.findOneAndUpdate(
       {
@@ -203,7 +210,7 @@ router.post("/api/dashboard/userMenu/friendRequests", (req, res) => {
   });
 });
 
-router.get("/api/rounds", (req, res) => {
+router.get('/api/rounds', (req, res) => {
   db.Round.find({})
     .then(data => {
       res.json(data);
@@ -215,21 +222,21 @@ router.get("/api/rounds", (req, res) => {
 
 // SIGN UP SET UP
 
-router.post("/api/account/signup", (req, res) => {
+router.post('/api/account/signup', (req, res) => {
   const { body } = req;
   let { email, password, username } = body;
 
   if (!email) {
     return res.send({
       success: false,
-      message: "Input an email",
+      message: 'Input an email',
     });
   }
 
   if (!password) {
     return res.send({
       success: false,
-      message: "Input a password",
+      message: 'Input a password',
     });
   }
 
@@ -251,7 +258,7 @@ router.post("/api/account/signup", (req, res) => {
       } else if (previousUsers.length > 0) {
         return res.send({
           success: false,
-          message: "WARNING WARNING! Account already exists! WARNING WARNING!",
+          message: 'WARNING WARNING! Account already exists! WARNING WARNING!',
         });
       } else {
         // save the email
@@ -271,7 +278,7 @@ router.post("/api/account/signup", (req, res) => {
           }
           return res.send({
             success: true,
-            message: "SUCCESS! YOU HAVE SIGNED UP! PLEASE LOGIN!",
+            message: 'SUCCESS! YOU HAVE SIGNED UP! PLEASE LOGIN!',
           });
         });
       }
@@ -281,7 +288,7 @@ router.post("/api/account/signup", (req, res) => {
 
 // SIGN IN SET UP
 
-router.post("/api/account/signin", (req, res, next) => {
+router.post('/api/account/signin', (req, res, next) => {
   console.log(req.body);
   const { body } = req;
   let { email, password } = body;
@@ -289,14 +296,14 @@ router.post("/api/account/signin", (req, res, next) => {
   if (!email) {
     return res.send({
       success: false,
-      message: "Input an email",
+      message: 'Input an email',
     });
   }
 
   if (!password) {
     return res.send({
       success: false,
-      message: "Input a password",
+      message: 'Input a password',
     });
   }
 
@@ -326,7 +333,7 @@ router.post("/api/account/signin", (req, res, next) => {
       if (!user.validPassword(password)) {
         return res.send({
           succcess: false,
-          message: "That password is wrong... who are you?!",
+          message: 'That password is wrong... who are you?!',
         });
       }
 
@@ -345,7 +352,7 @@ router.post("/api/account/signin", (req, res, next) => {
         }
         return res.send({
           success: true,
-          message: "SUCCESS! YOU HAVE SIGNED IN! IT IS TEE TIME!!! FOOOOURRRRR",
+          message: 'SUCCESS! YOU HAVE SIGNED IN! IT IS TEE TIME!!! FOOOOURRRRR',
           token: doc._id,
         });
       });
@@ -355,19 +362,19 @@ router.post("/api/account/signin", (req, res, next) => {
 
 // VERIFY SET UP
 
-router.get("/api/account/verify", (req, res) => {
+router.get('/api/account/verify', (req, res) => {
   db.UserSession.find({})
     .then(data => {
       res.json(data);
     })
     .catch(({ message }) => {
-      console.log("Message:", message);
+      console.log('Message:', message);
     });
 });
 
 // LOG OUT SET UP
 
-router.get("/api/account/logout", (req, res, next) => {
+router.get('/api/account/logout', (req, res, next) => {
   //get the token
   // const query = req;
   console.log(req.body);
@@ -395,7 +402,7 @@ router.get("/api/account/logout", (req, res, next) => {
       }
       return res.send({
         success: true,
-        message: "We have logged you out",
+        message: 'We have logged you out',
       });
     }
   );
@@ -416,8 +423,8 @@ router.post("/dashboard/api/match/new", (req, res) => {
         for (let i = 0; i < data.ops[0].holes; i++) {
           const holeData = {
             number: i,
-            score: ""
-          }
+            score: '',
+          };
           holeObjs.push(holeData);
         }
         console.log(data.ops[0].course);
@@ -432,7 +439,7 @@ router.post("/dashboard/api/match/new", (req, res) => {
                 courseId: data.ops[0]._id,
                 courseName: data.ops[0].course,
                 players: data.ops[0].participants,
-                holes: holeObjs
+                holes: holeObjs,
               },
             },
           }
@@ -448,23 +455,23 @@ router.post("/dashboard/api/match/new", (req, res) => {
 
 // CREATE A NEW NEW ROUND
 
-router.post("/api/round/new", (req, res, next) => {
+router.post('/api/round/new', (req, res, next) => {
   //STILL NEED TO SET UP THIS ROUTE
 });
 
 // ADD MATCH TO HISTORY
 
-router.post("/api/match/history", (req, res, next) => {
+router.post('/api/match/history', (req, res, next) => {
   //STILL NEED TO SET UP THIS ROUTE
 });
 
 // GET MATCH HISTORY
 
-router.get("/api/match/history", (req, res, next) => {
+router.get('/api/match/history', (req, res, next) => {
   //STILL NEED TO SET UP THIS ROUTE
 });
 
-router.post("/api/user/score", (req, res) => {
+router.post('/api/user/score', (req, res) => {
   console.log(req.body);
   const username = req.body.username;
   db.User.findOne({ username: username }).then(data => {
@@ -472,24 +479,23 @@ router.post("/api/user/score", (req, res) => {
   });
 });
 
-router.put("/api/user/score", (req, res) => {
+router.put('/api/user/score', (req, res) => {
   console.log(req.body);
   const userId = req.body.userId;
   db.User.findOneAndUpdate(
-    { 
-      _id: userId, 
-      "currentMatch.holes.number": req.body.currentHole 
+    {
+      _id: userId,
+      'currentMatch.holes.number': req.body.currentHole,
     },
-    { 
-      $set: { 
-        "currentMatch.holes.$.score" : req.body.currentScore
-      } 
+    {
+      $set: {
+        'currentMatch.holes.$.score': req.body.currentScore,
+      },
     }
-  )
-    .then(data => {
-      console.log(data);
-      res.json(data);
-    });
+  ).then(data => {
+    console.log(data);
+    res.json(data);
+  });
 });
 
 router.post("/api/user/favoriteCourses", (req, res) => {
@@ -540,7 +546,7 @@ router.post("/api/user/favoriteCourses/delete", (req, res) => {
 });
 
 //GET CURRENT MATCH
-router.put("/api/match/current", (req, res) => {
+router.put('/api/match/current', (req, res) => {
   // console.log(req.body); // matchId object
   db.Match.find({ _id: req.body.matchId }).then(data => {
     res.json(data);
@@ -548,7 +554,7 @@ router.put("/api/match/current", (req, res) => {
 });
 
 //SAVES MESSAGES TO CHAT LOG IN MATCH
-router.post("/api/match/current/saveChatMessage", (req, res) => {
+router.post('/api/match/current/saveChatMessage', (req, res) => {
   const matchId = req.body.userData.currentMatchId;
   db.Match.findOneAndUpdate(
     { _id: matchId },
@@ -568,7 +574,7 @@ router.post("/api/match/current/saveChatMessage", (req, res) => {
 });
 
 //Get Chat Message Log
-router.put("/api/match/current/getChat", (req, res) => {
+router.put('/api/match/current/getChat', (req, res) => {
   // console.log(req.body);
   const currentMatch = req.body.userData.currentMatchId;
 
