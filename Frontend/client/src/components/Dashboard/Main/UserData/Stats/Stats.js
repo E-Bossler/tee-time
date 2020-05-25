@@ -1,24 +1,24 @@
 import React, { Component, PureComponent } from "react";
 import api from "../../../../utils/api";
 import { getFromStorage } from "../../../../utils/storage";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis,} from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, } from 'recharts';
 
 
 const data = [
     {
-        name: 'Match 1',strokes: 78,par: 74, amt: 78,
+        name: 'Match 1', strokes: 78, par: 74, amt: 78,
     },
     {
-        name: 'Match 2',strokes: 72,par: 72, amt: 74,
+        name: 'Match 2', strokes: 72, par: 72, amt: 74,
     },
     {
-        name: 'Match 3',strokes: 97,par: 68, amt: 87,
+        name: 'Match 3', strokes: 97, par: 68, amt: 87,
     },
     {
-        name: 'Match 4',strokes: 78,par: 76, amt: 91,
+        name: 'Match 4', strokes: 78, par: 76, amt: 91,
     },
     {
-        name: 'Match 5',strokes: 95,par: 76, amt: 82,
+        name: 'Match 5', strokes: 95, par: 76, amt: 82,
     },
 ];
 
@@ -188,25 +188,39 @@ export default class Stats extends PureComponent {
                     <Line type="monotone" dataKey="strokes" stroke="#8884d8" activeDot={{ r: 8 }} />
                     <Line type="monotone" dataKey="par" stroke="#82ca9d" activeDot={{ r: 8 }} />
                 </LineChart>
-                    <hr></hr>
-                    <h4>
-                    Statistics for {this.state.username}:
+                <hr></hr>
+                <h4>
+                    You skill levels:
                 </h4>
-                <RadarChart 
-                    cx={200} 
-                    cy={150} 
-                    outerRadius={100} 
-                    width={350} 
-                    height={500} 
-                    data={radialData} 
+                <RadarChart
+                    cx={200}
+                    cy={150}
+                    outerRadius={100}
+                    width={350}
+                    height={275}
+                    data={radialData}
                     margin={{
-                        top: 20, right: 0, left: 20, bottom: 5,
+                        top: 20, right: 0, left: 20, bottom: 0,
                     }}>
                     <PolarGrid />
                     <PolarAngleAxis dataKey="subject" />
                     <PolarRadiusAxis />
                     <Radar name="Mike" dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
                 </RadarChart>
+                <hr></hr>
+                <div>
+                <h3>Stats for {this.state.username}:</h3>
+                <ul>
+                    <li>Personal Best:</li>
+                    {this.state.userBestMatch}
+                    <li>Most Recent Match:</li>
+                    {this.state.userMostRecentMatch}
+                    <li>Favorite Course:</li>
+                    {this.state.userFavoriteCourse}
+                    <li>Handicap:</li>
+                    {this.state.userHandicap}
+                </ul>
+            </div>
             </>
         );
     }
