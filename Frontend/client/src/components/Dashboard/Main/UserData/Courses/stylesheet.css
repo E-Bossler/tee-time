@@ -1,18 +1,106 @@
 #courses-container {
   max-height: calc(100vh - 65px - 45px);
-  padding: 20px;
   overflow-y: scroll;
 }
 
-#courses-container h3 {
+#courses-container .hide {
+  display: none;
+}
+
+#courses-container #favorite-container,
+#courses-container #all-container {
+  padding: 20px;
+}
+
+#courses-container #favorite-container h3,
+#courses-container #all-container h3 {
   font-size: 1.4em;
   font-weight: 400;
   padding: 5px 0;
 }
 
-#courses-container #user-courses-list li,
-#courses-container #all-courses-list li {
+#courses-container #favorite-container #user-courses-list li,
+#courses-container #favorite-container #all-courses-list li,
+#courses-container #all-container #user-courses-list li,
+#courses-container #all-container #all-courses-list li {
   list-style: none;
   padding: 4px;
+}
+
+#courses-container #favorite-container {
+  border-bottom: 1px solid black;
+}
+
+#courses-container #favorite-container #user-courses-list li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#courses-container #favorite-container #user-courses-list li span {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin-right: -50px;
+}
+
+#courses-container #favorite-container #user-courses-list li .red {
+  background: #fd3030;
+  color: white;
+}
+
+#courses-container #all-container #all-courses-list .li-container li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-right: 4px;
+  padding: 8px 4px;
+}
+
+#courses-container #all-container #all-courses-list .li-container li i {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
+#courses-container #all-container #all-courses-list .li-container .btn-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+#courses-container #all-container #all-courses-list .li-container .btn-container button {
+  margin: 0px 4px;
+}
+
+#courses-container #all-container #all-courses-list .li-container .btn-container #add-btn {
+  background: -webkit-gradient(linear, left top, left bottom, from(#4bff4b), to(#12c912));
+  background: linear-gradient(#4bff4b, #12c912);
+}
+
+#courses-container #all-container #all-courses-list .li-container .btn-container #times-icon {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
 }
 /*# sourceMappingURL=stylesheet.css.map */

@@ -1,43 +1,164 @@
-#match-splash {
-    // border: 1px solid black;
+$lightBlue: rgb(100, 142, 255);
+$darkBlue: rgb(51, 104, 250);
+
+.match-splash {
+    background: rgb(100, 200, 100);
     font-family: 'Open Sans', sans-serif;
-    margin: 20px auto;
-    padding: 15px;
-    width: 90%;
-    h4 {
-        font-size: 1.5em;
-        font-weight: 400;
-        padding: 2px 0px 20px;
-        text-align: center;
-    }
-    #course-name {
-        color: rgb(31, 142, 253);
-        padding: 8px 20px;
-        text-transform: uppercase;
-    }
-    ul {
-        padding: 5px;
-        li {
-            list-style: none;
-            color: rgb(31, 142, 253);
-            padding: 2px 20px;
+    height: calc(100vh - 67px - 34px - 45px);
+    margin-top: 6px;
+    overflow-y: auto;
+    #loading-animation {
+        background: rgb(100, 200, 100);
+        padding-top: calc((50vh - 146px));
+        padding-left: calc(50vw - 35px);
+        width: 80px;
+        .lds-roller {
+            display: inline-block;
+            height: 80px;
+            position: relative;
+            width: 80px;
+            div {
+                animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+                transform-origin: 40px 40px;
+            }
+            div:after {
+                content: " ";
+                display: block;
+                position: absolute;
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                background: #fff;
+                margin: -4px 0 0 -4px;
+            }
+            div:nth-child(1) {
+                animation-delay: -0.036s;
+            }
+            div:nth-child(1):after {
+                top: 63px;
+                left: 63px;
+            }
+            div:nth-child(2) {
+                animation-delay: -0.072s;
+            }
+            div:nth-child(2):after {
+                top: 68px;
+                left: 56px;
+            }
+            div:nth-child(3) {
+                animation-delay: -0.108s;
+            }
+            div:nth-child(3):after {
+                top: 71px;
+                left: 48px;
+            }
+            div:nth-child(4) {
+                animation-delay: -0.144s;
+            }
+            div:nth-child(4):after {
+                top: 72px;
+                left: 40px;
+            }
+            div:nth-child(5) {
+                animation-delay: -0.18s;
+            }
+            div:nth-child(5):after {
+                top: 71px;
+                left: 32px;
+            }
+            div:nth-child(6) {
+                animation-delay: -0.216s;
+            }
+            div:nth-child(6):after {
+                top: 68px;
+                left: 24px;
+            }
+            div:nth-child(7) {
+                animation-delay: -0.252s;
+            }
+            div:nth-child(7):after {
+                top: 63px;
+                left: 17px;
+            }
+            div:nth-child(8) {
+                animation-delay: -0.288s;
+            }
+            div:nth-child(8):after {
+                top: 56px;
+                left: 12px;
+            }
+        }
+        @keyframes lds-roller {
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
         }
     }
-    #scoreboard-msg,
-    #chatroom-msg {
-        line-height: 2em;
-        margin: 8px 0;
-        span {
-            background: linear-gradient(rgb(241, 241, 241), rgb(190, 190, 190));
-            border: 1px solid rgb(60, 60, 60);
-            border-radius: 5px; 
-            margin: 0px 3px;
-            padding: 1px 3px;
+    #splash-data-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        margin: 0px auto;
+        padding-top: 30px;
+        width: 80%;
+        h4 {
+            color: white;
+            font-size: 1.8em;
+            font-weight: 400;
+            padding: 2px 0px 20px;
+            text-align: center;
         }
-    }
-    #enjoy-msg {
-        font-size: 1.4em;
-        padding: 20px;
-        text-align: center;
+        p {
+            font-size: 1.1em;
+            margin: 5px auto;
+            width: 90%;
+        }
+        #course-name {
+            background: linear-gradient($lightBlue, $darkBlue);
+            border-radius: 5px;
+            color: white;
+            padding: 6px; 
+            margin: 10px auto;
+            text-align: center;
+            width: 70%;
+            text-transform: none;
+        }
+        ul {
+            padding: 5px;
+            li {
+                background: linear-gradient($lightBlue, $darkBlue);
+                border-radius: 5px;
+                color: white; 
+                font-size: 1.2em;
+                list-style: none;
+                margin: 10px auto;
+                padding: 6px;
+                text-align: center;
+                width: 70%;
+            }
+        }
+        #scoreboard-msg,
+        #chatroom-msg {
+            line-height: 2em;
+            margin: 8px 0;
+            span {
+                background: linear-gradient(rgb(241, 241, 241), rgb(190, 190, 190));
+                border: 1px solid rgb(60, 60, 60);
+                border-radius: 5px; 
+                margin: 0px 3px;
+                padding: 1px 3px;
+            }
+        }
+        #enjoy-msg {
+            background:rgb(100, 200, 100);
+            color: white;
+            font-size: 1.4em;
+            padding: 20px;
+            text-align: center;
+            text-transform: none;
+        }
     }
 }

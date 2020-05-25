@@ -21,7 +21,7 @@ class FriendsInput extends Component {
           id="not-found-msg"
           className={this.props.friendFound ? "hide" : "show"}
         >
-          Sorry, that user is not on your friends list.
+          Sorry, you cannot add that friend.
         </p>
         <button id="add-friend-btn" onClick={this.props.handleFriendSubmit}>
           Add Friend

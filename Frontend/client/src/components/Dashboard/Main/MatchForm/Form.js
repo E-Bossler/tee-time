@@ -24,7 +24,7 @@ class Form extends Component {
       matchHoles: "",
       friendFound: true,
       courseFound: true,
-      courseSelected: true
+      formComplete: true
     };
   }
 
@@ -87,12 +87,13 @@ class Form extends Component {
   handleCourseInputChange(event) {
     let value = event.target.value;
     this.setState({ course: value });
-    this.setState({ courseSelected: true });
+    this.setState({ formComplete: true });
   }
 
   handleFriendInputChange(event) {
     let value = event.target.value;
     this.setState({ friend: value });
+    this.setState({ formComplete: true });
   }
 
   handleCourseSubmit(event) {
@@ -119,44 +120,31 @@ class Form extends Component {
     this.setState({ matchCourse: "" });
   }
 
-  handleMatchSubmit(event) {
-    const course = this.state.matchCourse;
-    const players = this.state.matchFriends;
-    const holes = this.state.matchHoles;
-    if (course === "") {
-      event.preventDefault();
-      console.log("no course selected");
-      this.setState({ courseSelected: false });
-    }
-    const userData = this.props.userData;
-    const allPlayers = [...players, userData];
-    console.log(this.state.matchHoles);
-    console.log(this.state.matchCourse);
-
-    axios.post("/dashboard/api/match/new", { course, allPlayers, holes });
-  }
-
   handleFriendSubmit(event) {
     event.preventDefault();
     const friend = this.state.friend;
-    const friendArr = this.state.allFriends;
     const allFriends = this.state.allFriends.map(friend => friend.username);
     const matchArr = this.state.matchFriends.map(mFriend => mFriend.username);
-
-    if (allFriends.indexOf(friend) !== -1 && matchArr.indexOf(friend) === -1) {
-      for (let i = 0; i < friendArr.length; i++) {
-        if (friendArr[i].username === friend) {
-          this.setState({
-            matchFriends: [...this.state.matchFriends, friendArr[i]],
-          });
+    const username = friend;
+    axios.put("/api/users", {username}).then(res => {
+      console.log(res.data);
+      const friendData = {
+        username: res.data[0].username,
+        currentMatchData: {
+          currentMatchId: res.data[0].currentMatch.courseId,
+          scoreData: res.data[0].currentMatch.holes
         }
       }
-      this.setState({ friendFound: true });
-    } else {
-      this.setState({ friendFound: false });
-    }
-
-    this.setState({ friend: "" });
+      console.log(friendData);
+      if (allFriends.indexOf(friend) !== -1 && matchArr.indexOf(friend) === -1) {
+        this.setState({ matchFriends: [...this.state.matchFriends, friendData]})
+        this.setState({ friendFound: true });
+        this.setState({ friend: "" });
+      } else {
+        this.setState({ friendFound: false });
+        this.setState({ friend: "" });
+      }
+    });
   }
 
   handleFriendDelete(event) {
@@ -168,6 +156,21 @@ class Form extends Component {
       }
     }
     this.setState({ matchFriends });
+  }
+
+  handleMatchSubmit(event) {
+    const course = this.state.matchCourse;
+    const players = this.state.matchFriends;
+    const holes = this.state.matchHoles;
+    if (course === "" || players.length === 0) {
+      event.preventDefault();
+      console.log("no course selected");
+      this.setState({ formComplete: false });
+    }
+    const userData = this.props.userData;
+    const allPlayers = [...players, userData];
+
+    axios.post("/dashboard/api/match/new", { course, allPlayers, holes });
   }
 
   render() {
@@ -209,9 +212,9 @@ class Form extends Component {
         </button>
         <p 
           id="select-course-msg"
-          className={this.state.courseSelected ? "hide" : "show"}
+          className={this.state.formComplete ? "hide" : "show"}
         >
-          Please add a course
+          Please add a course and friends
         </p>
       </div>
     );

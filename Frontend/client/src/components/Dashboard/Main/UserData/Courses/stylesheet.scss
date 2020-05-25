@@ -1,17 +1,71 @@
 #courses-container {
     max-height: calc(100vh - 65px - 45px);
-    padding: 20px;
     overflow-y: scroll;
-    h3 {
-        font-size: 1.4em;
-        font-weight: 400;
-        padding: 5px 0;
+    .hide {
+        display: none;
     }
-    #user-courses-list,
-    #all-courses-list {
-        li {
-            list-style: none;
-            padding: 4px;
+    #favorite-container,
+    #all-container {
+        padding: 20px;
+        h3 {
+            font-size: 1.4em;
+            font-weight: 400;
+            padding: 5px 0;
+        }
+        #user-courses-list,
+        #all-courses-list {
+            li {
+                list-style: none;
+                padding: 4px;
+            }
+        }
+    }
+    #favorite-container {
+        border-bottom: 1px solid black;
+        #user-courses-list {
+            li {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                span {
+                    align-self: center;
+                    margin-right: -50px;
+                }
+                .red {
+                    background: rgb(253, 48, 48);
+                    color: white;
+                }
+            }
+        }
+    }
+    #all-container {
+        #all-courses-list  {
+            .li-container {
+                li {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    margin-right: 4px;
+                    padding: 8px 4px;
+                    i {
+                        align-self: flex-end;
+                    }
+                }
+                .btn-container {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-end;
+                    button {
+                        margin: 0px 4px;
+                    }
+                    #add-btn {
+                        background: linear-gradient(rgb(75, 255, 75), rgb(18, 201, 18));
+                    }
+                    #times-icon {
+                        align-self: center;
+                    }
+                } 
+            }
         }
     }
 }

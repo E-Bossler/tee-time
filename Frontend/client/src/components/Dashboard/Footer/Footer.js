@@ -2,12 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./stylesheet.css";
 
-const flagIconStyles = {
-  "--fa-secondary-opacity": "1.0",
-  "--fa-primary-color": "grey",
-  "--fa-secondary-color": "red",
-};
-
 const friendsIconStyles = {
   "--fa-secondary-opacity": "1.0",
   "--fa-primary-color": "blue",
@@ -20,6 +14,12 @@ const statsIconStyles = {
   "--fa-secondary-color": "grey",
 };
 
+const coursesIconStyles = {
+  "--fa-secondary-opacity": "1.0",
+  "--fa-primary-color": "grey",
+  "--fa-secondary-color": "red",
+};
+
 class Footer extends Component {
   render() {
     return (
@@ -27,14 +27,16 @@ class Footer extends Component {
         <ul id="footer-list">
           <li className="footer-item" id="stats-item">
             <Link
-              id="stats-link"
               className="footer-link"
+              id="stats-link"
+              onClick={this.props.animateNav}
               to="/dashboard/userMenu/stats"
             >
-              <div>
+              <div className="icon-container">
                 Stats
                 <i
                   className="fad fa-chart-bar fa-lg"
+                  id="stats-icon"
                   style={statsIconStyles}
                 ></i>
               </div>
@@ -42,14 +44,16 @@ class Footer extends Component {
           </li>
           <li className="footer-item" id="friends-item">
             <Link
-              id="friends-link"
               className="footer-link"
+              id="friends-link"
+              onClick={this.props.animateNav}
               to="/dashboard/userMenu/friends"
             >
-              <div>
+              <div className="icon-container">
                 Friends
                 <i
                   className="fad fa-user-friends fa-lg"
+                  id="friends-icon"
                   style={friendsIconStyles}
                 ></i>
               </div>
@@ -57,13 +61,18 @@ class Footer extends Component {
           </li>
           <li className="footer-item" id="courses-item">
             <Link
-              id="courses-link"
               className="footer-link"
+              id="courses-link"
+              onClick={this.props.animateNav}
               to="/dashboard/userMenu/courses"
             >
-              <div>
+              <div className="icon-container">
                 Courses
-                <i className="fad fa-flag fa-lg" style={flagIconStyles}></i>
+                <i 
+                  className="fad fa-flag fa-lg"
+                  id="courses-icon"
+                  style={coursesIconStyles}
+                ></i>
               </div>
             </Link>
           </li>

@@ -1,8 +1,61 @@
-import React, { Component } from "react";
+import React, { Component, PureComponent } from "react";
 import api from "../../../../utils/api";
 import { getFromStorage } from "../../../../utils/storage";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, } from 'recharts';
 
-class Stats extends Component {
+
+const data = [
+    {
+        name: 'Match 1', strokes: 78, par: 74, amt: 78,
+    },
+    {
+        name: 'Match 2', strokes: 72, par: 72, amt: 74,
+    },
+    {
+        name: 'Match 3', strokes: 97, par: 68, amt: 87,
+    },
+    {
+        name: 'Match 4', strokes: 78, par: 76, amt: 91,
+    },
+    {
+        name: 'Match 5', strokes: 95, par: 76, amt: 82,
+    },
+];
+
+const radialData = [
+    {
+        subject: 'Driving', A: 83, B: 83, fullMark: 100,
+    },
+    {
+        subject: 'Chipping', A: 67, B: 67, fullMark: 100,
+    },
+    {
+        subject: 'Putting', A: 56, B: 56, fullMark: 100,
+    },
+    {
+        subject: 'Club Selection', A: 92, B: 92, fullMark: 100,
+    },
+    {
+        subject: 'Course Reading', A: 33, B: 33, fullMark: 100,
+    },
+    {
+        subject: 'Hat choice', A: 70, B: 85, fullMark: 100,
+    },
+];
+
+const bestFitData = [
+    { index: 10000, red: 1643, blue: 790 },
+    { index: 1666, red: 182, blue: 42 },
+    { index: 625, red: 56, blue: 11 },
+    // Calculation of line of best fit is not included in this demo
+    { index: 300, redLine: 0 },
+    { index: 10000, redLine: 1522 },
+    { index: 600, blueLine: 0 },
+    { index: 10000, blueLine: 678 },
+];
+
+export default class Stats extends PureComponent {
+    static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
 
     constructor(props) {
         super(props);
@@ -13,7 +66,8 @@ class Stats extends Component {
             userBestMatch: [1234],
             userMostRecentMatch: [1234],
             userFavoriteCourse: '1234',
-            userHandicap: [11234]
+            userHandicap: [11234],
+            data: []
         }
 
     };
@@ -49,7 +103,7 @@ class Stats extends Component {
                                     username: username,
                                     userMatchHistory: userMatchHistory
                                 });
-                                
+
                                 this.findUserBestMatch(username)
                                 this.findUserMostRecentMatch(username)
                                 this.findUserFavoriteCourse(username)
@@ -61,6 +115,7 @@ class Stats extends Component {
                                 console.log("User most recent match: ", this.state.userMostRecentMatch)
                                 console.log("User favorite course: ", this.state.userFavoriteCourse)
                                 console.log("Handicap: ", this.state.userHandicap)
+
                             }
                         }
                     });
@@ -73,7 +128,7 @@ class Stats extends Component {
     findUserBestMatch(username) {
 
 
-        
+
         // this.setState({
         //     userBestMatch: userBestMatch,
         // })
@@ -98,8 +153,8 @@ class Stats extends Component {
     }
 
     calculateUserHandicap(username) {
-        
-        
+
+
 
         // this.setState({
         //     userHandicap: userHandicap,
@@ -108,7 +163,52 @@ class Stats extends Component {
 
     render() {
         return (
-            <div>
+            <>
+                <h2>
+                    Statistics for {this.state.username}:
+                </h2>
+                <hr>
+                </hr>
+                <h4>
+                    Your recent performances:
+                </h4>
+                <LineChart
+                    width={350}
+                    height={300}
+                    data={data}
+                    margin={{
+                        top: 20, right: 0, left: 20, bottom: 5,
+                    }}
+                >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" dataKey="strokes" stroke="#8884d8" activeDot={{ r: 8 }} />
+                    <Line type="monotone" dataKey="par" stroke="#82ca9d" activeDot={{ r: 8 }} />
+                </LineChart>
+                <hr></hr>
+                <h4>
+                    You skill levels:
+                </h4>
+                <RadarChart
+                    cx={200}
+                    cy={150}
+                    outerRadius={100}
+                    width={350}
+                    height={275}
+                    data={radialData}
+                    margin={{
+                        top: 20, right: 0, left: 20, bottom: 0,
+                    }}>
+                    <PolarGrid />
+                    <PolarAngleAxis dataKey="subject" />
+                    <PolarRadiusAxis />
+                    <Radar name="Mike" dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+                </RadarChart>
+                <hr></hr>
+                <div>
                 <h3>Stats for {this.state.username}:</h3>
                 <ul>
                     <li>Personal Best:</li>
@@ -121,8 +221,7 @@ class Stats extends Component {
                     {this.state.userHandicap}
                 </ul>
             </div>
+            </>
         );
     }
-};
-
-export default Stats;
+}

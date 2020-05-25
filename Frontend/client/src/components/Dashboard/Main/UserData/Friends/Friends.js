@@ -84,7 +84,7 @@ class Friends extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const friend = this.state.friendName;
+    const friend = (this.state.friendName).toLowerCase();
     const user = this.state.username;
     const userData = this.props.userData;
 
@@ -187,7 +187,7 @@ class Friends extends Component {
             {this.state.friends.map(friend => {
               return (
                 <li 
-                  value={this.state.friends} // why not friend.username?
+                  value={this.state.friends}
                   key={friend._id}>
                   {friend.username}
                   <span

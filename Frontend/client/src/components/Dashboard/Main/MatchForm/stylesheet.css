@@ -81,7 +81,8 @@ button {
 
 #form-container #form .form-group #add-friend-btn,
 #form-container #form .form-group #find-course-btn {
-  background: #1ae41a;
+  background: -webkit-gradient(linear, left top, left bottom, from(#48f048), to(#1ae41a));
+  background: linear-gradient(#48f048, #1ae41a);
   color: white;
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;

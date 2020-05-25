@@ -18,7 +18,7 @@ class SignUpForm extends Component {
     const email = document.getElementById("email-input").value;
     const password = document.getElementById("password-input").value;
     const passwordCheck = document.getElementById("password-input-check").value;
-    const username = document.getElementById("username-input").value;
+    const username = document.getElementById("username-input").value
 
     if (username === "") {
       swal("ERROR", 
@@ -44,15 +44,16 @@ class SignUpForm extends Component {
     if (password === passwordCheck) {
       api.signUp(email, password, username).then(result => {
         let successful = result.data.success;
+        let message = result.data.message;
         if (successful) {
           swal(
             "SUCCESS",
-            "You have created an account. Please log in.",
+            message,
             "success");
           this.setState({ toLogin: true });
         } else {
           swal("ERROR", 
-          "This email address already has an account associated with it.", 
+          message, 
           "error");
         }
       });
@@ -73,7 +74,7 @@ class SignUpForm extends Component {
       <div className="container">
         <div className="row">
           <div className="col text-center">
-            <h1>Welcome to Tee-Time!</h1>
+            <h1>Welcome to Tee Time!</h1>
             <form>
               <div className="form-group">
                 <label htmlFor="email-input">Username</label>
