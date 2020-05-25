@@ -1,7 +1,6 @@
 import "react-native-gesture-handler";
 import React, { Component } from "react";
-import styles from "./App.scss";
-import { SafeAreaView } from "react-native";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -33,14 +32,14 @@ const MatBottomTabs = createMaterialBottomTabNavigator();
 const MatTopTabs = createMaterialTopTabNavigator();
 
 class App extends Component {
-  createMainDrawer = props => {
-    console.log(props);
+  createMainDrawer = () => {
     return (
       <Drawer.Navigator>
         <Drawer.Screen name="Home" {...this.props} component={Main} />
         <Drawer.Screen name="New Match" component={MatchForm} />
         <Drawer.Screen
           name="Current Match"
+          {...this.props}
           children={this.createMatchTopTabs}
         />
         <Drawer.Screen name="Saved Matches" component={Matches} />

@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {Divider, Text, Icon, ListItem} from 'react-native-elements';
-import style from './stylesheet.scss';
+import React, { Component } from "react";
+import { Divider, Text, Icon, ListItem } from "react-native-elements";
+import style from "./stylesheet.scss";
 
 class FriendsList extends Component {
   render() {
@@ -11,9 +11,9 @@ class FriendsList extends Component {
     }
 
     return (
-      <Divider style={style} id="friends-list-container">
+      <>
         <Text h3>Match Players:</Text>
-        <Text className={friendsAdded ? 'hide' : 'show'}>
+        <Text className={friendsAdded ? "hide" : "show"}>
           No friends added yet
         </Text>
         <Divider id="friends-list">
@@ -22,7 +22,7 @@ class FriendsList extends Component {
               <ListItem key={friend._id}>
                 <Text>{friend.username}</Text>
                 <Icon
-                  className={'fas fa-times'}
+                  className={"fas fa-times"}
                   id={friend.username}
                   onPress={this.props.handleFriendDelete}
                 />
@@ -30,7 +30,7 @@ class FriendsList extends Component {
             );
           })}
         </Divider>
-      </Divider>
+      </>
     );
   }
 }

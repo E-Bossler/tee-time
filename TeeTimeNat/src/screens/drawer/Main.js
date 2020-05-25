@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Button, Text } from "react-native-elements";
 import axios from "axios";
-import style from "./stylesheet.scss";
 
 class Main extends Component {
   constructor(props) {
@@ -14,7 +13,6 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
     this.findUserName();
   }
 
@@ -58,10 +56,7 @@ class Main extends Component {
           title="New Match"
           id="new-match-btn"
           onPress={() => {
-            this.props.navigation.navigate("Dashboard", {
-              screen: "MatchForm",
-              params: { userData }
-            });
+            this.props.navigation.navigate("New Match", { userData });
           }}
         />
 

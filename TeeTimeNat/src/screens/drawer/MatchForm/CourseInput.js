@@ -1,16 +1,10 @@
-import React, {Component} from 'react';
-import {Divider, Input, Text, Button} from 'react-native-elements';
-import CourseDatalist from './CourseDatalist';
-import style from './stylesheet.scss';
+import React, { Component } from "react";
+import { Input, Text, Button } from "react-native-elements";
 
 class CourseInput extends Component {
   render() {
     return (
-      <Divider style={style} className="form-group">
-        <CourseDatalist
-          capCourse={this.props.capCourse}
-          courses={this.props.courses}
-        />
+      <>
         <Input
           label="Find Course:"
           type="text"
@@ -23,13 +17,16 @@ class CourseInput extends Component {
         />
         <Text
           id="not-found-msg"
-          className={this.props.courseFound ? 'hide' : 'show'}>
+          className={this.props.courseFound ? "hide" : "show"}
+        >
           Sorry, cannot find data for that course.
         </Text>
-        <Button id="find-course-btn" onPress={this.props.handleCourseSubmit}>
-          Add Course
-        </Button>
-      </Divider>
+        <Button
+          id="find-course-btn"
+          title="Add Course"
+          onPress={this.props.handleCourseSubmit}
+        />
+      </>
     );
   }
 }

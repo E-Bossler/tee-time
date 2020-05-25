@@ -1,14 +1,15 @@
-import React, {Component} from 'react';
-import {Divider, Text, ListItem} from 'react-native-elements';
-import style from './stylesheet.scss';
+import React, { Component } from "react";
+import { Divider, Text, ListItem } from "react-native-elements";
+import style from "./stylesheet.scss";
 
 class MatchSplash extends Component {
   render() {
+    console.log(this.props);
     const username = this.props.userData.username;
     const list = this.props.currentMatch.participants;
     const course = this.props.currentMatch.course;
     if (list === undefined || course === undefined) {
-      console.log('no props yet...');
+      console.log("no props yet...");
       return (
         <Divider>
           <Text>Loading...</Text>

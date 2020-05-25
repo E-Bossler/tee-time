@@ -1,13 +1,15 @@
-import React, {Component} from 'react';
-import {Divider, Input, Button, Text} from 'react-native-elements';
-import FriendDatalist from './FriendDatalist';
-import style from './stylesheet.scss';
+import React, { Component } from "react";
+import { Input, Button, Text } from "react-native-elements";
+import { Dropdown } from "react-native-material-dropdown";
 
 class FriendsInput extends Component {
   render() {
     return (
-      <Divider style={style} className="form-group">
-        <FriendDatalist allFriends={this.props.allFriends} />
+      <>
+        <Dropdown
+          label="Friends"
+          data={this.props.allFriends.map(friend => friend.username)}
+        />
         <Input
           list="friends"
           type="text"
@@ -20,13 +22,16 @@ class FriendsInput extends Component {
         />
         <Text
           id="not-found-msg"
-          className={this.props.friendFound ? 'hide' : 'show'}>
+          className={this.props.friendFound ? "hide" : "show"}
+        >
           Sorry, that user is not on your friends list.
         </Text>
-        <Button id="add-friend-btn" onPress={this.props.handleFriendSubmit}>
-          Add Friend
-        </Button>
-      </Divider>
+        <Button
+          id="add-friend-btn"
+          title="Add Friend"
+          onPress={this.props.handleFriendSubmit}
+        />
+      </>
     );
   }
 }

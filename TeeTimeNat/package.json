@@ -25,6 +25,7 @@
     "react-native-collapsible": "^1.5.2",
     "react-native-elements": "^2.0.0",
     "react-native-gesture-handler": "^1.6.1",
+    "react-native-material-dropdown": "^0.11.1",
     "react-native-paper": "^3.10.1",
     "react-native-reanimated": "^1.9.0",
     "react-native-safe-area-context": "^1.0.2",
@@ -53,5 +54,6 @@
   "main": "index.js",
   "author": "",
   "license": "ISC",
+  "keywords": [],
   "description": ""
 }

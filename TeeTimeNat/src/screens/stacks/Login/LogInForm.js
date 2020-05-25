@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Text, Input, Button } from "react-native-elements";
 import api from "../../../utils/api";
-import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./stylesheet.scss";
 import SweetAlert from "react-native-sweet-alert";
 
