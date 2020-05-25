@@ -290,13 +290,12 @@ router.post('/api/account/signup', (req, res) => {
                 if (err) {
                   return res.send({
                     success: false,
-                    message: `Please see error message: ${err}
-              location 0`,
+                    message: `Please see error message: ${err}`,
                   });
                 }
                 return res.send({
                   success: true,
-                  message: 'SUCCESS! YOU HAVE SIGNED UP! PLEASE LOGIN!',
+                  message: 'You have created an account. Please log in.',
                 });
               });
             }

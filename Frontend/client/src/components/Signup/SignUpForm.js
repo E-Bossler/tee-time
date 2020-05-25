@@ -48,7 +48,7 @@ class SignUpForm extends Component {
         if (successful) {
           swal(
             "SUCCESS",
-            "You have created an account. Please log in.",
+            message,
             "success");
           this.setState({ toLogin: true });
         } else {
