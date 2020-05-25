@@ -74,7 +74,9 @@ nav #slider #nav-links {
   height: calc(100vh - 65px - 45px);
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  padding: 60px 0;
   position: fixed;
+  top: 66px;
   -webkit-transition: right 1000ms ease-in-out;
   transition: right 1000ms ease-in-out;
   width: 100vw;
@@ -87,7 +89,7 @@ nav #slider #nav-links li {
 
 nav #slider #nav-links li .nav-link {
   color: white;
-  font-size: 1.1em;
+  font-size: 1.2em;
   text-decoration: none;
   text-transform: uppercase;
 }
