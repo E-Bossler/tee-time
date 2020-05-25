@@ -36,7 +36,6 @@
   font-size: 0.75em;
   font-weight: 600;
   list-style: none;
-  padding-top: 15px;
   text-align: center;
   text-transform: uppercase;
   width: 33.1%;
@@ -47,7 +46,12 @@
   text-decoration: none;
 }
 
-#footer-container #footer-list .footer-item i {
+#footer-container #footer-list .footer-item .footer-link .icon-container {
+  height: 45px;
+  padding-top: 15px;
+}
+
+#footer-container #footer-list .footer-item .footer-link .icon-container i {
   padding: 0 4px;
 }
 

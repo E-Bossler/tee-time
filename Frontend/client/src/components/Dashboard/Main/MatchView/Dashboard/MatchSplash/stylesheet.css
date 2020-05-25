@@ -3,6 +3,7 @@
   font-family: 'Open Sans', sans-serif;
   height: calc(100vh - 67px - 34px - 45px);
   margin-top: 6px;
+  overflow-y: auto;
 }
 
 .match-splash #loading-animation {

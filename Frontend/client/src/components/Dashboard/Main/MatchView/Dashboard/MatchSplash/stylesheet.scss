@@ -6,6 +6,7 @@ $darkBlue: rgb(51, 104, 250);
     font-family: 'Open Sans', sans-serif;
     height: calc(100vh - 67px - 34px - 45px);
     margin-top: 6px;
+    overflow-y: auto;
     #loading-animation {
         background: rgb(100, 200, 100);
         padding-top: calc((50vh - 146px));
