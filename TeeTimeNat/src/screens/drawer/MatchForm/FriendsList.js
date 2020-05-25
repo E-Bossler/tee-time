@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Divider, Text, Icon, ListItem } from "react-native-elements";
+import { View } from "react-native";
+import { Text, ListItem } from "react-native-elements";
 import style from "./stylesheet.scss";
 
 class FriendsList extends Component {
@@ -10,21 +11,28 @@ class FriendsList extends Component {
       friendsAdded = true;
     }
 
+    console.log("Match Friends: ", friends);
+
     return (
       <>
         <Text h4>Match Players:</Text>
         <Text style={friendsAdded ? style.hide : { color: "red" }}>
           No friends added yet
         </Text>
-        <Divider id="friends-list">
-          {friends.map(friend => {
+        <View id="friends-list">
+          {friends.map(friend => (
             <ListItem
-              key={friend.Id}
-              title={friends.username}
-              rightIcon={{ name: "delete", type: "font-awesome-5" }}
-            />;
-          })}
-        </Divider>
+              key={friend.friendId}
+              title={friend.username}
+              // value={friend.username}
+              rightIcon={{
+                onPress: () => this.props.handleFriendDelete(friend.username),
+                name: "undo",
+                type: "font-awesome"
+              }}
+            />
+          ))}
+        </View>
       </>
     );
   }

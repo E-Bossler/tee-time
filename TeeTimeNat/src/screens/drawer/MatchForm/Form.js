@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Divider, Text, Button } from "react-native-elements";
+import { View } from "react-native";
 import axios from "axios";
 import GolfAPI from "../../../utils/golfGeniusAPI";
 import CourseInput from "./CourseInput";
@@ -166,7 +167,8 @@ class Form extends Component {
   }
 
   handleFriendDelete(event) {
-    const friendToDelete = event.target.id;
+    console.log(event);
+    const friendToDelete = event;
     const matchFriends = this.state.matchFriends;
     for (let i = 0; i < matchFriends.length; i++) {
       if (matchFriends[i].username === friendToDelete) {
@@ -178,7 +180,13 @@ class Form extends Component {
 
   render() {
     return (
-      <>
+      <View
+        style={{
+          flexDirection: "column",
+          justifyContent: "space-between"
+        }}
+        accesible={true}
+      >
         <CourseInput
           handleCourseSubmit={this.handleCourseSubmit.bind(this)}
           handleCourseInputChange={this.handleCourseInputChange.bind(this)}
@@ -195,21 +203,26 @@ class Form extends Component {
           friendFound={this.state.friendFound}
           allFriends={this.state.allFriends}
         />
-        <MatchCourse
-          matchCourse={this.state.matchCourse}
-          handleCourseDelete={this.handleCourseDelete.bind(this)}
-        />
-        <FriendsList
-          matchFriends={this.state.matchFriends}
-          handleFriendDelete={this.handleFriendDelete.bind(this)}
-        />
+        <View
+          accesible={true}
+          style={{ flexDirection: "column", justifyContent: "space-around" }}
+        >
+          <MatchCourse
+            matchCourse={this.state.matchCourse}
+            handleCourseDelete={this.handleCourseDelete.bind(this)}
+          />
+          <FriendsList
+            matchFriends={this.state.matchFriends}
+            handleFriendDelete={this.handleFriendDelete.bind(this)}
+          />
+          <Button
+            title="Start"
+            onClick={this.handleMatchSubmit.bind(this)}
+            id="start-match-btn"
+          />
+        </View>
         {/* <Link to="/dashboard/matchView"> */}
-        <Button
-          title="Start"
-          onClick={this.handleMatchSubmit.bind(this)}
-          id="start-match-btn"
-        />
-      </>
+      </View>
     );
   }
 }

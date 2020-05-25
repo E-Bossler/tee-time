@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Divider, Text, Icon } from "react-native-elements";
+import { View } from "react-native";
+import { Text, Icon } from "react-native-elements";
 import style from "./stylesheet.scss";
 
 class MatchCourse extends Component {
@@ -16,13 +17,16 @@ class MatchCourse extends Component {
         <Text style={courseFound ? style.hide : { color: "red" }}>
           No course added yet
         </Text>
-        <Divider id="course-name" style={courseFound ? "show" : style.hide}>
-          <Text>{this.props.matchCourse}</Text>
+        <View id="course-name" style={courseFound ? "show" : style.hide}>
+          <Text h3>{this.props.matchCourse}</Text>
           <Icon
-            className="fas fa-times"
-            onClick={this.props.handleCourseDelete}
+            onPress={() =>
+              this.props.handleCourseDelete(this.props.matchCourse)
+            }
+            name={"undo"}
+            type={"font-awesome"}
           />
-        </Divider>
+        </View>
       </>
     );
   }
