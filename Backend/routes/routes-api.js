@@ -404,7 +404,6 @@ router.get("/api/account/logout", (req, res, next) => {
 // SET UP A  NEW MATCH
 
 router.post("/dashboard/api/match/new", (req, res) => {
-  console.log(req.body);
   db.Match.collection
     .insertOne({
       course: req.body.course,
@@ -421,6 +420,7 @@ router.post("/dashboard/api/match/new", (req, res) => {
           }
           holeObjs.push(holeData);
         }
+        console.log(data.ops[0].course);
         db.User.updateMany(
           { username: { $in: player.username } },
           {
