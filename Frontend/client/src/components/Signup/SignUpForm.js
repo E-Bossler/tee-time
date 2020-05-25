@@ -18,8 +18,7 @@ class SignUpForm extends Component {
     const email = document.getElementById("email-input").value;
     const password = document.getElementById("password-input").value;
     const passwordCheck = document.getElementById("password-input-check").value;
-    const usernameValue = document.getElementById("username-input").value;
-    const username = usernameValue.toLowerCase();
+    const username = document.getElementById("username-input").value
 
     if (username === "") {
       swal("ERROR", 
@@ -45,15 +44,16 @@ class SignUpForm extends Component {
     if (password === passwordCheck) {
       api.signUp(email, password, username).then(result => {
         let successful = result.data.success;
+        let message = result.data.message;
         if (successful) {
           swal(
             "SUCCESS",
-            "You have created an account. Please log in.",
+            message,
             "success");
           this.setState({ toLogin: true });
         } else {
           swal("ERROR", 
-          "This email address already has an account associated with it.", 
+          message, 
           "error");
         }
       });
