@@ -32,44 +32,46 @@ const MatBottomTabs = createMaterialBottomTabNavigator();
 const MatTopTabs = createMaterialTopTabNavigator();
 
 class App extends Component {
-  createMainDrawer = () => {
+  createMainDrawer = props => {
+    console.log("Main Drawer Props", props);
+    const userData = props.route.params.params.userData;
+    console.log(props.route.params.params.userData);
     return (
       <Drawer.Navigator>
-        <Drawer.Screen name="Home" {...this.props} component={Main} />
-        <Drawer.Screen name="New Match" {...this.props} component={MatchForm} />
-        <Drawer.Screen
-          name="Current Match"
-          {...this.props}
-          children={this.createMatchTopTabs}
-        />
-        <Drawer.Screen
-          name="Saved Matches"
-          {...this.props}
-          component={Matches}
-        />
+        <Drawer.Screen name="Home">
+          {props => <Main {...props} userData={userData} />}
+        </Drawer.Screen>
+        <Drawer.Screen name="New Match">
+          {props => <MatchForm {...props} userData={userData} />}
+        </Drawer.Screen>
+        <Drawer.Screen name="Current Match">
+          {props => this.createMatchTopTabs(props, userData)}
+        </Drawer.Screen>
+        <Drawer.Screen name="Matches">
+          {props => <Matches {...props} userData={userData} />}
+        </Drawer.Screen>
         <Drawer.Screen name="Logout" component={LogInForm} />
       </Drawer.Navigator>
     );
   };
 
-  createMatchTopTabs = () => {
+  createMatchTopTabs = (props, userData) => {
+    console.log("Match Tab Props", props);
+    console.log("Match Data", userData);
     return (
       <MatTopTabs.Navigator>
         <MatTopTabs.Screen
           name="Match Splash"
           option={{ title: "Current Match" }}
-          component={MatchSplash}
-        />
-        <MatTopTabs.Screen
-          name="Chat"
-          option={{ title: "Chat" }}
-          component={Chat}
-        />
-        <MatTopTabs.Screen
-          name="Scoreboard"
-          option={{ title: "Score" }}
-          component={Scoreboard}
-        />
+        >
+          {props => <MatchSplash userData={userData} {...props} />}
+        </MatTopTabs.Screen>
+        <MatTopTabs.Screen name="Chat" option={{ title: "Chat" }}>
+          {props => <Chat userData={userData} {...props} />}
+        </MatTopTabs.Screen>
+        <MatTopTabs.Screen name="Scoreboard" option={{ title: "Score" }}>
+          {props => <Scoreboard userData={userData} {...props} />}
+        </MatTopTabs.Screen>
       </MatTopTabs.Navigator>
     );
   };
@@ -104,7 +106,9 @@ class App extends Component {
           <Stack.Screen name="Signup">
             {props => <SignUpForm {...props} />}
           </Stack.Screen>
-          <Stack.Screen name="Dashboard" children={this.createMainDrawer} />
+          <Stack.Screen name="Dashboard">
+            {props => this.createMainDrawer(props)}
+          </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
     );

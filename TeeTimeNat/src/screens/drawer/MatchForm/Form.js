@@ -26,7 +26,7 @@ class Form extends Component {
   }
 
   findFriends = () => {
-    const username = this.props.route.params.userData.username;
+    const username = this.props.userData.username;
     axios
       .put("http://192.168.138.2:7777/api/dashboard/userMenu/friends", {
         username
