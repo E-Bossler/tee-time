@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Divider, Text, Button } from "react-native-elements";
+import { Button } from "react-native-elements";
 import { View } from "react-native";
 import axios from "axios";
 import GolfAPI from "../../../utils/golfGeniusAPI";
@@ -84,6 +84,7 @@ class Form extends Component {
   };
 
   componentDidMount() {
+    console.log(this.props);
     GolfAPI.findCourses().then(res => {
       const courseData = res.data.courses;
       const courses = this.state.courses;
@@ -97,12 +98,10 @@ class Form extends Component {
   }
 
   handleCourseInputChange(event) {
-    console.log(event);
     this.setState({ course: event });
   }
 
   handleFriendInputChange(event) {
-    console.log(event);
     this.setState({ friend: event });
   }
 
@@ -131,12 +130,18 @@ class Form extends Component {
   handleMatchSubmit() {
     const course = this.state.matchCourse;
     const players = this.state.matchFriends;
-    const userData = this.props.userData;
+    const userData = this.props.route.params.userData;
     const allPlayers = [...players, userData];
 
+    console.log(this.props);
     axios.post("http://192.168.138.2:7777/dashboard/api/match/new", {
       course,
       allPlayers
+    });
+
+    return this.props.navigation.navigate("Current Match", {
+      screen: "Match Splash",
+      params: { userData: userData }
     });
   }
 
@@ -145,8 +150,6 @@ class Form extends Component {
     const friendArr = this.state.allFriends;
     const allFriends = this.state.allFriends.map(friend => friend.username);
     const matchArr = this.state.matchFriends.map(mFriend => mFriend.username);
-
-    console.log(friend);
 
     if (allFriends.indexOf(friend) !== -1 && matchArr.indexOf(friend) === -1) {
       for (let i = 0; i < friendArr.length; i++) {
@@ -157,7 +160,7 @@ class Form extends Component {
           });
         }
       }
-      console.log(this.state.matchFriends);
+
       this.setState({ friendFound: true });
     } else {
       this.setState({ friendFound: false });
@@ -167,7 +170,6 @@ class Form extends Component {
   }
 
   handleFriendDelete(event) {
-    console.log(event);
     const friendToDelete = event;
     const matchFriends = this.state.matchFriends;
     for (let i = 0; i < matchFriends.length; i++) {
@@ -217,7 +219,7 @@ class Form extends Component {
           />
           <Button
             title="Start"
-            onClick={this.handleMatchSubmit.bind(this)}
+            onPress={this.handleMatchSubmit.bind(this)}
             id="start-match-btn"
           />
         </View>

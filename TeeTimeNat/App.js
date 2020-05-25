@@ -36,37 +36,43 @@ class App extends Component {
     return (
       <Drawer.Navigator>
         <Drawer.Screen name="Home" {...this.props} component={Main} />
-        <Drawer.Screen name="New Match" component={MatchForm} />
+        <Drawer.Screen name="New Match" {...this.props} component={MatchForm} />
         <Drawer.Screen
           name="Current Match"
           {...this.props}
           children={this.createMatchTopTabs}
         />
-        <Drawer.Screen name="Saved Matches" component={Matches} />
+        <Drawer.Screen
+          name="Saved Matches"
+          {...this.props}
+          component={Matches}
+        />
         <Drawer.Screen name="Logout" component={LogInForm} />
       </Drawer.Navigator>
     );
   };
 
-  createMatchTopTabs = () => (
-    <MatTopTabs.Navigator>
-      <MatTopTabs.Screen
-        name="Match Splash"
-        option={{ title: "Current Match" }}
-        component={MatchSplash}
-      />
-      <MatTopTabs.Screen
-        name="Chat"
-        option={{ title: "Chat" }}
-        component={Chat}
-      />
-      <MatTopTabs.Screen
-        name="Scoreboard"
-        option={{ title: "Score" }}
-        component={Scoreboard}
-      />
-    </MatTopTabs.Navigator>
-  );
+  createMatchTopTabs = () => {
+    return (
+      <MatTopTabs.Navigator>
+        <MatTopTabs.Screen
+          name="Match Splash"
+          option={{ title: "Current Match" }}
+          component={MatchSplash}
+        />
+        <MatTopTabs.Screen
+          name="Chat"
+          option={{ title: "Chat" }}
+          component={Chat}
+        />
+        <MatTopTabs.Screen
+          name="Scoreboard"
+          option={{ title: "Score" }}
+          component={Scoreboard}
+        />
+      </MatTopTabs.Navigator>
+    );
+  };
 
   createMatchBottomTabs = () => (
     <MatBottomTabs.Navigator>

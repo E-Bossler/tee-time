@@ -351,6 +351,7 @@ router.post('/api/account/signin', (req, res, next) => {
           });
         }
         return res.send({
+          userData: user,
           success: true,
           message: 'SUCCESS! YOU HAVE SIGNED IN! IT IS TEE TIME!!! FOOOOURRRRR',
           token: doc._id,
@@ -410,7 +411,7 @@ router.get('/api/account/logout', (req, res, next) => {
 
 // SET UP A  NEW MATCH
 
-router.post("/dashboard/api/match/new", (req, res) => {
+router.post('/dashboard/api/match/new', (req, res) => {
   db.Match.collection
     .insertOne({
       course: req.body.course,
@@ -498,14 +499,14 @@ router.put('/api/user/score', (req, res) => {
   });
 });
 
-router.post("/api/user/favoriteCourses", (req, res) => {
+router.post('/api/user/favoriteCourses', (req, res) => {
   const username = req.body.username;
   db.User.findOne({ username: username }).then(data => {
     res.json(data);
   });
 });
 
-router.put("/api/user/favoriteCourses", (req, res) => {
+router.put('/api/user/favoriteCourses', (req, res) => {
   const username = req.body.username;
   const course = req.body.course;
   console.log(course);
@@ -514,9 +515,9 @@ router.put("/api/user/favoriteCourses", (req, res) => {
     {
       $push: {
         favoriteCourses: {
-          course: course
-        }
-      }
+          course: course,
+        },
+      },
     }
   ).then(data => {
     console.log(data);
@@ -524,7 +525,7 @@ router.put("/api/user/favoriteCourses", (req, res) => {
   });
 });
 
-router.post("/api/user/favoriteCourses/delete", (req, res) => {
+router.post('/api/user/favoriteCourses/delete', (req, res) => {
   console.log(req.body);
   const username = req.body.username;
   const course = req.body.course;
@@ -537,12 +538,13 @@ router.post("/api/user/favoriteCourses/delete", (req, res) => {
         },
       },
     }
-  ).then(data => {
-    res.json(data);
-  })
-  .catch(({ message }) => {
-    console.log(message);
-  });
+  )
+    .then(data => {
+      res.json(data);
+    })
+    .catch(({ message }) => {
+      console.log(message);
+    });
 });
 
 //GET CURRENT MATCH

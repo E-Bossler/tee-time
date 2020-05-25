@@ -11,8 +11,6 @@ class FriendsList extends Component {
       friendsAdded = true;
     }
 
-    console.log("Match Friends: ", friends);
-
     return (
       <>
         <Text h4>Match Players:</Text>

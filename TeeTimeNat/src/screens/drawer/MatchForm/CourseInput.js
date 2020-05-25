@@ -11,8 +11,6 @@ class CourseInput extends Component {
       data.push({ value: this.props.capCourse(course) });
     });
 
-    console.log(data);
-
     return (
       <>
         <Dropdown
