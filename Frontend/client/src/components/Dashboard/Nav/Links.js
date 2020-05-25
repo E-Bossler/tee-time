@@ -38,7 +38,7 @@ class Links extends Component {
             Current Match
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link
             id="saved-matches-link"
             className="nav-link"
@@ -47,7 +47,7 @@ class Links extends Component {
           >
             Saved Matches
           </Link>
-        </li>
+        </li> */}
         <li>
           <Link
             id="matchForm-link"

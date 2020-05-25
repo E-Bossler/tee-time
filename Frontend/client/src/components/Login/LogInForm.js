@@ -37,7 +37,7 @@ class LogInForm extends Component {
       <div className="container">
         <div className="row">
           <div className="col text-center">
-            <h1>Welcome to Tee-Time!</h1>
+            <h1>Welcome to Tee Time!</h1>
             <form>
               <div className="form-group">
                 <label htmlFor="email-input">Email address</label>
