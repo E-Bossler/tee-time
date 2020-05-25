@@ -15,6 +15,7 @@ router.get('/api/users', (req, res) => {
 });
 
 router.post('/api/users', (req, res) => {
+  console.log(req.body);
   db.User.findOne({
     where: {
       username: req.body.username,
@@ -242,7 +243,7 @@ router.post('/api/account/signup', (req, res) => {
 
   email = email.toLowerCase();
 
-  username = username.toLowerCase();
+  // username = username.toLowerCase();
 
   // Verify email doesn't exist
   db.User.find(
@@ -420,20 +421,19 @@ router.post("/dashboard/api/match/new", (req, res) => {
     .then(data => {
       req.body.allPlayers.map((player, i) => {
         const holeObjs = [];
-        for (let i = 0; i < data.ops[0].holes; i++) {
+        for (i = 0; i < data.ops[0].holes; i++) {
           const holeData = {
             number: i,
             score: '',
           };
           holeObjs.push(holeData);
         }
-        console.log(data.ops[0].course);
         db.User.updateMany(
           { username: { $in: player.username } },
           {
-            // $push: {
-            //   matchHistory: player.currentMatchId,
-            // },
+            $push: {
+              matchHistory: player.currentMatchData,
+            },
             $set: {
               currentMatch: {
                 courseId: data.ops[0]._id,
@@ -443,9 +443,7 @@ router.post("/dashboard/api/match/new", (req, res) => {
               },
             },
           }
-        ).then(data => {
-          // res.json(data);
-        });
+        )
       });
     })
     .catch(err => {

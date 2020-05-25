@@ -14,9 +14,9 @@ class FriendsList extends Component {
         <h3>Match Players:</h3>
         <p className={friendsAdded ? "hide" : "show"}>No friends added yet</p>
         <ul id="friends-list">
-          {friends.map(friend => {
+          {friends.map((friend, i) => {
             return (
-              <li key={friend._id}>
+              <li key={i}>
                 <p>{friend.username}</p>
                 <i
                   className={"fas fa-times"}
