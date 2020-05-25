@@ -24,7 +24,7 @@ class Form extends Component {
       matchHoles: "",
       friendFound: true,
       courseFound: true,
-      courseSelected: true
+      formComplete: true
     };
   }
 
@@ -87,12 +87,13 @@ class Form extends Component {
   handleCourseInputChange(event) {
     let value = event.target.value;
     this.setState({ course: value });
-    this.setState({ courseSelected: true });
+    this.setState({ formComplete: true });
   }
 
   handleFriendInputChange(event) {
     let value = event.target.value;
     this.setState({ friend: value });
+    this.setState({ formComplete: true });
   }
 
   handleCourseSubmit(event) {
@@ -122,16 +123,20 @@ class Form extends Component {
   handleMatchSubmit(event) {
     const course = this.state.matchCourse;
     const players = this.state.matchFriends;
+    console.log(players);
+    console.log(course);
     const holes = this.state.matchHoles;
-    if (course === "") {
+    if (course === "" || players.length === 0) {
       event.preventDefault();
       console.log("no course selected");
-      this.setState({ courseSelected: false });
+      this.setState({ formComplete: false });
     }
     const userData = this.props.userData;
     const allPlayers = [...players, userData];
     console.log(this.state.matchHoles);
     console.log(this.state.matchCourse);
+
+    console.log(allPlayers);
 
     axios.post("/dashboard/api/match/new", { course, allPlayers, holes });
   }
@@ -209,9 +214,9 @@ class Form extends Component {
         </button>
         <p 
           id="select-course-msg"
-          className={this.state.courseSelected ? "hide" : "show"}
+          className={this.state.formComplete ? "hide" : "show"}
         >
-          Please add a course
+          Please add a course and friends
         </p>
       </div>
     );

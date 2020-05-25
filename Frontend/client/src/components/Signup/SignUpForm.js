@@ -18,7 +18,8 @@ class SignUpForm extends Component {
     const email = document.getElementById("email-input").value;
     const password = document.getElementById("password-input").value;
     const passwordCheck = document.getElementById("password-input-check").value;
-    const username = document.getElementById("username-input").value;
+    const usernameValue = document.getElementById("username-input").value;
+    const username = usernameValue.toLowerCase();
 
     if (username === "") {
       swal("ERROR", 

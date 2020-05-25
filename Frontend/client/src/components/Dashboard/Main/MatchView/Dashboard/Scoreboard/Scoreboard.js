@@ -20,6 +20,9 @@ class Scoreboard extends Component {
   }
 
   render() {
+    console.log(this.props.userData);
+    console.log(this.props.currentMatch);
+    
     const username = this.props.userData.username;
     const course = this.props.currentMatch.course;
     const playerData = this.props.currentMatch.participants;

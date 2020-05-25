@@ -242,6 +242,8 @@ router.post('/api/account/signup', (req, res) => {
 
   email = email.toLowerCase();
 
+  username = username.toLowerCase();
+
   // Verify email doesn't exist
   db.User.find(
     {
@@ -408,8 +410,7 @@ router.get('/api/account/logout', (req, res, next) => {
 
 // SET UP A  NEW MATCH
 
-router.post('/dashboard/api/match/new', (req, res) => {
-  console.log(req.body);
+router.post("/dashboard/api/match/new", (req, res) => {
   db.Match.collection
     .insertOne({
       course: req.body.course,
@@ -426,6 +427,7 @@ router.post('/dashboard/api/match/new', (req, res) => {
           };
           holeObjs.push(holeData);
         }
+        console.log(data.ops[0].course);
         db.User.updateMany(
           { username: { $in: player.username } },
           {
@@ -493,6 +495,53 @@ router.put('/api/user/score', (req, res) => {
   ).then(data => {
     console.log(data);
     res.json(data);
+  });
+});
+
+router.post("/api/user/favoriteCourses", (req, res) => {
+  const username = req.body.username;
+  db.User.findOne({ username: username }).then(data => {
+    res.json(data);
+  });
+});
+
+router.put("/api/user/favoriteCourses", (req, res) => {
+  const username = req.body.username;
+  const course = req.body.course;
+  console.log(course);
+  db.User.findOneAndUpdate(
+    { username: username },
+    {
+      $push: {
+        favoriteCourses: {
+          course: course
+        }
+      }
+    }
+  ).then(data => {
+    console.log(data);
+    res.json(data);
+  });
+});
+
+router.post("/api/user/favoriteCourses/delete", (req, res) => {
+  console.log(req.body);
+  const username = req.body.username;
+  const course = req.body.course;
+  db.User.findOneAndUpdate(
+    { username: username },
+    {
+      $pull: {
+        favoriteCourses: {
+          course: course,
+        },
+      },
+    }
+  ).then(data => {
+    res.json(data);
+  })
+  .catch(({ message }) => {
+    console.log(message);
   });
 });
 

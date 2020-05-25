@@ -58,12 +58,16 @@ class Scorecard extends Component {
     GolfAPI.findCourses()
       .then(res => {
         const allCourseData = res.data.courses;
+        console.log(allCourseData);
+        console.log(course);
         let matchCourseData;
         for (let i = 0; i < allCourseData.length; i++) {
           if (allCourseData[i].name === course) {
             matchCourseData = allCourseData[i];
           }
         }
+
+        console.log(matchCourseData);
 
         const holes = matchCourseData.hole_labels;
         this.setState({ holes: holes });
@@ -293,7 +297,6 @@ class Scorecard extends Component {
             <div></div>
             <div></div>
           </div>
-          {/* <p id="loading-msg">Loading...</p> */}
         </div>
       );
     }

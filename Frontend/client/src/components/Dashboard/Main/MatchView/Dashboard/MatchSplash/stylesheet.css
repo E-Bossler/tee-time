@@ -1,41 +1,211 @@
-#match-splash {
+.match-splash {
+  background: #64c864;
   font-family: 'Open Sans', sans-serif;
-  margin: 20px auto;
-  padding: 15px;
-  width: 90%;
+  height: calc(100vh - 67px - 34px - 45px);
+  margin-top: 6px;
 }
 
-#match-splash h4 {
-  font-size: 1.5em;
+.match-splash #loading-animation {
+  background: #64c864;
+  padding-top: calc((50vh - 146px));
+  padding-left: calc(50vw - 35px);
+  width: 80px;
+}
+
+.match-splash #loading-animation .lds-roller {
+  display: inline-block;
+  height: 80px;
+  position: relative;
+  width: 80px;
+}
+
+.match-splash #loading-animation .lds-roller div {
+  -webkit-animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+          animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  -webkit-transform-origin: 40px 40px;
+          transform-origin: 40px 40px;
+}
+
+.match-splash #loading-animation .lds-roller div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+  margin: -4px 0 0 -4px;
+}
+
+.match-splash #loading-animation .lds-roller div:nth-child(1) {
+  -webkit-animation-delay: -0.036s;
+          animation-delay: -0.036s;
+}
+
+.match-splash #loading-animation .lds-roller div:nth-child(1):after {
+  top: 63px;
+  left: 63px;
+}
+
+.match-splash #loading-animation .lds-roller div:nth-child(2) {
+  -webkit-animation-delay: -0.072s;
+          animation-delay: -0.072s;
+}
+
+.match-splash #loading-animation .lds-roller div:nth-child(2):after {
+  top: 68px;
+  left: 56px;
+}
+
+.match-splash #loading-animation .lds-roller div:nth-child(3) {
+  -webkit-animation-delay: -0.108s;
+          animation-delay: -0.108s;
+}
+
+.match-splash #loading-animation .lds-roller div:nth-child(3):after {
+  top: 71px;
+  left: 48px;
+}
+
+.match-splash #loading-animation .lds-roller div:nth-child(4) {
+  -webkit-animation-delay: -0.144s;
+          animation-delay: -0.144s;
+}
+
+.match-splash #loading-animation .lds-roller div:nth-child(4):after {
+  top: 72px;
+  left: 40px;
+}
+
+.match-splash #loading-animation .lds-roller div:nth-child(5) {
+  -webkit-animation-delay: -0.18s;
+          animation-delay: -0.18s;
+}
+
+.match-splash #loading-animation .lds-roller div:nth-child(5):after {
+  top: 71px;
+  left: 32px;
+}
+
+.match-splash #loading-animation .lds-roller div:nth-child(6) {
+  -webkit-animation-delay: -0.216s;
+          animation-delay: -0.216s;
+}
+
+.match-splash #loading-animation .lds-roller div:nth-child(6):after {
+  top: 68px;
+  left: 24px;
+}
+
+.match-splash #loading-animation .lds-roller div:nth-child(7) {
+  -webkit-animation-delay: -0.252s;
+          animation-delay: -0.252s;
+}
+
+.match-splash #loading-animation .lds-roller div:nth-child(7):after {
+  top: 63px;
+  left: 17px;
+}
+
+.match-splash #loading-animation .lds-roller div:nth-child(8) {
+  -webkit-animation-delay: -0.288s;
+          animation-delay: -0.288s;
+}
+
+.match-splash #loading-animation .lds-roller div:nth-child(8):after {
+  top: 56px;
+  left: 12px;
+}
+
+@-webkit-keyframes lds-roller {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes lds-roller {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+.match-splash #splash-data-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  margin: 0px auto;
+  padding-top: 30px;
+  width: 80%;
+}
+
+.match-splash #splash-data-container h4 {
+  color: white;
+  font-size: 1.8em;
   font-weight: 400;
   padding: 2px 0px 20px;
   text-align: center;
 }
 
-#match-splash #course-name {
-  color: #1f8efd;
-  padding: 8px 20px;
-  text-transform: uppercase;
+.match-splash #splash-data-container p {
+  font-size: 1.1em;
+  margin: 5px auto;
+  width: 90%;
 }
 
-#match-splash ul {
+.match-splash #splash-data-container #course-name {
+  background: -webkit-gradient(linear, left top, left bottom, from(#648eff), to(#3368fa));
+  background: linear-gradient(#648eff, #3368fa);
+  border-radius: 5px;
+  color: white;
+  padding: 6px;
+  margin: 10px auto;
+  text-align: center;
+  width: 70%;
+  text-transform: none;
+}
+
+.match-splash #splash-data-container ul {
   padding: 5px;
 }
 
-#match-splash ul li {
+.match-splash #splash-data-container ul li {
+  background: -webkit-gradient(linear, left top, left bottom, from(#648eff), to(#3368fa));
+  background: linear-gradient(#648eff, #3368fa);
+  border-radius: 5px;
+  color: white;
+  font-size: 1.2em;
   list-style: none;
-  color: #1f8efd;
-  padding: 2px 20px;
+  margin: 10px auto;
+  padding: 6px;
+  text-align: center;
+  width: 70%;
 }
 
-#match-splash #scoreboard-msg,
-#match-splash #chatroom-msg {
+.match-splash #splash-data-container #scoreboard-msg,
+.match-splash #splash-data-container #chatroom-msg {
   line-height: 2em;
   margin: 8px 0;
 }
 
-#match-splash #scoreboard-msg span,
-#match-splash #chatroom-msg span {
+.match-splash #splash-data-container #scoreboard-msg span,
+.match-splash #splash-data-container #chatroom-msg span {
   background: -webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#bebebe));
   background: linear-gradient(#f1f1f1, #bebebe);
   border: 1px solid #3c3c3c;
@@ -44,9 +214,12 @@
   padding: 1px 3px;
 }
 
-#match-splash #enjoy-msg {
+.match-splash #splash-data-container #enjoy-msg {
+  background: #64c864;
+  color: white;
   font-size: 1.4em;
   padding: 20px;
   text-align: center;
+  text-transform: none;
 }
 /*# sourceMappingURL=stylesheet.css.map */

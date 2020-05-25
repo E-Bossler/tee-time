@@ -80,6 +80,10 @@ const UserSchema = new Schema({
       },
     },
   ],
+  favoriteCourses: {
+      type: Array,
+      trim: true
+  }
 });
 
 UserSchema.methods.generateHash = function (password) {
