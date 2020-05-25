@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Divider, Text, Button } from "react-native-elements";
+import { Button } from "react-native-elements";
+import { View } from "react-native";
 import axios from "axios";
 import GolfAPI from "../../../utils/golfGeniusAPI";
 import CourseInput from "./CourseInput";
@@ -25,7 +26,7 @@ class Form extends Component {
   }
 
   findFriends = () => {
-    const username = this.props.route.params.userData.username;
+    const username = this.props.userData.username;
     axios
       .put("http://192.168.138.2:7777/api/dashboard/userMenu/friends", {
         username
@@ -83,6 +84,7 @@ class Form extends Component {
   };
 
   componentDidMount() {
+    console.log(this.props);
     GolfAPI.findCourses().then(res => {
       const courseData = res.data.courses;
       const courses = this.state.courses;
@@ -96,18 +98,18 @@ class Form extends Component {
   }
 
   handleCourseInputChange(event) {
-    let value = event.target.value;
-    this.setState({ course: value });
+    this.setState({ course: event });
   }
 
   handleFriendInputChange(event) {
-    let value = event.target.value;
-    this.setState({ friend: value });
+    this.setState({ friend: event });
   }
 
   handleCourseSubmit() {
     const course = this.state.course.toLowerCase();
     const courses = this.state.courses;
+
+    console.log(course);
 
     if (courses.indexOf(course) !== -1) {
       const matchCourse = this.capCourse(course);
@@ -128,12 +130,18 @@ class Form extends Component {
   handleMatchSubmit() {
     const course = this.state.matchCourse;
     const players = this.state.matchFriends;
-    const userData = this.props.userData;
+    const userData = this.props.route.params.userData;
     const allPlayers = [...players, userData];
 
+    console.log(this.props);
     axios.post("http://192.168.138.2:7777/dashboard/api/match/new", {
       course,
       allPlayers
+    });
+
+    return this.props.navigation.navigate("Current Match", {
+      screen: "Match Splash",
+      params: { userData: userData }
     });
   }
 
@@ -146,11 +154,13 @@ class Form extends Component {
     if (allFriends.indexOf(friend) !== -1 && matchArr.indexOf(friend) === -1) {
       for (let i = 0; i < friendArr.length; i++) {
         if (friendArr[i].username === friend) {
+          console.log(friendArr[i]);
           this.setState({
             matchFriends: [...this.state.matchFriends, friendArr[i]]
           });
         }
       }
+
       this.setState({ friendFound: true });
     } else {
       this.setState({ friendFound: false });
@@ -160,7 +170,7 @@ class Form extends Component {
   }
 
   handleFriendDelete(event) {
-    const friendToDelete = event.target.id;
+    const friendToDelete = event;
     const matchFriends = this.state.matchFriends;
     for (let i = 0; i < matchFriends.length; i++) {
       if (matchFriends[i].username === friendToDelete) {
@@ -172,7 +182,13 @@ class Form extends Component {
 
   render() {
     return (
-      <>
+      <View
+        style={{
+          flexDirection: "column",
+          justifyContent: "space-between"
+        }}
+        accesible={true}
+      >
         <CourseInput
           handleCourseSubmit={this.handleCourseSubmit.bind(this)}
           handleCourseInputChange={this.handleCourseInputChange.bind(this)}
@@ -189,22 +205,26 @@ class Form extends Component {
           friendFound={this.state.friendFound}
           allFriends={this.state.allFriends}
         />
-        <MatchCourse
-          matchCourse={this.state.matchCourse}
-          handleCourseDelete={this.handleCourseDelete.bind(this)}
-        />
-        <FriendsList
-          matchFriends={this.state.matchFriends}
-          handleFriendDelete={this.handleFriendDelete.bind(this)}
-        />
-        {/* <Link to="/dashboard/matchView"> */}
-        <Button
-          onClick={this.handleMatchSubmit.bind(this)}
-          id="start-match-btn"
+        <View
+          accesible={true}
+          style={{ flexDirection: "column", justifyContent: "space-around" }}
         >
-          <Text>Start</Text>
-        </Button>
-      </>
+          <MatchCourse
+            matchCourse={this.state.matchCourse}
+            handleCourseDelete={this.handleCourseDelete.bind(this)}
+          />
+          <FriendsList
+            matchFriends={this.state.matchFriends}
+            handleFriendDelete={this.handleFriendDelete.bind(this)}
+          />
+          <Button
+            title="Start"
+            onPress={this.handleMatchSubmit.bind(this)}
+            id="start-match-btn"
+          />
+        </View>
+        {/* <Link to="/dashboard/matchView"> */}
+      </View>
     );
   }
 }

@@ -8,7 +8,8 @@ class LogInForm extends Component {
   state = {
     toDashboard: api,
     email: "",
-    password: ""
+    password: "",
+    userData: {}
   };
 
   componentDidMount() {
@@ -30,6 +31,8 @@ class LogInForm extends Component {
       let successful = result.data.success;
 
       if (successful) {
+        const userData = result.data.userData;
+        this.setState({ userData });
         this.setState({ toDashboard: true });
       } else {
         SweetAlert.showAlertWithOptions({
@@ -43,10 +46,10 @@ class LogInForm extends Component {
 
   render() {
     if (this.state.toDashboard === true) {
-      const email = this.state.email;
+      const userData = this.state.userData;
       this.props.navigation.navigate("Dashboard", {
         screen: "Home",
-        params: { email: email }
+        params: { userData: userData }
       });
     }
     return (
