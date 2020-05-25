@@ -26,13 +26,13 @@ class Links extends Component {
     return (
       <ul
         id="nav-links"
-        className={this.props.burgerClicked ? "slide-left" : "slide-right"}
+        className={this.props.navOpen ? "slide-left" : "slide-right"}
       >
         <li>
           <Link
             id="matchView-link"
             className="nav-link"
-            onClick={this.props.animate}
+            onClick={this.props.animateNav}
             to="/dashboard/matchView"
           >
             Current Match
@@ -52,7 +52,7 @@ class Links extends Component {
           <Link
             id="matchForm-link"
             className="nav-link"
-            onClick={this.props.animate}
+            onClick={this.props.animateNav}
             to="/dashboard/matchForm"
           >
             New Match

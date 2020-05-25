@@ -8,11 +8,17 @@ class Banner extends Component {
     return (
       <div id="banner">
         <h2>
-          <Link to="/dashboard">Tee Time</Link>
+          <Link 
+            to="/dashboard"
+            className="dashboard-link"
+            onClick={this.props.animateNav}
+          >
+            Tee Time
+          </Link>
         </h2>
         <Burger
-          animate={this.props.action}
-          burgerClicked={this.props.clicked}
+          animateNav={this.props.animateNav}
+          navOpen={this.props.navOpen}
         />
       </div>
     );

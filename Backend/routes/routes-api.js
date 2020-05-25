@@ -15,6 +15,7 @@ router.get('/api/users', (req, res) => {
 });
 
 router.post('/api/users', (req, res) => {
+  console.log(req.body);
   db.User.findOne({
     where: {
       username: req.body.username,
@@ -242,48 +243,71 @@ router.post('/api/account/signup', (req, res) => {
 
   email = email.toLowerCase();
 
-  username = username.toLowerCase();
+  // username = username.toLowerCase();
 
-  // Verify email doesn't exist
+  // verify username doesn't exist 
+
   db.User.find(
     {
-      email: email,
+      username: username
     },
-    (err, previousUsers) => {
+    (err, previousUserNames) => {
       if (err) {
         return res.send({
           success: false,
           message: `Please see error message: ${err}`,
         });
-      } else if (previousUsers.length > 0) {
+      } else if (previousUserNames.length > 0) {
         return res.send({
           success: false,
-          message: 'WARNING WARNING! Account already exists! WARNING WARNING!',
+          message: 'That username is already taken. Please select another.',
         });
       } else {
-        // save the email
+        db.User.find(
+          {
+            email: email,
+          },
+          (err, previousUsers) => {
+            if (err) {
+              return res.send({
+                success: false,
+                message: `Please see error message: ${err}`,
+              });
+            } else if (previousUsers.length > 0) {
+              return res.send({
+                success: false,
+                message: 'This email address already has an account associated with it.',
+              });
+            } else {
+              // save the email
 
-        const newUser = new db.User();
+              const newUser = new db.User();
 
-        newUser.email = email;
-        newUser.username = username;
-        newUser.password = newUser.generateHash(password);
-        newUser.save(err => {
-          if (err) {
-            return res.send({
-              success: false,
-              message: `Please see error message: ${err}
-        location 0`,
-            });
+              newUser.email = email;
+              newUser.username = username;
+              newUser.password = newUser.generateHash(password);
+              newUser.save(err => {
+                if (err) {
+                  return res.send({
+                    success: false,
+                    message: `Please see error message: ${err}`,
+                  });
+                }
+                return res.send({
+                  success: true,
+                  message: 'You have created an account. Please log in.',
+                });
+              });
+            }
           }
-          return res.send({
-            success: true,
-            message: 'SUCCESS! YOU HAVE SIGNED UP! PLEASE LOGIN!',
-          });
-        });
+        );
       }
     }
-  );
+  )
+
+
+  // Verify email doesn't exist
+
 });
 
 // SIGN IN SET UP
@@ -421,20 +445,19 @@ router.post('/dashboard/api/match/new', (req, res) => {
     .then(data => {
       req.body.allPlayers.map((player, i) => {
         const holeObjs = [];
-        for (let i = 0; i < data.ops[0].holes; i++) {
+        for (i = 0; i < data.ops[0].holes; i++) {
           const holeData = {
             number: i,
             score: '',
           };
           holeObjs.push(holeData);
         }
-        console.log(data.ops[0].course);
         db.User.updateMany(
           { username: { $in: player.username } },
           {
-            // $push: {
-            //   matchHistory: player.currentMatchId,
-            // },
+            $push: {
+              matchHistory: player.currentMatchData,
+            },
             $set: {
               currentMatch: {
                 courseId: data.ops[0]._id,
@@ -444,9 +467,7 @@ router.post('/dashboard/api/match/new', (req, res) => {
               },
             },
           }
-        ).then(data => {
-          // res.json(data);
-        });
+        )
       });
     })
     .catch(err => {
@@ -538,10 +559,9 @@ router.post('/api/user/favoriteCourses/delete', (req, res) => {
         },
       },
     }
-  )
-    .then(data => {
-      res.json(data);
-    })
+  ).then(data => {
+    res.json(data);
+  })
     .catch(({ message }) => {
       console.log(message);
     });

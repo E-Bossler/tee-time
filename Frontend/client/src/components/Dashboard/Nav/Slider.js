@@ -6,7 +6,7 @@ class Slider extends Component {
     render() {
         return(
             <div id='slider'>
-                <Links animate={this.props.action} burgerClicked={this.props.clicked}/>
+                <Links animateNav={this.props.animateNav} navOpen={this.props.navOpen}/>
             </div>
         );
     }
