@@ -96,18 +96,20 @@ class Form extends Component {
   }
 
   handleCourseInputChange(event) {
-    let value = event.target.value;
-    this.setState({ course: value });
+    console.log(event);
+    this.setState({ course: event });
   }
 
   handleFriendInputChange(event) {
-    let value = event.target.value;
-    this.setState({ friend: value });
+    console.log(event);
+    this.setState({ friend: event });
   }
 
   handleCourseSubmit() {
     const course = this.state.course.toLowerCase();
     const courses = this.state.courses;
+
+    console.log(course);
 
     if (courses.indexOf(course) !== -1) {
       const matchCourse = this.capCourse(course);
@@ -143,14 +145,18 @@ class Form extends Component {
     const allFriends = this.state.allFriends.map(friend => friend.username);
     const matchArr = this.state.matchFriends.map(mFriend => mFriend.username);
 
+    console.log(friend);
+
     if (allFriends.indexOf(friend) !== -1 && matchArr.indexOf(friend) === -1) {
       for (let i = 0; i < friendArr.length; i++) {
         if (friendArr[i].username === friend) {
+          console.log(friendArr[i]);
           this.setState({
             matchFriends: [...this.state.matchFriends, friendArr[i]]
           });
         }
       }
+      console.log(this.state.matchFriends);
       this.setState({ friendFound: true });
     } else {
       this.setState({ friendFound: false });
@@ -199,11 +205,10 @@ class Form extends Component {
         />
         {/* <Link to="/dashboard/matchView"> */}
         <Button
+          title="Start"
           onClick={this.handleMatchSubmit.bind(this)}
           id="start-match-btn"
-        >
-          <Text>Start</Text>
-        </Button>
+        />
       </>
     );
   }

@@ -12,22 +12,17 @@ class FriendsList extends Component {
 
     return (
       <>
-        <Text h3>Match Players:</Text>
-        <Text className={friendsAdded ? "hide" : "show"}>
+        <Text h4>Match Players:</Text>
+        <Text style={friendsAdded ? style.hide : { color: "red" }}>
           No friends added yet
         </Text>
         <Divider id="friends-list">
           {friends.map(friend => {
-            return (
-              <ListItem key={friend._id}>
-                <Text>{friend.username}</Text>
-                <Icon
-                  className={"fas fa-times"}
-                  id={friend.username}
-                  onPress={this.props.handleFriendDelete}
-                />
-              </ListItem>
-            );
+            <ListItem
+              key={friend.Id}
+              title={friends.username}
+              rightIcon={{ name: "delete", type: "font-awesome-5" }}
+            />;
           })}
         </Divider>
       </>
