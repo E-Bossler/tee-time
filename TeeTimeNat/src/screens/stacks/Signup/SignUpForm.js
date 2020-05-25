@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { Divider, Text, Input, Button } from "react-native-elements";
-import api from "../utils/api";
-import style from "./stylesheet.scss";
+import { Text, Input, Button } from "react-native-elements";
+import api from "../../../utils/api";
 import { TouchableOpacity } from "react-native";
-import { Redirect, Link } from "react-router-native";
 import SweetAlert from "react-native-sweet-alert";
 
 class SignUpForm extends Component {

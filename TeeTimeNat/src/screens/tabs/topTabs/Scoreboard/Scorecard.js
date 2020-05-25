@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Divider, Text } from "react-native-elements";
-import GolfAPI from "../../../../../utils/golfGeniusAPI";
+import GolfAPI from "../../../../utils/golfGeniusAPI";
 import axios from "axios";
 import style from "./stylesheet.scss";
 
@@ -127,7 +127,7 @@ class Scorecard extends Component {
               </Text>
             </Divider>
 
-            <table className="score-table">
+            {/* <table className="score-table">
               <thead>
                 <tr>
                   <th>Hole</th>
@@ -184,7 +184,7 @@ class Scorecard extends Component {
                   );
                 })}
               </tbody>
-            </table>
+            </table> */}
           </Divider>
           {players.map((value, index) => {
             return (
@@ -213,7 +213,7 @@ class Scorecard extends Component {
                     IN
                   </Text>
                 </Divider>
-                <table className="score-table">
+                {/* <table className="score-table">
                   <thead>
                     <tr>
                       <th>Hole</th>
@@ -255,28 +255,28 @@ class Scorecard extends Component {
                       );
                     })}
                   </tbody>
-                </table>
+                </table> */}
               </Divider>
             );
           })}
         </Divider>
       );
-    } else {
-      return (
-        <div>
-          <div className="lds-roller">
-            <div />
-            <div />
-            <div />
-            <div />
-            <div />
-            <div />
-            <div />
-            <div />
-          </div>
-          {/* <p id="loading-msg">Loading...</p> */}
-        </div>
-      );
+      // } else {
+      //   return (
+      //     <div>
+      //       <div className="lds-roller">
+      //         <div />
+      //         <div />
+      //         <div />
+      //         <div />
+      //         <div />
+      //         <div />
+      //         <div />
+      //         <div />
+      //       </div>
+      //       {/* <p id="loading-msg">Loading...</p> */}
+      //     </div>
+      //   );
     }
   }
 }

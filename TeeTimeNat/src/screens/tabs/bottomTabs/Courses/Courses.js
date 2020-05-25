@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {Divider, Text, ListItem} from 'react-native-elements';
-import GolfAPI from '../../../../utils/golfGeniusAPI';
-import style from './stylesheet.scss';
+import React, { Component } from "react";
+import { Divider, Text, ListItem } from "react-native-elements";
+import GolfAPI from "../../../../utils/golfGeniusAPI";
+import style from "./stylesheet.scss";
 
 class Courses extends Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class Courses extends Component {
     this.state = {
       username: this.props.username,
       userCourses: [],
-      allCourses: [],
+      allCourses: []
     };
   }
 
@@ -20,25 +20,29 @@ class Courses extends Component {
       for (let i = 0; i < courseData.length; i++) {
         courses.push(courseData[i].name);
       }
-      this.setState({allCourses: courses});
+      this.setState({ allCourses: courses });
       // console.log(courses);
     });
   }
 
   render() {
     return (
-      <Divider style={style} id="courses-container">
+      <>
         <Text h3>My Favorite Courses:</Text>
-        <Divider id="user-courses-list">
-          <ListItem>Placeholder Greens</ListItem>
-        </Divider>
+
+        <Text>Placeholder Greens</Text>
+
         <Text h3>All Available Courses:</Text>
         <Divider id="all-courses-list">
           {this.state.allCourses.map((value, index) => {
-            return <ListItem key={index}>{value}</ListItem>;
+            return (
+              <ListItem key={index}>
+                <Text>{value}</Text>
+              </ListItem>
+            );
           })}
         </Divider>
-      </Divider>
+      </>
     );
   }
 }

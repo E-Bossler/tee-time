@@ -29,6 +29,7 @@
     "express": "^4.17.1",
     "mongoose": "^5.9.11",
     "nodemon": "^2.0.3",
+    "react-navigation": "^4.3.9",
     "socket.io": "^2.3.0"
   },
   "engines": {

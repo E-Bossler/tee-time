@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { Text, Input, Button } from "react-native-elements";
-import api from "../utils/api";
+import api from "../../../utils/api";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./stylesheet.scss";
 import SweetAlert from "react-native-sweet-alert";
-import Greens from "../GreensCSS/Greens";
 
 class LogInForm extends Component {
   state = {
@@ -26,11 +25,9 @@ class LogInForm extends Component {
   }
 
   handleSubmit() {
-    console.log(this.state);
     const email = this.state.email;
     const password = this.state.password;
     api.login(email, password).then(result => {
-      console.log(result);
       let successful = result.data.success;
 
       if (successful) {
@@ -46,10 +43,12 @@ class LogInForm extends Component {
   }
 
   render() {
-    console.log(this.props);
     if (this.state.toDashboard === true) {
       const email = this.state.email;
-      this.props.navigation.navigate("Dashboard", { email });
+      this.props.navigation.navigate("Dashboard", {
+        screen: "Home",
+        params: { email: email }
+      });
     }
     return (
       <>
@@ -94,7 +93,6 @@ class LogInForm extends Component {
             this.props.navigation.navigate("Signup");
           }}
         />
-        <Greens />
 
         <Text>© 2020 Ballard Study Group</Text>
       </>

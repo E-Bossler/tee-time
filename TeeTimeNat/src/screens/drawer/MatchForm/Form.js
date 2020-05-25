@@ -176,40 +176,43 @@ class Form extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
-      <Divider style={style} id="form">
-        <CourseInput
-          handleCourseSubmit={this.handleCourseSubmit.bind(this)}
-          handleCourseInputChange={this.handleCourseInputChange.bind(this)}
-          course={this.state.course}
-          courses={this.state.courses}
-          courseFound={this.state.courseFound}
-          capCourse={this.capCourse.bind(this)}
-        />
+      <>
+        <Divider style={style} id="form">
+          <CourseInput
+            handleCourseSubmit={this.handleCourseSubmit.bind(this)}
+            handleCourseInputChange={this.handleCourseInputChange.bind(this)}
+            course={this.state.course}
+            courses={this.state.courses}
+            courseFound={this.state.courseFound}
+            capCourse={this.capCourse.bind(this)}
+          />
 
-        <FriendsInput
-          handleFriendSubmit={this.handleFriendSubmit.bind(this)}
-          handleFriendInputChange={this.handleFriendInputChange.bind(this)}
-          friend={this.state.friend}
-          friendFound={this.state.friendFound}
-          allFriends={this.state.allFriends}
-        />
-        <MatchCourse
-          matchCourse={this.state.matchCourse}
-          handleCourseDelete={this.handleCourseDelete.bind(this)}
-        />
-        <FriendsList
-          matchFriends={this.state.matchFriends}
-          handleFriendDelete={this.handleFriendDelete.bind(this)}
-        />
-        {/* <Link to="/dashboard/matchView"> */}
-        <Button
-          onClick={this.handleMatchSubmit.bind(this)}
-          id="start-match-btn"
-        >
-          <Text>Start</Text>
-        </Button>
-      </Divider>
+          <FriendsInput
+            handleFriendSubmit={this.handleFriendSubmit.bind(this)}
+            handleFriendInputChange={this.handleFriendInputChange.bind(this)}
+            friend={this.state.friend}
+            friendFound={this.state.friendFound}
+            allFriends={this.state.allFriends}
+          />
+          <MatchCourse
+            matchCourse={this.state.matchCourse}
+            handleCourseDelete={this.handleCourseDelete.bind(this)}
+          />
+          <FriendsList
+            matchFriends={this.state.matchFriends}
+            handleFriendDelete={this.handleFriendDelete.bind(this)}
+          />
+          {/* <Link to="/dashboard/matchView"> */}
+          <Button
+            onClick={this.handleMatchSubmit.bind(this)}
+            id="start-match-btn"
+          >
+            <Text>Start</Text>
+          </Button>
+        </Divider>
+      </>
     );
   }
 }
