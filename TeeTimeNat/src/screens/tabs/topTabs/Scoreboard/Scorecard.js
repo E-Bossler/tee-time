@@ -29,48 +29,49 @@ class Scorecard extends Component {
 
   componentDidMount() {
     const course = this.props.course;
-    const username = this.props.userData.username;
-    const playerData = this.props.playerData;
 
+    const playerData = this.props.playerData;
+    const playerScoreData = [];
     const friends = [];
+
     for (let i = 0; i < playerData.length; i++) {
       friends.push(playerData[i].username);
     }
 
-    const playerScoreData = [];
     for (let i = 0; i < friends.length; i++) {
       let username = friends[i];
-      axios.post("/api/user/score", { username }).then(res => {
-        const scoreData = res.data.currentMatch.holes;
-        console.log("test", res.data.currentMatch);
-        const playerData = {
-          username: username,
-          scoreData: scoreData
-        };
-        playerScoreData.push(playerData);
-        this.setState({ playerScoreData: playerScoreData });
-      });
+      axios
+        .post("http://192.168.138.2:7777/api/user/score", { username })
+        .then(res => {
+          const scoreData = res.data.currentMatch.holes;
+
+          const playerData = {
+            username: username,
+            scoreData: scoreData
+          };
+          playerScoreData.push(playerData);
+          this.setState({ playerScoreData: playerScoreData });
+        });
     }
 
-    axios.post("/api/user/score", { username }).then(res => {
-      console.log("Score Data", res.data.currentMatch.holes);
-      const scoreData = res.data.currentMatch.holes;
-      this.setState({ userScoreData: scoreData });
-    });
+    const username = this.props.userData.username;
+    axios
+      .post("http://192.168.138.2:7777/api/user/score", { username })
+      .then(res => {
+        console.log("Score Data", res);
+        const scoreData = res.data.currentMatch.holes;
+        this.setState({ userScoreData: scoreData });
+      });
 
     GolfAPI.findCourses()
       .then(res => {
         const allCourseData = res.data.courses;
-        console.log(allCourseData);
-        console.log(course);
         let matchCourseData;
         for (let i = 0; i < allCourseData.length; i++) {
           if (allCourseData[i].name === course) {
             matchCourseData = allCourseData[i];
           }
         }
-
-        console.log(matchCourseData);
 
         const holes = matchCourseData.hole_labels;
         this.setState({ holes: holes });
@@ -112,13 +113,18 @@ class Scorecard extends Component {
     this.setState({ currentHole: currentHole });
 
     axios
-      .put("/api/user/score", { currentScore, currentHole, userId })
+      .put("http://192.168.138.2:7777/api/user/score", {
+        currentScore,
+        currentHole,
+        userId
+      })
       .then(res => {
         console.log(res.data);
       });
   }
 
   render() {
+    console.log(this);
     if (!this.state.loading) {
       const sideOut = this.state.sideOut;
       const sideIn = this.state.sideIn;

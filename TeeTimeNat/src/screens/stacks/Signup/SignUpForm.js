@@ -29,7 +29,7 @@ class SignUpForm extends Component {
     this.setState({ pass: e });
   }
 
-  handleSubmit(e) {
+  handleSubmit() {
     const email = this.state.email;
     const password = this.state.pass;
     const username = this.state.username;

@@ -4,7 +4,7 @@ import style from "./stylesheet.scss";
 
 class MatchSplash extends Component {
   render() {
-    console.log("Current Match", this.props);
+    console.log(this.props);
     const username = this.props.userData.username;
     const list = this.props.userData.currentMatch.players;
     const course = this.props.userData.currentMatch.courseName;

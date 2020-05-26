@@ -22,6 +22,7 @@ class Scoreboard extends Component {
   }
 
   render() {
+    const userData = this.props.userData;
     const username = this.props.userData.username;
     const course = this.props.userData.currentMatch.courseName;
     const playerData = this.props.userData.currentMatch.players;
@@ -57,7 +58,7 @@ class Scoreboard extends Component {
             handleCardViewChange={this.handleCardViewChange.bind(this)}
           />
           <Scorecard
-            userData={this.props.userData}
+            userData={userData}
             playerData={playerData}
             username={username}
             players={players}

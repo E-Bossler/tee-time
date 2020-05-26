@@ -499,6 +499,7 @@ router.post('/api/user/score', (req, res) => {
   console.log(req.body);
   const username = req.body.username;
   db.User.findOne({ username: username }).then(data => {
+    console.log(data);
     res.json(data);
   });
 });

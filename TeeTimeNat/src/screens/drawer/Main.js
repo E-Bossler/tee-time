@@ -12,7 +12,6 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    console.log("Main props", this.props);
     const userData = this.props.route.params.userData;
     this.setState({ userData });
   }

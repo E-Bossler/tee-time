@@ -84,7 +84,6 @@ class Form extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props);
     GolfAPI.findCourses().then(res => {
       const courseData = res.data.courses;
       const courses = this.state.courses;
@@ -131,7 +130,6 @@ class Form extends Component {
     const userData = this.props.userData;
     const allPlayers = [...players, userData];
 
-    console.log(this.props);
     axios
       .post("http://192.168.138.2:7777/dashboard/api/match/new", {
         course,

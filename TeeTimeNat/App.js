@@ -12,7 +12,6 @@ import LogInForm from "./src/screens/stacks/Login/LogInForm";
 import SignUpForm from "./src/screens/stacks/Signup/SignUpForm";
 
 // Drawer Navigator
-import Matches from "./src/screens/drawer/Matches/Matches";
 import Main from "./src/screens/drawer/Main";
 import MatchForm from "./src/screens/drawer/MatchForm/Form";
 
@@ -33,7 +32,6 @@ const MatTopTabs = createMaterialTopTabNavigator();
 
 class App extends Component {
   createMainDrawer = props => {
-    console.log("Main Drawer Props", props);
     const userData = props.route.params.params.userData;
 
     return (
@@ -47,17 +45,12 @@ class App extends Component {
         <Drawer.Screen name="Current Match">
           {props => this.createMatchTopTabs(props, userData)}
         </Drawer.Screen>
-        <Drawer.Screen name="Matches">
-          {props => <Matches {...props} userData={userData} />}
-        </Drawer.Screen>
         <Drawer.Screen name="Logout" component={LogInForm} />
       </Drawer.Navigator>
     );
   };
 
   createMatchTopTabs = (props, userData) => {
-    console.log("tab props", props);
-    console.log("tabs userData", userData);
     return (
       <MatTopTabs.Navigator>
         <MatTopTabs.Screen
@@ -69,32 +62,31 @@ class App extends Component {
         <MatTopTabs.Screen name="Chat" option={{ title: "Chat" }}>
           {props => <Chat userData={userData} {...props} />}
         </MatTopTabs.Screen>
-        <MatTopTabs.Screen name="Scoreboard" option={{ title: "Score" }}>
-          {props => <Scoreboard userData={userData} {...props} />}
+        {/* <MatTopTabs.Screen name="Scoreboard" option={{ title: "Score" }}>
+          {props1 => <Scoreboard userData={userData} {...props1} />}
+        </MatTopTabs.Screen> */}
+        <MatTopTabs.Screen name="More" option={{ title: "More..." }}>
+          {props => this.createMatchBottomTabs(props, userData)}
         </MatTopTabs.Screen>
       </MatTopTabs.Navigator>
     );
   };
 
-  createMatchBottomTabs = () => (
-    <MatBottomTabs.Navigator>
-      <MatBottomTabs
-        name="Stats"
-        option={{ title: "Stats" }}
-        component={Stats}
-      />
-      <MatBottomTabs
-        name="Friends"
-        option={{ title: "Friends" }}
-        component={Friends}
-      />
-      <MatBottomTabs
-        name="Courses"
-        option={{ title: "Courses" }}
-        component={Courses}
-      />
-    </MatBottomTabs.Navigator>
-  );
+  createMatchBottomTabs = (props, userData) => {
+    return (
+      <MatBottomTabs.Navigator>
+        <MatBottomTabs.Screen name="Stats" option={{ title: "Stats" }}>
+          {props => <Stats userData={userData} {...props} />}
+        </MatBottomTabs.Screen>
+        <MatBottomTabs.Screen name="Friends" option={{ title: "Friends" }}>
+          {props => <Friends userData={userData} {...props} />}
+        </MatBottomTabs.Screen>
+        <MatBottomTabs.Screen name="Courses" option={{ title: "Courses" }}>
+          {props => <Courses userData={userData} {...props} />}
+        </MatBottomTabs.Screen>
+      </MatBottomTabs.Navigator>
+    );
+  };
 
   render() {
     return (
