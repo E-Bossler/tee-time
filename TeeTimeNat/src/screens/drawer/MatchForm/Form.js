@@ -109,8 +109,6 @@ class Form extends Component {
     const course = this.state.course.toLowerCase();
     const courses = this.state.courses;
 
-    console.log(course);
-
     if (courses.indexOf(course) !== -1) {
       const matchCourse = this.capCourse(course);
       this.setState({ courseFound: true });

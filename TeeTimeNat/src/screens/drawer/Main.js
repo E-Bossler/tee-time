@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Button, Text } from "react-native-elements";
-import axios from "axios";
 
 class Main extends Component {
   constructor(props) {
@@ -13,7 +12,7 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
+    console.log("Main props", this.props);
     const userData = this.props.route.params.userData;
     this.setState({ userData });
   }

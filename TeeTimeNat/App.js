@@ -35,7 +35,7 @@ class App extends Component {
   createMainDrawer = props => {
     console.log("Main Drawer Props", props);
     const userData = props.route.params.params.userData;
-    console.log(props.route.params.params.userData);
+
     return (
       <Drawer.Navigator>
         <Drawer.Screen name="Home">
@@ -56,8 +56,6 @@ class App extends Component {
   };
 
   createMatchTopTabs = (props, userData) => {
-    console.log("Match Tab Props", props);
-    console.log("Match Data", userData);
     return (
       <MatTopTabs.Navigator>
         <MatTopTabs.Screen

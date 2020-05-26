@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import { Divider, Text } from "react-native-elements";
+import { View } from "react-native";
+import { Text, Input } from "react-native-elements";
 import GolfAPI from "../../../../utils/golfGeniusAPI";
+import { Table, TableWrapper, Row, Cell } from "react-native-table-component";
 import axios from "axios";
-import style from "./stylesheet.scss";
-
-/// IMPORT REACT NATIVE TABLE COMPONENT
-/// This is not ready to convert
+import "./stylesheet.scss";
 
 class Scorecard extends Component {
   constructor(props) {
@@ -20,22 +19,56 @@ class Scorecard extends Component {
       yardageData: [],
       viewSideOut: true,
       currentScore: "",
-      currentHole: ""
+      currentHole: "",
+      userScoreData: [],
+      playerScoreData: [],
+      tableHead: ["Hole", "Par", "HCP", "Score"],
+      holeData: ["1", "2", "3"]
     };
   }
 
   componentDidMount() {
     const course = this.props.course;
+    const username = this.props.userData.username;
+    const playerData = this.props.playerData;
+
+    const friends = [];
+    for (let i = 0; i < playerData.length; i++) {
+      friends.push(playerData[i].username);
+    }
+
+    const playerScoreData = [];
+    for (let i = 0; i < friends.length; i++) {
+      let username = friends[i];
+      axios.post("/api/user/score", { username }).then(res => {
+        const scoreData = res.data.currentMatch.holes;
+        const playerData = {
+          username: username,
+          scoreData: scoreData
+        };
+        playerScoreData.push(playerData);
+        this.setState({ playerScoreData: playerScoreData });
+      });
+    }
+
+    axios.post("/api/user/score", { username }).then(res => {
+      const scoreData = res.data.currentMatch.holes;
+      this.setState({ userScoreData: scoreData });
+    });
 
     GolfAPI.findCourses()
       .then(res => {
         const allCourseData = res.data.courses;
+        console.log(allCourseData);
+        console.log(course);
         let matchCourseData;
         for (let i = 0; i < allCourseData.length; i++) {
           if (allCourseData[i].name === course) {
             matchCourseData = allCourseData[i];
           }
         }
+
+        console.log(matchCourseData);
 
         const holes = matchCourseData.hole_labels;
         this.setState({ holes: holes });
@@ -54,8 +87,6 @@ class Scorecard extends Component {
 
         const yardageData = matchCourseData.tees[0].hole_data.yardage;
         this.setState({ yardageData: yardageData });
-
-        // console.log(this.state);
       })
       .then(() => {
         this.setState({ loading: false });
@@ -72,17 +103,15 @@ class Scorecard extends Component {
 
   handleScoreInput(event) {
     event.preventDefault();
-    const userData = this.props.userData;
+    const userId = this.props.userData.id;
     const currentScore = event.target.value;
-    const currentHole = event.target.id;
+    const currentHole = event.target.id - 1;
+
     this.setState({ currentScore: currentScore });
     this.setState({ currentHole: currentHole });
+
     axios
-      .post("http://192.168.138.2:7777/api/user/score", {
-        currentScore,
-        currentHole,
-        userData
-      })
+      .put("/api/user/score", { currentScore, currentHole, userId })
       .then(res => {
         console.log(res.data);
       });
@@ -96,13 +125,10 @@ class Scorecard extends Component {
       const hcpData = this.state.hcpData;
       const players = this.props.players;
       const username = this.props.username;
-      const indexToSplice = players.indexOf(username);
-      players.splice(1, indexToSplice);
-      console.log(players);
 
       return (
-        <Divider style={style}>
-          <Divider
+        <View>
+          <View
             className={
               this.props.scorecardView === username
                 ? "show scorecard"
@@ -110,7 +136,7 @@ class Scorecard extends Component {
             }
           >
             <Text className="player-name">{username}</Text>
-            <Divider className="side-container">
+            <View className="side-container">
               <Text
                 id="side-out"
                 className={this.state.viewSideOut ? "selected" : "hidden"}
@@ -125,158 +151,179 @@ class Scorecard extends Component {
               >
                 IN
               </Text>
-            </Divider>
+            </View>
+            <ScrollView>
+              <View>
+                <Table className="score-table">
+                  <Row data={this.state.tableHead} />
 
-            {/* <table className="score-table">
-              <thead>
-                <tr>
-                  <th>Hole</th>
-                  <th>Par</th>
-                  <th>Hcp</th>
-                  <th>Score</th>
-                </tr>
-              </thead>
-
-              <tbody
-                className={this.state.viewSideOut ? "out show" : "out hide"}
-              >
-                {sideOut.map((value, index) => {
-                  return (
-                    <tr key={index}>
-                      <td className="hole">
-                        <Text note="This was a span.">{value}</Text>
-                      </td>
-                      <td className="par">{parData[index]}</td>
-                      <td className="hcp">{hcpData[index]}</td>
-                      <td className="score">
-                        <Divider>
-                          <Input
-                            className="score-input"
-                            id={value}
-                            // value={event.target.value}
-                            onChange={this.handleScoreInput.bind(this)}
-                          />
-                        </Divider>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-              <tbody className={this.state.viewSideOut ? "in hide" : "in show"}>
-                {sideIn.map((value, index) => {
-                  return (
-                    <tr key={index}>
-                      <td className="hole">
-                        <Text note="This was a span.">{value}</Text>
-                      </td>
-                      <td className="par-cell">{parData[index + 9]}</td>
-                      <td className="hcp-cell">{hcpData[index + 9]}</td>
-                      <td className="score-cell">
-                        <Divider>
-                          <Input
-                            className="score-input"
-                            value={this.state.currentScore}
-                            onChange={this.handleScoreInput.bind(this)}
-                          />
-                        </Divider>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table> */}
-          </Divider>
-          {players.map((value, index) => {
-            return (
-              <Divider
-                key={index}
-                className={
-                  this.props.scorecardView === value
-                    ? "show scorecard"
-                    : "hide scorecard"
-                }
-              >
-                <Text className="player-name">{value}</Text>
-                <Divider className="side-container">
-                  <Text
-                    id="side-out"
-                    className={this.state.viewSideOut ? "selected" : "hidden"}
-                    onClick={this.handleSideViewChange.bind(this)}
-                  >
-                    OUT
-                  </Text>
-                  <Text
-                    id="side-in"
-                    className={this.state.viewSideOut ? "hidden" : "selected"}
-                    onClick={this.handleSideViewChange.bind(this)}
-                  >
-                    IN
-                  </Text>
-                </Divider>
-                {/* <table className="score-table">
-                  <thead>
-                    <tr>
-                      <th>Hole</th>
-                      <th>Par</th>
-                      <th>Hcp</th>
-                      <th>Score</th>
-                    </tr>
-                  </thead>
-
-                  <tbody
+                  <TableWrapper
                     className={this.state.viewSideOut ? "out show" : "out hide"}
                   >
                     {sideOut.map((value, index) => {
                       return (
-                        <tr key={index}>
-                          <td className="hole">
-                            <Text note="Span">{value}</Text>
-                          </td>
-                          <td className="par">{parData[index]}</td>
-                          <td className="hcp">{hcpData[index]}</td>
-                          <td className="score">?</td>
-                        </tr>
+                        <Row key={index}>
+                          <Cell className="hole">
+                            <Text>{value}</Text>
+                          </Cell>
+                          <Cell className="par">{parData[index]}</Cell>
+                          <Cell className="hcp">{hcpData[index]}</Cell>
+                          <Cell className="score">
+                            <Input
+                              className="score-input"
+                              id={value}
+                              defaultValue={
+                                this.state.userScoreData[index].score
+                                  ? this.state.userScoreData[index].score
+                                  : ""
+                              }
+                              onChangeText={this.handleScoreInput.bind(this)}
+                            />
+                          </Cell>
+                        </Row>
                       );
                     })}
-                  </tbody>
-                  <tbody
+                  </TableWrapper>
+                  <TableWrapper
                     className={this.state.viewSideOut ? "in hide" : "in show"}
                   >
                     {sideIn.map((value, index) => {
                       return (
-                        <tr key={index}>
-                          <td className="hole">
-                            <Text note="span">{value}</Text>
-                          </td>
-                          <td className="par-cell">{parData[index + 9]}</td>
-                          <td className="hcp-cell">{hcpData[index + 9]}</td>
-                          <td className="score-cell">?</td>
-                        </tr>
+                        <Row key={index}>
+                          <Cell className="hole">
+                            <Text>{value}</Text>
+                          </Cell>
+                          <Cell className="par-cell">{parData[index + 9]}</Cell>
+                          <Cell className="hcp-cell">{hcpData[index + 9]}</Cell>
+                          <Cell className="score-cell">
+                            <Input
+                              className="score-input"
+                              id={value}
+                              defaultValue={
+                                this.state.userScoreData[index].score
+                                  ? this.state.userScoreData[index].score
+                                  : ""
+                              }
+                              onChangeText={this.handleScoreInput.bind(this)}
+                            />
+                          </Cell>
+                        </Row>
                       );
                     })}
-                  </tbody>
-                </table> */}
-              </Divider>
-            );
-          })}
-        </Divider>
+                  </TableWrapper>
+                </Table>
+              </View>
+              {players.map((value, i) => {
+                return (
+                  <View
+                    key={i}
+                    className={
+                      this.props.scorecardView === value
+                        ? "show scorecard"
+                        : "hide scorecard"
+                    }
+                  >
+                    <Text className="player-name">{value}</Text>
+                    <View className="side-container">
+                      <Text
+                        id="side-out"
+                        className={
+                          this.state.viewSideOut ? "selected" : "hidden"
+                        }
+                        onClick={this.handleSideViewChange.bind(this)}
+                      >
+                        OUT
+                      </Text>
+                      <Text
+                        id="side-in"
+                        className={
+                          this.state.viewSideOut ? "hidden" : "selected"
+                        }
+                        onClick={this.handleSideViewChange.bind(this)}
+                      >
+                        IN
+                      </Text>
+                    </View>
+                    <Table className="score-table">
+                      <Row data={this.state.tableHead} />
+
+                      <TableWrapper
+                        className={
+                          this.state.viewSideOut ? "out show" : "out hide"
+                        }
+                      >
+                        {sideOut.map((value, index) => {
+                          return (
+                            <Row key={index}>
+                              <Cell className="hole">
+                                <Text>{value}</Text>
+                              </Cell>
+                              <Cell className="par">{parData[index]}</Cell>
+                              <Cell className="hcp">{hcpData[index]}</Cell>
+                              <Cell className="score">
+                                {this.state.playerScoreData[i].scoreData[index]
+                                  .score
+                                  ? this.state.playerScoreData[i].scoreData[
+                                      index
+                                    ].score
+                                  : ""}
+                              </Cell>
+                            </Row>
+                          );
+                        })}
+                      </TableWrapper>
+                      <TableWrapper
+                        className={
+                          this.state.viewSideOut ? "in hide" : "in show"
+                        }
+                      >
+                        {sideIn.map((value, index) => {
+                          return (
+                            <Row key={index}>
+                              <Cell className="hole">
+                                <Text>{value}</Text>
+                              </Cell>
+                              <Cell className="par-cell">
+                                {parData[index + 9]}
+                              </Cell>
+                              <Cell className="hcp-cell">
+                                {hcpData[index + 9]}
+                              </Cell>
+                              <Cell className="score">
+                                {this.state.playerScoreData[i].scoreData[index]
+                                  .score
+                                  ? this.state.playerScoreData[i].scoreData[
+                                      index
+                                    ].score
+                                  : ""}
+                              </Cell>
+                            </Row>
+                          );
+                        })}
+                      </TableWrapper>
+                    </Table>
+                  </View>
+                );
+              })}
+            </ScrollView>
+          </View>
+        </View>
       );
-      // } else {
-      //   return (
-      //     <div>
-      //       <div className="lds-roller">
-      //         <div />
-      //         <div />
-      //         <div />
-      //         <div />
-      //         <div />
-      //         <div />
-      //         <div />
-      //         <div />
-      //       </div>
-      //       {/* <p id="loading-msg">Loading...</p> */}
-      //     </div>
-      //   );
+    } else {
+      return (
+        <View id="loading-animation">
+          <View className="lds-roller">
+            <View />
+            <View />
+            <View />
+            <View />
+            <View />
+            <View />
+            <View />
+            <View />
+          </View>
+        </View>
+      );
     }
   }
 }

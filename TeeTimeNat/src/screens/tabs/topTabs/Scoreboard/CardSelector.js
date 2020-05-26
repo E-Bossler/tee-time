@@ -1,21 +1,27 @@
-//THIS IS NOT READY TO CONVERT YET
-
-import React, {Component} from 'react';
-import style from './stylesheet.scss';
+import React, { Component } from "react";
+import { View } from "react-native";
+import { Checkbox, Text } from "react-native-elements";
+import "./stylesheet.css";
 
 class CardSelector extends Component {
   render() {
-    const players = this.props.players;
     const username = this.props.username;
-    const indexToSplice = players.indexOf(username);
-    players.splice(indexToSplice, 1);
+    const playerData = this.props.playerData;
 
-    // console.log(players);
+    const players = [];
+
+    for (let i = 0; i < playerData.length; i++) {
+      if (playerData[i].username !== username) {
+        players.push(playerData[i].username);
+      } else {
+        playerData.splice(i, 1);
+      }
+    }
 
     return (
-      <div style={style} id="card-selector">
+      <View id="card-selector">
         <form>
-          <div id="radio-group">
+          <View id="radio-group">
             <input
               type="radio"
               id={username}
@@ -30,10 +36,10 @@ class CardSelector extends Component {
               </span>
               {username}
             </label>
-          </div>
+          </View>
           {players.map((value, index) => {
             return (
-              <div id="radio-group" key={index}>
+              <View id="radio-group" key={index}>
                 <input
                   type="radio"
                   id={value}
@@ -48,21 +54,11 @@ class CardSelector extends Component {
                   </span>
                   {value}
                 </label>
-              </div>
+              </View>
             );
           })}
-          {/* <div id="radio-group">
-                        <input 
-                            type="radio" 
-                            id="all" 
-                            name="scorecard-radio" 
-                            value="all" 
-                            onChange={this.props.handleCardViewChange}
-                        />
-                        <label htmlFor="all">View All</label>
-                    </div> */}
         </form>
-      </div>
+      </View>
     );
   }
 }

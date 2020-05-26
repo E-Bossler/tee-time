@@ -4,10 +4,10 @@ import style from "./stylesheet.scss";
 
 class MatchSplash extends Component {
   render() {
-    console.log(this.props);
+    console.log("Current Match", this.props);
     const username = this.props.userData.username;
-    const list = this.props.userData.currentCoursePlayers;
-    const course = this.props.userData.currentCourse;
+    const list = this.props.userData.currentMatch.players;
+    const course = this.props.userData.currentMatch.courseName;
     if (list === undefined || course === undefined) {
       console.log("no props yet...");
       return (
