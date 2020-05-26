@@ -244,12 +244,9 @@ router.post('/api/account/signup', (req, res) => {
   email = email.toLowerCase();
 
   // username = username.toLowerCase();
-<<<<<<< HEAD
 
 
   // verify username doesn't exist 
-=======
->>>>>>> d362518f4a467c950781fbbb91e067bce303813e
 
   db.User.find(
     {
@@ -317,7 +314,6 @@ router.post('/api/account/signup', (req, res) => {
 // SIGN IN SET UP
 
 router.post('/api/account/signin', (req, res, next) => {
-  console.log(req.body);
   const { body } = req;
   let { email, password } = body;
 

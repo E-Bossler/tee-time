@@ -1,8 +1,9 @@
-import React, { Component, PureComponent } from "react";
+import React, { PureComponent } from "react";
 import api from "../../../../utils/api";
 import { getFromStorage } from "../../../../utils/storage";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, } from 'recharts';
-
+import swal from "sweetalert";
+import { Redirect } from "react-router-dom";
 
 const data = [
     {
@@ -43,16 +44,6 @@ const radialData = [
     },
 ];
 
-const bestFitData = [
-    { index: 10000, red: 1643, blue: 790 },
-    { index: 1666, red: 182, blue: 42 },
-    { index: 625, red: 56, blue: 11 },
-    // Calculation of line of best fit is not included in this demo
-    { index: 300, redLine: 0 },
-    { index: 10000, redLine: 1522 },
-    { index: 600, blueLine: 0 },
-    { index: 10000, blueLine: 678 },
-];
 
 export default class Stats extends PureComponent {
     static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
@@ -61,6 +52,7 @@ export default class Stats extends PureComponent {
         super(props);
 
         this.state = {
+            hasStats: false,
             username: '',
             userMatchHistory: [1234],
             userBestMatch: [1234],
@@ -91,6 +83,7 @@ export default class Stats extends PureComponent {
                 ) {
                     const userId = response.data[i].userId;
                     api.getUserWithId(userId).then(response => {
+                        // console.log(response.data)
                         for (let i = 0; i < response.data.length; i++) {
                             let checkAgainstId = response.data[i]._id;
                             if (
@@ -99,23 +92,33 @@ export default class Stats extends PureComponent {
                             ) {
                                 const username = response.data[i].username;
                                 const userMatchHistory = response.data[i].matchHistory
+                                console.log("Match history:", userMatchHistory)
                                 this.setState({
                                     username: username,
                                     userMatchHistory: userMatchHistory
                                 });
 
-                                this.findUserBestMatch(username)
-                                this.findUserMostRecentMatch(username)
-                                this.findUserFavoriteCourse(username)
-                                this.calculateUserHandicap(username)
+                                if (userMatchHistory.length = 0) {
+                                    this.setState({hasStats: false})
+                                    swal("NO MATCHES", "You have no match history. Play some matches and check back here!", "warning");
+                                    return
+                                } else {
+                                    this.setState({hasStats: true})
+                                }
 
-                                console.log("Username: ", this.state.username)
-                                console.log("User match history: ", this.state.userMatchHistory)
-                                console.log("User best match: ", this.state.userBestMatch)
-                                console.log("User most recent match: ", this.state.userMostRecentMatch)
-                                console.log("User favorite course: ", this.state.userFavoriteCourse)
-                                console.log("Handicap: ", this.state.userHandicap)
+                                this.findUserBestMatch(userMatchHistory);
+                                this.findUserMostRecentMatch(userMatchHistory);
+                                this.findUserFavoriteCourse(userMatchHistory);
+                                this.calculateUserHandicap(userMatchHistory);
 
+                                // console.log("Username: ", this.state.username)
+                                // console.log("User match history: ", this.state.userMatchHistory)
+                                // console.log("User best match: ", this.state.userBestMatch)
+                                // console.log("User most recent match: ", this.state.userMostRecentMatch)
+                                // console.log("User favorite course: ", this.state.userFavoriteCourse)
+                                // console.log("Handicap: ", this.state.userHandicap)
+
+                                return
                             }
                         }
                     });
@@ -125,43 +128,56 @@ export default class Stats extends PureComponent {
     }
 
 
-    findUserBestMatch(username) {
+    findUserBestMatch(userMatchHistory) {
 
+        // for now, this is a placeholder. need to use match history to create this
 
+        let userBestMatch = userMatchHistory
 
-        // this.setState({
-        //     userBestMatch: userBestMatch,
-        // })
+        this.setState({
+            userBestMatch: userBestMatch,
+        })
     }
 
-    findUserMostRecentMatch(username) {
+    findUserMostRecentMatch(userMatchHistory) {
 
+        // for now, this is a placeholder. need to use match history to create this
+        let userMostRecentMatch= userMatchHistory
 
-
-        // this.setState({
-        //     userMostRecentMatch: userMostRecentMatch,
-        // })
+        this.setState({
+            userMostRecentMatch: userMostRecentMatch,
+        })
     }
 
-    findUserFavoriteCourse(username) {
+    findUserFavoriteCourse(userMatchHistory) {
 
+        // for now, this is a placeholder. need to use match history to create this
+        let userFavoriteCourse= userMatchHistory
 
-
-        // this.setState({
-        //     userFavoriteCourse: userFavoriteCourse,
-        // })
+        this.setState({
+            userFavoriteCourse: userFavoriteCourse,
+        })
     }
 
-    calculateUserHandicap(username) {
+    calculateUserHandicap(userMatchHistory) {
 
+        // for now, this is a placeholder. need to use match history to create this
+        let userHandicap= userMatchHistory
 
-
-        // this.setState({
-        //     userHandicap: userHandicap,
-        // })
+        this.setState({
+            userHandicap: userHandicap,
+        })
     }
 
     render() {
+
+        // THE BELOW CODE WILL PREVENT THE USER FROM ACCESSING THE STATS PAGE WITHOUT A HISTORY OF MATCHES
+
+        // if (this.state.hasStats === false) {
+        //     swal("NO MATCH HISTORY", "You have no match history. Play some matches and check back here!", "warning");
+        //     return <Redirect to="/dashboard" />;
+        // }
+
         return (
             <>
                 <h2>
@@ -182,7 +198,7 @@ export default class Stats extends PureComponent {
                 >
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
-                    <YAxis />
+                    <YAxis minimum="50" />
                     <Tooltip />
                     <Legend />
                     <Line type="monotone" dataKey="strokes" stroke="#8884d8" activeDot={{ r: 8 }} />

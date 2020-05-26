@@ -1,2 +1,0 @@
-# tee-time
-Golf! React! 
