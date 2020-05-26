@@ -6,8 +6,8 @@ class MatchSplash extends Component {
   render() {
     console.log(this.props);
     const username = this.props.userData.username;
-    const list = this.props.userData.currentCoursePlayers;
-    const course = this.props.userData.currentCourse;
+    const list = this.props.userData.currentMatch.players;
+    const course = this.props.userData.currentMatch.courseName;
     if (list === undefined || course === undefined) {
       console.log("no props yet...");
       return (
@@ -21,14 +21,18 @@ class MatchSplash extends Component {
         players.push(list[i].username);
       }
       return (
-        <Divider style={style} id="match-splash">
+        <Divider id="match-splash">
           <Text h4>Welcome back to the green, {username}!</Text>
           <Text>Your current course:</Text>
           <Text id="course-name">{course}</Text>
           <Text>Friends on the the field:</Text>
           <Divider>
             {players.map((value, index) => {
-              return <ListItem key={index}>{value}</ListItem>;
+              return (
+                <ListItem id="ListItem" key={index}>
+                  {value}
+                </ListItem>
+              );
             })}
           </Divider>
           <Text id="scoreboard-msg">

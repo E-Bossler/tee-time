@@ -84,7 +84,6 @@ class Form extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props);
     GolfAPI.findCourses().then(res => {
       const courseData = res.data.courses;
       const courses = this.state.courses;
@@ -109,8 +108,6 @@ class Form extends Component {
     const course = this.state.course.toLowerCase();
     const courses = this.state.courses;
 
-    console.log(course);
-
     if (courses.indexOf(course) !== -1) {
       const matchCourse = this.capCourse(course);
       this.setState({ courseFound: true });
@@ -130,16 +127,18 @@ class Form extends Component {
   handleMatchSubmit() {
     const course = this.state.matchCourse;
     const players = this.state.matchFriends;
-    const userData = this.props.route.params.userData;
+    const userData = this.props.userData;
     const allPlayers = [...players, userData];
 
-    console.log(this.props);
-    axios.post("http://192.168.138.2:7777/dashboard/api/match/new", {
-      course,
-      allPlayers
-    });
-
-    return this.props.navigation.navigate("Current Match", {
+    axios
+      .post("http://192.168.138.2:7777/dashboard/api/match/new", {
+        course,
+        allPlayers
+      })
+      .then(res => {
+        console.log("res object", JSON.parse(res.config.data));
+      });
+    this.props.navigation.navigate("Current Match", {
       screen: "Match Splash",
       params: { userData: userData }
     });
