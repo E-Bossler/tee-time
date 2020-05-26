@@ -155,7 +155,7 @@ class Scorecard extends Component {
             <ScrollView>
               <View>
                 <Table className="score-table">
-                  <Row data={this.state.tableHead} />
+                  <Row className="table-head" data={this.state.tableHead} />
 
                   <TableWrapper
                     className={this.state.viewSideOut ? "out show" : "out hide"}
@@ -190,12 +190,16 @@ class Scorecard extends Component {
                     {sideIn.map((value, index) => {
                       return (
                         <Row key={index}>
-                          <Cell className="hole">
+                          <Cell id="Cell" className="hole">
                             <Text>{value}</Text>
                           </Cell>
-                          <Cell className="par-cell">{parData[index + 9]}</Cell>
-                          <Cell className="hcp-cell">{hcpData[index + 9]}</Cell>
-                          <Cell className="score-cell">
+                          <Cell id="Cell" className="par-cell">
+                            {parData[index + 9]}
+                          </Cell>
+                          <Cell id="Cell" className="hcp-cell">
+                            {hcpData[index + 9]}
+                          </Cell>
+                          <Cell id="Cell" className="score-cell">
                             <Input
                               className="score-input"
                               id={value}
@@ -245,7 +249,7 @@ class Scorecard extends Component {
                       </Text>
                     </View>
                     <Table className="score-table">
-                      <Row data={this.state.tableHead} />
+                      <Row className="table-head" data={this.state.tableHead} />
 
                       <TableWrapper
                         className={

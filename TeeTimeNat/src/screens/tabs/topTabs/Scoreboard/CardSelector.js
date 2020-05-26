@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View } from "react-native";
-import { Checkbox, Text } from "react-native-elements";
-import "./stylesheet.css";
+import { CheckBox } from "react-native-elements";
+import "./stylesheet.scss";
 
 class CardSelector extends Component {
   render() {
@@ -20,44 +20,32 @@ class CardSelector extends Component {
 
     return (
       <View id="card-selector">
-        <form>
-          <View id="radio-group">
-            <input
-              type="radio"
-              id={username}
-              name="scorecard-radio"
-              value={username}
-              className="scorecard-radio"
-              onChange={this.props.handleCardViewChange}
-            />
-            <label htmlFor={username}>
-              <span>
-                <span />
-              </span>
-              {username}
-            </label>
-          </View>
-          {players.map((value, index) => {
-            return (
-              <View id="radio-group" key={index}>
-                <input
-                  type="radio"
-                  id={value}
-                  name="scorecard-radio"
-                  value={value}
-                  className="scorecard-radio"
-                  onChange={this.props.handleCardViewChange}
-                />
-                <label htmlFor={value}>
-                  <span>
-                    <span />
-                  </span>
-                  {value}
-                </label>
-              </View>
-            );
-          })}
-        </form>
+        <View id="radio-group">
+          <CheckBox
+            label={username}
+            type="radio"
+            id={username}
+            name="scorecard-radio"
+            value={username}
+            className="scorecard-radio"
+            checked={this.props.handleCardViewChange}
+          />
+        </View>
+        {players.map((value, index) => {
+          return (
+            <View id="radio-group" key={index}>
+              <CheckBox
+                type="radio"
+                label={value}
+                id={value}
+                name="scorecard-radio"
+                value={value}
+                className="scorecard-radio"
+                checked={this.props.handleCardViewChange}
+              />
+            </View>
+          );
+        })}
       </View>
     );
   }
