@@ -581,7 +581,7 @@ router.put('/api/match/current', (req, res) => {
 
 //SAVES MESSAGES TO CHAT LOG IN MATCH
 router.post('/api/match/current/saveChatMessage', (req, res) => {
-  const matchId = req.body.userData.currentMatchId;
+  const matchId = req.body.userData.currentMatch.courseId;
   db.Match.findOneAndUpdate(
     { _id: matchId },
     {
@@ -589,7 +589,7 @@ router.post('/api/match/current/saveChatMessage', (req, res) => {
         chat: {
           message: req.body.chatMessage,
           messager: req.body.userData.username,
-          messagerId: req.body.userData.id,
+          messagerId: req.body.userData._id,
         },
       },
     }
@@ -602,7 +602,7 @@ router.post('/api/match/current/saveChatMessage', (req, res) => {
 //Get Chat Message Log
 router.put('/api/match/current/getChat', (req, res) => {
   // console.log(req.body);
-  const currentMatch = req.body.userData.currentMatchId;
+  const currentMatch = req.body.userData.currentMatch.courseId;
 
   db.Match.find({ _id: currentMatch }).then(data => {
     res.json(data);
