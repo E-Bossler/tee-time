@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {Divider, Text} from 'react-native-elements';
+import React, { Component } from "react";
+import { Divider, Text } from "react-native-elements";
 // import CardSelector from "./CardSelector";
-import Scorecard from './Scorecard';
-import style from './stylesheet.scss';
+import Scorecard from "./Scorecard";
+import style from "./stylesheet.scss";
 
 class Scoreboard extends Component {
   constructor(props) {
@@ -11,27 +11,28 @@ class Scoreboard extends Component {
       // username: "",
       // players: [],
       // course: "",
-      scorecardView: this.props.userData.username,
+      scorecardView: this.props.userData.username
     };
   }
 
   handleCardViewChange(event) {
     const radioValue = event.target.value;
-    this.setState({scorecardView: radioValue});
+    this.setState({ scorecardView: radioValue });
     // console.log(this.state.scorecardView);
   }
 
   render() {
     const username = this.props.userData.username;
-    const list = this.props.currentMatch.participants;
+    const list = this.props.userData.currentMatch.players;
+    console.log(list);
     const players = [];
     for (let i = 0; i < list.length; i++) {
       players.push(list[i].username);
     }
-    const course = this.props.currentMatch.course;
+    const course = this.props.userData.currentMatch.course;
 
     if (username === undefined || list === undefined || course === undefined) {
-      console.log('waiting for props...');
+      console.log("waiting for props...");
       return (
         <Divider>
           <Text>Loading...</Text>

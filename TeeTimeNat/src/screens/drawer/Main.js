@@ -13,34 +13,9 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    this.findUserName();
-  }
-
-  findUserName() {
-    const email = this.props.route.params.email;
-    console.log(email);
-    return axios
-      .put("http://192.168.138.2:7777/api/dashboard/email", { email })
-      .then(res => {
-        const userData = {
-          username: res.data[0].username,
-          email: res.data[0].email,
-          id: res.data[0]._id,
-          currentMatchId: "",
-          currentCourse: "",
-          currentCoursePlayers: ""
-        };
-
-        if (res.data[0].currentMatch === undefined) {
-          console.log("no current match");
-        } else {
-          userData.currentMatchId = res.data[0].currentMatch.courseId;
-          userData.currentCourse = res.data[0].currentMatch.courseName;
-          userData.currentCoursePlayers = res.data[0].currentMatch.players;
-        }
-
-        this.setState({ userData });
-      });
+    console.log(this.props);
+    const userData = this.props.route.params.userData;
+    this.setState({ userData });
   }
 
   render() {

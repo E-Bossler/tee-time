@@ -6,8 +6,8 @@ class MatchSplash extends Component {
   render() {
     console.log(this.props);
     const username = this.props.userData.username;
-    const list = this.props.currentMatch.participants;
-    const course = this.props.currentMatch.course;
+    const list = this.props.userData.currentCoursePlayers;
+    const course = this.props.userData.currentCourse;
     if (list === undefined || course === undefined) {
       console.log("no props yet...");
       return (
