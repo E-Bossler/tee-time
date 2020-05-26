@@ -245,11 +245,11 @@ router.post('/api/account/signup', (req, res) => {
 
   // username = username.toLowerCase();
 
-  // verify username doesn't exist 
+  // verify username doesn't exist
 
   db.User.find(
     {
-      username: username
+      username: username,
     },
     (err, previousUserNames) => {
       if (err) {
@@ -276,7 +276,8 @@ router.post('/api/account/signup', (req, res) => {
             } else if (previousUsers.length > 0) {
               return res.send({
                 success: false,
-                message: 'This email address already has an account associated with it.',
+                message:
+                  'This email address already has an account associated with it.',
               });
             } else {
               // save the email
@@ -303,11 +304,9 @@ router.post('/api/account/signup', (req, res) => {
         );
       }
     }
-  )
-
+  );
 
   // Verify email doesn't exist
-
 });
 
 // SIGN IN SET UP
@@ -443,6 +442,7 @@ router.post('/dashboard/api/match/new', (req, res) => {
       participants: req.body.allPlayers,
     })
     .then(data => {
+      console.log(data.ops[0]);
       req.body.allPlayers.map((player, i) => {
         const holeObjs = [];
         for (i = 0; i < data.ops[0].holes; i++) {
@@ -467,7 +467,9 @@ router.post('/dashboard/api/match/new', (req, res) => {
               },
             },
           }
-        )
+        ).then(data => {
+          res.json(data);
+        });
       });
     })
     .catch(err => {
@@ -559,9 +561,10 @@ router.post('/api/user/favoriteCourses/delete', (req, res) => {
         },
       },
     }
-  ).then(data => {
-    res.json(data);
-  })
+  )
+    .then(data => {
+      res.json(data);
+    })
     .catch(({ message }) => {
       console.log(message);
     });

@@ -1,12 +1,6 @@
 import React, { Component } from "react";
-import {
-  Divider,
-  Input,
-  Button,
-  Text,
-  ListItem,
-  Icon
-} from "react-native-elements";
+import { View } from "react-native";
+import { Input, Button, Text, ListItem } from "react-native-elements";
 import axios from "axios";
 import io from "socket.io-client";
 import style from "./stylesheet.scss";
@@ -93,9 +87,9 @@ export default class Chat extends Component {
 
   render() {
     return (
-      <Divider style={style} id="chat-container">
-        <Divider id="msg-container">
-          <Divider className={this.state.user ? "user-msgs" : "friend-msgs"}>
+      <View style={style} id="chat-container">
+        <View id="msg-container">
+          <View className={this.state.user ? "user-msgs" : "friend-msgs"}>
             {this.state.chatMessages.map((chatMessage, i) => (
               <ListItem key={i} value={chatMessage.id} className="message">
                 {chatMessage.messager}
@@ -103,15 +97,15 @@ export default class Chat extends Component {
                 {chatMessage.message}
               </ListItem>
             ))}
-          </Divider>
+          </View>
           <Text
             note="This was a Span Element"
             ref={el => {
               this.messagesEnd = el;
             }}
           />
-        </Divider>
-        <Divider id="input-container" onSubmit={this.submitChatMessage}>
+        </View>
+        <View id="input-container" onSubmit={this.submitChatMessage}>
           <Input
             type="text"
             id="chat-input"
@@ -122,8 +116,8 @@ export default class Chat extends Component {
           <Button type="submit" id="send-btn">
             send
           </Button>
-        </Divider>
-      </Divider>
+        </View>
+      </View>
     );
   }
 }

@@ -56,6 +56,8 @@ class App extends Component {
   };
 
   createMatchTopTabs = (props, userData) => {
+    console.log("tab props", props);
+    console.log("tabs userData", userData);
     return (
       <MatTopTabs.Navigator>
         <MatTopTabs.Screen

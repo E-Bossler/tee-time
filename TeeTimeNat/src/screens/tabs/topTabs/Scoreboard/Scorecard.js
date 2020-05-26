@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View } from "react-native";
+import { View, ScrollView } from "react-native";
 import { Text, Input } from "react-native-elements";
 import GolfAPI from "../../../../utils/golfGeniusAPI";
 import { Table, TableWrapper, Row, Cell } from "react-native-table-component";
@@ -42,6 +42,7 @@ class Scorecard extends Component {
       let username = friends[i];
       axios.post("/api/user/score", { username }).then(res => {
         const scoreData = res.data.currentMatch.holes;
+        console.log("test", res.data.currentMatch);
         const playerData = {
           username: username,
           scoreData: scoreData
@@ -52,6 +53,7 @@ class Scorecard extends Component {
     }
 
     axios.post("/api/user/score", { username }).then(res => {
+      console.log("Score Data", res.data.currentMatch.holes);
       const scoreData = res.data.currentMatch.holes;
       this.setState({ userScoreData: scoreData });
     });
@@ -102,7 +104,6 @@ class Scorecard extends Component {
   }
 
   handleScoreInput(event) {
-    event.preventDefault();
     const userId = this.props.userData.id;
     const currentScore = event.target.value;
     const currentHole = event.target.id - 1;

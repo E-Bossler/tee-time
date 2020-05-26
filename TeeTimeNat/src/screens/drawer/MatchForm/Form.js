@@ -128,16 +128,19 @@ class Form extends Component {
   handleMatchSubmit() {
     const course = this.state.matchCourse;
     const players = this.state.matchFriends;
-    const userData = this.props.route.params.userData;
+    const userData = this.props.userData;
     const allPlayers = [...players, userData];
 
     console.log(this.props);
-    axios.post("http://192.168.138.2:7777/dashboard/api/match/new", {
-      course,
-      allPlayers
-    });
-
-    return this.props.navigation.navigate("Current Match", {
+    axios
+      .post("http://192.168.138.2:7777/dashboard/api/match/new", {
+        course,
+        allPlayers
+      })
+      .then(res => {
+        console.log("res object", JSON.parse(res.config.data));
+      });
+    this.props.navigation.navigate("Current Match", {
       screen: "Match Splash",
       params: { userData: userData }
     });
