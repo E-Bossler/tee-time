@@ -313,7 +313,6 @@ router.post('/api/account/signup', (req, res) => {
 // SIGN IN SET UP
 
 router.post('/api/account/signin', (req, res, next) => {
-  console.log(req.body);
   const { body } = req;
   let { email, password } = body;
 
