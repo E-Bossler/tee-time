@@ -22,19 +22,17 @@ class MatchSplash extends Component {
         players.push(list[i]);
       }
       return (
-        <View id="match-splash" style={{ justifyContent: "column" }}>
+        <View id="match-splash">
           <Text h4>Welcome back to the green, {user}!</Text>
           <Text>Current course:</Text>
           <Text id="course-name">{course}</Text>
           <Text>Friends on the Field:</Text>
           <View>
-            {players.map(player => {
+            {players.map((player, i) => {
               return (
-                <ListItem
-                  subtitle={player.username}
-                  id="ListItem"
-                  key={player._id}
-                />
+                <View>
+                  <ListItem subtitle={player.username} id="ListItem" key={i} />
+                </View>
               );
             })}
           </View>

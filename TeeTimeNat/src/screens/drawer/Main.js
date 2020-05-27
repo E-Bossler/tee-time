@@ -48,10 +48,10 @@ class Main extends Component {
           <Button
             title="New Match"
             id="new-match-btn"
-            titleStyle={{ fontSize: 20 }}
+            titleStyle={{ color: "white", fontSize: 20 }}
             buttonStyle={{
               backgroundColor: "rgb(100, 200, 100)",
-              color: "white",
+
               paddingVertical: 10
             }}
             onPress={() => {

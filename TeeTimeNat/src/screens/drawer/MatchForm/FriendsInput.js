@@ -35,9 +35,10 @@ class FriendsInput extends Component {
         <Button
           id="add-friend-btn"
           title="Add Friend"
+          titleStyle={{ color: "white" }}
           buttonStyle={{
             backgroundColor: "rgb(100, 200, 100)",
-            color: "white",
+
             paddingVertical: 10,
             alignSelf: "center",
             width: "75%",

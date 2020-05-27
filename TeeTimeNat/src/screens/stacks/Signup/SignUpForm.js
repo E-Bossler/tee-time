@@ -109,10 +109,10 @@ class SignUpForm extends Component {
             title="Sign Up"
             id="login-btn"
             className="btn btn-default"
-            titleStyle={{ fontSize: 20 }}
+            titleStyle={{ color: "white", fontSize: 20 }}
             buttonStyle={{
               backgroundColor: "rgb(100, 200, 100)",
-              color: "white",
+
               paddingVertical: 10
             }}
             onPress={this.handleSubmit.bind(this)}
@@ -129,10 +129,10 @@ class SignUpForm extends Component {
         >
           <Button
             title="Back to Login"
-            titleStyle={{ fontSize: 20 }}
+            titleStyle={{ color: "white", fontSize: 20 }}
             buttonStyle={{
               backgroundColor: "rgb(100, 200, 100)",
-              color: "white",
+
               paddingVertical: 10
             }}
             onPress={() => {
