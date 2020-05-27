@@ -92,19 +92,17 @@ class SignUpForm extends Component {
 
         <Button
           title="Sign Up"
-          type="submit"
           id="login-btn"
           className="btn btn-default"
           onPress={this.handleSubmit}
         />
 
-        <TouchableOpacity
+        <Button
+          title="Back to Login"
           onPress={() => {
             this.props.navigation.navigate("TeeTime");
           }}
-        >
-          <Text>Back to Login</Text>
-        </TouchableOpacity>
+        />
       </>
     );
   }

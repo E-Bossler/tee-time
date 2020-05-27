@@ -34,6 +34,10 @@ class App extends Component {
   createMainDrawer = props => {
     const userData = props.route.params.params.userData;
 
+    console.log(props.route);
+
+    console.log(userData);
+
     return (
       <Drawer.Navigator>
         <Drawer.Screen name="Home">

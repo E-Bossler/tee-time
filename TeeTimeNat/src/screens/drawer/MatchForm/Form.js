@@ -125,9 +125,10 @@ class Form extends Component {
   }
 
   handleMatchSubmit() {
+    let userData = this.props.userData;
+    const username = this.props.userData.username;
     const course = this.state.matchCourse;
     const players = this.state.matchFriends;
-    const userData = this.props.userData;
     const allPlayers = [...players, userData];
 
     axios
@@ -136,12 +137,17 @@ class Form extends Component {
         allPlayers
       })
       .then(res => {
-        console.log("res object", JSON.parse(res.config.data));
+        axios.put("http://192.168.138.2:7777/api/users", { username }).then(res => {
+          let userData = res.data[0];
+    
+          this.props.navigation.navigate("Current Match", {
+            screen: "Match Splash",
+            params: { userData: userData }
+          });
+        });
       });
-    this.props.navigation.navigate("Current Match", {
-      screen: "Match Splash",
-      params: { userData: userData }
-    });
+
+    
   }
 
   handleFriendSubmit() {
