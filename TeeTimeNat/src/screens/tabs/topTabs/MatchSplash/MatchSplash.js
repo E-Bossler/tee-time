@@ -18,7 +18,7 @@ class MatchSplash extends Component {
     } else {
       const players = [];
       for (let i = 0; i < list.length; i++) {
-        players.push(list[i].username);
+        players.push(list[i]);
       }
       return (
         <Divider id="match-splash">
@@ -27,11 +27,13 @@ class MatchSplash extends Component {
           <Text id="course-name">{course}</Text>
           <Text>Friends on the the field:</Text>
           <Divider>
-            {players.map((value, index) => {
+            {players.map(player => {
               return (
-                <ListItem id="ListItem" key={index}>
-                  {value}
-                </ListItem>
+                <ListItem
+                  subtitle={player.username}
+                  id="ListItem"
+                  key={player.id}
+                />
               );
             })}
           </Divider>
