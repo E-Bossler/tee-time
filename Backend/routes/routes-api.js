@@ -581,6 +581,7 @@ router.put('/api/match/current', (req, res) => {
 //SAVES MESSAGES TO CHAT LOG IN MATCH
 router.post('/api/match/current/saveChatMessage', (req, res) => {
   const matchId = req.body.userData.currentMatch.courseId;
+  console.log('matchId', matchId);
   db.Match.findOneAndUpdate(
     { _id: matchId },
     {

@@ -46,7 +46,6 @@ export default class Chat extends Component {
     this.setState({
       chatMessage: event
     });
-    console.log(this.state.chatMessage);
   }
 
   submitChatMessage() {
@@ -95,13 +94,13 @@ export default class Chat extends Component {
           }}
         >
           <View className={this.state.user ? "user-msgs" : "friend-msgs"}>
-            {this.state.chatMessages.map((chatMessage, i) => (
-              <ListItem key={i} className="message">
-                <Text key={chatMessage._id} style={{ color: "black" }}>
-                  {chatMessage.messager}
-                </Text>
-                <Text key={chatMessage.messagerId}>{chatMessage.message}</Text>
-              </ListItem>
+            {this.state.chatMessages.map(chatMessage => (
+              <ListItem
+                title={chatMessage.message}
+                subtitle={chatMessage.messager}
+                key={chatMessage._id}
+                className="message"
+              />
             ))}
           </View>
         </ScrollView>
