@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { ScrollView } from "react-native";
 import { Button, Text } from "react-native-elements";
 import { Dropdown } from "react-native-material-dropdown";
 import style from "./stylesheet.scss";
@@ -12,9 +13,14 @@ class FriendsInput extends Component {
     });
 
     return (
-      <>
+      <ScrollView>
         <Dropdown
           label="Find Friends:"
+          fontSize={20}
+          animationDuration={100}
+          baseColor={"rgb(100, 200, 100)"}
+          textColor={"rgb(0, 0, 0)"}
+          containerStyle={{ width: "85%", alignSelf: "center" }}
           onChangeText={this.props.handleFriendInputChange}
           useNativeDriver={false}
           data={data}
@@ -29,9 +35,17 @@ class FriendsInput extends Component {
         <Button
           id="add-friend-btn"
           title="Add Friend"
+          buttonStyle={{
+            backgroundColor: "rgb(100, 200, 100)",
+            color: "white",
+            paddingVertical: 10,
+            alignSelf: "center",
+            width: "75%",
+            marginTop: 25
+          }}
           onPress={this.props.handleFriendSubmit}
         />
-      </>
+      </ScrollView>
     );
   }
 }

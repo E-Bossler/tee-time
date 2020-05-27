@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Divider, Text, ListItem } from "react-native-elements";
-import axios from "axios";
-import style from "./stylesheet.scss";
+import { Text, ListItem } from "react-native-elements";
+import { View } from "react-native";
 
 class MatchSplash extends Component {
   render() {
@@ -13,9 +12,9 @@ class MatchSplash extends Component {
     if (list === undefined || course === undefined) {
       console.log("no props yet...");
       return (
-        <Divider>
+        <View>
           <Text>Loading...</Text>
-        </Divider>
+        </View>
       );
     } else {
       const players = [];
@@ -23,22 +22,22 @@ class MatchSplash extends Component {
         players.push(list[i]);
       }
       return (
-        <Divider id="match-splash">
+        <View id="match-splash" style={{ justifyContent: "column" }}>
           <Text h4>Welcome back to the green, {user}!</Text>
-          <Text>Your current course:</Text>
+          <Text>Current course:</Text>
           <Text id="course-name">{course}</Text>
-          <Text>Friends on the the field:</Text>
-          <Divider>
+          <Text>Friends on the Field:</Text>
+          <View>
             {players.map(player => {
               return (
                 <ListItem
                   subtitle={player.username}
                   id="ListItem"
-                  key={player.id}
+                  key={player._id}
                 />
               );
             })}
-          </Divider>
+          </View>
           <Text id="scoreboard-msg">
             Enter your score or track your friend's score using the
             <Text note="This was a Span.">Scoreboard</Text>
@@ -48,7 +47,7 @@ class MatchSplash extends Component {
             <Text note="This was a Span.">Chatroom</Text>
           </Text>
           <Text id="enjoy-msg">Enjoy your match!</Text>
-        </Divider>
+        </View>
       );
     }
   }

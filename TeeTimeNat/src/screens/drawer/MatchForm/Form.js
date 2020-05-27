@@ -137,17 +137,17 @@ class Form extends Component {
         allPlayers
       })
       .then(res => {
-        axios.put("http://192.168.138.2:7777/api/users", { username }).then(res => {
-          let userData = res.data[0];
-    
-          this.props.navigation.navigate("Current Match", {
-            screen: "Match Splash",
-            params: { userData: userData }
-          });
-        });
-      });
+        axios
+          .put("http://192.168.138.2:7777/api/users", { username })
+          .then(res => {
+            let userData = res.data[0];
 
-    
+            this.props.navigation.navigate("Current Match", {
+              screen: "Match Splash",
+              params: { userData: userData }
+            });
+          });
+      });
   }
 
   handleFriendSubmit() {
@@ -212,7 +212,12 @@ class Form extends Component {
         />
         <View
           accesible={true}
-          style={{ flexDirection: "column", justifyContent: "space-around" }}
+          style={{
+            height: 100,
+            flexDirection: "row",
+            alignItems: "center",
+            alignSelf: "center"
+          }}
         >
           <MatchCourse
             matchCourse={this.state.matchCourse}
@@ -222,12 +227,21 @@ class Form extends Component {
             matchFriends={this.state.matchFriends}
             handleFriendDelete={this.handleFriendDelete.bind(this)}
           />
-          <Button
-            title="Start"
-            onPress={this.handleMatchSubmit.bind(this)}
-            id="start-match-btn"
-          />
         </View>
+        <Button
+          title="Start"
+          titleStyle={{ fontSize: 20 }}
+          buttonStyle={{
+            backgroundColor: "rgb(100, 200, 100)",
+            color: "white",
+            paddingVertical: 10,
+            alignSelf: "center",
+            width: "75%",
+            marginTop: 25
+          }}
+          onPress={this.handleMatchSubmit.bind(this)}
+          id="start-match-btn"
+        />
         {/* <Link to="/dashboard/matchView"> */}
       </View>
     );

@@ -15,8 +15,11 @@ class CourseInput extends Component {
       <>
         <Dropdown
           label="Find Course:"
+          fontSize={20}
+          baseColor={"rgb(100, 200, 100)"}
+          textColor={"rgb(0, 0, 0)"}
+          containerStyle={{ width: "85%", alignSelf: "center" }}
           onChangeText={this.props.handleCourseInputChange}
-          useNativeDriver={false}
           data={data}
         />
 
@@ -29,6 +32,14 @@ class CourseInput extends Component {
         <Button
           id="find-course-btn"
           title="Add Course"
+          buttonStyle={{
+            backgroundColor: "rgb(100, 200, 100)",
+            color: "white",
+            paddingVertical: 10,
+            alignSelf: "center",
+            width: "75%",
+            marginTop: 25
+          }}
           onPress={this.props.handleCourseSubmit}
         />
       </>
