@@ -22,29 +22,33 @@ class MatchSplash extends Component {
         players.push(list[i]);
       }
       return (
-        <View id="match-splash">
-          <Text h4>Welcome back to the green, {user}!</Text>
-          <Text>Current course:</Text>
-          <Text id="course-name">{course}</Text>
-          <Text>Friends on the Field:</Text>
-          <View>
-            {players.map((player, i) => {
+        <View id="match-splash" style={{ alignItems: "center" }}>
+          <Text style={{ fontSize: 20, marginVertical: 20 }} id="course-name">
+            {course}
+          </Text>
+          <Text style={{ fontSize: 20, marginVertical: 20 }}>
+            Friends on the Field:
+          </Text>
+          <View style={{ width: "100%", marginBottom: 10 }}>
+            {players.map(player => {
               return (
-                <View>
-                  <ListItem subtitle={player.username} id="ListItem" key={i} />
-                </View>
+                <ListItem
+                  subtitle={player.username}
+                  subtitleStyle={{
+                    fontSize: 20,
+                    color: "rgb(100, 200, 100)",
+                    textAlign: "center"
+                  }}
+                  id="ListItem"
+                  key={player.id}
+                />
               );
             })}
           </View>
-          <Text id="scoreboard-msg">
-            Enter your score or track your friend's score using the
-            <Text note="This was a Span.">Scoreboard</Text>
+
+          <Text style={{ marginTop: 50, fontSize: 20 }} id="enjoy-msg">
+            Enjoy your match!
           </Text>
-          <Text id="chatroom-msg">
-            Chat with your friends during the match using the
-            <Text note="This was a Span.">Chatroom</Text>
-          </Text>
-          <Text id="enjoy-msg">Enjoy your match!</Text>
         </View>
       );
     }
