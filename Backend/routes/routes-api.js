@@ -15,7 +15,7 @@ router.get('/api/users', (req, res) => {
 });
 
 router.post('/api/users', (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   db.User.findOne({
     where: {
       username: req.body.username,
@@ -42,7 +42,7 @@ router.put('/api/users', (req, res) => {
 });
 
 router.put('/api/dashboard/email', (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   db.User.find({ email: req.body.email }).then(data => {
     res.json(data);
   });
@@ -141,7 +141,7 @@ router.post('/api/dashboard/userMenu/friends', (req, res) => {
 router.put('/api/dashboard/userMenu/deleteFriends', (req, res) => {
   const id = req.body.userId;
   const friendId = req.body.friendToDelete;
-  console.log(req.body.friendToDelete);
+  // console.log(req.body.friendToDelete);
 
   db.User.findOneAndUpdate(
     {
@@ -164,8 +164,8 @@ router.put('/api/dashboard/userMenu/deleteFriends', (req, res) => {
 });
 
 router.post('/api/dashboard/userMenu/friendRequests', (req, res) => {
-  console.log(req.body.request);
-  console.log('FULL REQ BODY: ', req.body);
+  // console.log(req.body.request);
+  // console.log('FULL REQ BODY: ', req.body);
   db.User.find({ username: req.body.username }).then(userData => {
     db.User.findOneAndUpdate(
       {
@@ -400,7 +400,7 @@ router.get('/api/account/verify', (req, res) => {
 router.get('/api/account/logout', (req, res, next) => {
   //get the token
   // const query = req;
-  console.log(req.body);
+  // console.log(req.body);
   const token = req.body._id;
   const updateLogOut = {
     isDeleted: true,
@@ -441,28 +441,30 @@ router.post('/dashboard/api/match/new', (req, res) => {
       participants: req.body.allPlayers,
     })
     .then(data => {
-      console.log(data.ops[0]);
-      req.body.allPlayers.map((player, i) => {
+      req.body.allPlayers.map((player, index) => {
         const holeObjs = [];
-        for (i = 0; i < data.ops[0].holes; i++) {
+        for (let i = 0; i < data.ops[0].holes; i++) {
           const holeData = {
             number: i,
             score: '',
           };
           holeObjs.push(holeData);
         }
-        db.User.updateMany(
-          { username: { $in: player.username } },
-          {
-            $push: {
-              matchHistory: player.currentMatchData,
-            },
-            $set: {
-              currentMatch: {
-                courseId: data.ops[0]._id,
-                courseName: data.ops[0].course,
-                players: data.ops[0].participants,
-                holes: holeObjs,
+        console.log(data.ops[0].participants);
+        console.log(holeObjs);
+          db.User.updateMany(
+            { username: { $in: player.username } },
+            {
+              // $push: {
+              //   matchHistory: player.currentMatchData,
+              // },
+              $set: {
+                currentMatch: {
+                  courseId: data.ops[0]._id,
+                  courseName: data.ops[0].course,
+                  players: data.ops[0].participants,
+                  holes: holeObjs,
+                },
               },
             },
           }

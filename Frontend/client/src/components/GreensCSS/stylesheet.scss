@@ -30,7 +30,7 @@
         position: absolute;
         top: 10%;
         width: 5px;
-        z-index: 1;
+        z-index: 4;
       }
       #hole {
         background: lightgrey;
@@ -43,6 +43,7 @@
         position: absolute;
         top: 75%;
         width: 37px;
+        z-index: 3;
         &::after {
           background: rgb(10, 10, 10);
           border-radius: 50%;
