@@ -21,7 +21,7 @@ class Main extends Component {
     if (this.state.toLogin === true) {
       //return <Redirect to="/" />
     }
-    const userData = this.props.route.params.userData;
+    const userData = this.state.userData;
     return (
       <>
         <Text
@@ -41,7 +41,6 @@ class Main extends Component {
           style={{
             width: "75%",
             alignSelf: "center",
-
             marginBottom: 25
           }}
         >
@@ -51,7 +50,6 @@ class Main extends Component {
             titleStyle={{ color: "white", fontSize: 20 }}
             buttonStyle={{
               backgroundColor: "rgb(100, 200, 100)",
-
               paddingVertical: 10
             }}
             onPress={() => {

@@ -24,6 +24,7 @@ import Stats from "./src/screens/tabs/bottomTabs/Stats/Stats";
 import Chat from "./src/screens/tabs/topTabs/Chat/Chat";
 import MatchSplash from "./src/screens/tabs/topTabs/MatchSplash/MatchSplash";
 import Scoreboard from "./src/screens/tabs/topTabs/Scoreboard/Scoreboard";
+import { color } from "react-native-reanimated";
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -33,10 +34,6 @@ const MatTopTabs = createMaterialTopTabNavigator();
 class App extends Component {
   createMainDrawer = props => {
     const userData = props.route.params.params.userData;
-
-    console.log(props.route);
-
-    console.log(userData);
 
     return (
       <Drawer.Navigator
@@ -65,11 +62,13 @@ class App extends Component {
 
   createMatchTopTabs = (props, userData) => {
     return (
-      <MatTopTabs.Navigator>
-        <MatTopTabs.Screen
-          name="Match Splash"
-          option={{ title: "Current Match" }}
-        >
+      <MatTopTabs.Navigator
+        tabBarOptions={{
+          activeTintColor: "rgb(100, 200, 100)",
+          labelStyle: { fontSize: 20 }
+        }}
+      >
+        <MatTopTabs.Screen name="Match">
           {props => <MatchSplash userData={userData} {...props} />}
         </MatTopTabs.Screen>
         <MatTopTabs.Screen name="Chat" option={{ title: "Chat" }}>
@@ -87,7 +86,11 @@ class App extends Component {
 
   createMatchBottomTabs = (props, userData) => {
     return (
-      <MatBottomTabs.Navigator>
+      <MatBottomTabs.Navigator
+        barStyle={{ backgroundColor: "rgb(100, 200, 100)" }}
+        activeColor={"white"}
+        style={{ justifyContent: "center" }}
+      >
         <MatBottomTabs.Screen name="Stats" option={{ title: "Stats" }}>
           {props => <Stats userData={userData} {...props} />}
         </MatBottomTabs.Screen>

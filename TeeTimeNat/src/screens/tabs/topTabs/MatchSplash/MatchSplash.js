@@ -40,7 +40,7 @@ class MatchSplash extends Component {
                     textAlign: "center"
                   }}
                   id="ListItem"
-                  key={player.id}
+                  key={player._id}
                 />
               );
             })}

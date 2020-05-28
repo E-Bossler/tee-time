@@ -28,12 +28,9 @@ class Form extends Component {
   findFriends = () => {
     const username = this.props.userData.username;
     axios
-      .put(
-        "https://tee-time-seattle.herokuapp.com/api/dashboard/userMenu/friends",
-        {
-          username
-        }
-      )
+      .put("http://192.168.138.2:7777/api/dashboard/userMenu/friends", {
+        username
+      })
       .then(res => {
         const friendsData = res.data[0].friends;
         const friends = [];
@@ -135,15 +132,13 @@ class Form extends Component {
     const allPlayers = [...players, userData];
 
     axios
-      .post("https://tee-time-seattle.herokuapp.com/dashboard/api/match/new", {
+      .post("http://192.168.138.2:7777/dashboard/api/match/new", {
         course,
         allPlayers
       })
       .then(res => {
         axios
-          .put("https://tee-time-seattle.herokuapp.com/api/users", {
-            username
-          })
+          .put("http://192.168.138.2:7777/api/users", { username })
           .then(res => {
             let userData = res.data[0];
 
