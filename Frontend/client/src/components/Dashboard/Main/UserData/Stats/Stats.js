@@ -4,6 +4,7 @@ import { getFromStorage } from "../../../../utils/storage";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, } from 'recharts';
 import swal from "sweetalert";
 import { Redirect } from "react-router-dom";
+import "./stylesheet.css";
 
 const data = [
     {
@@ -99,11 +100,11 @@ export default class Stats extends PureComponent {
                                 });
 
                                 if (userMatchHistory.length = 0) {
-                                    this.setState({hasStats: false})
+                                    this.setState({ hasStats: false })
                                     swal("NO MATCHES", "You have no match history. Play some matches and check back here!", "warning");
                                     return
                                 } else {
-                                    this.setState({hasStats: true})
+                                    this.setState({ hasStats: true })
                                 }
 
                                 this.findUserBestMatch(userMatchHistory);
@@ -142,7 +143,7 @@ export default class Stats extends PureComponent {
     findUserMostRecentMatch(userMatchHistory) {
 
         // for now, this is a placeholder. need to use match history to create this
-        let userMostRecentMatch= userMatchHistory
+        let userMostRecentMatch = userMatchHistory
 
         this.setState({
             userMostRecentMatch: userMostRecentMatch,
@@ -152,7 +153,7 @@ export default class Stats extends PureComponent {
     findUserFavoriteCourse(userMatchHistory) {
 
         // for now, this is a placeholder. need to use match history to create this
-        let userFavoriteCourse= userMatchHistory
+        let userFavoriteCourse = userMatchHistory
 
         this.setState({
             userFavoriteCourse: userFavoriteCourse,
@@ -162,7 +163,7 @@ export default class Stats extends PureComponent {
     calculateUserHandicap(userMatchHistory) {
 
         // for now, this is a placeholder. need to use match history to create this
-        let userHandicap= userMatchHistory
+        let userHandicap = userMatchHistory
 
         this.setState({
             userHandicap: userHandicap,
@@ -179,34 +180,37 @@ export default class Stats extends PureComponent {
         // }
 
         return (
-            <>
+            < div id='stats-container'>
                 <h2>
                     Statistics for {this.state.username}:
                 </h2>
                 <hr>
                 </hr>
-                <h4>
-                    Your recent performances:
+
+                <div id='line-chart-container'>
+                    <h4>
+                        Your recent performances:
                 </h4>
-                <LineChart
-                    width={350}
-                    height={300}
-                    data={data}
-                    margin={{
-                        top: 20, right: 0, left: 20, bottom: 5,
-                    }}
-                >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis minimum="50" />
-                    <Tooltip />
-                    <Legend />
-                    <Line type="monotone" dataKey="strokes" stroke="#8884d8" activeDot={{ r: 8 }} />
-                    <Line type="monotone" dataKey="par" stroke="#82ca9d" activeDot={{ r: 8 }} />
-                </LineChart>
+                    <LineChart
+                        width={350}
+                        height={300}
+                        data={data}
+                        margin={{
+                            top: 20, right: 0, left: 20, bottom: 5,
+                        }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="name" />
+                        <YAxis minimum="50" />
+                        <Tooltip />
+                        <Legend />
+                        <Line type="monotone" dataKey="strokes" stroke="#8884d8" activeDot={{ r: 8 }} />
+                        <Line type="monotone" dataKey="par" stroke="#82ca9d" activeDot={{ r: 8 }} />
+                    </LineChart>
+                </div>
                 <hr></hr>
                 <h4>
-                    You skill levels:
+                    Your skill levels:
                 </h4>
                 <RadarChart
                     cx={200}
@@ -225,19 +229,19 @@ export default class Stats extends PureComponent {
                 </RadarChart>
                 <hr></hr>
                 <div>
-                <h3>Stats for {this.state.username}:</h3>
-                <ul>
-                    <li>Personal Best:</li>
-                    {this.state.userBestMatch}
-                    <li>Most Recent Match:</li>
-                    {this.state.userMostRecentMatch}
-                    <li>Favorite Course:</li>
-                    {this.state.userFavoriteCourse}
-                    <li>Handicap:</li>
-                    {this.state.userHandicap}
-                </ul>
+                    <h3>Stats for {this.state.username}:</h3>
+                    <ul>
+                        <li>Personal Best:</li>
+                        {this.state.userBestMatch}
+                        <li>Most Recent Match:</li>
+                        {this.state.userMostRecentMatch}
+                        <li>Favorite Course:</li>
+                        {this.state.userFavoriteCourse}
+                        <li>Handicap:</li>
+                        {this.state.userHandicap}
+                    </ul>
+                </div>
             </div>
-            </>
         );
     }
 }

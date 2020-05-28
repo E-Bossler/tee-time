@@ -1,0 +1,52 @@
+#match-splash {
+  font-family: 'Open Sans', sans-serif;
+  margin: 20px auto;
+  padding: 15px;
+  width: 90%;
+}
+
+#match-splash h4 {
+  font-size: 1.5em;
+  font-weight: 400;
+  padding: 2px 0px 20px;
+  text-align: center;
+}
+
+#match-splash #course-name {
+  color: #1f8efd;
+  padding: 8px 20px;
+  text-transform: uppercase;
+}
+
+#match-splash ul {
+  padding: 5px;
+}
+
+#match-splash ul li {
+  list-style: none;
+  color: #1f8efd;
+  padding: 2px 20px;
+}
+
+#match-splash #scoreboard-msg,
+#match-splash #chatroom-msg {
+  line-height: 2em;
+  margin: 8px 0;
+}
+
+#match-splash #scoreboard-msg span,
+#match-splash #chatroom-msg span {
+  background: -webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#bebebe));
+  background: linear-gradient(#f1f1f1, #bebebe);
+  border: 1px solid #3c3c3c;
+  border-radius: 5px;
+  margin: 0px 3px;
+  padding: 1px 3px;
+}
+
+#match-splash #enjoy-msg {
+  font-size: 1.4em;
+  padding: 20px;
+  text-align: center;
+}
+/*# sourceMappingURL=stylesheet.css.map */
