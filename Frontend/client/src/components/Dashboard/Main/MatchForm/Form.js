@@ -128,14 +128,24 @@ class Form extends Component {
     const username = friend;
     axios.put("/api/users", {username}).then(res => {
       console.log(res.data);
-      const friendData = {
-        username: res.data[0].username,
-        currentMatchData: {
-          currentMatchId: res.data[0].currentMatch.courseId,
-          scoreData: res.data[0].currentMatch.holes
+      let friendData;
+      if (res.data[0].currentMatch.courseId) {
+        friendData = {
+          username: res.data[0].username,
+          currentMatchData: {
+            currentMatchId: res.data[0].currentMatch.courseId,
+            scoreData: res.data[0].currentMatch.holes
+          }
         }
-      }
+      } else {
+        friendData = {
+          username: res.data[0].username
+        }
+      };
+      
+      
       console.log(friendData);
+
       if (allFriends.indexOf(friend) !== -1 && matchArr.indexOf(friend) === -1) {
         this.setState({ matchFriends: [...this.state.matchFriends, friendData]})
         this.setState({ friendFound: true });
@@ -167,8 +177,16 @@ class Form extends Component {
       console.log("no course selected");
       this.setState({ formComplete: false });
     }
+
+    
+    console.log(this.state.matchFriends);
+
     const userData = this.props.userData;
+    console.log(this.props.userData.currentMatch); 
+
     const allPlayers = [...players, userData];
+
+    console.log(allPlayers);
 
     axios.post("/dashboard/api/match/new", { course, allPlayers, holes });
   }
