@@ -12,13 +12,19 @@ class MatchCourse extends Component {
     }
 
     return (
-      <>
-        <Text h4>Match Course:</Text>
+      <View
+        style={{
+          flexDirection: "column",
+          alignItems: "center",
+          marginHorizontal: 10
+        }}
+      >
+        <Text h4>Match Course</Text>
         <Text style={courseFound ? style.hide : { color: "red" }}>
           No course added yet
         </Text>
         <View id="course-name" style={courseFound ? "show" : style.hide}>
-          <Text h3>{this.props.matchCourse}</Text>
+          <Text>{this.props.matchCourse}</Text>
           <Icon
             onPress={() =>
               this.props.handleCourseDelete(this.props.matchCourse)
@@ -27,7 +33,7 @@ class MatchCourse extends Component {
             type={"font-awesome"}
           />
         </View>
-      </>
+      </View>
     );
   }
 }

@@ -22,19 +22,24 @@ export default class Chat extends Component {
     const userData = this.props.userData;
 
     axios
-      .put("http://192.168.138.2:7777/api/match/current/getChat", { userData })
+      .put("https://tee-time-seattle.herokuapp.com/api/match/current/getChat", {
+        userData
+      })
       .then(res => {
         console.log("chat data res", res.data);
         const chatMessages = res.data[0].chat;
         this.setState({ chatMessages });
       });
-    this.socket = io("http://192.168.138.2:7777");
+    this.socket = io("https://tee-time-seattle.herokuapp.com");
     this.socket.on("connect", () => console.log("connected"));
     this.socket.on("chat message", msg => {
       axios
-        .put("http://192.168.138.2:7777/api/match/current/getChat", {
-          userData
-        })
+        .put(
+          "https://tee-time-seattle.herokuapp.com/api/match/current/getChat",
+          {
+            userData
+          }
+        )
         .then(res => {
           const chatMessages = res.data[0].chat;
           this.setState({ chatMessages });
@@ -58,10 +63,13 @@ export default class Chat extends Component {
     };
 
     axios
-      .post("http://192.168.138.2:7777/api/match/current/saveChatMessage", {
-        userData,
-        chatMessage
-      })
+      .post(
+        "https://tee-time-seattle.herokuapp.com/api/match/current/saveChatMessage",
+        {
+          userData,
+          chatMessage
+        }
+      )
       .then(res => {
         this.socket.emit("chat message", this.state.chatMessage);
         this.setState({
@@ -106,12 +114,20 @@ export default class Chat extends Component {
         </ScrollView>
         <View id="input-container" style={{ justifyContent: "flex-end" }}>
           <Input
+            style={{ marginTop: 20 }}
             type="text"
             id="chat-input"
             placeholder="Type your message here..."
             onChangeText={this.handleChange}
           />
           <Button
+            buttonStyle={{
+              width: "75%",
+              paddingVertical: 20,
+              alignSelf: "center",
+              backgroundColor: "rgb(100, 200, 100)"
+            }}
+            titleStyle={{ fontSize: 20 }}
             onPress={this.submitChatMessage}
             title={"Send Message"}
             id="send-btn"

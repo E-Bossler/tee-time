@@ -28,9 +28,12 @@ class Form extends Component {
   findFriends = () => {
     const username = this.props.userData.username;
     axios
-      .put("http://192.168.138.2:7777/api/dashboard/userMenu/friends", {
-        username
-      })
+      .put(
+        "https://tee-time-seattle.herokuapp.com/api/dashboard/userMenu/friends",
+        {
+          username
+        }
+      )
       .then(res => {
         const friendsData = res.data[0].friends;
         const friends = [];
@@ -125,23 +128,31 @@ class Form extends Component {
   }
 
   handleMatchSubmit() {
+    let userData = this.props.userData;
+    const username = this.props.userData.username;
     const course = this.state.matchCourse;
     const players = this.state.matchFriends;
-    const userData = this.props.userData;
     const allPlayers = [...players, userData];
 
     axios
-      .post("http://192.168.138.2:7777/dashboard/api/match/new", {
+      .post("https://tee-time-seattle.herokuapp.com/dashboard/api/match/new", {
         course,
         allPlayers
       })
       .then(res => {
-        console.log("res object", JSON.parse(res.config.data));
+        axios
+          .put("https://tee-time-seattle.herokuapp.com/api/users", {
+            username
+          })
+          .then(res => {
+            let userData = res.data[0];
+
+            this.props.navigation.navigate("Current Match", {
+              screen: "Match Splash",
+              params: { userData: userData }
+            });
+          });
       });
-    this.props.navigation.navigate("Current Match", {
-      screen: "Match Splash",
-      params: { userData: userData }
-    });
   }
 
   handleFriendSubmit() {
@@ -206,7 +217,12 @@ class Form extends Component {
         />
         <View
           accesible={true}
-          style={{ flexDirection: "column", justifyContent: "space-around" }}
+          style={{
+            height: 100,
+            flexDirection: "row",
+            alignItems: "center",
+            alignSelf: "center"
+          }}
         >
           <MatchCourse
             matchCourse={this.state.matchCourse}
@@ -216,12 +232,21 @@ class Form extends Component {
             matchFriends={this.state.matchFriends}
             handleFriendDelete={this.handleFriendDelete.bind(this)}
           />
-          <Button
-            title="Start"
-            onPress={this.handleMatchSubmit.bind(this)}
-            id="start-match-btn"
-          />
         </View>
+        <Button
+          title="Start"
+          titleStyle={{ color: "white", fontSize: 20 }}
+          buttonStyle={{
+            backgroundColor: "rgb(100, 200, 100)",
+
+            paddingVertical: 10,
+            alignSelf: "center",
+            width: "75%",
+            marginTop: 25
+          }}
+          onPress={this.handleMatchSubmit.bind(this)}
+          id="start-match-btn"
+        />
         {/* <Link to="/dashboard/matchView"> */}
       </View>
     );

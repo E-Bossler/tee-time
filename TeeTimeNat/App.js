@@ -34,8 +34,21 @@ class App extends Component {
   createMainDrawer = props => {
     const userData = props.route.params.params.userData;
 
+    console.log(props.route);
+
+    console.log(userData);
+
     return (
-      <Drawer.Navigator>
+      <Drawer.Navigator
+        drawerContentOptions={{
+          labelStyle: { fontSize: 30, color: "white" },
+          itemStyle: { marginVertical: 40 }
+        }}
+        drawerStyle={{
+          backgroundColor: "rgb(100, 200, 100)",
+          borderColor: "white"
+        }}
+      >
         <Drawer.Screen name="Home">
           {props => <Main {...props} userData={userData} />}
         </Drawer.Screen>
