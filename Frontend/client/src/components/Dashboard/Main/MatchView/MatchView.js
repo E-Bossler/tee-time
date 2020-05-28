@@ -1,36 +1,39 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
-import axios from "axios";
-import swal from "sweetalert";
-import TabsContainer from "./Tabs/TabsContainer";
-import DashboardContainer from "./Dashboard/DashboardContainer";
-import "./stylesheet.css";
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
+import axios from 'axios';
+import swal from 'sweetalert';
+import TabsContainer from './Tabs/TabsContainer';
+import DashboardContainer from './Dashboard/DashboardContainer';
+import './stylesheet.css';
 
 class MatchView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentMatch: "",
+      currentMatch: '',
       error: false,
     };
   }
 
   async componentDidMount() {
     const username = this.props.userData.username;
-    await axios.put("/api/users", { username }).then(res => {
+    await axios.put('/api/users', { username }).then(res => {
+      console.log('matchview res', res.data[0]);
       const matchId = res.data[0].currentMatch.courseId;
-      axios.put("/api/match/current", { matchId }).then(res => {
+      this.setState({ userData: res.data[0] });
+      axios.put('/api/match/current', { matchId }).then(res => {
         const currentMatch = res.data[0];
         if (currentMatch === undefined) {
           swal({
-            title: "No Current Match",
+            title: 'No Current Match',
             text:
               "You're not currently playing in a match! Go to 'New Match' to tee off!",
-            icon: "warning",
+            icon: 'warning',
           });
           this.setState({ error: true });
         } else {
           this.setState({ currentMatch });
+          this.setState({ userData: res.data[0] });
         }
       });
     });
@@ -38,7 +41,7 @@ class MatchView extends Component {
 
   render() {
     if (this.state.error === true) {
-      return <Redirect to="/dashboard/matchForm" />;
+      return <Redirect to='/dashboard/matchForm' />;
     }
     return (
       <div>

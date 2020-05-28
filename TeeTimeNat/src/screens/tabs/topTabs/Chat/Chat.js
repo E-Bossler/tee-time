@@ -22,24 +22,19 @@ export default class Chat extends Component {
     const userData = this.props.userData;
 
     axios
-      .put("https://tee-time-seattle.herokuapp.com/api/match/current/getChat", {
-        userData
-      })
+      .put("http://192.168.138.2:7777/api/match/current/getChat", { userData })
       .then(res => {
         console.log("chat data res", res.data);
         const chatMessages = res.data[0].chat;
         this.setState({ chatMessages });
       });
-    this.socket = io("https://tee-time-seattle.herokuapp.com");
+    this.socket = io("http://192.168.138.2:7777");
     this.socket.on("connect", () => console.log("connected"));
     this.socket.on("chat message", msg => {
       axios
-        .put(
-          "https://tee-time-seattle.herokuapp.com/api/match/current/getChat",
-          {
-            userData
-          }
-        )
+        .put("http://192.168.138.2:7777/api/match/current/getChat", {
+          userData
+        })
         .then(res => {
           const chatMessages = res.data[0].chat;
           this.setState({ chatMessages });
@@ -63,13 +58,10 @@ export default class Chat extends Component {
     };
 
     axios
-      .post(
-        "https://tee-time-seattle.herokuapp.com/api/match/current/saveChatMessage",
-        {
-          userData,
-          chatMessage
-        }
-      )
+      .post("http://192.168.138.2:7777/api/match/current/saveChatMessage", {
+        userData,
+        chatMessage
+      })
       .then(res => {
         this.socket.emit("chat message", this.state.chatMessage);
         this.setState({
@@ -92,13 +84,14 @@ export default class Chat extends Component {
   render() {
     console.log(this.state.chatMessages);
     return (
-      <View style={style} id="chat-container">
+      <View id="chat-container">
         <ScrollView
           id="msg-container"
           style={{
-            borderWidth: 1,
-            borderColor: "red",
-            height: "70%"
+            borderWidth: 3,
+            borderRadius: 5,
+            borderColor: "green",
+            height: "60%"
           }}
         >
           <View className={this.state.user ? "user-msgs" : "friend-msgs"}>
