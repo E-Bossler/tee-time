@@ -1,14 +1,15 @@
 import React, { Component } from "react";
+import { View } from "react-native";
 import { Text, Input, Button } from "react-native-elements";
 import api from "../../../utils/api";
-import styles from "./stylesheet.scss";
 import SweetAlert from "react-native-sweet-alert";
 
 class LogInForm extends Component {
   state = {
     toDashboard: api,
     email: "",
-    password: ""
+    password: "",
+    userData: {}
   };
 
   componentDidMount() {
@@ -30,6 +31,8 @@ class LogInForm extends Component {
       let successful = result.data.success;
 
       if (successful) {
+        const userData = result.data.userData;
+        this.setState({ userData });
         this.setState({ toDashboard: true });
       } else {
         SweetAlert.showAlertWithOptions({
@@ -43,15 +46,23 @@ class LogInForm extends Component {
 
   render() {
     if (this.state.toDashboard === true) {
-      const email = this.state.email;
+      const userData = this.state.userData;
       this.props.navigation.navigate("Dashboard", {
         screen: "Home",
-        params: { email: email }
+        params: { userData: userData }
       });
     }
     return (
       <>
-        <Text style={styles.h1} h1>
+        <Text
+          style={{
+            textAlign: "center",
+            backgroundColor: "rgb(100, 200, 100)",
+            color: "white",
+            marginBottom: 25
+          }}
+          h1
+        >
           Welcome to Tee-Time!
         </Text>
 
@@ -59,7 +70,7 @@ class LogInForm extends Component {
           onChangeText={value => {
             this.handleChangeEmail(value);
           }}
-          style={styles.input}
+          style={{ marginBottom: 20 }}
           type="email"
           className="form-control"
           id="email-input"
@@ -69,7 +80,7 @@ class LogInForm extends Component {
         />
         <Input
           onChangeText={value => this.handleChangePass(value)}
-          style={styles.input}
+          style={{ marginBottom: 50 }}
           type="password"
           className="form-control"
           id="password-input"
@@ -78,22 +89,51 @@ class LogInForm extends Component {
           leftIcon={{ type: "font-awesome", name: "lock" }}
         />
 
-        <Button
-          title="Login"
-          style={styles.button}
-          id="login-btn"
-          className="btn btn-default"
-          onPress={this.handleSubmit.bind(this)}
-        />
-
-        <Button
-          title="Or Sign Up"
-          onPress={() => {
-            this.props.navigation.navigate("Signup");
+        <View
+          style={{
+            width: "75%",
+            alignSelf: "center",
+            marginTop: 15,
+            marginBottom: 25
           }}
-        />
+        >
+          <Button
+            title="Login"
+            titleStyle={{ color: "white", fontSize: 20 }}
+            buttonStyle={{
+              backgroundColor: "rgb(100, 200, 100)",
 
-        <Text>© 2020 Ballard Study Group</Text>
+              paddingVertical: 10
+            }}
+            id="login-btn"
+            className="btn btn-default"
+            onPress={this.handleSubmit.bind(this)}
+          />
+        </View>
+
+        <View
+          style={{
+            width: "75%",
+            alignSelf: "center",
+            marginBottom: 25
+          }}
+        >
+          <Button
+            title="Or Sign Up"
+            titleStyle={{ color: "white", fontSize: 20 }}
+            buttonStyle={{
+              backgroundColor: "rgb(100, 200, 100)",
+
+              paddingVertical: 10
+            }}
+            onPress={() => {
+              this.props.navigation.navigate("Signup");
+            }}
+          />
+        </View>
+        <Text style={{ justifyContent: "flex-end", alignSelf: "center" }}>
+          © 2020 Ballard Study Group
+        </Text>
       </>
     );
   }

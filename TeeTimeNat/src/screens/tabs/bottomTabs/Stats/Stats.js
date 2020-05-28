@@ -1,10 +1,14 @@
 import React, { Component } from "react";
-import Text from "react-native";
-import { Divider, ListItem } from "react-native-elements";
+import { Text } from "react-native";
 
 class Stats extends Component {
   render() {
-    return <Text>These are stats.</Text>;
+    return (
+      <>
+        <Text>These are stats.</Text>
+        <Text>More stats.</Text>
+      </>
+    );
   }
 }
 

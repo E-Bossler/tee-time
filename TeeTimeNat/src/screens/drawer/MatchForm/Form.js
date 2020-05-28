@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Divider, Text, Button } from "react-native-elements";
+import { Button } from "react-native-elements";
+import { View } from "react-native";
 import axios from "axios";
 import GolfAPI from "../../../utils/golfGeniusAPI";
 import CourseInput from "./CourseInput";
@@ -25,11 +26,14 @@ class Form extends Component {
   }
 
   findFriends = () => {
-    const username = this.props.route.params.userData.username;
+    const username = this.props.userData.username;
     axios
-      .put("http://192.168.138.2:7777/api/dashboard/userMenu/friends", {
-        username
-      })
+      .put(
+        "https://tee-time-seattle.herokuapp.com/api/dashboard/userMenu/friends",
+        {
+          username
+        }
+      )
       .then(res => {
         const friendsData = res.data[0].friends;
         const friends = [];
@@ -96,13 +100,11 @@ class Form extends Component {
   }
 
   handleCourseInputChange(event) {
-    let value = event.target.value;
-    this.setState({ course: value });
+    this.setState({ course: event });
   }
 
   handleFriendInputChange(event) {
-    let value = event.target.value;
-    this.setState({ friend: value });
+    this.setState({ friend: event });
   }
 
   handleCourseSubmit() {
@@ -126,15 +128,31 @@ class Form extends Component {
   }
 
   handleMatchSubmit() {
+    let userData = this.props.userData;
+    const username = this.props.userData.username;
     const course = this.state.matchCourse;
     const players = this.state.matchFriends;
-    const userData = this.props.userData;
     const allPlayers = [...players, userData];
 
-    axios.post("http://192.168.138.2:7777/dashboard/api/match/new", {
-      course,
-      allPlayers
-    });
+    axios
+      .post("https://tee-time-seattle.herokuapp.com/dashboard/api/match/new", {
+        course,
+        allPlayers
+      })
+      .then(res => {
+        axios
+          .put("https://tee-time-seattle.herokuapp.com/api/users", {
+            username
+          })
+          .then(res => {
+            let userData = res.data[0];
+
+            this.props.navigation.navigate("Current Match", {
+              screen: "Match Splash",
+              params: { userData: userData }
+            });
+          });
+      });
   }
 
   handleFriendSubmit() {
@@ -146,11 +164,13 @@ class Form extends Component {
     if (allFriends.indexOf(friend) !== -1 && matchArr.indexOf(friend) === -1) {
       for (let i = 0; i < friendArr.length; i++) {
         if (friendArr[i].username === friend) {
+          console.log(friendArr[i]);
           this.setState({
             matchFriends: [...this.state.matchFriends, friendArr[i]]
           });
         }
       }
+
       this.setState({ friendFound: true });
     } else {
       this.setState({ friendFound: false });
@@ -160,7 +180,7 @@ class Form extends Component {
   }
 
   handleFriendDelete(event) {
-    const friendToDelete = event.target.id;
+    const friendToDelete = event;
     const matchFriends = this.state.matchFriends;
     for (let i = 0; i < matchFriends.length; i++) {
       if (matchFriends[i].username === friendToDelete) {
@@ -172,7 +192,13 @@ class Form extends Component {
 
   render() {
     return (
-      <>
+      <View
+        style={{
+          flexDirection: "column",
+          justifyContent: "space-between"
+        }}
+        accesible={true}
+      >
         <CourseInput
           handleCourseSubmit={this.handleCourseSubmit.bind(this)}
           handleCourseInputChange={this.handleCourseInputChange.bind(this)}
@@ -189,22 +215,40 @@ class Form extends Component {
           friendFound={this.state.friendFound}
           allFriends={this.state.allFriends}
         />
-        <MatchCourse
-          matchCourse={this.state.matchCourse}
-          handleCourseDelete={this.handleCourseDelete.bind(this)}
-        />
-        <FriendsList
-          matchFriends={this.state.matchFriends}
-          handleFriendDelete={this.handleFriendDelete.bind(this)}
+        <View
+          accesible={true}
+          style={{
+            height: 100,
+            flexDirection: "row",
+            alignItems: "center",
+            alignSelf: "center"
+          }}
+        >
+          <MatchCourse
+            matchCourse={this.state.matchCourse}
+            handleCourseDelete={this.handleCourseDelete.bind(this)}
+          />
+          <FriendsList
+            matchFriends={this.state.matchFriends}
+            handleFriendDelete={this.handleFriendDelete.bind(this)}
+          />
+        </View>
+        <Button
+          title="Start"
+          titleStyle={{ color: "white", fontSize: 20 }}
+          buttonStyle={{
+            backgroundColor: "rgb(100, 200, 100)",
+
+            paddingVertical: 10,
+            alignSelf: "center",
+            width: "75%",
+            marginTop: 25
+          }}
+          onPress={this.handleMatchSubmit.bind(this)}
+          id="start-match-btn"
         />
         {/* <Link to="/dashboard/matchView"> */}
-        <Button
-          onClick={this.handleMatchSubmit.bind(this)}
-          id="start-match-btn"
-        >
-          <Text>Start</Text>
-        </Button>
-      </>
+      </View>
     );
   }
 }
