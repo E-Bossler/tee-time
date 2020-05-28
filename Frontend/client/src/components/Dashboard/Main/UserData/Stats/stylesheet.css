@@ -1,0 +1,17 @@
+#stats-container {
+  max-height: calc(100vh - 65px - 45px);
+  overflow-y: scroll;
+}
+
+#stats-container .hide {
+  display: none;
+}
+
+#stats-container h4 {
+  padding: 0 20px 0px 20px;
+}
+
+#stats-container #line-chart-container {
+  padding: 20px 20px 20px 0px;
+}
+/*# sourceMappingURL=stylesheet.css.map */
