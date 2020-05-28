@@ -245,52 +245,73 @@ router.post('/api/account/signup', (req, res) => {
 
   // username = username.toLowerCase();
 
-  // Verify email doesn't exist
+  // verify username doesn't exist
+
   db.User.find(
     {
-      email: email,
+      username: username,
     },
-    (err, previousUsers) => {
+    (err, previousUserNames) => {
       if (err) {
         return res.send({
           success: false,
           message: `Please see error message: ${err}`,
         });
-      } else if (previousUsers.length > 0) {
+      } else if (previousUserNames.length > 0) {
         return res.send({
           success: false,
-          message: 'WARNING WARNING! Account already exists! WARNING WARNING!',
+          message: 'That username is already taken. Please select another.',
         });
       } else {
-        // save the email
+        db.User.find(
+          {
+            email: email,
+          },
+          (err, previousUsers) => {
+            if (err) {
+              return res.send({
+                success: false,
+                message: `Please see error message: ${err}`,
+              });
+            } else if (previousUsers.length > 0) {
+              return res.send({
+                success: false,
+                message:
+                  'This email address already has an account associated with it.',
+              });
+            } else {
+              // save the email
 
-        const newUser = new db.User();
+              const newUser = new db.User();
 
-        newUser.email = email;
-        newUser.username = username;
-        newUser.password = newUser.generateHash(password);
-        newUser.save(err => {
-          if (err) {
-            return res.send({
-              success: false,
-              message: `Please see error message: ${err}
-        location 0`,
-            });
+              newUser.email = email;
+              newUser.username = username;
+              newUser.password = newUser.generateHash(password);
+              newUser.save(err => {
+                if (err) {
+                  return res.send({
+                    success: false,
+                    message: `Please see error message: ${err}`,
+                  });
+                }
+                return res.send({
+                  success: true,
+                  message: 'You have created an account. Please log in.',
+                });
+              });
+            }
           }
-          return res.send({
-            success: true,
-            message: 'SUCCESS! YOU HAVE SIGNED UP! PLEASE LOGIN!',
-          });
-        });
+        );
       }
     }
   );
+
+  // Verify email doesn't exist
 });
 
 // SIGN IN SET UP
 
 router.post('/api/account/signin', (req, res, next) => {
-  // console.log(req.body);
   const { body } = req;
   let { email, password } = body;
 
@@ -352,6 +373,7 @@ router.post('/api/account/signin', (req, res, next) => {
           });
         }
         return res.send({
+          userData: user,
           success: true,
           message: 'SUCCESS! YOU HAVE SIGNED IN! IT IS TEE TIME!!! FOOOOURRRRR',
           token: doc._id,
@@ -411,7 +433,7 @@ router.get('/api/account/logout', (req, res, next) => {
 
 // SET UP A  NEW MATCH
 
-router.post("/dashboard/api/match/new", (req, res) => {
+router.post('/dashboard/api/match/new', (req, res) => {
   db.Match.collection
     .insertOne({
       course: req.body.course,
@@ -444,8 +466,11 @@ router.post("/dashboard/api/match/new", (req, res) => {
                   holes: holeObjs,
                 },
               },
-            }
-          )
+            },
+          }
+        ).then(data => {
+          res.json(data);
+        });
       });
     })
     .catch(err => {
@@ -475,6 +500,7 @@ router.post('/api/user/score', (req, res) => {
   console.log(req.body);
   const username = req.body.username;
   db.User.findOne({ username: username }).then(data => {
+    console.log(data);
     res.json(data);
   });
 });
@@ -498,14 +524,14 @@ router.put('/api/user/score', (req, res) => {
   });
 });
 
-router.post("/api/user/favoriteCourses", (req, res) => {
+router.post('/api/user/favoriteCourses', (req, res) => {
   const username = req.body.username;
   db.User.findOne({ username: username }).then(data => {
     res.json(data);
   });
 });
 
-router.put("/api/user/favoriteCourses", (req, res) => {
+router.put('/api/user/favoriteCourses', (req, res) => {
   const username = req.body.username;
   const course = req.body.course;
   console.log(course);
@@ -514,9 +540,9 @@ router.put("/api/user/favoriteCourses", (req, res) => {
     {
       $push: {
         favoriteCourses: {
-          course: course
-        }
-      }
+          course: course,
+        },
+      },
     }
   ).then(data => {
     console.log(data);
@@ -524,7 +550,7 @@ router.put("/api/user/favoriteCourses", (req, res) => {
   });
 });
 
-router.post("/api/user/favoriteCourses/delete", (req, res) => {
+router.post('/api/user/favoriteCourses/delete', (req, res) => {
   console.log(req.body);
   const username = req.body.username;
   const course = req.body.course;
@@ -537,12 +563,13 @@ router.post("/api/user/favoriteCourses/delete", (req, res) => {
         },
       },
     }
-  ).then(data => {
-    res.json(data);
-  })
-  .catch(({ message }) => {
-    console.log(message);
-  });
+  )
+    .then(data => {
+      res.json(data);
+    })
+    .catch(({ message }) => {
+      console.log(message);
+    });
 });
 
 //GET CURRENT MATCH
@@ -555,7 +582,8 @@ router.put('/api/match/current', (req, res) => {
 
 //SAVES MESSAGES TO CHAT LOG IN MATCH
 router.post('/api/match/current/saveChatMessage', (req, res) => {
-  const matchId = req.body.userData.currentMatchId;
+  const matchId = req.body.userData.currentMatch.courseId;
+  console.log('matchId', matchId);
   db.Match.findOneAndUpdate(
     { _id: matchId },
     {
@@ -563,7 +591,7 @@ router.post('/api/match/current/saveChatMessage', (req, res) => {
         chat: {
           message: req.body.chatMessage,
           messager: req.body.userData.username,
-          messagerId: req.body.userData.id,
+          messagerId: req.body.userData._id,
         },
       },
     }
@@ -576,7 +604,7 @@ router.post('/api/match/current/saveChatMessage', (req, res) => {
 //Get Chat Message Log
 router.put('/api/match/current/getChat', (req, res) => {
   // console.log(req.body);
-  const currentMatch = req.body.userData.currentMatchId;
+  const currentMatch = req.body.userData.currentMatch.courseId;
 
   db.Match.find({ _id: currentMatch }).then(data => {
     res.json(data);

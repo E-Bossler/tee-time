@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Divider, Text, ListItem, Button, Input } from "react-native-elements";
+import { View } from "react-native";
+import { Text, ListItem, Button, Input } from "react-native-elements";
 import axios from "axios";
 import SweetAlert from "react-native-sweet-alert";
 
@@ -19,11 +20,14 @@ class Friends extends Component {
   }
 
   componentDidMount() {
-    const username = this.state.username;
+    const username = this.props.userData.username;
     axios
-      .put("http://192.168.138.2:7777/api/dashboard/userMenu/friends", {
-        username
-      })
+      .put(
+        "https://tee-time-seattle.herokuapp.com/api/dashboard/userMenu/friends",
+        {
+          username
+        }
+      )
       .then(res => {
         const friends = res.data[0].friends;
         if (friends === undefined) {
@@ -39,9 +43,12 @@ class Friends extends Component {
       });
 
     axios
-      .put("http://192.168.138.2:7777/api/dashboard/userMenu/friendRequests", {
-        username
-      })
+      .put(
+        "https://tee-time-seattle.herokuapp.com/api/dashboard/userMenu/friendRequests",
+        {
+          username
+        }
+      )
       .then(res => {
         const friendRequests = res.data[0].friendRequests;
         if (friendRequests === undefined) {
@@ -53,16 +60,19 @@ class Friends extends Component {
   }
 
   acceptFriend(e) {
-    e.preventDefault();
-    const request = JSON.parse(e.target.value);
-    const username = this.state.username;
+    const request = e;
+    const username = this.props.userData.username;
     const userData = this.props.userData;
+
     axios
-      .post("http://192.168.138.2:7777/api/dashboard/userMenu/friendRequests", {
-        request,
-        username,
-        userData
-      })
+      .post(
+        "https://tee-time-seattle.herokuapp.com/api/dashboard/userMenu/friendRequests",
+        {
+          request,
+          username,
+          userData
+        }
+      )
       .then(res => {
         const request = JSON.parse(res.config.data);
         const newFriend = request.request;
@@ -78,22 +88,25 @@ class Friends extends Component {
   }
 
   handleChange(e) {
-    const { value } = e.target;
+    const value = e;
+
     this.setState({ friendName: value });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  handleSubmit() {
     const friend = this.state.friendName;
-    const user = this.state.username;
+    const user = this.props.userData.username;
     const userData = this.props.userData;
 
     axios
-      .post("http://192.168.138.2:7777/api/dashboard/userMenu/friends", {
-        friend,
-        user,
-        userData
-      })
+      .post(
+        "https://tee-time-seattle.herokuapp.com/api/dashboard/userMenu/friends",
+        {
+          friend,
+          user,
+          userData
+        }
+      )
       .then(res => {
         if (res.status === 201) {
           SweetAlert.showAlertWithOptions({
@@ -133,48 +146,42 @@ class Friends extends Component {
 
   render() {
     return (
-      <Divider>
+      <>
         <Text h2>Friends</Text>
-        <Divider>
+        <View>
           <Input
             label="Find Friends!"
             className="friend-name"
-            onChange={this.handleChange.bind(this)}
-            onSubmitEditing={this.handleSubmit.bind(this)}
+            onChangeText={this.handleChange.bind(this)}
           />
-          <Button title="Add Friend" />
-        </Divider>
+          <Button title="Find Friend" onPress={this.handleSubmit.bind(this)} />
+        </View>
 
         <Text h2>Your Friends</Text>
-        <Divider>
+        <View>
           {this.state.friends.map(friend => {
-            return (
-              <ListItem value={this.state.friends} key={friend._id}>
-                {friend.username}
-              </ListItem>
-            );
+            return <ListItem title={friend.username} key={friend._id} />;
           })}
-        </Divider>
+        </View>
         <Text h2>Friend Requests</Text>
-        <Divider>
+        <View>
           {this.state.friendRequests.map(friendRequest => {
             return (
-              <Divider key={friendRequest._id + 2}>
-                <ListItem key={friendRequest._id}>
-                  {friendRequest.username}
-                </ListItem>
-                <Button
-                  onPress={this.acceptFriend}
-                  key={friendRequest._id + 1}
-                  value={JSON.stringify(friendRequest)}
-                >
-                  Add Friend
-                </Button>
-              </Divider>
+              <View key={friendRequest._id + 2}>
+                <ListItem
+                  title={friendRequest.username}
+                  key={friendRequest._id}
+                  rightIcon={{
+                    name: "plus",
+                    type: "font-awesome",
+                    onPress: () => this.acceptFriend(friendRequest)
+                  }}
+                />
+              </View>
             );
           })}
-        </Divider>
-      </Divider>
+        </View>
+      </>
     );
   }
 }
