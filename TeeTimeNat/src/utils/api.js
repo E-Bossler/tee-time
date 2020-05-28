@@ -4,32 +4,26 @@ const api = {
   // logs the user in, creates a new usersession for the user
 
   login: function(email, password) {
-    return axios.post(
-      "https://tee-time-seattle.herokuapp.com/api/account/signin",
-      {
-        email: email,
-        password: password
-      }
-    );
+    return axios.post("http://192.168.138.2:7777/api/account/signin", {
+      email: email,
+      password: password
+    });
   },
 
   // creates a new user in the db
 
   signUp: function(email, password, username) {
-    return axios.post(
-      "https://tee-time-seattle.herokuapp.com/api/account/signup",
-      {
-        email: email,
-        password: password,
-        username: username
-      }
-    );
+    return axios.post("http://192.168.138.2:7777/api/account/signup", {
+      email: email,
+      password: password,
+      username: username
+    });
   },
 
   // finds the username from the db with the userid as input
 
   getUserWithId: function(userId) {
-    return axios.get("https://tee-time-seattle.herokuapp.com/api/users", {
+    return axios.get("http://192.168.138.2:7777/api/users", {
       _id: userId
     });
   },
@@ -37,24 +31,18 @@ const api = {
   //verify the session token is valid and that the person is logged in
 
   verify: function(sessionToken) {
-    return axios.get(
-      "https://tee-time-seattle.herokuapp.com/api/account/verify",
-      {
-        _id: sessionToken
-        // isDeleted: false
-      }
-    );
+    return axios.get("http://192.168.138.2:7777/api/account/verify", {
+      _id: sessionToken
+      // isDeleted: false
+    });
   },
 
   //logs the loser out, clears out sessiontoken from storage
 
   logout: function(userId) {
-    return axios.get(
-      "https://tee-time-seattle.herokuapp.com/api/account/logout",
-      {
-        _id: userId
-      }
-    );
+    return axios.get("http://192.168.138.2:7777/api/account/logout", {
+      _id: userId
+    });
   },
 
   //creates a new match in the database, assigns it a course, and adds users to the match

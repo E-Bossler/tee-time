@@ -1,20 +1,20 @@
-import React, { Component } from "react";
-import { Route, Redirect } from "react-router-dom";
-import axios from "axios";
-import NewMatchBtn from "./MatchForm/NewMatchBtn";
-import Greens from "../../GreensCSS/Greens";
-import FormContainer from "./MatchForm/FormContainer";
-import UserMenuContainer from "./UserData/UserMenuContainer";
-import MatchView from "./MatchView/MatchView";
-import "./stylesheet.css";
-import api from "../../utils/api";
-import { getFromStorage } from "../../utils/storage";
+import React, { Component } from 'react';
+import { Route, Redirect } from 'react-router-dom';
+import axios from 'axios';
+import NewMatchBtn from './MatchForm/NewMatchBtn';
+import Greens from '../../GreensCSS/Greens';
+import FormContainer from './MatchForm/FormContainer';
+import UserMenuContainer from './UserData/UserMenuContainer';
+import MatchView from './MatchView/MatchView';
+import './stylesheet.css';
+import api from '../../utils/api';
+import { getFromStorage } from '../../utils/storage';
 
 class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      username: '',
       userData: {},
       toLogin: false,
     };
@@ -26,7 +26,7 @@ class Main extends Component {
 
   findUserName() {
     // get token from storage
-    let key = "SessionToken";
+    let key = 'SessionToken';
     const sessionToken = getFromStorage(key);
     // search user session db
 
@@ -51,28 +51,9 @@ class Main extends Component {
                 });
                 const username = this.state.username;
                 axios
-                  .put("/api/dashboard/userMenu/friends", { username })
+                  .put('/api/dashboard/userMenu/friends', { username })
                   .then(res => {
-                    console.log(res.data);
-                    const userData = {
-                      username: res.data[0].username,
-                      email: res.data[0].email,
-                      id: res.data[0]._id,
-                      currentMatchId: "",
-                      currentCourse: "",
-                      currentCoursePlayers: "",
-                    };
-
-                    if (res.data[0].currentMatch === undefined) {
-                      console.log("no current match");
-                    } else {
-                      userData.currentMatchId =
-                        res.data[0].currentMatch.courseId;
-                      userData.currentCourse =
-                        res.data[0].currentMatch.courseName;
-                      userData.currentCoursePlayers =
-                        res.data[0].currentMatch.players;
-                    }
+                    const userData = res.data[0];
 
                     this.setState({ userData });
                   });
@@ -86,13 +67,13 @@ class Main extends Component {
 
   render() {
     if (this.state.toLogin === true) {
-      return <Redirect to="/" />;
+      return <Redirect to='/' />;
     }
 
     return (
       <div>
-        <Route exact path="/dashboard">
-          <div id="landing-container">
+        <Route exact path='/dashboard'>
+          <div id='landing-container'>
             <h2>Welcome, {this.state.username}</h2>
             <h4>Start a new match?</h4>
             <NewMatchBtn />
@@ -100,21 +81,21 @@ class Main extends Component {
           </div>
         </Route>
 
-        <Route path="/dashboard/matchForm">
+        <Route path='/dashboard/matchForm'>
           <FormContainer
             userData={this.state.userData}
             username={this.state.username}
           />
         </Route>
 
-        <Route path="/dashboard/userMenu">
+        <Route path='/dashboard/userMenu'>
           <UserMenuContainer
             userData={this.state.userData}
             username={this.state.username}
           />
         </Route>
 
-        <Route path="/dashboard/matchView">
+        <Route path='/dashboard/matchView'>
           <MatchView
             userData={this.state.userData}
             username={this.state.username}

@@ -452,19 +452,18 @@ router.post('/dashboard/api/match/new', (req, res) => {
         }
         console.log(data.ops[0].participants);
         console.log(holeObjs);
-          db.User.updateMany(
-            { username: { $in: player.username } },
-            {
-              // $push: {
-              //   matchHistory: player.currentMatchData,
-              // },
-              $set: {
-                currentMatch: {
-                  courseId: data.ops[0]._id,
-                  courseName: data.ops[0].course,
-                  players: data.ops[0].participants,
-                  holes: holeObjs,
-                },
+        db.User.updateMany(
+          { username: { $in: player.username } },
+          {
+            // $push: {
+            //   matchHistory: player.currentMatchData,
+            // },
+            $set: {
+              currentMatch: {
+                courseId: data.ops[0]._id,
+                courseName: data.ops[0].course,
+                players: data.ops[0].participants,
+                holes: holeObjs,
               },
             },
           }

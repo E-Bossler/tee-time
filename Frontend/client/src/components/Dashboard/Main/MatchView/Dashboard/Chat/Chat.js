@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import axios from "axios";
-import io from "socket.io-client";
-import "./stylesheet.css";
+import React, { Component } from 'react';
+import axios from 'axios';
+import io from 'socket.io-client';
+import './stylesheet.css';
 
 export default class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      chatMessage: "",
-      chatMessages: []
+      chatMessage: '',
+      chatMessages: [],
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -16,21 +16,23 @@ export default class Chat extends Component {
   }
 
   scrollToBottom = () => {
-    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    this.messagesEnd.scrollIntoView({ behavior: 'smooth' });
   };
 
   componentDidMount() {
     const userData = this.props.userData;
 
-    axios.put("/api/match/current/getChat", { userData }).then(res => {
+    console.log(userData);
+
+    axios.put('/api/match/current/getChat', { userData }).then(res => {
       const chatMessages = res.data[0].chat;
       this.setState({ chatMessages });
       this.scrollToBottom();
     });
-    this.socket = io("http://192.168.138.2:7777");
-    this.socket.on("connect", () => console.log("connected"));
-    this.socket.on("chat message", msg => {
-      axios.put("/api/match/current/getChat", { userData }).then(res => {
+    this.socket = io('http://192.168.138.2:7777');
+    this.socket.on('connect', () => console.log('connected'));
+    this.socket.on('chat message', msg => {
+      axios.put('/api/match/current/getChat', { userData }).then(res => {
         const chatMessages = res.data[0].chat;
         this.setState({ chatMessages });
         this.scrollToBottom();
@@ -55,14 +57,14 @@ export default class Chat extends Component {
     };
 
     axios
-      .post("/api/match/current/saveChatMessage", { userData, chatMessage })
+      .post('/api/match/current/saveChatMessage', { userData, chatMessage })
       .then(res => {
-        this.socket.emit("chat message", this.state.chatMessage);
+        this.socket.emit('chat message', this.state.chatMessage);
         this.setState({
           chatMessages: [...this.state.chatMessages, chatMessageObj],
         });
         this.scrollToBottom();
-        this.setState({ chatMessage: "" });
+        this.setState({ chatMessage: '' });
       });
     this.scrollToBottom();
   }
@@ -71,18 +73,19 @@ export default class Chat extends Component {
     const user = this.props.userData.username;
 
     return (
-      <div id="chat-container">
-
-        <div id="msg-container">
-          <ul >
+      <div id='chat-container'>
+        <div id='msg-container'>
+          <ul>
             {this.state.chatMessages.map((chatMessage, i) => (
-              <li 
-                key={i} 
+              <li
+                key={i}
                 value={chatMessage.id}
-                className={chatMessage.messager === user ? "user-msgs" : "friend-msgs"}
+                className={
+                  chatMessage.messager === user ? 'user-msgs' : 'friend-msgs'
+                }
               >
                 {chatMessage.messager}
-                <span className="message">{chatMessage.message}</span>
+                <span className='message'>{chatMessage.message}</span>
               </li>
             ))}
           </ul>
@@ -93,19 +96,18 @@ export default class Chat extends Component {
           ></span>
         </div>
 
-        <form id="input-container" onSubmit={this.submitChatMessage}>
+        <form id='input-container' onSubmit={this.submitChatMessage}>
           <input
-            type="text"
-            id="chat-input"
-            placeholder="Type your message here..."
+            type='text'
+            id='chat-input'
+            placeholder='Type your message here...'
             onChange={this.handleChange}
             value={this.state.chatMessage}
           />
-          <button type="submit" id="send-btn">
+          <button type='submit' id='send-btn'>
             send
           </button>
         </form>
-
       </div>
     );
   }
