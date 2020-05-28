@@ -21,7 +21,7 @@ class Main extends Component {
     if (this.state.toLogin === true) {
       //return <Redirect to="/" />
     }
-    const userData = this.state.userData;
+    const userData = this.props.route.params.userData;
     return (
       <>
         <Text
