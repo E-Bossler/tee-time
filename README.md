@@ -9,7 +9,7 @@ The technologies we utilized were: the MERN framework, mongoose, Sass CSS compil
 This project if brought to you by:
 
 - Austen Turner (austenpturner)
-- Dustin Jackson (dustinhjack99)
+- Dustin Jackson (dustinjack99)
 - Eric Bossler (e-bossler)
 - Jon Lee (enadan)
 
