@@ -103,6 +103,8 @@ class Form extends Component {
     const courseHoles = this.state.courseHoles;
     const courseIndex = courses.indexOf(course);
 
+    console.log(courseHoles);
+
     if (courseIndex !== -1) {
       const matchCourse = this.capCourse(course);
       this.setState({ courseFound: true });

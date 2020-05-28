@@ -21,7 +21,9 @@ class Form extends Component {
       course: "",
       matchCourse: "",
       courses: [],
-      courseFound: true
+      courseFound: true,
+      matchHoles: "",
+      courseHoles: []
     };
   }
 
@@ -50,21 +52,6 @@ class Form extends Component {
       });
   };
 
-  findCourses = () => {
-    axios
-      .get(
-        "https://www.golfgenius.com/api_v2/L7DBdFNJ4i-mR6ZeBOFPMw/events/4995124311334371081/courses"
-      )
-      .then(res => {
-        const courseData = res.data.courses;
-        const courses = this.state.courses;
-        for (let i = 0; i < courseData.length; i++) {
-          courses.push(courseData[i].name.toLowerCase());
-        }
-        this.setState({ courses });
-      });
-  };
-
   capCourse = course => {
     const words = course.toLowerCase().split(" ");
     let capCourse = "";
@@ -87,10 +74,13 @@ class Form extends Component {
     GolfAPI.findCourses().then(res => {
       const courseData = res.data.courses;
       const courses = this.state.courses;
+      const courseHoles = this.state.courseHoles;
       for (let i = 0; i < courseData.length; i++) {
+        courseHoles.push(courseData[i].hole_labels.length);
         courses.push(courseData[i].name.toLowerCase());
       }
       this.setState({ courses: courses });
+      this.setState({ couseHoles: courseHoles });
     });
 
     this.findFriends();
@@ -107,11 +97,19 @@ class Form extends Component {
   handleCourseSubmit() {
     const course = this.state.course.toLowerCase();
     const courses = this.state.courses;
+    const courseHoles = this.state.courseHoles;
+    const courseIndex = courses.indexOf(course);
 
-    if (courses.indexOf(course) !== -1) {
+    console.log(course);
+    console.log(courseHoles);
+    console.log(courseIndex);
+
+    if (courseIndex !== -1) {
       const matchCourse = this.capCourse(course);
       this.setState({ courseFound: true });
       this.setState({ matchCourse: matchCourse });
+      this.setState({ matchHoles: courseHoles[courseIndex] });
+      console.log("matchholes", this.state.matchHoles);
     } else {
       this.setState({ courseFound: false });
     }
@@ -130,11 +128,13 @@ class Form extends Component {
     const course = this.state.matchCourse;
     const players = this.state.matchFriends;
     const allPlayers = [...players, userData];
+    const holes = this.state.matchHoles;
 
     axios
       .post("http://192.168.138.2:7777/dashboard/api/match/new", {
         course,
-        allPlayers
+        allPlayers,
+        holes
       })
       .then(res => {
         axios
