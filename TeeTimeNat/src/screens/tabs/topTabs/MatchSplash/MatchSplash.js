@@ -1,46 +1,55 @@
 import React, { Component } from "react";
-import { Divider, Text, ListItem } from "react-native-elements";
-import style from "./stylesheet.scss";
+import { Text, ListItem } from "react-native-elements";
+import { View } from "react-native";
 
 class MatchSplash extends Component {
   render() {
-    console.log(this.props);
-    const username = this.props.userData.username;
-    const list = this.props.currentMatch.participants;
-    const course = this.props.currentMatch.course;
+    // const username = this.props.userData.username;
+    const user = this.props.userData.username;
+    const list = this.props.userData.currentMatch.players;
+    const course = this.props.userData.currentMatch.courseName;
+
     if (list === undefined || course === undefined) {
       console.log("no props yet...");
       return (
-        <Divider>
+        <View>
           <Text>Loading...</Text>
-        </Divider>
+        </View>
       );
     } else {
       const players = [];
       for (let i = 0; i < list.length; i++) {
-        players.push(list[i].username);
+        players.push(list[i]);
       }
       return (
-        <Divider style={style} id="match-splash">
-          <Text h4>Welcome back to the green, {username}!</Text>
-          <Text>Your current course:</Text>
-          <Text id="course-name">{course}</Text>
-          <Text>Friends on the the field:</Text>
-          <Divider>
-            {players.map((value, index) => {
-              return <ListItem key={index}>{value}</ListItem>;
+        <View id="match-splash" style={{ alignItems: "center" }}>
+          <Text style={{ fontSize: 20, marginVertical: 20 }} id="course-name">
+            {course}
+          </Text>
+          <Text style={{ fontSize: 20, marginVertical: 20 }}>
+            Friends on the Field:
+          </Text>
+          <View style={{ width: "100%", marginBottom: 10 }}>
+            {players.map(player => {
+              return (
+                <ListItem
+                  subtitle={player.username}
+                  subtitleStyle={{
+                    fontSize: 20,
+                    color: "rgb(100, 200, 100)",
+                    textAlign: "center"
+                  }}
+                  id="ListItem"
+                  key={player.id}
+                />
+              );
             })}
-          </Divider>
-          <Text id="scoreboard-msg">
-            Enter your score or track your friend's score using the
-            <Text note="This was a Span.">Scoreboard</Text> tab.
+          </View>
+
+          <Text style={{ marginTop: 50, fontSize: 20 }} id="enjoy-msg">
+            Enjoy your match!
           </Text>
-          <Text id="chatroom-msg">
-            Chat with your friends during the match using the
-            <Text note="This was a Span.">Chatroom</Text> tab.
-          </Text>
-          <Text id="enjoy-msg">Enjoy your match!</Text>
-        </Divider>
+        </View>
       );
     }
   }

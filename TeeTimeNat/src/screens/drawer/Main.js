@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import { View } from "react-native";
 import { Button, Text } from "react-native-elements";
-import axios from "axios";
 
 class Main extends Component {
   constructor(props) {
@@ -13,54 +13,54 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    this.findUserName();
-  }
-
-  findUserName() {
-    const email = this.props.route.params.email;
-    console.log(email);
-    return axios
-      .put("http://192.168.138.2:7777/api/dashboard/email", { email })
-      .then(res => {
-        const userData = {
-          username: res.data[0].username,
-          email: res.data[0].email,
-          id: res.data[0]._id,
-          currentMatchId: "",
-          currentCourse: "",
-          currentCoursePlayers: ""
-        };
-
-        if (res.data[0].currentMatch === undefined) {
-          console.log("no current match");
-        } else {
-          userData.currentMatchId = res.data[0].currentMatch.courseId;
-          userData.currentCourse = res.data[0].currentMatch.courseName;
-          userData.currentCoursePlayers = res.data[0].currentMatch.players;
-        }
-
-        this.setState({ userData });
-      });
+    const userData = this.props.route.params.userData;
+    this.setState({ userData });
   }
 
   render() {
     if (this.state.toLogin === true) {
       //return <Redirect to="/" />
     }
-    const userData = this.state.userData;
+    const userData = this.props.route.params.userData;
     return (
       <>
-        <Text h2>Welcome, {userData.username}</Text>
-        <Text h4>Start a new match?</Text>
-        <Button
-          title="New Match"
-          id="new-match-btn"
-          onPress={() => {
-            this.props.navigation.navigate("New Match", { userData });
+        <Text
+          style={{
+            alignSelf: "center",
+            textAlign: "center",
+            marginVertical: 20
           }}
-        />
+          h2
+        >
+          Welcome, {userData.username}
+        </Text>
+        <Text style={{ alignSelf: "center", marginVertical: 20 }} h4>
+          Start a new match?
+        </Text>
+        <View
+          style={{
+            width: "75%",
+            alignSelf: "center",
 
-        <Text>© 2020 Ballard Study Group</Text>
+            marginBottom: 25
+          }}
+        >
+          <Button
+            title="New Match"
+            id="new-match-btn"
+            titleStyle={{ color: "white", fontSize: 20 }}
+            buttonStyle={{
+              backgroundColor: "rgb(100, 200, 100)",
+
+              paddingVertical: 10
+            }}
+            onPress={() => {
+              this.props.navigation.navigate("New Match", { userData });
+            }}
+          />
+        </View>
+
+        <Text style={{ alignSelf: "center" }}>© 2020 Ballard Study Group</Text>
       </>
     );
   }
