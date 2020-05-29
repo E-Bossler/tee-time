@@ -40,7 +40,9 @@ class Scorecard extends Component {
     for (let i = 0; i < friends.length; i++) {
       let username = friends[i];
       axios
-        .post("http://192.168.138.2:7777/api/user/score", { username })
+        .post("https://tee-time-seattle.herokuapp.com/api/user/score", {
+          username
+        })
         .then(res => {
           const scoreData = res.data.currentMatch.holes;
 
@@ -54,7 +56,9 @@ class Scorecard extends Component {
     }
 
     axios
-      .post("http://192.168.138.2:7777/api/user/score", { username })
+      .post("https://tee-time-seattle.herokuapp.com/api/user/score", {
+        username
+      })
       .then(res => {
         const scoreData = res.data.currentMatch.holes;
         this.setState({ userScoreData: scoreData });
@@ -109,7 +113,7 @@ class Scorecard extends Component {
     this.setState({ currentScore: currentScore });
     this.setState({ currentHole: currentHole });
 
-    axios.put("http://192.168.138.2:7777/api/user/score", {
+    axios.put("https://tee-time-seattle.herokuapp.com/api/user/score", {
       currentScore,
       currentHole,
       userId
