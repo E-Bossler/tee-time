@@ -74,9 +74,9 @@ class App extends Component {
         <MatTopTabs.Screen name="Chat" option={{ title: "Chat" }}>
           {props => <Chat userData={userData} {...props} />}
         </MatTopTabs.Screen>
-        {/* <MatTopTabs.Screen name="Scoreboard" option={{ title: "Score" }}>
+        <MatTopTabs.Screen name="Scoreboard" option={{ title: "Score" }}>
           {props1 => <Scoreboard userData={userData} {...props1} />}
-        </MatTopTabs.Screen> */}
+        </MatTopTabs.Screen>
         <MatTopTabs.Screen name="More" option={{ title: "More..." }}>
           {props => this.createMatchBottomTabs(props, userData)}
         </MatTopTabs.Screen>

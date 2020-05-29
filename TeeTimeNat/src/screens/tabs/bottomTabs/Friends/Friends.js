@@ -142,7 +142,11 @@ class Friends extends Component {
             className="friend-name"
             onChangeText={this.handleChange.bind(this)}
           />
-          <Button title="Find Friend" onPress={this.handleSubmit.bind(this)} />
+          <Button
+            title="Find Friend"
+            buttonStyle={{ backgroundColor: "rgb(100, 200, 100)" }}
+            onPress={this.handleSubmit.bind(this)}
+          />
         </View>
 
         <Text h2>Your Friends</Text>
@@ -158,6 +162,7 @@ class Friends extends Component {
               <View key={friendRequest._id + 2}>
                 <ListItem
                   title={friendRequest.username}
+                  titleStyle={{ textAlign: "center" }}
                   key={friendRequest._id}
                   rightIcon={{
                     name: "plus",

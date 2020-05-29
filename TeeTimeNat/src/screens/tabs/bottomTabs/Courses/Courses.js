@@ -35,11 +35,7 @@ class Courses extends Component {
         <Text h3>All Available Courses:</Text>
         <Divider id="all-courses-list">
           {this.state.allCourses.map((value, index) => {
-            return (
-              <ListItem key={index}>
-                <Text>{value}</Text>
-              </ListItem>
-            );
+            return <ListItem title={value} key={index} />;
           })}
         </Divider>
       </>

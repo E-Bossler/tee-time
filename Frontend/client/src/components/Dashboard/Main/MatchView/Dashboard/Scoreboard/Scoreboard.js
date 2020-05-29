@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import CardSelector from "./CardSelector";
-import Scorecard from "./Scorecard";
-import "./stylesheet.css";
+import React, { Component } from 'react';
+import CardSelector from './CardSelector';
+import Scorecard from './Scorecard';
+import './stylesheet.css';
 
 class Scoreboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      players: "",
-      course: "",
-      scorecardView: this.props.userData.username
+      username: '',
+      players: '',
+      course: '',
+      scorecardView: this.props.userData.username,
     };
   }
 
@@ -22,12 +22,14 @@ class Scoreboard extends Component {
   render() {
     console.log(this.props.userData);
     console.log(this.props.currentMatch);
-    
+
     const username = this.props.userData.username;
     const course = this.props.currentMatch.course;
     const playerData = this.props.currentMatch.participants;
 
     const players = [];
+
+    console.log('score course', course);
 
     for (let i = 0; i < playerData.length; i++) {
       if (playerData[i].username !== username) {
@@ -37,8 +39,12 @@ class Scoreboard extends Component {
       }
     }
 
-    if (username === undefined || players === undefined || course === undefined) {
-      console.log("waiting for props...");
+    if (
+      username === undefined ||
+      players === undefined ||
+      course === undefined
+    ) {
+      console.log('waiting for props...');
       return (
         <div>
           <p>Loading...</p>
@@ -46,7 +52,7 @@ class Scoreboard extends Component {
       );
     } else {
       return (
-        <div id="scoreboard">
+        <div id='scoreboard'>
           <CardSelector
             username={username}
             playerData={playerData}

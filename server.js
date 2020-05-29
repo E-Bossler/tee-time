@@ -23,11 +23,20 @@ app.use("/", router);
 
 // THIS IS THE PRODUCTION DB
 
+<<<<<<< HEAD
 const mongo = "mongodb://user2020:password2020@ds119820.mlab.com:19820/heroku_l7c7wq9n"
 
 // THIS IS THE DEV DB
 
 // const mongo = "mongodb://localhost/tee-time";
+=======
+const mongo =
+  'mongodb://user2020:password2020@ds119820.mlab.com:19820/heroku_l7c7wq9n';
+
+// THIS IS THE DEV DB
+
+// const mongo = 'mongodb://localhost/tee-time';
+>>>>>>> ed3e424df1d5c7a8048cf5d18243b88800edacdb
 
 // ********************************************************************************
 
@@ -50,6 +59,7 @@ app.get('/api/test', (req, res) => {
 // FOR PRODUCTION WE NEED THE FOLLOWING UNCOMMENTED
 
 // ********************************************************************************
+<<<<<<< HEAD
 
 const path = require("path");
 
@@ -57,6 +67,14 @@ app.use(express.static(path.join(__dirname, "Frontend/client/build")));
 
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "Frontend/client/build", "index.html"));
+=======
+const path = require('path');
+
+app.use(express.static(path.join(__dirname, 'Frontend/client/build')));
+
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'Frontend/client/build', 'index.html'));
+>>>>>>> ed3e424df1d5c7a8048cf5d18243b88800edacdb
 });
 
 // ********************************************************************************

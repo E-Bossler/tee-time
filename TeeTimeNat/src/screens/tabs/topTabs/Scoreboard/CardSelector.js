@@ -4,6 +4,15 @@ import { CheckBox } from "react-native-elements";
 import "./stylesheet.scss";
 
 class CardSelector extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      check: false
+    };
+
+    // this.props.handleCardViewChange.bind(this);
+  }
+
   render() {
     const username = this.props.username;
     const playerData = this.props.playerData;
@@ -22,26 +31,30 @@ class CardSelector extends Component {
       <View id="card-selector">
         <View id="radio-group">
           <CheckBox
-            label={username}
-            type="radio"
+            title={username}
             id={username}
+            checkedIcon="dot-circle-o"
+            uncheckedIcon="circle-o"
             name="scorecard-radio"
             value={username}
             className="scorecard-radio"
-            checked={this.props.handleCardViewChange}
+            onPress={() => this.props.handleCardViewChange(username)}
+            checked={this.state.checked}
           />
         </View>
-        {players.map((value, index) => {
+        {players.map((player, index) => {
           return (
             <View id="radio-group" key={index}>
               <CheckBox
-                type="radio"
-                label={value}
-                id={value}
+                title={player}
+                id={player}
+                checkedIcon="dot-circle-o"
+                uncheckedIcon="circle-o"
                 name="scorecard-radio"
-                value={value}
+                value={player}
                 className="scorecard-radio"
-                checked={this.props.handleCardViewChange}
+                onPress={() => this.props.handleCardViewChange(player)}
+                checked={this.state.checked}
               />
             </View>
           );
