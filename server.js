@@ -24,12 +24,12 @@ app.use('/', router);
 
 // THIS IS THE PRODUCTION DB
 
-// const mongo =
-//   'mongodb://user2020:password2020@ds119820.mlab.com:19820/heroku_l7c7wq9n';
+const mongo =
+  'mongodb://user2020:password2020@ds119820.mlab.com:19820/heroku_l7c7wq9n';
 
 // THIS IS THE DEV DB
 
-const mongo = 'mongodb://localhost/tee-time';
+// const mongo = 'mongodb://localhost/tee-time';
 
 // ********************************************************************************
 
@@ -52,13 +52,13 @@ app.get('/api/test', (req, res) => {
 // FOR PRODUCTION WE NEED THE FOLLOWING UNCOMMENTED
 
 // ********************************************************************************
-// const path = require('path');
+const path = require('path');
 
-// app.use(express.static(path.join(__dirname, 'Frontend/client/build')));
+app.use(express.static(path.join(__dirname, 'Frontend/client/build')));
 
-// app.get('/*', function (req, res) {
-//   res.sendFile(path.join(__dirname, 'Frontend/client/build', 'index.html'));
-// });
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'Frontend/client/build', 'index.html'));
+});
 
 // ********************************************************************************
 
