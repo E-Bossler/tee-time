@@ -126,7 +126,11 @@ class Scorecard extends Component {
     const playerScore = (index, i) => {
       const score = this.state.playerScoreData[i].scoreData[index].score;
 
-      return <Text>{score ? `${score}` : ""}</Text>;
+      return (
+        <Text style={{ textAlign: "center", fontSize: 20 }}>
+          {score ? `${score}` : ""}
+        </Text>
+      );
     };
     const input = (hole, index) => {
       const score = this.state.userScoreData[index].score;
@@ -135,19 +139,16 @@ class Scorecard extends Component {
         <Input
           // style={{ borderWidth: 1, borderColor: "red" }}
           containerStyle={{
-            borderWidth: 1,
-            borderColor: "red",
             justifyContent: "flex-end",
             alignSelf: "center"
           }}
           defaultValue={score ? `${score}` : ""}
           // inputStyle={{ borderWidth: 1, borderColor: "red" }}
-          inputContainerStyle={{
-            borderWidth: 1,
-            borderColor: "red",
-            alignSelf: "auto"
-            // justifyContent: "center"
-          }}
+          inputContainerStyle={
+            {
+              // justifyContent: "center"
+            }
+          }
           className="score-input"
           onChangeText={event => this.handleScoreInput(event, id)}
         />
@@ -163,26 +164,33 @@ class Scorecard extends Component {
               : styles.hidden
           }
         >
-          <Text className="player-name">{username}</Text>
+          <Text
+            style={{ textAlign: "center", marginVertical: 10, fontSize: 25 }}
+            className="player-name"
+          >
+            {username}
+          </Text>
           <View className="side-container">
             <Button
               title="OUT"
               id="side-out"
+              buttonStyle={{ backgroundColor: "rgb(100, 200, 100)" }}
               style={this.state.viewSideOut ? "selected" : "hidden"}
               onPress={() => this.handleSideViewChange("side-out")}
             />
             <Button
               title="IN"
               id="side-in"
+              buttonStyle={{ backgroundColor: "rgb(100, 200, 100)" }}
               style={this.state.viewSideOut ? "hidden" : "selected"}
               onPress={() => this.handleSideViewChange("side-in")}
             />
           </View>
 
-          <Table className="score-table">
-            <ScrollView>
+          <ScrollView>
+            <Table className="score-table">
               <Row
-                textStyle={{ textAlign: "center" }}
+                textStyle={{ textAlign: "center", fontSize: 25 }}
                 style={{ alignItems: "center" }}
                 className="table-head"
                 data={this.state.tableHead}
@@ -197,7 +205,7 @@ class Scorecard extends Component {
                       style={{
                         justifyContent: "center"
                       }}
-                      textStyle={{ textAlign: "center" }}
+                      textStyle={{ textAlign: "center", fontSize: 20 }}
                       key={index}
                       data={[
                         hole,
@@ -209,29 +217,29 @@ class Scorecard extends Component {
                   );
                 })}
               </TableWrapper>
-            </ScrollView>
-            <TableWrapper
-              style={this.state.viewSideOut ? styles.hidden : "in show"}
-            >
-              {sideIn.map((hole, index) => {
-                return (
-                  <Row
-                    style={{
-                      justifyContent: "center"
-                    }}
-                    textStyle={{ textAlign: "center" }}
-                    key={index}
-                    data={[
-                      hole,
-                      parData[index + 9],
-                      hcpData[index + 9],
-                      input(hole, index + 9)
-                    ]}
-                  />
-                );
-              })}
-            </TableWrapper>
-          </Table>
+              <TableWrapper
+                style={this.state.viewSideOut ? styles.hidden : "in show"}
+              >
+                {sideIn.map((hole, index) => {
+                  return (
+                    <Row
+                      style={{
+                        justifyContent: "center"
+                      }}
+                      textStyle={{ textAlign: "center", fontSize: 20 }}
+                      key={index}
+                      data={[
+                        hole,
+                        parData[index + 9],
+                        hcpData[index + 9],
+                        input(hole, index + 9)
+                      ]}
+                    />
+                  );
+                })}
+              </TableWrapper>
+            </Table>
+          </ScrollView>
         </View>
         <View>
           {players.map((value, i) => {
@@ -244,17 +252,28 @@ class Scorecard extends Component {
                     : styles.hidden
                 }
               >
-                <Text className="player-name">{value}</Text>
+                <Text
+                  style={{
+                    textAlign: "center",
+                    marginVertical: 10,
+                    fontSize: 25
+                  }}
+                  className="player-name"
+                >
+                  {value}
+                </Text>
                 <View className="side-container">
                   <Button
                     title="OUT"
                     id="side-out"
+                    buttonStyle={{ backgroundColor: "rgb(100, 200, 100)" }}
                     style={this.state.viewSideOut ? "selected" : "hidden"}
                     onPress={() => this.handleSideViewChange("side-out")}
                   />
                   <Button
                     title="IN"
                     id="side-in"
+                    buttonStyle={{ backgroundColor: "rgb(100, 200, 100)" }}
                     style={this.state.viewSideOut ? "hidden" : "selected"}
                     onPress={() => this.handleSideViewChange("side-in")}
                   />
@@ -262,7 +281,7 @@ class Scorecard extends Component {
                 <Table className="score-table">
                   <Row
                     className="table-head"
-                    textStyle={{ textAlign: "center" }}
+                    textStyle={{ textAlign: "center", fontSize: 25 }}
                     data={this.state.tableHead}
                   />
 
@@ -275,7 +294,7 @@ class Scorecard extends Component {
                           style={{
                             justifyContent: "center"
                           }}
-                          textStyle={{ textAlign: "center" }}
+                          textStyle={{ textAlign: "center", fontSize: 20 }}
                           key={index}
                           data={[
                             hole,
@@ -296,7 +315,7 @@ class Scorecard extends Component {
                           style={{
                             justifyContent: "center"
                           }}
-                          textStyle={{ textAlign: "center" }}
+                          textStyle={{ textAlign: "center", fontSize: 20 }}
                           key={index}
                           data={[
                             hole,
