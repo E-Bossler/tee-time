@@ -22,9 +22,12 @@ class Friends extends Component {
   componentDidMount() {
     const username = this.props.userData.username;
     axios
-      .put("http://192.168.138.2:7777/api/dashboard/userMenu/friends", {
-        username
-      })
+      .put(
+        "https://tee-time-seattle.herokuapp.com/api/dashboard/userMenu/friends",
+        {
+          username
+        }
+      )
       .then(res => {
         const friends = res.data[0].friends;
         if (friends === undefined) {
@@ -40,9 +43,12 @@ class Friends extends Component {
       });
 
     axios
-      .put("http://192.168.138.2:7777/api/dashboard/userMenu/friendRequests", {
-        username
-      })
+      .put(
+        "https://tee-time-seattle.herokuapp.com/api/dashboard/userMenu/friendRequests",
+        {
+          username
+        }
+      )
       .then(res => {
         const friendRequests = res.data[0].friendRequests;
         if (friendRequests === undefined) {
@@ -59,11 +65,14 @@ class Friends extends Component {
     const userData = this.props.userData;
 
     axios
-      .post("http://192.168.138.2:7777/api/dashboard/userMenu/friendRequests", {
-        request,
-        username,
-        userData
-      })
+      .post(
+        "https://tee-time-seattle.herokuapp.com/api/dashboard/userMenu/friendRequests",
+        {
+          request,
+          username,
+          userData
+        }
+      )
       .then(res => {
         const request = JSON.parse(res.config.data);
         const newFriend = request.request;
@@ -90,11 +99,14 @@ class Friends extends Component {
     const userData = this.props.userData;
 
     axios
-      .post("http://192.168.138.2:7777/api/dashboard/userMenu/friends", {
-        friend,
-        user,
-        userData
-      })
+      .post(
+        "https://tee-time-seattle.herokuapp.com/api/dashboard/userMenu/friends",
+        {
+          friend,
+          user,
+          userData
+        }
+      )
       .then(res => {
         if (res.status === 201) {
           SweetAlert.showAlertWithOptions({

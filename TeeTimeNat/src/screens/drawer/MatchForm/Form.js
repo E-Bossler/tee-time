@@ -30,9 +30,12 @@ class Form extends Component {
   findFriends = () => {
     const username = this.props.userData.username;
     axios
-      .put("http://192.168.138.2:7777/api/dashboard/userMenu/friends", {
-        username
-      })
+      .put(
+        "https://tee-time-seattle.herokuapp.com/api/dashboard/userMenu/friends",
+        {
+          username
+        }
+      )
       .then(res => {
         const friendsData = res.data[0].friends;
         const friends = [];
@@ -131,14 +134,14 @@ class Form extends Component {
     const holes = this.state.matchHoles;
 
     axios
-      .post("http://192.168.138.2:7777/dashboard/api/match/new", {
+      .post("https://tee-time-seattle.herokuapp.com/dashboard/api/match/new", {
         course,
         allPlayers,
         holes
       })
       .then(res => {
         axios
-          .put("http://192.168.138.2:7777/api/users", { username })
+          .put("https://tee-time-seattle.herokuapp.com/api/users", { username })
           .then(res => {
             let userData = res.data[0];
 
