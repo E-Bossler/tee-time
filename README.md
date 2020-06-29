@@ -3,9 +3,11 @@
 ## Live Demos
 
 <h3 align="center">Tee Time in Browser</h3>
+
 ![](tee-time-demo.gif)
 
 <h3 align="center">Tee Time on Mobile w/ React Native</h3>
+
 ![](tee-time-nat-demo.gif)
 
 
