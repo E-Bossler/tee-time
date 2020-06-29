@@ -5,6 +5,7 @@ The free, social golf app for desktop and Android!
 ## Live Demos
 
 <h3 align="center">Tee Time in Browser</h3>
+<p align="center">Demonstration of live scoring, creating matches, adding friends, and chat.</p>
 
 <div align="center">
   <img src="./tee-time-demo.gif" />
@@ -14,6 +15,7 @@ The free, social golf app for desktop and Android!
 <br>
 
 <h3 align="center">Tee Time on Mobile w/ React Native</h3>
+<p align="center">Demonstration of live mobile build interacting with deployed browser app.</p>
 
 <div align="center">
   <img src="./tee-time-nat-demo.gif" />
