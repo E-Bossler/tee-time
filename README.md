@@ -1,5 +1,7 @@
 # Tee-Time
 
+The free, social golf app for desktop and Android!
+
 ## Live Demos
 
 <h3 align="center">Tee Time in Browser</h3>
