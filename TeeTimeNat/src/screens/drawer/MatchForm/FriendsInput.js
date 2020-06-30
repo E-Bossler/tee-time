@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { ScrollView } from "react-native";
 import { Button, Text } from "react-native-elements";
 import { Dropdown } from "react-native-material-dropdown";
-import style from "./stylesheet.scss";
+// import style from "./stylesheet.scss";
 
 class FriendsInput extends Component {
   render() {
@@ -28,7 +28,9 @@ class FriendsInput extends Component {
 
         <Text
           id="not-found-msg"
-          style={this.props.friendFound ? style.hide : { color: "red" }}
+          style={
+            this.props.friendFound ? { display: "none " } : { color: "red" }
+          }
         >
           Sorry, that user is not on your friends list.
         </Text>

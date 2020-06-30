@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View } from "react-native";
 import { CheckBox } from "react-native-elements";
-import "./stylesheet.scss";
+// import "./stylesheet.scss";
 
 class CardSelector extends Component {
   constructor(props) {

@@ -3,7 +3,7 @@ import { View, ScrollView } from "react-native";
 import { Input, Button, Text, ListItem } from "react-native-elements";
 import axios from "axios";
 import io from "socket.io-client";
-import style from "./stylesheet.scss";
+// import style from "./stylesheet.scss";
 
 export default class Chat extends Component {
   constructor(props) {

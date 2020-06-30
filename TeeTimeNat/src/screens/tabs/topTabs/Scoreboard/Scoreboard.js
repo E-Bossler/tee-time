@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { Text } from "react-native-elements";
 import CardSelector from "./CardSelector";
 import Scorecard from "./Scorecard";
-import "./stylesheet.scss";
+// import "./stylesheet.scss";
 
 class Scoreboard extends Component {
   constructor(props) {

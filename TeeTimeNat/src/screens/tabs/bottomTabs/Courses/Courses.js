@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Divider, Text, ListItem } from "react-native-elements";
 import GolfAPI from "../../../../utils/golfGeniusAPI";
-import style from "./stylesheet.scss";
+// import style from "./stylesheet.scss";
 
 class Courses extends Component {
   constructor(props) {

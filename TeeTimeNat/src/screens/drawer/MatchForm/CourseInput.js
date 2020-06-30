@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Text, Button } from "react-native-elements";
 import { Dropdown } from "react-native-material-dropdown";
-import style from "./stylesheet.scss";
+// import style from "./stylesheet.scss";
 
 class CourseInput extends Component {
   render() {
@@ -25,7 +25,9 @@ class CourseInput extends Component {
 
         <Text
           id="not-found-msg"
-          style={this.props.courseFound ? style.hide : { color: "red" }}
+          style={
+            this.props.courseFound ? { display: "none" } : { color: "red" }
+          }
         >
           Sorry, cannot find data for that course.
         </Text>
