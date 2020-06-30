@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View } from "react-native";
 import { Text, Icon } from "react-native-elements";
-import style from "./stylesheet.scss";
+// import style from "./stylesheet.scss";
 
 class MatchCourse extends Component {
   render() {
@@ -20,7 +20,7 @@ class MatchCourse extends Component {
         }}
       >
         <Text h4>Match Course</Text>
-        <Text style={courseFound ? style.hide : { color: "red" }}>
+        <Text style={courseFound ? { display: "none " } : { color: "red" }}>
           No course added yet
         </Text>
         <View id="course-name" style={courseFound ? "show" : style.hide}>

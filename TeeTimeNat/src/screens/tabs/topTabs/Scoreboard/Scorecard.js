@@ -4,7 +4,7 @@ import { Text, Input, Button } from "react-native-elements";
 import GolfAPI from "../../../../utils/golfGeniusAPI";
 import { Table, TableWrapper, Row, Cell } from "react-native-table-component";
 import axios from "axios";
-import "./stylesheet.scss";
+// import "./stylesheet.scss";
 
 class Scorecard extends Component {
   constructor(props) {

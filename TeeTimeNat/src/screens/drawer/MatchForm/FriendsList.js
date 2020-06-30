@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View } from "react-native";
 import { Text, ListItem } from "react-native-elements";
-import style from "./stylesheet.scss";
+// import style from "./stylesheet.scss";
 
 class FriendsList extends Component {
   render() {
@@ -21,7 +21,7 @@ class FriendsList extends Component {
         }}
       >
         <Text h4>Match Players</Text>
-        <Text style={friendsAdded ? style.hide : { color: "red" }}>
+        <Text style={friendsAdded ? { display: "none " } : { color: "red" }}>
           No friends added yet
         </Text>
 
