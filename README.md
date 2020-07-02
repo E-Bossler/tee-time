@@ -39,6 +39,7 @@ Tee Time offers robust functionality for no subscription fees, no payments, allo
 ## The Assignment
 This app was the second project for UW Full-Stack Bootcamp. The requirements were to make an application with a friendly client-side UI utilizing the MERN stack framework (Mongo DB, Express, React, and Node). 
 
+<div align="left">
 ## The Team
 This project if brought to you by:
 
@@ -46,6 +47,7 @@ This project if brought to you by:
 - Dustin Jackson (dustinjack99)
 - Eric Bossler (e-bossler)
 - Jon Lee (enadan)
+</div>
 
 ## The Process
 ### Technologies Used:
@@ -53,6 +55,7 @@ Stack: React, Express, MongoDB (Mongoose), Node.js
 Third-Party Libraries: Socket.io, BCrypt HASH, Recharts, SASS, Axios, SweetAlert2.0
 API: Golf Genius
 
+<div align="left">
 ### Notes on Native Development (by Dustin)
 This was my first foray into mobile development, and there were a lot of traps I fell into that made porting to React Native tricky. For one, I couldn't develop for iOS, because you can't touch iOS code without Xcode (which was not possible on my PC). Below are some other pitfalls that Devs should be aware of when porting a React app over to React Native:
 
@@ -77,7 +80,7 @@ all the tools installed is a day-long task.
 	- There is no DOM to traverse. You will need to navigate based on the
   'flow' your app takes the user through.
 	- When porting over, read up on navigators from React Navigation.
-
+</div>
 ## Future Development
 We are very proud of our MVP, however we believe there are a few features that could be added to create an awesome user experience. For example, we would love to have a real time GPS tracking of golfers on individual courses and holes. This could be used to see where your partners are on the course, or if other users are also playing the same course. 
 
