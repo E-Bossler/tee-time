@@ -40,6 +40,7 @@ Tee Time offers robust functionality for no subscription fees, no payments, allo
 This app was the second project for UW Full-Stack Bootcamp. The requirements were to make an application with a friendly client-side UI utilizing the MERN stack framework (Mongo DB, Express, React, and Node). 
 
 <div align="left">
+	
 ## The Team
 This project if brought to you by:
 
@@ -56,6 +57,7 @@ Third-Party Libraries: Socket.io, BCrypt HASH, Recharts, SASS, Axios, SweetAlert
 API: Golf Genius
 
 <div align="left">
+	
 ### Notes on Native Development (by Dustin)
 This was my first foray into mobile development, and there were a lot of traps I fell into that made porting to React Native tricky. For one, I couldn't develop for iOS, because you can't touch iOS code without Xcode (which was not possible on my PC). Below are some other pitfalls that Devs should be aware of when porting a React app over to React Native:
 
