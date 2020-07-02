@@ -21,7 +21,7 @@ The free, social golf app for desktop and Android!
 <p align="center">Demonstration of live mobile build interacting with deployed browser app.</p>
 
 <div align="center">
-  <a :target="_blank" href="https://expo.io/@dustinjack99/tee-time">Mobile Demo on Expo</a>
+  <a :target="_blank" href="https://exp.host/@dustinjack99/tee-time-nat">Mobile Demo on Expo</a>
 </div>
 <div align="center">
   <img src="./tee-time-nat-demo.gif" />
