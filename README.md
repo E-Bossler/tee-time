@@ -42,16 +42,35 @@ This project if brought to you by:
 - Jon Lee (enadan)
 
 ## The Process
-<!-- We started the project using some starter code given to us. The started code included Passport and Sequelize ORM. Passport is used to authenticate our users and save their passwords safely using bcrpyt and hashing. The started code used jQuery to route to a login and signup page, however since we prefer using vanilla JavaScipt we re-wrote all the jQuery get and post requests in regular JS. 
+### Technologies Used:
+Stack: React, Express, MongoDB (Mongoose), Node.js
+Third-Party Libraries: Socket.io, BCrypt HASH, Recharts, SASS, Axios, SweetAlert2.0
+API: Golf Genius
 
+### Notes on Native Development (by Dustin)
+This was my first foray into mobile development, and there were a lot of traps I fell into that made porting to React Native tricky. For one, I couldn't develop for iOS, because you can't touch iOS code without Xcode (which was not possible on my PC). Below are some other pitfalls that Devs should be aware of when porting a React app over to React Native:
 
-Using MySQL we made a database and two tables, one for Users and one for Ducks. The User's model was already in the starter code, so all we needed to do was add a Ducks model and create datatypes and validation for the column values. Once we were able to register and save user's to the user model and our database, we added a ducklist and playground page so we could begin adding our ducks. Users can have multiple ducks, but ducks can only belong to one user so we used a duckId value to join the two tables. With the models joined, users were able to access their saved ducks on the ducklist page when they login, or make a new ducks. We used handlebars for the ducklist and playground pages to render the user's ducks.
++ React Native not as supported as React for the web.
+	- You will be working with much newer libraries and many
+	more errors to troubleshoot, many of which you can't Stack Overflow.
+  - Compared to React web dev, there is a lot of uncharted territory.
+	
++ Set aside an entire day to even get React Native running. Getting
+all the tools installed is a day-long task.
 
-The get and post routes for the app were the most difficult part of the project. We split our routes up into html-routes, api-routes and duck-routes. The duck-routes are used to update the Duck model when the user interacts with the duck in the playground. Each time a user clicks a button on the game controllers to ineract with their duck a post request is made, sending updated information to the database and saving a new value for the duck.
++ For Native dev, get a Mac!
+	- This can't be stressed enough. I wasn't able to develop an iOS client
+  because I only have a PC.
 
-The duck is made of pure CSS and is animated using animate.css. We decided to use Sass for writting and organizing our styles. This was helpful to break up the page styles into multiple files and save colors for re-use.
++ Use Expo for running / testing builds (not an emulator on your machine).
+	- Running React Native through an emulator dramatically slows down your 
+  computer, and the builds take much longer to finish and debug.
 
-When the user interacts with the duck, the duck gets hungry! However, the user only starts with a certain amount of duckbucks and duckfood. When the user is out of food and bucks they are redirected to a duckbucks page where they can choose to buy more duckbucks using PayPal. This takes the user to a PayPal sandbox where they can purchase duckbucks. After their purchase, they are taken back to the playground where they can continue to play with their duck. -->
++ Development is dramatically different than React Web Dev (especially navigation).
+	- Your Navigation will need to be rebuilt from the ground up.
+	- There is no DOM to traverse. You will need to navigate based on the
+  'flow' your app takes the user through.
+	- When porting over, read up on navigators from React Navigation.
 
 ## Future Development
 We are very proud of our MVP, however we believe there are a few features that could be added to create an awesome user experience. For example, we would love to have a real time GPS tracking of golfers on individual courses and holes. This could be used to see where your partners are on the course, or if other users are also playing the same course. 
