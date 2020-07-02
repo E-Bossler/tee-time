@@ -3,6 +3,7 @@ import { Text, Input, Button } from "react-native-elements";
 import api from "../../../utils/api";
 import { View } from "react-native";
 import SweetAlert from "react-native-sweet-alert";
+import { FontAwesome } from "@expo/vector-icons";
 
 class SignUpForm extends Component {
   state = {
@@ -73,7 +74,7 @@ class SignUpForm extends Component {
           name="username"
           placeholder="Username"
           style={{ marginBottom: 20 }}
-          leftIcon={{ type: "font-awesome", name: "user" }}
+          leftIcon={<FontAwesome name={"user"} />}
           onChangeText={this.handleChangeUsername.bind(this)}
         />
         <Input
@@ -83,7 +84,7 @@ class SignUpForm extends Component {
           name="email"
           placeholder="Email"
           style={{ marginBottom: 20 }}
-          leftIcon={{ type: "font-awesome", name: "envelope" }}
+          leftIcon={<FontAwesome name={"envelope"} />}
           onChangeText={this.handleChangeEmail.bind(this)}
         />
         <Input
@@ -93,7 +94,7 @@ class SignUpForm extends Component {
           name="password"
           placeholder="Password"
           style={{ marginBottom: 20 }}
-          leftIcon={{ type: "font-awesome", name: "lock" }}
+          leftIcon={<FontAwesome name={"lock"} />}
           onChangeText={this.handleChangePass.bind(this)}
         />
 

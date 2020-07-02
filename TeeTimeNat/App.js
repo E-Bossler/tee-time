@@ -31,7 +31,7 @@ const Stack = createStackNavigator();
 const MatBottomTabs = createMaterialBottomTabNavigator();
 const MatTopTabs = createMaterialTopTabNavigator();
 
-class App extends Component {
+const App = () => {
   createMainDrawer = props => {
     const userData = props.route.params.params.userData;
 
@@ -104,23 +104,21 @@ class App extends Component {
     );
   };
 
-  render() {
-    return (
-      <NavigationContainer>
-        <Stack.Navigator headerMode="none">
-          <Stack.Screen name="TeeTime">
-            {props => <LogInForm {...props} />}
-          </Stack.Screen>
-          <Stack.Screen name="Signup">
-            {props => <SignUpForm {...props} />}
-          </Stack.Screen>
-          <Stack.Screen name="Dashboard">
-            {props => this.createMainDrawer(props)}
-          </Stack.Screen>
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
-  }
-}
+  return (
+    <NavigationContainer>
+      <Stack.Navigator headerMode="none">
+        <Stack.Screen name="TeeTime">
+          {props => <LogInForm {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="Signup">
+          {props => <SignUpForm {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="Dashboard">
+          {props => this.createMainDrawer(props)}
+        </Stack.Screen>
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
 export default App;

@@ -3,6 +3,7 @@ import { View } from "react-native";
 import { Text, ListItem, Button, Input } from "react-native-elements";
 import axios from "axios";
 import SweetAlert from "react-native-sweet-alert";
+import { FontAwesome } from "@expo/vector-icons";
 
 class Friends extends Component {
   constructor(props) {
@@ -176,11 +177,12 @@ class Friends extends Component {
                   title={friendRequest.username}
                   titleStyle={{ textAlign: "center" }}
                   key={friendRequest._id}
-                  rightIcon={{
-                    name: "plus",
-                    type: "font-awesome",
-                    onPress: () => this.acceptFriend(friendRequest)
-                  }}
+                  rightIcon={
+                    <FontAwesome
+                      onPress={this.acceptFriend(friendRequest)}
+                      name={"plus"}
+                    />
+                  }
                 />
               </View>
             );
