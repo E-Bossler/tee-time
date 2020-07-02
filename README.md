@@ -1,9 +1,16 @@
+<div align="center">
 # Tee-Time
 
 The free, social golf app for desktop and Android!
 
-## Live Demos
+## Elevator Pitch
+Several on-the-market golf apps offer minimal functionality gated off by large subscription fees and misc. charges.
+<b>Example:</b> Golf Genius charges $800 to track a single season of golf, and locks away chat behind another $3000 payment.
+Tee Time offers robust functionality for no subscription fees, no payments, allowing users to focus on what matters: Golf!
 
+
+## Live Demos
+</div>
 <h3 align="center">Tee Time in Browser</h3>
 <p align="center">Demonstration of live scoring, creating matches, adding friends, and chat.</p>
 
@@ -30,8 +37,6 @@ The free, social golf app for desktop and Android!
 
 ## The Assignment
 This app was the second project for UW Full-Stack Bootcamp. The requirements were to make an application with a friendly client-side UI utilizing the MERN stack framework (Mongo DB, Express, React, and Node). 
-
-The technologies we utilized were: the MERN framework, mongoose, Sass CSS compiler, Recharts, Sweet Alert, BCrypt Hash, axios, socket.io for our chat room, and the Golf Genius software API. 
 
 ## The Team
 This project if brought to you by:
