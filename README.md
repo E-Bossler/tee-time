@@ -1,4 +1,5 @@
 <div align="center">
+
 # Tee-Time
 
 The free, social golf app for desktop and Android!
@@ -10,29 +11,29 @@ Tee Time offers robust functionality for no subscription fees, no payments, allo
 
 
 ## Live Demos
-</div>
-<h3 align="center">Tee Time in Browser</h3>
-<p align="center">Demonstration of live scoring, creating matches, adding friends, and chat.</p>
 
-<div align="center">
+<h3>Tee Time in Browser</h3>
+<p>Demonstration of live scoring, creating matches, adding friends, and chat.</p>
+
+
   <a :target="_blank" href="https://tee-time-seattle.herokuapp.com/">Web Demo on Heroku</a>
-</div>
-<div align="center">
+
+
   <img src="./tee-time-demo.gif" />
-</div>
+
 
 <br>
 <br>
 
-<h3 align="center">Tee Time on Mobile w/ React Native</h3>
-<p align="center">Demonstration of live mobile build interacting with deployed browser app.</p>
+<h3>Tee Time on Mobile w/ React Native</h3>
+<p>Demonstration of live mobile build interacting with deployed browser app.</p>
 
-<div align="center">
+
   <a :target="_blank" href="https://exp.host/@dustinjack99/tee-time-nat">Mobile Demo on Expo</a>
-</div>
-<div align="center">
+
+
   <img src="./tee-time-nat-demo.gif" />
-</div>
+
 
 
 ## The Assignment
@@ -86,3 +87,4 @@ Also, a user store for golf related items would be a good addition to this applc
 
 ## Thanks for reading! :smile:
 Please contact the team with any questions or comments.
+</div>
