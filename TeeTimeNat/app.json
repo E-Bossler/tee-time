@@ -1,1 +1,7 @@
-{}
+{
+  "expo": {
+    "name": "Tee Time Native",
+    "slug": "tee-time-nat",
+    "description": "Alpha build of Tee Time native app. Users can login to existing accounts. In this build, users can chat / update scores / add friends / and create new matches."
+  }
+}

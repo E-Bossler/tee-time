@@ -3,6 +3,7 @@ import { View } from "react-native";
 import { Text, Input, Button } from "react-native-elements";
 import api from "../../../utils/api";
 import SweetAlert from "react-native-sweet-alert";
+import { FontAwesome } from "@expo/vector-icons";
 
 class LogInForm extends Component {
   state = {
@@ -76,7 +77,7 @@ class LogInForm extends Component {
           id="email-input"
           name="email"
           placeholder="Email"
-          leftIcon={{ type: "font-awesome", name: "envelope" }}
+          leftIcon={<FontAwesome name={"envelope"} />}
         />
         <Input
           onChangeText={value => this.handleChangePass(value)}
@@ -86,7 +87,7 @@ class LogInForm extends Component {
           id="password-input"
           name="password"
           placeholder="Password"
-          leftIcon={{ type: "font-awesome", name: "lock" }}
+          leftIcon={<FontAwesome name={"lock"} />}
         />
 
         <View
