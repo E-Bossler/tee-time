@@ -6,7 +6,9 @@ The free, social golf app for desktop and Android!
 
 ## Elevator Pitch
 Several on-the-market golf apps offer minimal functionality gated off by large subscription fees and misc. charges.
+
 <b>Example:</b> Golf Genius charges $800 to track a single season of golf, and locks away chat behind another $3000 payment.
+
 Tee Time offers robust functionality for no subscription fees, no payments, allowing users to focus on what matters: Golf!
 
 
