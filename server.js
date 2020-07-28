@@ -7,6 +7,17 @@ const router = require('./Backend/routes/routes-api');
 const PORT = process.env.PORT || 7777;
 var server = http.createServer(app);
 const io = require('socket.io')(server);
+const path = require('path'); // on top
+
+// Serve Static assests if in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('Frontend/client/build')); // change this if your dir structure is different
+  app.get('*', (req, res) => {
+    res.sendFile(
+      path.resolve(__dirname, 'Frontend', 'client', 'build', 'index.html')
+    );
+  });
+}
 
 require('dotenv').config();
 

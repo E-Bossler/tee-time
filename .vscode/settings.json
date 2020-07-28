@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/9535fed6-0d39-4c03-9bd7-7ff691eedba5/resourceGroups/DustinPersonal/providers/Microsoft.Web/sites/tee-time",
+    "appService.deploySubpath": "."
+}
