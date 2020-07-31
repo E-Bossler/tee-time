@@ -62,8 +62,7 @@ app.get('/api/test', (req, res) => {
 
 // FOR PRODUCTION WE NEED THE FOLLOWING UNCOMMENTED
 
-// ********************************************************************************
-const path = require('path');
+// *******************************************************************************
 
 app.use(express.static(path.join(__dirname, 'Frontend/client/build')));
 
