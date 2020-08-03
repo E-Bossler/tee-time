@@ -9,7 +9,7 @@ services:
     links:
       - mongo
   mongo:
-    container_name: mongo
+    container_name: teetimedb
     image: mongo
     ports:
       - '27017:27017'
