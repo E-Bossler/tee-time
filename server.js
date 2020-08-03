@@ -35,12 +35,12 @@ app.use('/', router);
 
 // THIS IS THE PRODUCTION DB
 
-const mongo =
-  'mongodb://user2020:password2020@ds119820.mlab.com:19820/heroku_l7c7wq9n';
+// const mongo =
+//   'mongodb://user2020:password2020@ds119820.mlab.com:19820/heroku_l7c7wq9n';
 
 // THIS IS THE DEV DB
 
-// const mongo = 'mongodb://localhost/tee-time';
+const mongo = 'mongodb://mongo:27017/tee-time_tee-time_1';
 
 // ********************************************************************************
 

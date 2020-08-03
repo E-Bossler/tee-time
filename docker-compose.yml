@@ -4,7 +4,12 @@ services:
   tee-time:
     image: tee-time
     build: .
-    environment:
-      NODE_ENV: production
     ports:
-      - 3000
+      - '80:7777'
+    links:
+      - mongo
+  mongo:
+    container_name: teetimedb
+    image: mongo
+    ports:
+      - '27017:27017'
