@@ -39,12 +39,15 @@ app.use('/', router);
 //   'mongodb://user2020:password2020@ds119820.mlab.com:19820/heroku_l7c7wq9n';
 
 // THIS IS THE DEV DB
+// const mongo =
+// 'mongodb://mongo:27017/tee-time';
 
-const mongo = 'mongodb://mongo:27017/tee-time_tee-time_1';
+// THIS IS THE AZURE / DOCKER DEV DB
+// const mongo = 'mongodb://tee-time_teetimedb_1:27017/tee-time_web_1';
 
 // ********************************************************************************
 
-mongoose.connect(process.env.MONGODB_URI || mongo, {
+mongoose.connect(mongo, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useFindAndModify: false,
