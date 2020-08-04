@@ -38,14 +38,12 @@ app.use('/', router);
 // const mongo =
 //   'mongodb://user2020:password2020@ds119820.mlab.com:19820/heroku_l7c7wq9n';
 
-// Azure Container DB
-
-// const mongo =
-// '';
-
 // THIS IS THE DEV DB
+// const mongo =
+// 'mongodb://mongo:27017/tee-time';
 
-const mongo = 'mongodb://tee-time_teetimedb_1:27017/tee-time_web_1';
+// THIS IS THE AZURE / DOCKER DEV DB
+// const mongo = 'mongodb://tee-time_teetimedb_1:27017/tee-time_web_1';
 
 // ********************************************************************************
 
