@@ -1,15 +1,15 @@
 version: '3.4'
 
 services:
-  tee-time:
-    image: tee-time
+  web:
+    image: 'teetimedock.azurecr.io/tee-time'
     build: .
     ports:
       - '80:7777'
     links:
-      - mongo
-  mongo:
-    container_name: teetimedb
-    image: mongo
+      - teetimedb
+
+  teetimedb:
+    image: 'teetimedock.azurecr.io/mongo'
     ports:
       - '27017:27017'
