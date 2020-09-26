@@ -18,7 +18,7 @@ Tee Time offers robust functionality for no subscription fees, no payments, allo
 <p>Demonstration of live scoring, creating matches, adding friends, and chat.</p>
 
 
-  <a :target="_blank" href="https://tee-time-seattle.herokuapp.com/">Web Demo on Heroku</a>
+  <a :target="_blank" href="https://www.teetimeproject.com/">Web Demo</a>
 
 
   <img src="./tee-time-demo.gif" />
