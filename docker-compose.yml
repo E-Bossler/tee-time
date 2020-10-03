@@ -4,17 +4,19 @@ services:
   web:
     # Azure Container Registry Image
     image: 'teetimedock.azurecr.io/tee-time'
+    container_name: web
     # Dev Image
     # image: tee-time
     build: .
     ports:
       - '80:7777'
     links:
-      - teetimedb
+      - db
 
-  teetimedb:
+  db:
     # Azure Container Registry Image
     image: 'teetimedock.azurecr.io/mongo'
+    container_name: db
     # Dev Image
     # image: mongo
     ports:

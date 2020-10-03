@@ -43,7 +43,7 @@ app.use('/', router);
 // 'mongodb://mongo:27017/tee-time';
 
 // THIS IS THE AZURE / DOCKER DEV DB
-// const mongo = 'mongodb://tee-time_teetimedb_1:27017/tee-time_web_1';
+const mongo = 'mongodb://db:27017/web';
 
 // ********************************************************************************
 
