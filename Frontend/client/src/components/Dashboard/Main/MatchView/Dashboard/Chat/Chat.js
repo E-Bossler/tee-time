@@ -29,7 +29,7 @@ export default class Chat extends Component {
       this.setState({ chatMessages });
       this.scrollToBottom();
     });
-    this.socket = io('https://www.teetimeproject:7777');
+    this.socket = io('https://www.teetimeproject.com');
     this.socket.on('connect', () => console.log('connected'));
     this.socket.on('chat message', msg => {
       axios.put('/api/match/current/getChat', { userData }).then(res => {
